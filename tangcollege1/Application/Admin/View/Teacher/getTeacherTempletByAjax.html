@@ -1,0 +1,91 @@
+ <div class="pop-search-box">
+        <div class="condition">
+           <div class="branchs">
+          
+            </div>
+            <form action="{:U('Teacher/lists')}" method="post" id="search" style="display:inline">
+              <input name="branchId" type="hidden" value="0" />
+              <input name="words" type="text" class="input" placeholder="    关键字"/>
+              <button class="ok" type="submit">搜 索</button>
+            </form>
+        </div>
+        <ul class="result">
+                                 
+        </ul>
+        <div class="footer"><button class="ok" onclick="searchTeacher.ok(this)">确 定</button></div> 
+        <div class="class-loading"></div>
+   </div>
+    <script type="text/javascript">
+		function searchTeacher(){ 
+            var object = new Object; 
+            object.box = null; 
+            object.getTeacher = function(searchData){ 
+			   $('.pop-search-box .class-loading').show();
+			   url = "{:U('Teacher/lists')}";
+			   var liHtml = '';
+               $.ajax({type:'GET',url:url,dataType: "JSON",data:searchData, success:function(data){
+				  if(data.lists.length > 0) { 
+                    $.each(data.lists, function(name, value) {
+                      liHtml += '<li><div class="l">'+value.username+'</div><div class="m"><label>所在分院：</label>'+value.br_name+'</div><div class="r"><input name="classId" type="radio" value="'+value.id+'" /></div></li>';
+                    });
+				  }else{
+					  liHtml = '<li style="text-align:center">没有记录</>'
+				  }
+				  $('.pop-search-box .class-loading').hide();
+				  $('.pop-search-box .result').html(liHtml);
+               }});
+           }; 
+		   object.getBranch = function(e,branchId){ 
+			   url = "{:U('Structure/getBranchSubListByAjax')}";
+			   var selectHtml = '<select class="select" id="branch"><option>请选择分院</option>';
+			   $.ajax({type:'GET',url:url,data:{id:branchId}, dataType: "json", success: function(data){
+                  $.each(data, function(name, value) {
+                      selectHtml += '<option value="'+value.br_id+'" subCount="'+value.subCount+'">'+value.br_name+'</option>';
+                  });
+				  selectHtml += '</select>';
+				  el = $(selectHtml);
+			      $(e).append(el);
+				  el.bind("change",function(){
+					  if($(this).nextAll('select').length > 0) {
+						 $(this).nextAll('select').remove(); 
+					  }
+					  var checkSubCount = $(this).find("option:selected").attr('subCount');
+					  var val = $(this).val();
+					  if(checkSubCount > 0) {
+                         object.getBranch('.pop-search-box .branchs',val);
+					  }
+					  $('.pop-search-box [name="branchId"]').val(val);
+                  });
+              }});
+           }; 
+		   object.ok = function(e) {
+			 var selectOb = $('.pop-search-box [name="classId"]:checked'); 
+			 if(selectOb.length > 0) { 
+			   var val = selectOb.val(); 
+			   $(selectTeacher.element).length > 0 && $(selectTeacher.element).val(val);
+			   var text = selectOb.parent().parent().find('.l').html();
+			   $(selectTeacher.target).length > 0 && $(selectTeacher.target).text(text);
+			   selectTeacher.callBack && selectTeacher.callBack(val,text,selectTeacher.target);
+			   layer.close(selectTeacher.box);
+			 }else{
+			   layer.msg('没选择任何教师！');	 
+			 }
+		   }
+          
+		   object.init = function(e) {
+			  data = {branchId:0}; 
+			  object.getTeacher(data);
+			  object.getBranch('.pop-search-box .branchs',7); 
+			   $('.pop-search-box #search').submit(function(e){   
+				   object.getTeacher({branchId:$('.pop-search-box [name="branchId"]').val(),time:$('.pop-search-box [name="time"]').val(),words:$('.pop-search-box [name="words"]').val()});
+                   return false;
+               });
+ 
+		   }
+		   return object; 
+        } 
+		var searchTeacher = searchTeacher();
+		searchTeacher.init();
+		
+		
+	</script>

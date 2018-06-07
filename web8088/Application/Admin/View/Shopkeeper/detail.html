@@ -1,0 +1,123 @@
+<include file="Public:header" />
+<div id="content">
+
+	
+	<div class="container">
+		
+		<div class="row">
+			
+
+			<include file="Public:nav" />
+			
+			
+			<div class="span10">
+				
+				<div class="widget widget-table">
+										
+						<a href="javascript:history.go(-1);" class="btn btn-small">&lt; 返回</a>
+					
+						<br /><br />
+						
+						<empty name="row">
+							这位商家还没有上传资料呢！
+						<else />
+						<table class="table table-striped">
+                            <tr>
+                                <td>ID</td>
+                                <td>{$row.id}</td>
+                            </tr>
+							<tr>
+								<td>商家头像</td>
+								<td><img src="__PUBLIC__/Uploads/{$row.avatar}" alt="头像" width="100px" title="点击看大图" class="img-thumbnail"></td>
+							</tr>
+							<tr>
+								<td>昵称</td>
+								<td>{$row.nickname}</td>
+							</tr>
+                            <tr>
+                                <td>公司全称</td>
+                                <td>{$row.company_name}</td>
+                            </tr>
+                            <tr>
+                                <td>登陆邮箱</td>
+                                <td>{$row.login_email}</td>
+                            </tr>
+                            <tr>
+                                <td>登陆手机号码</td>
+                                <td>{$row.login_phone}</td>
+                            </tr>
+                            <tr>
+                                <td>企业邮箱</td>
+                                <td>{$row.company_email}</td>
+                            </tr>
+                            <tr>
+                                <td>电话号码</td>
+                                <td>{$row.tel}</td>
+                            </tr>
+							<tr>
+								<td>所在地区</td>
+								<td>{$row.areaname}</td>
+							</tr>
+							<tr>
+								<td>详细地址</td>
+								<td>{$row.area_detail}</td>
+							</tr>
+                            <tr>
+                                <td>分类名称</td>
+                                <td>{$row.upperCatename} -- {$row.catename}</td>
+                            </tr>
+                            <tr>
+                                <td>机构年龄</td>
+                                <td>{$row.age}</td>
+                            </tr>
+                            <tr>
+                                <td>机构网站</td>
+                                <td>{$row.website}</td>
+                            </tr>
+                            <tr>
+                                <td>教师力量</td>
+                                <td>{$row.teacher_power}</td>
+                            </tr>
+                            <tr>
+                                <td>特点</td>
+                                <td>{$row.features}</td>
+                            </tr>
+                            <tr>
+                                <td>环境图片</td>
+								<td><img src="__PUBLIC__/Uploads/{$row.environ}" alt="环境图" width="250px" title="点击看大图" class="img-thumbnail"></td>
+                            </tr>
+							<tr>
+								<td>备注</td>
+								<td>{$row.remark}</td>
+							</tr>
+                            <tr>
+                                <td>创建时间</td>
+                                <td>{$row.ctime}</td>
+                            </tr>
+						</table>
+						</empty>
+					
+				</div> <!-- /widget -->
+				
+			</div> <!-- /span10 -->
+			
+		</div> <!-- /row -->
+		
+	</div> <!-- /container -->
+	
+</div> <!-- /content -->
+
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="__AJS__/jquery-1.7.2.min.js"></script>
+<script src="__AJS__/excanvas.min.js"></script>
+<script src="__AJS__/jquery.flot.js"></script>
+<script src="__AJS__/jquery.flot.pie.js"></script>
+<script src="__AJS__/jquery.flot.orderBars.js"></script>
+<script src="__AJS__/jquery.flot.resize.js"></script>
+
+
+<script src="__AJS__/bootstrap.js"></script>
+<script src="__AJS__/charts/bar.js"></script>
+<include file="Public:footer" />

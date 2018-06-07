@@ -1,0 +1,78 @@
+ <div class="pop-search-box">
+        <div class="condition">
+           <div class="branchs">
+          
+            </div>
+            <form action="{:U('class/getselectCourseListByAjax')}" method="get" id="search" style="display:inline">
+              <select name="studyDirection" id="getStudyDirection">
+              </select>
+              <input name="words" id="words" type="text" class="input" placeholder="    关键字"/>
+              <button class="ok" type="submit">搜 索</button>
+            </form>
+        </div>
+        <ul class="result">
+                                 
+        </ul>
+        <div class="footer"><button class="ok" onclick="searchCourse.ok(this)">确 定</button></div> 
+        <div class="class-loading"></div>
+   </div>
+    <script type="text/javascript">
+		function searchCourse(){ 
+            var object = new Object; 
+            object.box = null; 
+            object.getCourse = function(searchData){ 
+			   $('.pop-search-box .class-loading').show();
+			   url = "{:U('Course/getselectCourseListByAjax')}";
+			   var liHtml = '';
+               $.ajax({type:'GET',url:url,dataType: "json",data:searchData, success:function(data){
+				  if(data) {  
+                    $.each(data, function(name, value) {
+                      liHtml += '<li><div class="l">'+value.co_name+'</div><div class="m"><label>课程分类：</label>'+value.sd_name+'</div><div class="r"><input name="courseId" type="radio" value="'+value.co_id+'" /></div></li>';
+                    });
+				  }else{
+					  liHtml = '<li style="text-align:center">没有记录</>'
+				  }
+				  $('.pop-search-box .class-loading').hide();
+				  $('.pop-search-box .result').html(liHtml);
+               }});
+           }; 
+		   object.getStudyDirection = function(){ 
+			   url = "{:U('StudyDirection/lists')}";
+			   var selectHtml = '<option value="">选择课程分类</option>';
+			   $.ajax({type:'GET',url:url, dataType: "json", success: function(data){
+                  $.each(data, function(name, value) {
+                      selectHtml += '<option value="'+value.sd_id+'">'+value.sd_name+'</option>';
+                  });
+				  $('#getStudyDirection').html(selectHtml);
+               }});
+			   
+           }; 
+		   object.ok = function(e) {
+			 var selectOb = $('.pop-search-box [name="courseId"]:checked'); 
+			 if(selectOb.length > 0) {  
+			   var val = selectOb.val();
+			   var text = selectOb.parent().parent().find('.l').html();
+			   selectCourse.callBack(val,text);
+			   layer.close(selectCourse.box);
+			 }else{
+			   layer.msg('没选择课程');
+			   return false;	 
+			 }
+		   }
+          
+		   object.init = function(e) {
+			  object.getCourse([]); 
+			  object.getStudyDirection();
+			   $('.pop-search-box #search').submit(function(e){   
+				   object.getCourse({getStudyDirectionId:$('.pop-search-box #getStudyDirection').val(),words:$('.pop-search-box #words').val()});
+                   return false;
+               });
+ 
+		   }
+		   return object; 
+        } 
+		var searchCourse = searchCourse();
+		searchCourse.init();
+		
+		
+	</script>

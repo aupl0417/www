@@ -1,0 +1,37 @@
+ <section class="sidebar" id="sidebar_menu" style="top:16px;!important">
+  <!-- sidebar menu: : style can be found in sidebar.less -->
+  <div class="sidebar-menu">
+        <h3>全部课程分类</h3>
+
+
+
+        <?php foreach ($cateNavData as $row): ?>
+        <div class="menu_box">
+          <div class="menu_main">
+            <h4>{$row[0]['catename']}</h4>
+            <i class="fa fa-angle-right pull-right"></i>
+            <?php for ($i = 0; $i < 3; $i++): ?>
+                <?php $index1 = mt_rand(1, count($row)-1); ?>
+                <?php $index2 = mt_rand(1, count($row[$index1])-1); ?>
+                <a href="{:mergeGetU('Shopkeeper/course_select', array('cateid'=>$row[$index1][$index2]['id']))}">{$row[$index1][$index2]['catename']}</a>
+            <?php endfor; ?>
+          </div>
+
+          <div class="menu_sub" style="top:0px;">
+          <?php for ($i = 1; $i < count($row); $i++): ?>
+            <dl>
+              <dt><a href="{:mergeGetU('Shopkeeper/course_select', array('cateid'=>$row[$i][0]['id']))}">{$row[$i][0]['catename']}</a></dt>
+              <dd>
+                <?php for ($j = 1; $j < count($row[$i]); $j++): ?>
+                <a href="{:mergeGetU('Shopkeeper/course_select', array('cateid'=>$row[$i][$j]['id']))}">{$row[$i][$j]['catename']}</a><span>&nbsp;&nbsp;|</span>
+                <?php endfor; ?>
+              </dd>
+            </dl>
+          <?php endfor; ?>
+          </div>
+
+        </div>
+        <?php endforeach; ?>
+
+  </div>
+</section>

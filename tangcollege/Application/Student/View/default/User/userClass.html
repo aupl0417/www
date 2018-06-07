@@ -1,0 +1,116 @@
+<extend name="Public/base"/>
+
+<block name="content">
+	<div id="content" class="content pt45 mb60">
+		<volist name='list' id='list'>
+		<if condition="$list.state eq 1">
+			<div class="tang-classgrade-box" data-url="{:U('Class/detail', array('id'=>$list['cl_id']))}">
+				<div class="tang-classgrade-title over solid-b bg_white">
+					<span>{$list.br_name}</span>
+					<span class="pull-right c-2a8">未开课</span>
+				</div>
+				<ul class="list-unstyled tang-cont-ul mb5">
+					<li class="">
+						<div class="over">
+							<div class="tang-li-img">
+								<img src="{$list.cl_logo|default='__IMG__/tang-li-img1.png'}" alt="">
+							</div>
+							<div class="tang-li-right">
+								<div class="tang-li-title">
+									<!-- C+商业模式系统讲解实战课堂-基 讲解(上)........ -->
+									{$list.cl_name}
+								</div>
+								<div class="tang-li-time">
+									&nbsp;
+								</div>
+								<div class="tang-li-bot">
+									<img src="__IMG__/tang-people-icon.png" alt="" class="tang-li-icon">
+									<span class="c-2a8">{$list.count}/</span>{$list.cl_allowableNumber}人
+									<if condition="$list.remainingTime egt 1">
+										<span class="pull-right">距离开课还有 <small class="c-2a8">{$list.remainingTime}</small>天</span>
+									<else/>
+										<span class="pull-right">该班级已结束</span>
+									</if>
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<elseif condition="$list.state eq 2"/>
+			<div class="tang-classgrade-box" data-url="{:U('Class/detail', array('id'=>$list['cl_id']))}">
+				<div class="tang-classgrade-title over solid-b bg_white">
+					<span>{$list.br_name}</span>
+					<span class="pull-right c-2a8">开课中</span>
+				</div>
+				<ul class="list-unstyled tang-cont-ul mb5">
+					<li class="">
+						<div class="over mb10">
+							<div class="tang-li-img">
+								<img src="__IMG__/tang-li-img1.png" alt="">
+							</div>
+							<div class="tang-li-right">
+								<div class="tang-li-title">
+									{$list.cl_name}
+								</div>
+								<div class="tang-li-time">
+									&nbsp;
+								</div>
+								<div class="tang-li-bot">
+									<img src="__IMG__/tang-people-icon.png" alt="" class="tang-li-icon">
+									<span class="c-2a8">{$list.count}/</span>{$list.cl_allowableNumber}人
+								</div>
+							</div>
+						</div>
+						<div class="text-right solid_t">
+							<a href="{:U('Attendance/index')}" class="tang-classgrade-btn">查看签到</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<else/>
+			<div class="tang-classgrade-box" data-url="{:U('Class/detail', array('id'=>$list['cl_id']))}">
+				<div class="tang-classgrade-title over solid-b bg_white">
+					<span>{$list.br_name}</span>
+					<span class="pull-right c-777">已结束</span>
+				</div>
+				<ul class="list-unstyled tang-cont-ul mb5">
+					<li class="active">
+						<div class="over mb10">
+							<div class="tang-li-img">
+								<img src="__IMG__/tang-li-img1.png" alt="">
+							</div>
+							<div class="tang-li-right">
+								<div class="tang-li-title">
+									{$list.cl_name}
+								</div>
+								<div class="tang-li-time">
+									&nbsp;
+								</div>
+								<div class="tang-li-bot">
+									<img src="__IMG__/tang-people-icon.png" alt="" class="tang-li-icon">
+									<span class="c-2a8">{$list.count}/</span>{$list.cl_allowableNumber}人
+								</div>
+							</div>
+						</div>
+						<div class="text-right solid_t">
+							<a href="" class="tang-classgrade-btn">去评论</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+			</if>
+			
+		</volist>
+	</div>
+</block>
+<block name="script">
+	<script>
+		$(function(){
+			$('.tang-classgrade-box').click(function(){
+				var url = $(this).data('url');
+				window.location.href = url;
+			});
+		});
+	</script>
+</block>

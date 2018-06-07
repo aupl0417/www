@@ -1,0 +1,328 @@
+<extend name="ShopPublic:base" />
+
+<block name="title">{$resArr.title}</block>
+
+<block name="main">
+
+    <!-- main container -->
+    <div class="main-wrap clearfix">
+        <ol class="bread fs14 clearfix">
+            <li><a href="#">首页</a></li>
+            <li><a href="#">驾驶培训</a></li>
+            <li class="active">组课详情</li>
+        </ol>
+        <!-- left sidebar here -->
+        <div class="sidebar-l">
+            <div class="bussiness-card box-wrap">
+                <div class="carousel">
+                    <div id="img-wrapper" class="img-wrap clearfix">
+                        <img src="__UPLOAD__{$resArr.environ}" alt="轮播图一">
+                        <!--<img src="__PCIMG__/banner.png" alt="轮播图二">-->
+                        <!--<img src="__PCIMG__/banner1.png" alt="轮播图三">-->
+                    </div>
+                    <ul id="bullet" class="bullet">
+                        <li class="active"><span>1</span></li>
+                        <li><span>2</span></li>
+                        <li><span>3</span></li>
+                    </ul>
+                </div>
+                <div class="organization">
+                    <div class="o-card">
+                        <a href="#"><img src="{$resArr.avatar}" alt="机构头像" class="o-ava"></a>
+                        <div class="o-brief">
+                            <p class="o-brief-t fs16">{$resArr.nickname}</p>
+                            <p class="o-badge">
+                                <?php if ($resArr['status'] >= 3): ?><img src="__PCIMG__/phone_validate.png" alt="手机认证"><?php endif; ?>
+                                <!--<img src="__PCIMG__/it_tag.png" alt="IT">-->
+                                <span class="first-badge">{$resArr.shopDetail.catename}</span><span class="second-badge">{$resArr.shopDetail.age}年教龄</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="o-intro">
+                        <p class="intro-t fs16">简介</p>
+                        <p class="intro-p fs14">{$resArr.shopDetail.remark}</p>
+                    </div>
+                    <div class="o-contact">
+                        <img class="phone" src="__PCIMG__/phone.png" alt="联系电话"><span class="phone-num fs16">{$resArr.tel}</span>
+                        <a class="jump-btn fs14" href="{:U('Shopkeeper/home', array('id'=>$resArr['sid']))}">进入机构主页</a>
+                    </div>
+                </div>
+            </div>
+            <h2 class="org-course-title fs16"><img src="__PCIMG__/organization.png" alt="机构">该机构已发布的课程</h2>
+            <div class="box-wrap">
+
+                <volist name="resArr.hotInfo" id="vo">
+                    <div class="course-item clearfix">
+                        <img src="__UPLOAD__{$vo.environ}" alt="" class="course-img">
+                        <p class="course-t">{$vo.title}</p>
+                    </div>
+                </volist>
+
+            </div>
+
+        </div>
+        <div class="content-main">
+            <div class="content-top box-wrap">
+                <h1 class="c-title"><span class="c-time fs12 c999"><img src="__PCIMG__/Time.png" alt="发布时间">{$resArr.ctime}</span>{$resArr.title}</h1>
+                <div class="c-attr">
+                    <p class="c-attr-i fs16"><img src="__PCIMG__/Classification.png" alt="分类"><span>{$resArr.catename}</span></p>
+                    <p class="c-attr-i fs16"><img src="__PCIMG__/Time.png" alt="时间"><span>{$resArr.mode}</span></p>
+                    <p class="c-attr-i fs16"><img src="__PCIMG__/Location.png" alt="位置"><span>{$resArr.area_detail}</span></p>
+                </div>
+                <div class="c-feature">
+                    <div class="c-feature-i">
+                        <p class="f-i-title">课程特色</p>
+                        <p class="f-i-cont"><volist name="resArr.tags" id="vo"><span>{$vo}</span></volist></p>
+                    </div>
+                    <div class="c-feature-i">
+                        <p class="f-i-title">截止日期</p>
+                        <p class="f-i-cont">{$resArr.overtime}</p>
+                    </div>
+                </div>
+            </div>
+            <div id="content-cen" class="content-cen box-wrap">
+                <ul id="c-menu" class="c-menu clearfix fs16">
+                    <li class="active">师资简介</li>
+                    <li>课程内容</li>
+                    <li>学员圈子</li>
+                    <li>学员点评</li>
+                </ul>
+                <div class="info-box">
+                    <div class="simple-item fs14">
+                        <p class="simple-title c999">教学特点：</p>
+                        <p class="simple-cont c666">{$resArr.teacher_feature}</p>
+                    </div>
+                    <div class="simple-item fs14">
+                        <p class="simple-title c999">老师教龄：</p>
+                        <p class="simple-cont c666">{$resArr.teacher_age}年</p>
+                    </div>
+                    <div class="rich-item">
+                        <p class="fs14 c999">老师资历</p>
+                        <p class="rich-cont c666 fs14">{$resArr.teacher_exp}</p>
+                    </div>
+                    <div class="rich-item">
+                        <p class="fs14 c999">老师简介</p>
+                        <p class="rich-cont c666 fs14">{$resArr.teacher_remark}</p>
+                    </div>
+                </div>
+                <div class="info-box hidden">
+                    <p clas="course-c-title">课程内容</p>
+                    <div class="course-c-cont c666">{$resArr.content}</div>
+                </div>
+                <div class="info-box hidden">
+                    <div class="comment-area">
+                        <div class="input-wrap mb30">
+                            <input type="text">
+                            <button>点评</button>
+                        </div>
+                        <!-- 评论模板输出位置 -->
+                        <div id="commentPanel"> </div>
+                    </div>
+
+                    <nav style="text-align:right;">
+                        <ul class="pagination my-pagination">
+                            <li><a href="javascript:showComments(1);">首页</a></li>
+                            <li>
+                                <a href="javascript:showComments(--g.commentPage);" aria-label="Previous">
+                                    <span aria-hidden="true">上一页</span>
+                                </a>
+                            </li>
+                            <li class="active"><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li>
+                                <a href="javascript:showComments(++g.commentPage);" aria-label="Next">
+                                    <span class="clightblue" aria-hidden="true">下一页</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="info-box hidden">
+                    <div style="margin: 45px 0 75px 50px;">
+                        <img src="__PCIMG__/upset_mascot.png" alt="功能开发中"/>
+                        <span style="margin-left: 20px;">抱歉约客们，此功能我们在紧急开发中...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--right sidbar here-->
+        <div class="sidebar-r">
+            <div class="course-other box-wrap">
+                <div class="c-other-item">
+                    <p class="price-txt fs14">价格</p>
+                    <p style="position:relative;"><span class="price-num">{$resArr.price|intval}</span><img src="__PCIMG__/Price.png" alt="价格" class="o-price-img"></p>
+                    <?php if ($resArr['preferent']): ?><p class="discount-p"><img src="__PCIMG__/Hui2.png" alt="优惠" class="dis-img"><span class="dis-txt fs18">{$resArr.preferent}</span></p><?php endif; ?>
+                </div>
+                <div class="c-other-item">
+                    <button class="apply-btn fs20" disabled="disabled">报名课程</button>
+                </div>
+                <div class="c-other-item">
+                    <span id="heart" class="heart"><i class="fa fa-heart"></i></span><span class="fav-txt fs16 c666">加入期望单</span>
+                </div>
+                <div class="c-other-item item-padding">
+                    <ul id="uAvatarPanel" class="user-list clearfix">
+                        <!-- 这里是显示更多用户的面板 -->
+                    </ul>
+                    <p class="more-user"><a id="uAvatarsMore" href="javascript:void(0);">显示更多</a></p>
+                </div>
+                <div class="user-apply item-padding fs16">
+                    <img src="__PCIMG__/users.png" alt="用户"><span class="user-apply-t">已报名<span class="clightblue">{$resArr.user_count}</span>人</span>
+                </div>
+            </div>
+            <div class="popularize box-wrap clearfix">
+                <img src="__PCIMG__/bincode.png" alt="二维码" class="qr-code">
+                <div class="po-txt">
+                    <p class="fs16">关注17约课微信号</p>
+                    <p class="po-p">1.开启课程动态通知</p>
+                    <p class="po-p">2.领取10-100元奖学金</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+</block>
+
+<block name="css">
+    <link rel="stylesheet" href="__PCCSS__/course_wish.css">
+</block>
+
+<block name="js">
+    <script src="__PCJS__/app.min.js" type="text/javascript"></script>
+    <script src="__PCJS__/all.js" type="text/javascript"></script>
+    <script src="__PCJS__/course_wish.js" type="text/javascript"></script>
+    <script type="text/javascript" src="__HJS__/juicer-min.js"></script>
+
+    <!-- 报名用户头像模板 -->
+    <script id="uAvatarTpl" type="text/template" charset="utf-8">
+        {@each data as it,i}
+        <li><a href="#"><img src="${it.avatar}" alt="用户头像" onerror="this.src='__HIMG__/iPhone.png'"></a></li>
+        {@/each}
+    </script>
+
+    <!-- 评论模板 -->
+    <script id="commentTpl" type="text/template" charset="utf-8">
+        {@each data as it,i}
+        <div class="comment-wrap">
+            <img src="${it.avatar}" alt="avatar" class="avatar">
+            <div class="comment-cont">
+                <div class="comment-t">
+                    <p class="comment-name"><a href="#">${it.nickname}</a></p>
+                    <p class="comment-time">12分钟前</p>
+                </div>
+                <p class="comment-c">${it.content}</p>
+                <p class="comment-op">
+                    <a class="cmt-delete" href="javascript:void(0);">删除</a>
+                    <a class="cmt-reply" href="javascript:void(0);">回复</a>
+                </p>
+                <div class="input-wrap cmt-input-mb hidden">
+                    <input type="text" placeholder="回复${it.nickname}" class="w355">
+                    <button class="cmt-reply-btn">回复</button>
+                </div>
+            </div>
+        </div>
+        {@/each}
+    </script>
+
+    <!-- 全局变量 -->
+    <script type="text/javascript" charset="utf-8">
+        var g = {
+                    "infoId":  {$resArr.id},
+
+                "userAvatarUrl":    "{:U('Api/ShopInfo/getUsersInfo')}",
+                "commentUrl":       "{:U('Api/ShopComment/listUserOrShopComment')}",
+
+                "uAvatarPage":      1,
+                "commentPage":      1
+        };
+
+    </script>
+
+    <script type="text/javascript" charset="utf-8">
+        $(function() {
+            $("#uAvatarsMore").on("click",showUserAvatars);
+
+            showUserAvatars();
+            showComments(1);
+        });
+
+        /**
+         * 展示用户头像
+         */
+        function showUserAvatars() {
+            $.get(g.userAvatarUrl, {'id': g.infoId, 'page': g.uAvatarPage}, function(data) {
+                console.log(data);
+
+                // $(".loading").addClass("hidden");
+                // hiddeLoading();
+
+                // 判断有没有数据
+                if (!data.data) {
+                    $("#uAvatarsMore").addClass("hidden");
+                    return;
+                }
+
+                // 判断是不是最后一页
+                if (data.isLast) {
+                    $("#uAvatarsMore").addClass("hidden");
+                } else {
+                    $("#uAvatarsMore").removeClass("hidden");
+                }
+
+                // 模板输出
+                bindTpl("uAvatarTpl", "uAvatarPanel", data);
+
+                g.uAvatarPage++;
+                // 游客是否报名-改变html
+                // visitor_enrolled_status();
+            }, "json");
+        }
+
+        /**
+         * 展示评论
+         */
+        function showComments(commentPage) {
+            //$(".loading").removeClass("hidden");
+            // showLoading();
+
+            // 页数不能少于1页
+            if (commentPage <= 0) {
+                return false;
+            }
+
+            $.get(g.commentUrl, {'id':g.infoId, 'page': commentPage}, function(data) {
+                console.log(data);
+
+                //$(".loading").addClass("hidden")
+                // hiddeLoading();
+
+                // 判断有没有数据
+                if (!data.data) {
+                    // $("#commentsMore").addClass("hidden")
+                    alert("没有数据");
+                    return false;
+                }
+
+                // 模板输出
+                var tpl = document.getElementById("commentTpl").innerHTML;
+                var html = juicer(tpl, data);
+                $("#commentPanel").html(html);
+
+                g.commentPage = commentPage;
+
+            }, "json")
+        }
+
+        /**
+         * 拼接模板了
+         */
+        function bindTpl(tplId, panelId, data) {
+            var tpl = document.getElementById(tplId).innerHTML;
+            var html = juicer(tpl, data);
+            $("#"+panelId).append(html)
+        }
+    </script>
+</block>

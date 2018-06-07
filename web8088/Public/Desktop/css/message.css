@@ -1,0 +1,31 @@
+/* css for both shopkeeper and user page message.html */
+.mb25{margin-bottom: 25px;}
+.stu-ava,.o-ava-s{width: 45px;border: 1px solid #eee;border-radius: 5px;position: absolute;}
+.o-ava-s{margin: 3px 0 0 5px; width: 30px;}
+.pagination>.active>a{background-color: #2DA4DE; border-color: #2DA4DE;}
+.cmt-item{padding-bottom: 20px;margin-bottom: 20px;border-bottom: 1px solid #d6d6d6;}
+.cmt-cont{position: relative;}
+.cmt-c-wrap{margin-left: 55px;}
+.post-time{float: right;}
+.cmt-reply{float: right;cursor: pointer;}
+.cmt-sub,.message-sub{padding: 3px 5px;background-color: #e8e8e8;}
+.cmt-sub-i,.message-sub-i{width: 60px;height: 40px;}
+.cmt-sub-t,.message-sub-t{margin-left: 15px;}
+
+.cmt-input-box{position: relative; margin: 0 0 10px 50px;border: 1px solid #d6d6d6;padding: 5px;}
+.cmt-input-box:before, .cmt-input-box:after{content: "";display: block;position: absolute;line-height: 0;font-size: 0;right: 6px;top: -20px;border-width: 10px;border-style: solid dashed dashed dashed;border-color: transparent transparent #dbdbdb transparent;}
+.cmt-input-box:after{right: 6px;top: -18px;border-color: transparent transparent white transparent;}
+.cmt-input{border: none;outline: none;width: 100%;}
+.cmt-btn{float: right;margin-bottom: 10px;border: none;color: white;width: 90px;height: 30px;border-radius: 5px;}
+/* for user message.html */
+.m-menu{background-color: white;padding: 0;margin: 0;list-style: none;margin-bottom: 20px;}
+.m-menu li {float: left;width: 33.33%;height: 55px;line-height:55px;text-align: center;cursor: pointer;border-right: 1px solid #eee;}
+.m-menu li:last-child{border-right: none;}
+.m-menu li.active{border-bottom: 1px solid #2DA4DE;color: #2DA4DE;}
+
+.message-item{padding: 12px 30px 15px 30px;background-color: white;margin-bottom: 15px;}
+.message-title{margin-bottom: 15px;}
+.message-ava{width: 45px;border: 1px solid #eee;border-radius: 5px;margin-right: 15px;}
+.status-txt{margin-left: 15px;}
+.status-phone{width: 17px;padding: 0 5px 4px 0;}
+.message-time{float: right;font-size: 15px;margin-top: 11px;}

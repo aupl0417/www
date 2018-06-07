@@ -1,0 +1,36 @@
+<extend name="Public/base"/>
+
+<block name='content'>
+	<div id="content" class="content pt45 mb60">
+		<div class="tang-sign-cont">
+			<volist name='list' id='info' key="key">
+				<div class="tang-sign-box">
+					<div class="tang-sign-title">
+						{$info.date} {$info.courseName} <notempty name='info.tra_name'>({$info.tra_name})</notempty>
+					</div>
+					<div class="tang-sign-time bg_white">
+						<ul class="list-unstyled tang-sign-ul over mb0">
+							<li>
+								<div class="time">{$info.attendTime.attendStartTime|strtotime|date="H:i:s",###}</div>
+								<div class="text-center state c-2a8">签到</div>
+							</li>
+							<li>
+								<div class="time">{$info.attendTime.attendEndTime|strtotime|date="H:i:s",###}</div>
+								<div class="text-center state c-2a8">退场</div>
+							</li>
+							<!-- <li>
+								<div class="time">9:10:08</div>
+								<div class="text-center state c-2a8">签到</div>
+							</li>
+							<li>
+								<div class="time">9:10:08</div>
+								<div class="text-center state c-2a8">退场</div>
+							</li> -->
+						</ul>
+					</div>
+				</div>
+			</volist>
+		</div>
+
+	</div>
+</block>

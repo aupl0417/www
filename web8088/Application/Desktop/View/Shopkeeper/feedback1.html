@@ -1,0 +1,89 @@
+<extend name="ShopPublic:base" />
+
+<block name="title">17约课-意见反馈</block>
+
+<block name="main">
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+
+      <include file="ShopPublic:centerNav" />
+      <!--课程发布-->
+       
+        <section class="content">
+        	<div class="row">
+            <div class="ml40 mr20">
+              <h3 class="fs26 mb25">意见反馈</h3>
+              <form action="#" method="post">
+                <div class="form-group">
+                  <textarea class="feedback fs16" name="feedback" id="feedback" cols="30" rows="10" placeholder="您的建议，是促使我们前进的动力！"></textarea>
+                </div>
+                <div class="form-group clearfix">
+                  <button type="button" id="submitBtn" class="fs16 submit-btn bglightblue">提交</button>
+                </div>
+              </form>
+            </div>
+        	</div>				
+        </section>
+
+      </div><!-- /.content-wrapper -->
+
+</block>
+
+<block name="css">
+	<link rel="stylesheet" href="__PCCSS__/publish.css">
+    <link rel="stylesheet" href="__PUBLIC__/Desktop/webuploader/style.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+    .mb25{margin-bottom: 25px;}
+    .submit-btn{border: none;width: 125px;height: 35px;color: white;float: right;} 
+    .feedback{padding: 16px;outline: none;width: 100%;}
+    </style>
+</block>
+
+<block name="js">
+    <!-- AdminLTE App -->
+    <script src="__PCJS__/app.min.js" type="text/javascript"></script>
+    <!-- 全局变量 -->
+    <script type="text/javascript" charset="utf-8">
+        var addFeedback_url = "{:U('Api/Shopkeeper/addFeedback')}";
+    </script>
+
+    <script type="text/javascript" charset="utf-8">
+    $(function() {
+        $("#submitBtn").click(AllCheck);
+    });
+
+    function AllCheck(){
+        var remarkvalue = $("textarea[name=feedback]").val();
+        var remarktest=/^.{1,255}$/;	//字符长度
+        if(remarkvalue.length == 0){
+            alert('反馈信息未填写');
+            return false;
+        }
+        if(!remarktest.test(remarkvalue)){
+            alert('反馈信息不能超过250个字');
+            return false;
+        }
+
+        // 这里要联网访问了，先禁用按钮
+        $("#submitBtn").attr("disabled", "disabled");
+        $.post(addFeedback_url, {"content": remarkvalue}, function(data) {
+            $("#submitBtn").removeAttr("disabled");
+
+            // 失败
+            if (data.status != 200) {
+                return alert(data.msg);
+            }
+
+            alert("意见反馈成功！");
+            $("textarea[name=feedback]").val("");
+        }, "json");
+
+    }
+    </script>
+</block>

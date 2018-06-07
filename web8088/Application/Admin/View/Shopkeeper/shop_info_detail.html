@@ -1,0 +1,115 @@
+<include file="Public:header" />
+<div id="content">
+
+	
+	<div class="container">
+		
+		<div class="row">
+			
+
+			<include file="Public:nav" />
+			
+			
+			<div class="span10">
+				
+				<div class="widget widget-table">
+										
+						<a href="javascript:history.go(-1);" class="btn btn-small">&lt; 返回</a>
+					
+						<br /><br />
+						
+						<empty name="row">
+                        没有课程详情
+						<else />
+						<table class="table table-striped">
+							<tr>
+								<td>标题</td>
+                                <td>{$row.title}</td>
+							</tr>
+                            <tr>
+                                <td>商家昵称</td>
+                                <td>{$row.nickname}</td>
+                            </tr>
+                            <tr>
+                                <td>商家头像</td>
+                                <td><img src="__UPLOAD__/{$row.avatar}" alt=""></td>
+                            </tr>
+                            <tr>
+                                <td>内容</td>
+                                <td>{:nl2br($row['content'])}</td>
+                            </tr>
+                            <tr>
+                                <td>分类</td>
+                                <td>{$row.catename}</td>
+                            </tr>
+							<tr>
+								<td>价格</td>
+                                <td>{$row.price}</td>
+							</tr>
+                            <tr>
+                                <td>模式</td>
+                                <td>{$row.mode}</td>
+                            </tr>
+                            <tr>
+                                <td>标签</td>
+                                <td>{:implode(',',$row['tags'])}</td>
+                            </tr>
+                            <tr>
+                                <td>创建时间</td>
+                                <td>{$row.ctime}</td>
+                            </tr>
+                            <tr>
+                                <td>过期时间</td>
+                                <td>{$row.overtime}</td>
+                            </tr>
+                            <tr>
+                                <td>是否过期</td>
+                                <td>{:$row['isTimeOut']?'是':'否'}</td>
+                            </tr>
+                            <tr>
+                                <td>分类名称</td>
+                                <td>{$row.catename}</td>
+                            </tr>
+							<tr>
+								<td>联系方式</td>
+								<td>{$row.phone_tel}</td>
+							</tr>
+                            <tr>
+                                <td>地区</td>
+                                <td>{:implode(' ', $row['areanames'][0])}</td>
+                            </tr>
+							<tr>
+								<td>详细地址</td>
+								<td>{$row.area_detail}</td>
+							</tr>
+                            <tr>
+                                <td>环境图片</td>
+                                <td><img src="__UPLOAD__/{$row.environ}" alt=""></td>
+                            </tr>
+						</table>
+						</empty>
+					
+				</div> <!-- /widget -->
+				
+			</div> <!-- /span10 -->
+			
+		</div> <!-- /row -->
+		
+	</div> <!-- /container -->
+	
+</div> <!-- /content -->
+
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="__AJS__/jquery-1.7.2.min.js"></script>
+<script src="__AJS__/excanvas.min.js"></script>
+<script src="__AJS__/jquery.flot.js"></script>
+<script src="__AJS__/jquery.flot.pie.js"></script>
+<script src="__AJS__/jquery.flot.orderBars.js"></script>
+<script src="__AJS__/jquery.flot.resize.js"></script>
+
+
+<script src="__AJS__/bootstrap.js"></script>
+<script src="__AJS__/charts/bar.js"></script>
+<include file="Public:footer" />

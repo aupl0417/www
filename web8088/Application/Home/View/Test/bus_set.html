@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+    <meta content="yes"name="apple-mobile-web-app-capable"/>
+    <meta content="black"name="apple-mobile-web-app-status-bar-style"/>
+    <title>用户注册 - 17约课</title>
+    <link rel="stylesheet" type="text/css" href="__HCSS__/reset.css">
+    <link rel="stylesheet" href="__HCSS__/4.css"/>
+    <link rel="stylesheet" href="__HCSS__/2.css"/>
+    <meta name="keywords" content="17约课,一起约课,约课,教育培训,约课神器,校园约课,大学生培训,约老师,约女神,驾驶培训,设计培训,职业考证,音乐培训,英语培训,小语种培训,体育培训" />
+    <meta name="description" content="17约课 - 约您身边的良师益友！为您提供约老师，约课程，约女神，约学霸等海量信息，充分满足您免费约课，免费发布课程的需求。" />
+</head>
+<body>
+
+
+
+<div id="one_reg_user" class="register_wrap e_first_register login_height">
+    <img src="__HIMG__/logo2.png" alt="" class="register_title"/>
+    <img src="__HIMG__/loading.gif" alt="" class="loading hidden"/>
+    <div class="user_register_nav">
+        <p class="user_register_nav_left"><a href="javascript:history.back(-1)"><img src="__HIMG__/back.png" alt=""/>返回</a></p>
+        <p class="user_register_nav_right"><a href="{:U('Userregsign/login')}">登陆<img src="__HIMG__/go.png" alt=""/></a></p>
+    </div>
+    <div class="input_wrap validate">
+        <input type="text" name="name"  class="register_input register_input_login" id="hiddentypevalue" placeholder="机构全称">
+        <i class="input_close_icon op_0"></i>
+        <div class="validate_wrap">
+            <input type="password" name="logintype"  class="register_input" id="reg_code_input" placeholder="设置密码">
+            <i class="input_close_icon_second op_0"></i>
+        </div>
+        <input type="text" name="type" id="hiddentype" class="register_input hidden">
+
+    </div>
+
+    <!--出错了就把Hidden去掉就会显示了，有多少个错误就在多少行li-->
+    <div id="reg_err1" class="u_register_err hidden">
+        <ul>
+            <li><img src="__HIMG__/Exclamation.png" alt="" class="register_err_image"/><span id="reg_err_text1">密码未填写</span></li>
+        </ul>
+    </div>
+    <button id="send_reg" class="register_submit" style="margin-top: 2em;"><span id="reg_next">提交注册</span></button>
+    <a href="/home/shopkeeper/signupstart.html" class="register_to_shop">机构加盟<img src="/Public/Home/img/Log in.png" alt="" class="login_register_footer_img"></a>
+</div>
+
+
+
+
+
+<div id="two_reg_user" class="register_wrap e_first_register login_height hidden">
+    <img src="__HIMG__/logo2.png" alt="" class="register_title"/>
+    <div class="user_register_nav">
+        <p class="user_register_nav_left"><a id="reg_user_fanhui" href="javascript:;"><img src="__HIMG__/back.png" alt=""/>返回</a></p>
+        <p class="user_register_nav_right"><a href="{:U('Userregsign/login')}">登陆<img src="__HIMG__/go.png" alt=""/></a></p>
+    </div>
+    <div class="input_wrap validate">
+        <input type="text" name="lastname"  class="register_input" id="lastname" placeholder="输入昵称">
+        <i class="input_close_icon op_0"></i>
+        <div class="validate_wrap">
+            <input type="password" name="password" id="password"  class="register_input" placeholder="设置密码">
+            <i class="input_close_icon_second op_0"></i>
+        </div>
+        <input type="text" name="type" id="hiddentype" class="register_input hidden">
+    </div>
+
+    <!--出错了就把Hidden去掉就会显示了，有多少个错误就在多少行li-->
+    <div id="reg_err2" class="u_register_err hidden">
+        <ul>
+            <li><img src="__HIMG__/Exclamation.png" alt="" class="register_err_image"/><span id="reg_err_text2">密码未填写</span></li>
+        </ul>
+    </div>
+    <button id="register" class="register_submit" style="margin-top: 2em;"><img src="__HIMG__/loading.gif" alt="" class="hidden" id="loading_img"/>
+        <span id="login_info">提交注册</span></button>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="__HJS__/zepto.min.js"></script>
+<script type="text/javascript">
+    var index_url  ="{:U('Index/index')}";
+    var register_send_url ="{:U('Userregsign/register_send')}";
+    var register_check_url ="{:U('Userregsign/register_check')}";
+    var register_save_url ="{:U('Userregsign/register_save')}";
+</script>
+<script type="text/javascript">
+(function () {
+    var oldScroll = $(".login_height").height();
+    $("input").on("focus", function (event) {
+        var height = oldScroll + 150;
+        $(".login_height").css("height",height+"px");
+        $(event.target).next().removeClass("op_0");
+        ontext();
+    }).on("blur", function (event) {
+        $(".login_height").css("height",oldScroll+"px");
+        $(event.target).next().addClass("op_0");
+    });
+    $(".input_close_icon").click(function (event) {
+        $(event.target).prev().val("");
+    });
+    $(".input_close_icon_second").click(function (event) {
+        $(event.target).prev().val("");
+    });
+    var btn = $(".validate_btn");
+    function reg_send_user(){
+        /**
+         * 这里判断手机合法性
+         */
+        btn.prop("disabled",true);
+        btn.removeClass("validate_btn_active");
+        var time=61;
+        var timeInter =setInterval(function () {
+            time = time - 1;
+            if(time>=0){
+                btn.html("<span style='color: #2ca5de'>"+time+"</span>"+"s后重发");
+            }
+            else{
+                btn.prop("disabled",false);
+                clearInterval(timeInter);
+                btn.text("重新发送");
+                btn.addClass("validate_btn_active");
+
+                /**
+                 * 这里判断手机合法性如果合法，添加   btn.addClass("validate_btn_active");
+                 */
+            }
+        },1000);
+    }
+
+
+
+
+
+    function ontext(){
+        document.getElementById('reg_err1').className='u_register_err hidden';
+        document.getElementById('reg_err2').className='u_register_err hidden';
+    }
+
+    function errtext(classn,etext){
+        document.getElementById('reg_err1').className=classn;
+        document.getElementById('reg_err_text1').innerHTML =etext;
+        document.getElementById('reg_err2').className=classn;
+        document.getElementById('reg_err_text2').innerHTML =etext;
+    }
+
+
+
+
+
+    $("#reg_user_fanhui").click(function(){
+        $("#one_reg_user").removeClass('hidden');
+        $("#two_reg_user").addClass('hidden');
+    });
+
+    //发送验证码
+    btn.click(function () {
+        regsendcode();
+    });
+//=11111111111111==============================================================================================
+    function checktype(){
+        var type=$("#hiddentypevalue").val();
+        var email=/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;//邮件地址必须包含@符号和.com等网络域名
+        var tel=/^(13[0-9]|15[0|3|5|6|7|8|9]|18[8|9])\d{8}$/;	//包括移动电话和固定电话，但是必须大于7位
+        if(email.test(type))
+        {
+            document.getElementById('hiddentype').value ='email';
+            return true;
+        }else if(tel.test(type)){
+            document.getElementById('hiddentype').value ='phone';
+            return true;
+        }else{
+            errtext('u_register_err','请输入正确的电话号码或邮箱');
+            return false;
+        }
+    }
+    //将上面n个函数打包成一个AllCheck()函数，在前台界面中调用该AllCheck()；
+    function CheckRegCode(){
+        if(checktype()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    function regsendcode(){
+        if(CheckRegCode()){
+            // 禁用滚动
+            $('#register_sendCode').unbind('click', regsendcode)
+            var typename=$("#hiddentype").val();
+            var typevalue=$("#hiddentypevalue").val();
+            var data_send={};
+            data_send.type=typename;
+            data_send.typevalue=typevalue;
+            console.log(data_send);
+            $(".loading").removeClass("hidden");
+            $.ajax({
+                type: 'POST',
+                url: register_send_url,
+                dataType: 'json',
+                data:data_send,
+                success: function(data) {one_reg_user
+                    $(".loading").addClass("hidden");
+                    if(data.status!=200){
+                        $('#reg_err1').removeClass('hidden');
+                        $("#reg_err_text1").html(data.msg);
+                        //绑定滚动事件
+                        $('#register_sendCode').bind('click', regsendcode);
+                    }else{
+                        $('#reg_err1').removeClass('hidden');
+                        $("#reg_err_text1").html("验证码发送成功！");
+                        reg_send_user();
+                    }
+                },
+                error:function(data){
+                    $(".loading").addClass("hidden");
+                    $('#reg_err1').removeClass('hidden');
+                    $("#reg_err_text1").html('请重新刷新页面再注册');
+                }
+            });
+        }else{
+            return false;
+        }
+    }
+//====2222222222222222222============================================================================================================
+    function regcodecheck(){
+        var code=$("#reg_code_input").val();
+        var codese=/^\d{6}$/;
+        if(!codese.test(code)){
+            errtext('u_register_err','验证码必须是6为数字');
+            return false;
+        }
+        return true;
+    }
+
+
+
+
+    /*登陆成功的时候*/
+    function check_codo_error() {
+        $(".loading").removeClass("hidden");
+        $("#reg_next").text("验证中...");
+    }
+    /*登陆按钮点击的逻辑*/
+    $("#send_reg").click(function () {
+        /*这里判断数据合法性和写ajax*/
+        check_code_user();
+    })
+
+
+
+
+    function check_code_user(){
+        if(regcodecheck()){
+            var regcode=$("#reg_code_input").val();
+            var data_check={};
+            data_check.code=regcode;
+            check_codo_error();
+            $.ajax({
+                type: 'POST',
+                url: register_check_url,
+                dataType: 'json',
+                data:data_check,
+                success: function(data) {
+                    $(".loading").addClass("hidden");
+                    if(data.status!=200){
+                        $('#reg_err1').removeClass('hidden');
+                        $("#reg_err_text1").html(data.msg);
+                    }else{
+                        $('#reg_err1').removeClass('hidden');
+                        $("#reg_err_text1").html("验证码正确！");
+
+                        $("#one_reg_user").addClass('hidden');
+                        $("#two_reg_user").removeClass('hidden');
+                    }
+                },
+                error:function(data){
+                    $(".loading").addClass("hidden");
+                    $('#reg_err1').removeClass('hidden');
+                    $("#reg_err_text1").html('请重新刷新页面再注册');
+                }
+            });
+
+        }else{
+            return false;
+        }
+    }
+
+
+
+
+//====333333333333333333============================================================================================================
+
+
+    String.prototype.lengthB = function( ){
+        var b = 0, l = this.length;
+        if( l ){
+            for( var i = 0; i < l; i ++ ){
+                if(this.charCodeAt( i ) > 255 ){
+                    b += 2;
+                }else{
+                    b ++ ;
+                }
+            }
+            return b;
+        }else{
+            return 0;
+        }
+    }
+
+
+    /*登陆成功的时候*/
+    function loginSussess() {
+        $("#loading_img").removeClass("hidden");
+        $("#login_info").text("注册中...");
+    }
+
+    /*登陆按钮点击的逻辑*/
+    $("#register").click(function () {
+        /*这里判断数据合法性和写ajax*/
+
+        save_data();
+    })
+
+
+    function TrueNa(){			//验证真实姓名
+        var TrlName=$("#lastname").val();
+        TrlNamelength=TrlName.lengthB();
+        //var lastName=/^[\u4E00-\u9FA5]{2,5}$/;	//只能是汉字
+        //var lastName=/^[\u4e00-\u9fa5]{2,5}$|^[\dA-Za-z]{4,15}$/;	//只能是2-5汉字||4-15字母--不能超过24个字母或12个汉字
+        //var lastName=/^.{4,15}$/;	//只能是2-5汉字||4-15字母--不能超过24个字母或12个汉字
+        if(TrlName.length==0){
+            errtext('u_register_err','呢称未填写');
+            return false;
+        }
+        else if(TrlNamelength>15||TrlNamelength<4){
+            errtext('u_register_err','呢称只能是4-15个字母或2-7个汉字');
+            return false;
+        }
+        return true;
+    }
+
+    function pwcheck(){
+        var pw=$("#password").val();
+        var passw=/^\S{6,12}$/;
+        if(!passw.test(pw)){
+            errtext('u_register_err','密码必须是6~12个字符');
+            return false;
+        }
+        return true;
+    }
+
+    //将上面n个函数打包成一个AllCheck()函数，在前台界面中调用该AllCheck()；
+    function AllCheck(){
+        if(TrueNa()&&pwcheck()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    function save_data(){
+        if(AllCheck()){
+            var lastname=$("#lastname").val();
+            var password=$("#password").val();
+            var data_save={};
+            data_save.lastname=lastname;
+            data_save.password=password;
+            $.ajax({
+                type: 'POST',
+                url: register_save_url,
+                dataType: 'json',
+                data:data_save,
+                success: function(data) {
+                    if(data.status!=200){
+                        $('#reg_err2').removeClass('hidden');
+                        $("#reg_err_text2").html(data.msg);
+                    }else{
+                        //清除LocalStorage内容，以显示提示
+                        localStorage.removeItem("UserFirstLogin");
+                        localStorage.removeItem("UserFirstOpenHisOwnWishList");
+                        $('#reg_err2').removeClass('hidden');
+                        $("#reg_err_text2").html("注册成功！");
+                        loginSussess();
+                        setTimeout(function () {
+                            if(data.histhref==null||data.histhre==""){
+                                window.location.href=index_url;
+                            }else{
+                                window.location.href=data.histhref;
+                            }
+                        },1000);
+                    }
+                },
+                error:function(data){
+                    $('#reg_err2').removeClass('hidden');
+                    $("#reg_err_text2").html('请重新刷新页面再注册');
+                }
+            });
+
+        }else{
+            return false;
+        }
+    }
+
+
+
+
+
+
+
+
+
+})()
+</script>
+
+</body>
+</html>
+
+
+
+
+

@@ -1,0 +1,119 @@
+<extend name="Public/base" />
+
+<block name="body">
+	<!-- 标题栏 -->
+	<div class="main-title">
+		<h2>用户列表</h2>
+	</div>
+	<div class="cf">
+		<div class="fl">
+            <a class="btn" href="{:U('Teacher/Add')}">新 增</a>
+            <!--<button class="btn ajax-post" url="{:U('User/changeStatus',array('method'=>'forbidUser'))}" target-form="ids">禁 用</button>
+            <button class="btn ajax-post confirm" url="{:U('User/changeStatus',array('method'=>'deleteUser'))}" target-form="ids">删 除</button>-->
+        </div>
+
+        <!-- 高级搜索 -->
+		<div class="search-form fr cf">
+			<div class="sleft">
+				<input type="text" name="words" class="search-input" value="{:I('get.words')}" placeholder="请输入教师账号或者ID">
+				<a class="sch-btn" href="javascript:;" id="search" url="{:U('index')}"><i class="btn-search"></i></a>
+			</div>
+		</div>
+    </div>
+    <!-- 数据列表 -->
+    <div class="data-table table-striped">
+	<table class="">
+    <thead>
+        <tr>
+		<th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+		<th class="">ID</th>
+		<th class="">账号</th>
+		<th class="">所属分院</th>
+		<th class="">学历</th>
+		<th class="">出生日期</th>
+		<th class="">性别</th>
+		<th class="">级别</th>
+		<th class="">操作</th>
+		</tr>
+    </thead>
+    <tbody>
+		<notempty name="lists">
+		<volist name="lists" id="vo">
+		<tr>
+            <td><input class="ids" type="checkbox" name="id[]" value="{$vo.uid}" /></td>
+			<td>{$vo.id}</td>
+			<td>{$vo.username}</td>
+			<td>{$vo.br_name}</td>
+			<td><php>$eduLevels = ['小学学历','高中或中专' ,'专科' ,'本科','研究生','博士','博士后']; echo isset($eduLevels[$vo['te_eduLevel']]) ? $eduLevels[$vo['te_eduLevel']] : '---' ;</php></td>
+            <td>{$vo.te_birthday}</td>
+			<td><php>echo $vo['te_sex'] == 0 ? '男' : '女' ;</php></td>
+			<td>{$vo.tl_name}</td>
+			<td>
+				<a href="{:U('Teacher/edit',['id'=>$vo['id']])}">编辑</a>
+				<a href="javascript:void(0);" class="confirm" onclick="teacherManager.del({$vo.id})">删除</a>
+             </td>
+		</tr>
+		</volist>
+		<else/>
+		<td colspan="9" class="text-center"> aOh! 暂时还没有内容! </td>
+		</notempty>
+	</tbody>
+    </table>
+	</div>
+    <div class="page">
+        {$_page}
+    </div>
+</block>
+
+<block name="script">
+	<script src="__STATIC__/thinkbox/jquery.thinkbox.js"></script>
+
+	<script type="text/javascript">
+	function teacherManager(){ 
+            var manager = new Object; 
+            manager.box = null; 
+            manager.del = function(id){ 
+			   if(!confirm('确认删除？'))
+			     return false;
+			   url = "{:U('Teacher/del')}";
+               $.ajax({type:'GET',url:url,data:{id:id}, dataType: "json", success: function(data){
+                   if(data.status == 1) {
+					  layer.msg('删除成功', function(){
+                          location.reload();
+                      });
+				  }else{
+					  layer.msg(data.info, {
+                         time: 2000
+                      });
+				  }
+              }});
+           };    
+           return manager; 
+        } 
+		
+  var teacherManager = teacherManager();
+
+	//搜索功能
+	$("#search").click(function(){
+		var url = $(this).attr('url');
+        var query  = $('.search-form').find('input').serialize();
+        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+        query = query.replace(/^&/g,'');
+        if( url.indexOf('?')>0 ){
+            url += '&' + query;
+        }else{
+            url += '?' + query;
+        }
+		window.location.href = url;
+	});
+	//回车搜索
+	$(".search-input").keyup(function(e){
+		if(e.keyCode === 13){
+			$("#search").click();
+			return false;
+		}
+	});
+    //导航高亮
+    highlight_subnav('{:U('User/index')}');
+	</script>
+</block>

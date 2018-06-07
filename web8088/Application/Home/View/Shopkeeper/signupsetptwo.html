@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+    <meta content="yes"name="apple-mobile-web-app-capable"/>
+    <meta content="black"name="apple-mobile-web-app-status-bar-style"/>
+    <title>机构注册 - 17约课</title>
+    <link rel="stylesheet" type="text/css" href="__HCSS__/reset.css">
+    <link rel="stylesheet" href="__HCSS__/4.css"/>
+    <link rel="stylesheet" href="__HCSS__/2.css"/>
+    <meta name="keywords" content="17约课,一起约课,约课,教育培训,约课神器,校园约课,大学生培训,约老师,约女神,驾驶培训,设计培训,职业考证,音乐培训,英语培训,小语种培训,体育培训" />
+    <meta name="description" content="17约课 - 约您身边的良师益友！为您提供约老师，约课程，约女神，约学霸等海量信息，充分满足您免费约课，免费发布课程的需求。" />
+</head>
+<body>
+<div class="register_wrap e_first_register" style="height: 53em; margin-bottom:0;">
+    <img src="__HIMG__/logo2.png" alt="" class="register_title"/>
+    <p class="e_register_second_title">开通商家发布课程服务</p>
+    <p class="e_first_register_path"><img src="__HIMG__/1(1).png" alt=""/>填写联系方式
+    <div class="e_register_line"></div></p>
+    <p class="e_first_register_path"><img src="__HIMG__/2(2).png" alt=""/>填写公司名称
+    <div class="e_register_line"></div></p>
+    <p class="e_first_register_path"><img src="__HIMG__/3.png" alt=""/>验证公司邮箱</p>
+    <p class="e_first_register_chip">公司全称(请填写与公司营业执照一致的公司全称)</p>
+    <div class="input_wrap">
+        <input type="text" id="company_name" class="register_input" placeholder="输入公司营业执照一致的公司名称">
+        <i class="input_close_icon op_0"></i>
+    </div>
+    <!--出错了就把Hidden去掉就会显示了，有多少个错误就在多少行li-->
+    <div id="err_panel" class="u_register_err {:empty($err)?'hidden':''}">
+        <ul>
+            <li>
+            	<img src="__HIMG__/Exclamation.png" alt="" class="register_err_image"/>
+            	<span id="err_span">{$err}</span>
+            </li>
+        </ul>
+    </div>
+    <!---->    
+    <button class="register_submit" id="btn" style="margin-top: 2em;">下一步</button>
+    <a href="{:U('Shopkeeper/signUpSetpOne')}">
+    	<p class="back_to_email" style="margin-top: 0.8em; margin-bottom:1em;"><img src="__HIMG__/Return.png" alt=""/>返回修改邮箱地址</p>
+    </a>
+    <p>温馨提示，任何问题请致电：020-28107517</p>
+    <p>我们会尽快为您解决</p>
+</div>
+<script type="text/javascript" src="__HJS__/zepto.min.js"></script>
+<script type="text/javascript">
+    var signUpSetpThree_url = "{:U('Shopkeeper/signUpSetpThree')}";
+    var validateCompanyName_url = "{:U('Api/Shopkeeper/validateCompanyName')}";
+</script>
+<script type="text/javascript" src="__HJS__/shopkeeper/signupsetptwo.js" charset="utf-8"></script>
+<include file="Public:statistics"/>
+</body>
+</html>

@@ -1,0 +1,419 @@
+<include file="Public:header" />
+<style>
+.loading {
+  display: block;
+  position: fixed;
+  top: 200px;
+  left: 45%;
+  width: 10%;
+  margin: 0 auto;
+  z-index: 2888;
+}
+</style>
+<img src="__HIMG__/loading.gif" alt=""  class="loading hidden"/>
+<div id="content">
+
+	
+	<div class="container">
+		
+		<div class="row">
+		
+			<include file="Public:nav" />
+
+	
+			
+			
+			<div class="span10">
+				
+				<div class="widget widget-table">
+										
+					<div class="widget-header">
+						<i class="icon-th-list"></i>
+						<h3>心愿详情</h3>
+                        <a href="javascript:history.back(-1)" class="btn btn-small">返回</a>
+					</div> <!-- /widget-header -->
+
+					<div class="widget-content" style="margin-bottom:1em;">
+	                	　<div class="span8">
+                              <h3 style="margin-top:1em;">心愿标题：{$info['title']}</h3>
+                              <table>
+                              		<tr>
+                              			<td>课程内容：</td>
+                              			<td style="max-width:690px;">{$info['content']}</td>
+                              		</tr>
+                              		<tr>
+                              			<td>商家全称：</td>
+                              			<td>{$info['company_name']}</td>
+                              		</tr>
+                              		<tr>
+                              			<td>商家简称：</td>
+                              			<td>{$info['nickname']}</td>
+                              		</tr>
+                              		<tr>
+                              			<td>约课模式：</td>
+                              			<td>{$info['mode']}</td>
+                              		</tr>
+                              		<tr>
+                              			<td>分类：</td>
+                              			<td>{$info['catename']}</td>
+                              		</tr>
+                              		<tr>
+                              			<td>价格：</td>
+                              			<td>{$info['ltprice']}</td>
+                              		</tr>
+                              		<tr>
+                              			<td>地址：</td>
+                              			<td>
+                              				<foreach  name="info['areaname']" item="voareaname" key="kareaname">
+                              					{$voareaname}　
+                              				</foreach>
+                              			</td>
+                              		</tr>
+                              		<tr>
+                              			<td>课程特色：</td>
+                              			<td>
+                              				<foreach  name="info['tags']" item="votags" key="ktags">
+                              					{$votags}　
+                              				</foreach>
+                              			</td>
+                              		</tr>
+                              </table>
+						　</div>
+					</div> <!-- /widget-content -->
+					
+					
+					
+					
+					<div id="assist">			
+					</div>
+					<div id="assistpage" class="widget-content" style="margin-top:-1em;margin-bottom:1em;">			
+					</div>
+					
+					<div id="pushed">				
+					</div>
+					<div id="pushedpage" class="widget-content" style="margin-top:-1em;margin-bottom:1em;">
+					</div>
+					
+					<div id="comment">
+					</div>
+					<div id="commentpage" class="widget-content" style="margin-top:-1em;margin-bottom:1em;">
+					</div>
+					
+					
+					
+					
+					<!-- 分页 -->	
+							<thead>
+								<div id="nvpage" class="pagination" style="margin-left:10px;">
+										
+								</div>
+								
+							</thead>
+							
+							
+					
+				</div> <!-- /widget -->
+				
+			</div> <!-- /span10 -->
+			
+		</div> <!-- /row -->
+		
+	</div> <!-- /container -->
+	
+</div> <!-- /content -->
+
+
+<script id="tplassist" type="text/template">
+						<div class="widget-content" style="margin-bottom:1em;">
+		                	　<div class="span8">
+	                              <h3 style="margin-top:1em;">该心愿单<span style="color:red">跟约</span>详情</h3>
+	                              <table>
+	                              		<tr>
+	                              			<td>跟约人姓名：　</td>
+	                              			<td>手机：　</td>
+	                              			<td>邮箱：　</td>
+	                              		</tr>
+{@each assist as ita,indexa}
+	                              		<tr>
+	                              			<td>${ita.firstname}${ita.lastname}<input type="hidden" value="${ita.uid}"/></td>
+	                              			<td>${ita.phone}</td>
+	                              			<td>${ita.email}</td>
+	                              		</tr>
+{@/each}
+	                              </table>
+							　</div>
+						</div>	
+</script>
+<script id="tplpushed" type="text/template">
+						<div class="widget-content" style="margin-bottom:1em;">
+	                          <h3 style="margin-top:1em;margin-left:30px;">该心愿单<span style="color:red">推送</span>详情</h3>
+{@each pusheds as itp,indexp}
+		                	　<div class="span5" style="float:left;margin-left:30px;width:388px;">
+	                              <table>
+	                              		<tr>
+	                              			<td>推送的课程标题：</td>
+	                              			<td style="max-width:690px;">${itp.title}</td>
+	                              		</tr>
+	                              		<tr>
+	                              			<td>商家机构的名称：</td>
+	                              			<td>${itp.company_name}</td>
+	                              		</tr>
+	                              		<tr>
+	                              			<td>商家机构的呢称：</td>
+	                              			<td>${itp.nickname}</td>
+	                              		</tr>
+	                              		<tr>
+	                              			<td>商家机构的电话：</td>
+	                              			<td>${itp.tel}</td>
+	                              		</tr>
+	                              		<tr>
+	                              			<td>商家机构的手机：</td>
+	                              			<td>${itp.login_phone}</td>
+	                              		</tr>
+	                              		<tr>
+	                              			<td>商家机构的邮箱：</td>
+	                              			<td>${itp.login_email}</td>
+	                              		</tr>
+	                              </table>
+							　</div>
+{@/each}
+						</div>
+</script>
+<script id="tplcom" type="text/template">
+
+						<div class="widget-content" style="margin-bottom:1em;">
+	                          <h3 style="margin-top:1em;margin-left:30px;">该心愿单<span style="color:red">评论</span>详情</h3>
+{@each gcommen as itc,indexc}
+				{@if itc.sid==0}
+		                	　<div class="span5" style="float:left;margin-top:10px;margin-left:30px;width:400px;">
+	                              <table>
+	                              		<tr>
+	                              			<td>评论人姓名：　</td>
+	                              			<td style="width:300px;>${itc.name}<input type="hidden" value="${itc.uid}"/></td>
+	                              		</tr>
+	                              		<tr>
+	                              			<td>手机：　</td>
+	                              			<td>${itc.phone}</td>
+	                              		</tr>
+	                              		<tr>
+	                              			<td>邮箱：　</td>
+	                              			<td>${itc.email}</td>
+	                              		</tr>
+	                              		<tr>
+	                              			<td>评论内容： </td>
+	                              			<td>
+							{@each itc as itcc,indexcc}
+								{@if !isNaN(indexcc)}
+												<p>${numxh=parseInt(indexcc)+1}：${itcc.c_info}</p>
+								{@/if}
+							{@/each}
+											</td>
+	                              		</tr>
+	                              </table>
+							　</div>
+				{@else if itc.uid==0}
+		                	　<div class="span5" style="float:left;margin-top:10px;argin-left:30px;width:400px;">
+	                              <table>
+	                              		<tr>
+	                              			<td>商家机构的名称：　</td>
+	                              			<td style="width:300px;">${itc.company_name}<input type="hidden" value="${itc.sid}"/></td>
+	                              		</tr>
+	                              		<tr>
+	                              			<td>商家机构的呢称：　</td>
+	                              			<td>${itc.nickname}</td>
+	                              		</tr>
+	                              		<tr>
+	                              			<td>商家机构的电话：　</td>
+	                              			<td>${itc.tel}</td>
+	                              		</tr>
+	                              		<tr>
+	                              			<td>商家机构的手机：　</td>
+	                              			<td>${itc.login_phone}</td>
+	                              		</tr>
+	                              		<tr>
+	                              			<td>商家机构的邮箱：　</td>
+	                              			<td>${itc.login_email}</td>
+	                              		</tr>
+	                              		<tr>
+	                              			<td>评论内容： </td>
+	                              			<td>
+							{@each itc as itccc,indexccc}
+								{@if !isNaN(indexccc)}
+												<p>${numxunhuan=parseInt(indexccc)+1}：${itccc.c_info}</p>
+								{@/if}
+							{@/each}
+											</td>
+	                              		</tr>
+	                              </table>
+							　</div>
+				{@/if}
+{@/each}
+						</div>
+</script>
+<!-- 分页是全部共用 -->
+<script id="tplassistpage" type="text/template">
+		<a href="javascript:;" style="border-left: 1px solid #ddd"   id="DataTables_Table_0_previous">${page.counts}条记录  ${page.curPage}/${page.pageAll}页</a>
+			{@if page.curPage!=1}
+				<a  href="javascript:;" class="page"  index="1" class=""  id="DataTables_Table_0_first">第一页</a>
+				<a  href="javascript:;"  class="page" index="${page.curPage-1}" class="" id="DataTables_Table_0_previous">上一页</a>
+			{@/if}				
+		<span>
+	{@each i in range(page.pageFirst, page.pageMax+1)}
+		<a href="javascript:;" index="${i}" class="page" {@if i==page.curPage} style="color: #FC8D00;background-color: #FFFFFF;"{@/if} >${i}</a>
+	{@/each}
+		</span>
+		{@if page.curPage!=page.pageAll}
+			<a  href="javascript:;"  index="${parseInt(page.curPage)+1}" class="page" id="DataTables_Table_0_next">下一页</a>
+			<a  href="javascript:;" index="${page.pageAll}" class="page" id="DataTables_Table_0_last">最后一页</a>
+		{@/if}
+</script>
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="__AJS__/jquery-1.7.2.min.js"></script>
+<script src="__AJS__/excanvas.min.js"></script>
+<!-- 
+<script src="__AJS__/jquery.flot.js"></script>
+<script src="__AJS__/jquery.flot.pie.js"></script>
+<script src="__AJS__/jquery.flot.orderBars.js"></script>
+<script src="__AJS__/jquery.flot.resize.js"></script>
+ -->
+<script src="__AJS__/bootstrap.js"></script>
+<!-- 
+<script src="__AJS__/charts/bar.js"></script>
+ -->
+<script type="text/javascript" src="__HJS__/juicer-min.js"></script>
+
+<script type="text/javascript">
+
+
+
+var uvpage=0;
+var comui=1;
+var comsi=1;
+
+
+var gid={$info['id']};
+function showLoading(){
+    $('.loading').removeClass("hidden");
+}
+function hiddenLoading(){
+    $('.loading').addClass("hidden");
+}
+function postaiisst(asistpage){
+	showLoading();
+	var datainfo={};
+	datainfo.gid=gid;
+	datainfo.page=asistpage;
+	$.post("{:U('User/groupassist')}",datainfo,function(data){
+
+		console.log(data);
+		
+		var tpla = document.getElementById('tplassist').innerHTML;
+		var htmla = juicer(tpla, data.gassist);
+		$('#assist').html(htmla);
+		
+		var tplapage = document.getElementById('tplassistpage').innerHTML;
+		var htmlapage = juicer(tplapage, data.gassist);
+		$('#assistpage').html(htmlapage);
+		hiddenLoading();
+     
+    }, "json");
+}
+postaiisst(1);
+$("#assistpage").on("click",".page",function(e){
+	postaiisst($(e.currentTarget).attr("index"));
+});
+
+
+
+function postpushed(pushedpage){
+	showLoading();
+	var pushedinfo={};
+	pushedinfo.gid=gid;
+	pushedinfo.page=pushedpage;
+	$.post("{:U('User/grouppush')}",pushedinfo,function(data){
+
+		console.log(data);
+		
+		var tplp = document.getElementById('tplpushed').innerHTML;
+		var htmlp = juicer(tplp, data.gpushed);
+		$('#pushed').html(htmlp);
+		
+		var tplppage = document.getElementById('tplassistpage').innerHTML;
+		var htmlppage = juicer(tplppage, data.gpushed);
+		$('#pushedpage').html(htmlppage);
+		hiddenLoading();
+     
+    }, "json");
+}
+postpushed(1);
+$("#pushedpage").on("click",".page",function(e){
+	postpushed($(e.currentTarget).attr("index"));
+});
+
+
+function postcom(compage){
+	showLoading();
+	var cominfo={};
+	cominfo.gid=gid;
+	cominfo.page=compage;
+	$.post("{:U('User/groupcom')}",cominfo,function(data){
+
+		console.log(data);
+		
+		var tplc = document.getElementById('tplcom').innerHTML;
+		var htmlc = juicer(tplc, data);
+		$('#comment').html(htmlc);
+		
+		var tplcpage = document.getElementById('tplassistpage').innerHTML;
+		var htmlcpage = juicer(tplcpage, data.gcommen);
+		$('#commentpage').html(htmlcpage);
+		hiddenLoading();
+     
+    }, "json");
+}
+postcom(1);
+$("#commentpage").on("click",".page",function(e){
+	postcom($(e.currentTarget).attr("index"));
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$("#nvpage").on("click",".page",function(e){
+	postuv($(e.currentTarget).attr("index"));
+});
+
+
+$("#changestatus").on("change",function(e){
+	postuv(1);
+});
+$("#changesort").on("change",function(e){
+	postuv(1);
+});
+
+
+
+
+</script>
+
+<include file="Public:footer" />
+

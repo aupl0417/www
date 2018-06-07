@@ -1,0 +1,202 @@
+<extend name="ShopPublic:base" />
+
+<block name="title">17约课-资料编辑</block>
+
+<block name="main">
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+		
+
+		 <!-- Left side column. contains the logo and sidebar -->
+
+         <include file="ShopPublic:centerNav" />
+
+      <!--课程发布-->
+       
+        <section class="content">
+           <form action="">
+           <div class="row">
+           	<h3>基本资料</h3>
+           	<div class="form-group">
+				<label for="">&nbsp;&nbsp;资料完善值</label>
+					<div class="progress">
+				      <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 30%;">
+				      </div><div class="bar_cont pa" id="bar">%</div>
+			       </div>
+			</div>
+               <div class="form-group my-form-group">
+                   <label class="require">上传头像</label>
+                   <div id="preview" href="javascript:void(0);" class="upload-btn">
+                       <img id="headimg" src="{$resArr.avatar}" alt="上传图片">
+                   </div>
+                   <input id="file-uploader" name="file" type="file" class="hidden" multiple="multiple" onchange="previewImage(this,93,95);">
+                   <div class="advise">
+                       <p>上传机构头像</p>
+                       <p>选择后一个月内修改一次</p>
+                   </div>
+
+               </div>
+				<div class="form-group">
+					<label for="" class="require">机构昵称</label>
+					<input type="text" value="{$resArr.nickname}" placeholder="输入机构昵称，长度不超过8个">
+				</div>
+				<div class="form-group">
+					<label for="" class="require">机构校龄</label>
+					<input type="text" value="{$resArr.age}" placeholder="请输入校龄">&nbsp;年
+				</div>
+				<div class="form-group">
+
+						<label class="require">机构类别</label>
+						<input type="text" class="input-small" style="margin-left: 0;" placeholder="选择大类" readonly="true" id="class_big">
+						<div class="input-group-btn">
+	       				 <button type="button" class="btn-down dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+	      				<span class="divide">-</span>
+	      				<input type="text" class="input-small" placeholder="选择小类" readonly="true" id="class_small">
+						<div class="input-group-btn">
+	       				 <button type="button" class="btn-down dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+	      				</div>
+					</div>
+           </div>
+           <div class="row">
+           	<h3>机构介绍</h3>
+           	<div class="form-group">
+					
+					<label for="">机构网址</label>
+					<input id="year" value="{$resArr.website}" placeholder="请输入机构网址，可方便链接">
+				</div>
+				<div class="form-group">
+					
+					<label for="">师资力量</label>
+					<textarea class="tinymce" id="content" cols="60" value="{$resArr.teacher_power}" placeholder="请填写机构强大的师资力量，优秀的师资力量可以吸引更多的学生"></textarea>
+				</div>
+				<div class="form-group">
+					
+					<label for="">机构全称</label>
+					<input value="{$resArr.company_name}"  id="name" placeholder="请输入机构全称">
+				</div>
+				<div class="form-group" style="position:relative">
+						
+						<label for="">课程特色</label>
+						<a href="javascript:void(0)" id="edit">编辑</a>
+						<div class="course-special" id="course_special">
+							<span>老师漂亮</span>
+							<span>责任心强</span>
+							<span>成绩好</span>
+						</div>
+						<div class="special-menu hidden" id="special_menu"> 
+							<p><input type="text" placeholder="自定义特色，不超过四个"> <button>添加</button></p>
+							<h4>选择3个符合您的课程特色</h4>
+							<ul class="special-list clearfix">
+								<li>老师漂亮</li>
+								<li>责任心强</li>
+								<li>成绩好</li>
+								<li>会唱歌</li>
+								<li>会打牌</li>
+								<li>经验丰富</li>
+								<li>勤奋</li>
+								<li>老师漂亮</li>
+								<li>责任心强</li>
+							</ul>
+						</div>
+					</div>
+					<div class="form-group">
+					
+					<label for="">机构简介</label>
+					<textarea class="tinymce" id="content" cols="60" rows="4" name="positionDetail" placeholder="请输入机家信任度，输入0-315个字">{$resArr.remark}</textarea>
+				</div>
+				<div class="form-group">
+					
+					<label for="">机构电话</label>
+					<input type='text' id="phone" value="{$resArr.tel}" placeholder="请填写机构真实电话">
+				</div>
+				<div class="form-group">
+						<label >机构地址</label>
+						<input type="text" class="input-small" style="margin-left: 0;" id="address1" readonly="true" placeholder="请选择">
+						<div class="input-group-btn">
+	       				 <button type="button" class="btn-down dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                            <ul class="dropdown-menu small-menu" role="menu">
+                                <li><a href="">全日制</a></li>
+                                <li><a href="">工作日</a></li>
+                                <li><a href="">周末班</a></li>
+                                <li><a href="">寒暑假</a></li>
+                                <li><a href="">网络班=</a></li>
+                                <li><a href="">其它</a></li>
+                            </ul>
+                        </div>
+	      				<span class="divide">-</span>
+	      				<input type="text" class="input-small" placeholder="请选择" readonly="true" id="address2">
+						<div class="input-group-btn">
+	       				 <button type="button" class="btn-down dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                            <ul class="dropdown-menu small-menu" role="menu">
+                                <li><a href="">全日制</a></li>
+                                <li><a href="">工作日</a></li>
+                                <li><a href="">周末班</a></li>
+                                <li><a href="">寒暑假</a></li>
+                                <li><a href="">网络班=</a></li>
+                                <li><a href="">其它</a></li>
+                            </ul>
+                        </div>
+						<span class="divide">-</span>
+						<input type="text" value="{$resArr.area_raw}" placeholder="请输入授课地点的详细地址" id="address3">
+						
+					</div>
+					<div class="form-group">
+					
+					<label for="">机构图片</label>
+                        <div id="preview" href="javascript:void(0);" class="upload-btn">
+                             <img id="imghead" src="<?php if (empty($resArr['environ'])): ?>__UPLOAD__Photo Frame.png<?php else: ?>__UPLOAD__{$resArr['environ']}<?php endif; ?>" alt="上传图片">
+                            
+                        </div>
+                        <input id="file-uploader2" name="file" type="file" class="hidden" multiple="multiple" onchange="previewImage(this,93,95,'preview2','orgimg');">
+
+				</div>
+               <div class="form-group">
+					<span class="button-wrap">
+						<button class="submit">发布</button>
+					<button class="preview">预览</button>
+					</span>
+
+               </div>
+           </div>
+			</form>
+        </section>
+
+      </div><!-- /.content-wrapper -->
+
+
+     
+    </div><!-- ./wrapper -->
+</block>
+
+<block name="css">
+	<link rel="stylesheet" href="__PCCSS__/publish.css">
+</block>
+
+<block name="js">
+
+	<script type="text/javascript">
+// 全局数组
+var g = {
+    "designBtn":            '<img src="__HIMG__/Design (7).png" alt="">',
+    "credit":               '{$resArr.credit}',
+    "handleEditUrl":        "{:U('Api/ShopkeeperDetail/handleEdit')}",
+    "infoUrl":              "{:U('Shopkeeper/info', ['id'=>session('shopkeeper.id')])}",
+    "zoneUrl":              "{:U('Api/Area/getByParentId')}",
+    "indexUrl":             "{:U('Index/index')}",
+
+    "upImg":                "__HIMG__/up.png",
+    "indexMoreImg":         "__HIMG__/index_more.png",
+
+    "cateid":               "{$resArr.cateid}"
+};
+</script>
+
+    <!-- AdminLTE App -->
+    <script src="_" type="text/javascript"></script>
+    <script src="__PCJS__/certification.js" type="text/javascript"></script>
+    <script src="__PCJS__/publish.js" type="text/javascript"></script>
+    <script type="text/javascript" src="__HJS__/shopkeeper/editor.js" charset="utf-8"></script>
+   <script>
+   		$('#bar').css('width', g.credit + '%').text(g.credit + '%');
+   </script>
+</block>

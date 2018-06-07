@@ -1,0 +1,358 @@
+<extend name="ShopPublic:base" />
+
+<block name="title">17约课-已发布课程</block>
+
+<block name="main">
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+
+      <include file="ShopPublic:centerNav" />
+      <!--课程发布-->
+       
+        <section class="content">
+           <div class="row">
+               <h4 style="margin-left: 13px;">已发布课程</h4>
+				
+               <!-- 模板输出位置 -->
+               <div id="infoPanel">
+               		<div class="col-xs-4">
+					<div class="course">
+						<div class="course-logo-wrap">
+							<div class="logo_model">
+								教学特点，老师是韩国的，整个宇宙都是韩国的。
+							</div>
+							<img src="__PCIMG__/demo1.png" class="course-logo" alt="course pic">
+						</div>
+						
+						<div class="course-content">
+						<img src="__PCIMG__/laba.png" alt="">
+						<a href="#">
+						啦啦啦啦啦啦1
+							</a>
+						</div>
+			            <div class="course_brief clearfix">
+                    <li><i class="icons-time"></i>全日制</li>
+                    <li><i class="icons-msg"></i>37条评论</li>
+                    <li><i class="icons-user"></i>10人报名</li>
+                  </div>
+						<div class="course-bottom">
+							<div class="bottom-left">
+								<a class="a-op delete" href="javascript:void(0)">删除</a>
+								<a class="a-op edit" href="javascript:void(0)">编辑</a>
+							</div>
+							<div class="bottom-right">
+								3-5人 &nbsp;<span class="price-now">600元</span> <span class="price-past">800元</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-4">
+					<div class="course">
+						<div class="course-logo-wrap">
+							<div class="logo_model">
+								教学特点，老师是韩国的，整个宇宙都是韩国的。
+							</div>
+							<img src="__PCIMG__/demo1.png" class="course-logo" alt="course pic">
+						</div>
+						
+						<div class="course-content">
+						<img src="__PCIMG__/laba.png" alt="">
+						<a href="#">
+						啦啦啦啦啦啦2
+							</a>
+						</div>
+			            <div class="course_brief clearfix">
+                    <li><i class="icons-time"></i>全日制</li>
+                    <li><i class="icons-msg"></i>37条评论</li>
+                    <li><i class="icons-user"></i>10人报名</li>
+                  </div>
+						<div class="course-bottom">
+							<div class="bottom-left">
+								<a class="a-op delete" href="javascript:void(0)">删除</a>
+								<a class="a-op edit" href="javascript:void(0)">编辑</a>
+							</div>
+							<div class="bottom-right">
+								3-5人 &nbsp;<span class="price-now">600元</span> <span class="price-past">800元</span>
+							</div>
+						</div>
+					</div>
+				</div>
+               </div>
+
+           </div>
+
+           <!-- 分页栏 -->
+           <nav id="paginationPanel" style="text-align:right;">
+
+        </section>
+
+      </div><!-- /.content-wrapper -->
+		<div id="a-box" class="a-box hidden animated bounceInDown">
+			<span>亲，确定要删除？</span>
+
+			<p><button id="op-confirm">是</button> 
+			<button id="op-cancel">否</button></p>
+		</div>
+        <!-- 分页栏使用到的js -->
+        <include file="ShopPublic:pagination" />
+
+</block>
+
+<block name="css">
+    <style>
+    .content {
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-bottom: 10px;
+      min-height: 140px;
+    }
+    .a-box{position: absolute;;background-color: #fff;border:2px solid #2DA4DE;height: 100px;width: 300px;left:585px;top:200px;z-index: 900;border-radius: 3px;padding: 1em;font-size: 18px;}
+    .a-box span,.a-box p{display: block;margin: 0 auto;text-align: center;}
+    .a-box button{border:none;width: 50px;border-radius: 2px;}
+	.a-op{font-size: 14px;}
+	#op-confirm{background-color: #2DA4DE;color: #fff}
+    .animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.animated.bounceIn {
+  -webkit-animation-duration: .75s;
+  animation-duration: .75s;
+}
+@-webkit-keyframes bounceInDown {
+  0%, 60%, 75%, 90%, 100% {
+    -webkit-transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -3000px, 0);
+    transform: translate3d(0, -3000px, 0);
+  }
+
+  60% {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 25px, 0);
+    transform: translate3d(0, 25px, 0);
+  }
+
+  75% {
+    -webkit-transform: translate3d(0, -10px, 0);
+    transform: translate3d(0, -10px, 0);
+  }
+
+  90% {
+    -webkit-transform: translate3d(0, 5px, 0);
+    transform: translate3d(0, 5px, 0);
+  }
+
+  100% {
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+@keyframes bounceInDown {
+  0%, 60%, 75%, 90%, 100% {
+    -webkit-transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -3000px, 0);
+    transform: translate3d(0, -3000px, 0);
+  }
+
+  60% {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 25px, 0);
+    transform: translate3d(0, 25px, 0);
+  }
+
+  75% {
+    -webkit-transform: translate3d(0, -10px, 0);
+    transform: translate3d(0, -10px, 0);
+  }
+
+  90% {
+    -webkit-transform: translate3d(0, 5px, 0);
+    transform: translate3d(0, 5px, 0);
+  }
+
+  100% {
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+.bounceInDown {
+  -webkit-animation-name: bounceInDown;
+  animation-name: bounceInDown;
+}
+@-webkit-keyframes bounceOutUp {
+  20% {
+    -webkit-transform: translate3d(0, -10px, 0);
+    transform: translate3d(0, -10px, 0);
+  }
+
+  40%, 45% {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 20px, 0);
+    transform: translate3d(0, 20px, 0);
+  }
+
+  100% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -2000px, 0);
+    transform: translate3d(0, -2000px, 0);
+  }
+}
+
+@keyframes bounceOutUp {
+  20% {
+    -webkit-transform: translate3d(0, -10px, 0);
+    transform: translate3d(0, -10px, 0);
+  }
+
+  40%, 45% {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 20px, 0);
+    transform: translate3d(0, 20px, 0);
+  }
+
+  100% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -2000px, 0);
+    transform: translate3d(0, -2000px, 0);
+  }
+}
+
+.bounceOutUp {
+  -webkit-animation-name: bounceOutUp;
+  animation-name: bounceOutUp;
+}
+    </style>
+</block>
+
+<block name="js">
+
+    <!-- 模板 -->
+    <script id="infoTpl" type="text/template" charset="utf-8">
+        {@each data as it,index}
+        <div class="col-xs-4">
+            <div class="course">
+                <div class="course-logo-wrap">
+                    <div class="logo_model">
+                    </div>
+                    <img src="__UPLOAD__${it.environ}" class="course-logo" alt="course pic">
+                </div>
+
+                <div class="course-content">
+                <img src="__PCIMG__/laba.png" alt="">
+                <a href="{:U('Shopkeeper/course')}?id=${it.id}">
+                    ${it.title}
+                </a>
+                </div>
+                <div class="course_brief clearfix">
+            <li><i class="icons-time"></i>${it.mode}</li>
+            <li><i class="icons-msg"></i>${it.comment_count}条评论</li>
+            <li><i class="icons-user"></i>${it.user_count}人报名</li>
+          </div>
+                <div class="course-bottom">
+                    <div class="bottom-left">
+                        <img src="${it.avatar}" alt="avator">&nbsp;&nbsp;&nbsp;${it.nickname}
+                    </div>
+                    <div class="bottom-right">
+                        <!-- 3-5人 --> &nbsp;<span class="price-now">${it.price}元</span> <!-- <span class="price-past">800元</span> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        {@/each}
+    </script>
+
+    <!-- AdminLTE App -->
+    <script src="__PCJS__/app.min.js" type="text/javascript"></script>
+    <script id="main_js" src="__PCJS__/main.js" type="text/javascript"></script>
+    <script type="text/javascript" src="__HJS__/juicer-min.js"></script>
+
+    <!-- 全局变量 -->
+    <script type="text/javascript" charset="utf-8">
+        var g ={
+            "courseUrl":    "{:U('Api/shopInfo/mycourse', ['id' => $sid, 'is_desktop' => 1])}"
+        };
+    </script>
+
+    <script type="text/javascript" charset="utf-8">
+        $(function() {
+            showInfo(1);
+
+            /*删除提示*/
+            var del_object={};
+            $("#infoPanel").on('click',"a.delete",function (e) {
+            	del_object = $(e.currentTarget).parents('div.col-xs-4');
+            	console.log(del_object);
+            	$('#a-box').removeClass('hidden');
+
+            });
+            $('#op-confirm').click(function (e) {
+            	//TODO php
+            	del_object.animate({height:'0px',opacity:'0'},"slow");
+            	setTimeout(function(){
+            		del_object.remove();
+            	},1000);
+            	
+            	$('#a-box').addClass('bounceOutUp');
+            	setTimeout(function(){
+            		$('#a-box').removeClass('bounceOutUp');
+            		$('#a-box').addClass('hidden');
+            	},800);
+
+            });
+            $('#op-cancel').click(function (e) {
+            	$('#a-box').addClass('bounceOutUp');
+            	setTimeout(function(){
+            		$('#a-box').removeClass('bounceOutUp');
+            		$('#a-box').addClass('hidden');
+            	},800);
+            });
+
+        });
+
+        function showInfo(page) {
+            $.get(g.courseUrl, {'page': page}, function(data) {
+                console.log(data);
+
+                // $(".css-loading").addClass("hidden");
+
+                if (data.status != 200) {
+                    // 先处理商家没有登陆的情况
+                    // handleNotSignIn(data.msg);
+
+                    // $(window).bind('scroll', pageScroll);
+                    alert(data.msg);
+                    return false;
+                }
+
+                if (data.data == null) {
+                    alert("暂无数据");
+                    return false;
+                }
+
+                // 拼接模板了
+                var tpl = document.getElementById("infoTpl").innerHTML;
+                var html = juicer(tpl, data);
+                $("#infoPanel").html(html);
+
+                showPagination("paginationPanel", page, data.totalPages, "showInfo");
+
+            }, "json");
+
+        }
+    </script>
+
+</block>

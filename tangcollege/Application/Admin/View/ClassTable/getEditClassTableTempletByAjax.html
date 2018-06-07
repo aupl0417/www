@@ -1,0 +1,115 @@
+<div id="main" class="main">
+  <div class="main-title">
+        <h2>编辑课时</h2>
+    </div>
+    <form action="{:U('ClassTable/edit')}" method="post" class="form-horizontal" id="editClassTableForm">
+        <div class="form-item">
+            <label class="item-label">选择班级<span class="check-tips">（请选择班级）</span></label>
+            <div class="controls">
+               <button class="select-btn select-selectClass" target-form="form-horizontal" type="button" onclick="selectClass.get(this,initCourseSelect)">{$info.cl_name|default='选择班级'}</button>
+               <input name="cta_classId" type="hidden" value="{$info.cl_id}" id="classId"/>
+            </div>
+        </div>
+         <div class="form-item">
+            <label class="item-label">培训地址<span class="check-tips">（输入培训地址）</span></label>
+            <div class="controls">
+                <button class="select-btn select-selectSite" target-form="form-horizontal" type="button" onclick="selectTrainingsite.get(this)">{$info.tra_name|default='选择培训地址'}</button>
+                <input name="cta_trainingsiteId" type="hidden" value="{$info.tra_id}" id="trainingsiteId"/>
+            </div>
+        </div> 
+        <div class="form-item">
+            <label class="item-label">培训课程<span class="check-tips">（输入培训科目）</span></label>
+            <div class="controls">
+                <select name='cta_courseId' id="class-course-lists">
+            		<option value="">--无任何课程--</option>	
+            	</select>
+            </div>
+        </div> 
+        <div class="form-item">
+            <label class="item-label">培训老师<span class="check-tips">（点击选择老师）</span></label>
+            <div class="controls"> 
+                <button class="select-btn select-selectTeacher" target-form="form-horizontal" type="button" onclick="selectTeacher.get(this)">{$info.username}</button>
+                <input name="cta_teacherId" type="hidden" value="{$info.id}" id="teacherId"/>
+            </div>
+        </div> 
+        <div class="form-item">
+            <label class="item-label">上课时间<span class="check-tips">（点击选择开课时间）</span></label>
+            <div class="controls">
+                <input type="text" name="cta_startTime" class="text time" value="{$info.cta_startTime|default=''}" placeholder="请选择时间" readonly />
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">结束时间（点击选择结束时间）</label>
+            <div class="controls">
+                <input type="text" name="cta_endTime" class="text time" value="{$info.cta_endTime|default=''}" placeholder="请选择时间" readonly/>
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">描叙</label>
+            <div class="controls">
+                <textarea id="auth-description" type="text" name="cta_description" style="height:100px;" class="text">{$info.cta_description|default=''}</textarea>
+            </div>
+        </div>
+        <div class="form-item">
+            <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <button class="btn btn-return" onclick="javascript:layer.close(classTableManager.box);return false;">关 闭</button>
+        </div>
+        <input name="id" type="hidden" value="{$info.cta_id}" />
+    </form>
+</div>  
+ <script type="text/javascript">
+    function initCourseSelect(classId,className,courseId) {
+		if(!classId)
+		  return false;
+		$('#classId').val(classId);
+		$('.select-selectClass').text(className);  
+		url = "{:U('Class/selectClassCourseListByAjax')}";
+		$.ajax({type:'GET',url:url,data:{id:classId}, dataType: "json", success: function(data){
+			  if(data.length > 0){
+			     var html = '<option value="">--请选择--</option>';
+                 $.each(data,function(name,val) {
+				   html += '<option value="'+val.co_id+'"'+(courseId == val.co_id ? 'selected="selected"' : '')+' >'+val.co_name+'</option>';
+			     }) 
+			    $('#class-course-lists').html(html); 
+		      }else{
+				$('#class-course-lists').html('<option value="">--无任何课程--</option>'); 
+			 }
+        }});
+	}
+$(document).ready(function(){
+	initCourseSelect({$info.cl_id|default='0'},"{$info.cl_name|default=''}",{$info.cta_courseId|default='0'});
+	$('.time').datetimepicker({
+                format: 'yyyy-mm-dd hh:ii',
+                language:"zh-CN",
+                minView: "hour",
+                autoclose:true
+    });
+});
+var loading  = null;
+$("#editClassTableForm").ajaxForm({
+   beforeSubmit: function(formData) {
+	   loading  = layer.load();
+   },
+   success: function(response) {
+	  layer.close(loading); 
+	  if(response.status == 1) { 
+	    layer.msg('提交成功！', {
+            time: 1000
+        }, function(){
+           act = {$act};
+		   if(act == 0){
+		     location.reload();
+		   }else{
+		     url = "{:U('ClassTable/getClassTableListTempletByAjax',['classId'=>$info['cl_id']])}";
+			 $('.getClassTableListTempletByAjax').offsetParent().empty().load(url);
+			 layer.close(classTableManager.box);
+		   }
+        });   
+	  }else{
+		layer.msg(response.info, {
+            time: 2000
+        });    
+	  }
+   },
+});
+ </script>

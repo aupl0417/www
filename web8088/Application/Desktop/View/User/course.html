@@ -1,0 +1,441 @@
+<extend name="UserPublic:tpl"/>
+
+<block name="title">17约课-约课动态</block>
+
+
+
+<block name="css">
+    <link rel="stylesheet" href="__PCCSS__/publish.css">
+    <link rel="stylesheet" href="__PCCSS__/message.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</block>
+
+<block name="main">
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+
+<!--课程发布-->
+<include file="UserPublic:centerNav"/>
+
+<section class="content">
+<ul id="m-menu" class="m-menu clearfix fs16">
+    <li class="active" id="publish"><span>我的心愿单</span></li>
+    <li id="assist"><span>跟约课程</span></li>
+    <li id="enroll"><span>已报名课程</span></li>
+</ul>
+<div id="switcher" >
+<!--messages for wish list-->
+<div class="switch-helper" id="publish_hidden">
+    <div class="row bg-inherit no-padding" id="publish_data">
+
+        <div class="col-xs-4">
+            <div class="course">
+                <div class="course-logo-wrap">
+                    <div class="logo_model">
+                        教学特点，老师是韩国的，整个宇宙都是韩国的。
+                    </div>
+                    <img src="/Public/Desktop/img/demo1.png" class="course-logo" alt="course pic">
+                </div>
+
+                <div class="course-content">
+                    <img src="/Public/Desktop/img/laba.png" alt="">
+                    <a href="#">
+                        一起来组团报名诚通驾校，速度组队更加划算，快点报名吧。
+                    </a>
+                </div>
+                <div class="course_brief clearfix" style="height: 0px; opacity: 0;">
+                    <li><i class="icons-time"></i>全日制</li>
+                    <li><i class="icons-msg"></i>37条评论</li>
+                    <li><i class="icons-user"></i>10人报名</li>
+                </div>
+                <div class="course-bottom">
+                    <div class="bottom-left">
+                        <img src="/Public/Desktop/img/mi.png" alt="avator">&nbsp;&nbsp;&nbsp;元灯亮
+                    </div>
+                    <div class="bottom-right">
+                        3-5人 <span class="price-now">600元</span> <span class="price-past">800元</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+    <nav style="text-align:right;" id="publish_page_data">
+    </nav>
+</div>
+<!--messages for course-->
+<div class="switch-helper hidden" id="aiisst_hidden">
+    <div class="row" id="assist_data">
+
+        
+    </div>
+     <nav style="text-align:right;" id="assist_page_data">
+    </nav>
+</div>
+
+<div class="switch-helper hidden" id="enroll_hidden">
+    <div class="row" id="enroll_data">
+
+        
+    </div>
+    
+     <nav style="text-align:right;" id="enroll_page_data">
+    </nav>
+</div>
+</div>
+</section>
+
+</div>
+<!-- /.content-wrapper -->
+
+
+</block>
+
+
+<block name="js">
+    <!-- AdminLTE App -->
+    <script src="__PCJS__/app.min.js" type="text/javascript"></script>
+    <script src="__PCJS__/all.js" type="text/javascript"></script>
+    <script src="__PCJS__/message.js" type="text/javascript"></script>
+    
+<script id="tplpage" type="text/template">
+        <ul class="pagination">
+		{@if page.curPage!=1}
+            <li><a href="javascript:;"  class="page"  index="1">首页</a></li>
+            <li>
+                <a href="javascript:;" aria-label="Previous" class="page" index="${page.curPage-1}">
+                    <span aria-hidden="true">上一页</span>
+                </a>
+            </li>
+		{@/if}	
+	{@each i in range(page.pageFirst, page.pageMax+1)}
+            <li index="${i}" class="page {@if i==page.curPage}active{@/if}"><a href="javascript:;">${i}</a></li>
+	{@/each}
+		{@if page.curPage!=page.pageAll}
+            <li>
+                <a href="javascript:;" aria-label="Next" index="${parseInt(page.curPage)+1}" class="page">
+                    <span class="clightblue" aria-hidden="true">下一页</span>
+                </a>
+            </li>
+		{@/if}	
+        </ul>
+</script>
+<script id="tplpublish" type="text/template">
+    {@each info as it,index}
+
+        <div class="col-xs-4">
+            <div class="course">
+                <div class="course-logo-wrap">
+                    <div class="logo_model">
+                        ${it.content}
+                    </div>
+                    <img src="{@if it.user_environ!=''||it.user_environ!=null}${it.user_environ}{@else}${it.environ}{@/if}" class="course-logo" alt="course pic">
+                </div>
+
+                <div class="course-content">
+                    <img src="/Public/Desktop/img/laba.png" alt="">
+                    <a href="{:U('User/onedetail')}?gid=${it.id}">
+                        ${it.title}
+                    </a>
+                </div>
+                <div class="course_brief clearfix" style="height: 0px; opacity: 0;">
+                    <li><i class="icons-time"></i>${it.mode}</li>
+                    <li><i class="icons-msg"></i>${it.comment}条评论</li>
+                    <li><i class="icons-user"></i>${it.coursemun}人跟约</li>
+                </div>
+                <div class="course-bottom">
+                    <div class="bottom-left">
+                        <a href="{:U('User/Home')}?uid=${it.uid}"><img src="${it.avatar}" alt="avator"></a>&nbsp;&nbsp;&nbsp;${it.firstname}${it.lastname}
+                    </div>
+                    <div class="bottom-right">
+						{@if it.pricearr!=null}
+                        	${it.pricearr.ltnumber}-${it.pricearr.gtnumber}人 <span class="price-now">${it.pricearr.ltprice}元</span> <span class="price-past">${it.pricearr.reference}元</span>
+						{@else}
+							<span class="price-now business">${it.ltprice}元</span>
+						{@/if}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+	{@/each}
+</script>
+<script id="tplassist" type="text/template">
+    {@each info as itt,indext}
+    {@each itt as it,index}
+
+        <div class="col-xs-4">
+            <div class="course">
+                <div class="course-logo-wrap">
+                    <div class="logo_model">
+                        ${it.content}
+                    </div>
+                    <img src="{@if it.user_environ!=''||it.user_environ!=null}${it.user_environ}{@else}${it.environ}{@/if}" class="course-logo" alt="course pic">
+                </div>
+
+                <div class="course-content">
+                    <img src="/Public/Desktop/img/laba.png" alt="">
+                    <a href="{:U('User/onedetail')}?gid=${it.id}">
+                        ${it.title}
+                    </a>
+                </div>
+                <div class="course_brief clearfix" style="height: 0px; opacity: 0;">
+                    <li><i class="icons-time"></i>${it.mode}</li>
+                    <li><i class="icons-msg"></i>${it.comment}条评论</li>
+                    <li><i class="icons-user"></i>${it.coursemun}人跟约</li>
+                </div>
+                <div class="course-bottom">
+                    <div class="bottom-left">
+                        <a href="{:U('User/Home')}?uid=${it.uid}"><img src="${it.avatar}" alt="avator"></a>&nbsp;&nbsp;&nbsp;${it.firstname}${it.lastname}
+                    </div>
+                    <div class="bottom-right">
+						{@if it.pricearr!=null}
+                        	${it.pricearr.ltnumber}-${it.pricearr.gtnumber}人 <span class="price-now">${it.pricearr.ltprice}元</span> <span class="price-past">${it.pricearr.reference}元</span>
+						{@else}
+							<span class="price-now business">${it.ltprice}元</span>
+						{@/if}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+	{@/each}
+	{@/each}
+    
+</script>
+<script id="tplenroll" type="text/template">
+    {@each info as it,index}
+		
+        <div class="col-xs-4">
+            <div class="course">
+                <div class="course-logo-wrap">
+                    <div class="logo_model">
+						课程特色：
+                        {@if it.teacher_feature==''}暂无{@else}${it.teacher_feature}{@/if}
+                    </div>
+                    <img src="__UPLOAD__${it.environ}" class="course-logo" alt="course pic">
+                </div>
+
+                <div class="course-content">
+                    <img src="/Public/Desktop/img/laba.png" alt="">
+                    <a href="{:U('Shopkeeper/course')}?id=${it.id}">
+						${it.title}
+                    </a>
+                </div>
+                <div class="course_brief clearfix" style="height: 0px; opacity: 0;">
+                    <li><i class="icons-time"></i>${it.mode}</li>
+                    <li><i class="icons-msg"></i>${it.comment_count}条评论</li>
+                    <li><i class="icons-user"></i>${it.user_count}人报名</li>
+                </div>
+                <div class="course-bottom">
+                    <div class="bottom-left">
+                        <a href="{:U('Shopkeeper/home')}?id=${it.sid}"><img src="__UPLOAD__${it.avatar}" alt="avator"></a>&nbsp;&nbsp;&nbsp;${it.nickname}
+                    </div>
+                    <div class="bottom-right">
+                        {@if it.preferent}<span class="price-now business">${it.preferent}元</span>{@/if} <span class="price-past" style="text-decoration:none;">${it.price}元</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+	{@/each}
+</script>
+    
+<script>
+
+var postpublish_url = "{:U('Home/User/course')}";
+var postassist_url ="{:U('Home/User/courseAssist')}";
+var postenroll_url = "{:U('Home/User/courseShop')}";
+
+var deletegroup_url = "{:U('Home/User/delGroup')}";
+
+
+var publish_page = 0;
+var assist_page = 0;
+var enroll_page = 0;
+
+$('#publish').click(function(){
+	$('#assist_hidden').addClass('hidden');
+	$('#enroll_hidden').addClass('hidden');
+	$('#publish_hidden').removeClass('hidden');
+	assist_page = 0;
+	enroll_page = 0;
+	if(publish_page<1){
+		$('#publish_data').html('');
+	}
+	postpublish();
+});
+
+$('#assist').click(function(){
+	$('#assist_hidden').addClass('hidden');
+	$('#enroll_hidden').addClass('hidden');
+	$('#publish_hidden').removeClass('hidden');
+	publish_page = 0;
+	enroll_page = 0;
+	if(assist_page<1){
+	  $('#asssit_data').html('');
+	}
+	postAssist();
+});
+$('#enroll').click(function(){
+	$('#assist_hidden').addClass('hidden');
+	$('#enroll_hidden').addClass('hidden');
+	$('#publish_hidden').removeClass('hidden');
+	publish_page = 0;
+	assist_page = 0;
+	if(enroll_page<1){
+	  $('#enroll_data').html('');
+	}
+	postEnroll();
+});
+
+//获取我发布的约课 
+function postpublish(){
+	publish_page = publish_page + 1;
+	$.post(postpublish_url,{"page":publish_page},function(data){
+		console.log(data);
+			  
+		var tpl = document.getElementById('tplpublish').innerHTML;
+		var html = juicer(tpl, data);
+		$('#publish_data').html(html);
+		    
+		var tplpage = document.getElementById('tplpage').innerHTML;
+		var htmlpage = juicer(tplpage, data);
+		$('#publish_page_data').html(htmlpage);
+		    
+		imgonerror();
+				    
+	}, "json");
+}
+postpublish();
+$("#publish_page_data").on("click",".page",function(e){
+	publish_page = $(e.currentTarget).attr("index") -1;
+	postpublish();
+});
+
+//获取我跟约的约课 
+function postAssist(){
+	assist_page = assist_page + 1;
+	$.post(postassist_url,{"page":assist_page},function(data){
+		console.log(data);
+			  
+		var tpl = document.getElementById('tplassist').innerHTML;
+		var html = juicer(tpl, data);
+		$("#assist_data").html(html);
+			
+		var tplpage = document.getElementById('tplpage').innerHTML;
+		var htmlpage = juicer(tplpage, data);
+		$('#assist_page_data').html(htmlpage);
+		
+		imgonerror();
+	
+	}, "json");
+}
+$("#assist_page_data").on("click",".page",function(e){
+	assist_page = $(e.currentTarget).attr("index") -1;
+	postAssist();
+});
+
+
+//获取我已报名的课程 
+function postEnroll(){
+	enroll_page = enroll_page + 1;
+	$.post(postenroll_url,{"page":enroll_page},function(data){
+		console.log(data);
+			  
+		var tpl = document.getElementById('tplenroll').innerHTML;
+		var html = juicer(tpl, data);
+		$("#enroll_data").html(html);
+			
+		var tplpage = document.getElementById('tplpage').innerHTML;
+		var htmlpage = juicer(tplpage, data);
+		$('#enroll_page_data').html(htmlpage);
+		    
+		imgonerror();
+	
+	}, "json");
+}
+$("#enroll_page_data").on("click",".page",function(e){
+	enroll_page = $(e.currentTarget).attr("index") -1;
+	postEnroll();
+});
+
+
+
+
+
+
+/* $("#sectionscroll").on("click",".section_item_pv_delete_user",function(e) {
+	e.preventDefault();
+	if (!confirm("确认删除？")) {
+	  window.event.returnValue = false;
+	}else{
+	        var delClick = $(e.target);
+	        var n = delClick.parent(".get_del_user_id").find(".hidden_del_git").val();
+	        console.log(n);
+	        delGroup(n);
+	   }
+});
+
+
+function delGroup(n){
+	var postgid={};
+	postgid.gid=n;
+	console.log(postgid.gid);
+	$.post(deletegroup_url,postgid,function(data){
+	  console.log(data);
+	  if(data.status!=200){
+	      alert('删除失败，请刷新重试');
+	  }else{
+	      $("#groupinfoid" + n).remove();
+	      alert('删除成功');
+	  }
+	}, "json");
+}
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</block>

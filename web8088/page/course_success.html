@@ -1,0 +1,54 @@
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+    <meta content="yes"name="apple-mobile-web-app-capable"/>
+    <meta content="black"name="apple-mobile-web-app-status-bar-style"/>
+    <title>主页</title>
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" href="css/2.css"/>
+    <link rel="stylesheet" href="css/4.css"/>
+    <style>
+        #header{
+            width: 100%;
+            position: relative;
+            height: 100%;;
+            background: url("images/Gradual change.png");
+            background-repeat: repeat-x;
+        }
+    </style>
+</head>
+<body>
+<header id="top_header">
+    <div id="header" align="center">
+        <h3 class="identify_title">发布课程</h3>
+        <a href="" class="identify_back"><img src="images/Return2.png" alt=""/>返回</a>
+    </div>
+</header>
+<div class="wrap-page">
+    <section class="page" id="wrap">
+        <div class="page-inner">
+            <div class="course_success_wrap">
+                <p class="course_success_wrap_p"><img src="images/Success.png" alt=""/>恭喜您发布成功</p>
+                <div class="bigV_btn_wrap">
+                    <a href="" class="bigV-btn_first">查看发布内容</a>
+                    <a href="" class="bigV-btn_second">继续发布</a>
+                </div>
+                <br/>
+            </div>
+        </div>
+
+    </section>
+</div>
+
+<script type="text/javascript" src="js/zepto.min.js"></script>
+<script type="text/javascript" src="js/swipe.js"></script>
+<script type="text/javascript" src="js/lequ.js"></script>
+<script type="text/javascript">
+    $('.identify_file').click(function () {
+        $(".identify_input").trigger('click');
+    })
+</script>
+</body>
+</html>

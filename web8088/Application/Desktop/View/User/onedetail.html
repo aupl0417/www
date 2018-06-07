@@ -1,0 +1,824 @@
+<extend name="UserPublic:tpl" />
+
+<block name="title">17约课 - 发布个心愿单感觉萌萌哒</block>
+
+<block name="css">
+    <link rel="stylesheet" href="__PCCSS__/course_wish.css">
+</block>
+
+
+<!-- 中部内容 -->	
+<block name="main">
+
+	
+<!-- main container -->
+<div class="main-wrap">
+    <ol class="bread fs14 clearfix">
+        <li><a href="#">首页</a></li>
+        <li><a href="#">驾驶培训</a></li>
+        <li class="active">组课详情</li>
+    </ol>
+    <!-- left sidebar here -->
+    <div class="sidebar-l">
+        <div class="bussiness-card box-wrap">
+            <div class="carousel">
+                <div id="img-wrapper" class="img-wrap clearfix">
+                    <img src="<if condition="$info['user_environ'] neq null">{$info['user_environ']}<else />__PCIMG__/c_img.png</if>" alt="轮播图一">
+                    <img src="__PCIMG__/banner.png" alt="轮播图二">
+                    <img src="__PCIMG__/banner1.png" alt="轮播图三">
+                </div>
+                <ul id="bullet" class="bullet">
+                    <li class="active"><span>1</span></li>
+                    <li><span>2</span></li>
+                    <li><span>3</span></li>
+                </ul>
+            </div>
+            <div class="organization">
+                <div class="o-card">
+                    <a href="{:U('User/Home',array('uid'=>$info['uid']))}" title="查看用户信息"><img src="{$userinfo['avatar']}" alt="用户头像" class="o-ava"></a>
+                    <div class="o-brief">
+                        <p class="o-brief-t fs16">{$userinfo['firstname']}{$userinfo['lastname']}</p>
+                        <p class="o-badge">
+                        <if condition="$userinfo['telstatus'] eq 1">
+                            <img src="__PCIMG__/phone_validate.png" alt="手机认证">
+                        </if>
+                            <span class="first-badge">
+                            
+                            <switch name="userinfo['profession']">
+                               <case value="1">
+                                    IT
+                               </case>
+                               <case value="2">
+                                    工
+                               </case>
+                               <case value="3">
+                                    金
+                               </case>
+                               <case value="4">
+                                    文
+                               </case>
+                               <case value="5">
+                                    艺
+                               </case>
+                               <case value="6">
+                                    农
+                               </case>
+                               <case value="7">
+                                    法
+                               </case>
+                                <case value="8">
+                                    教
+                                </case>
+                                <case value="9">
+                                    其
+                                </case>
+                           </switch>
+                            </span>
+                            <span class="second-badge"><i class="fa fa-mars" style="font-size:50%;"></i>&nbsp;{$userinfo["age"]}</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="o-intro">
+                    <p class="intro-t fs16">个性签名</p>
+                    <p class="intro-p fs14">
+                    	<if condition="$userinfo['remark'] neq ''">
+                    	{$userinfo["remark"]}
+                    	<else />
+                    	女神快来跟我一起上课
+                    	</if>
+                    	</p>
+                </div>
+                <div class="o-contact">
+                    <div id="noticetip" class="noticetip hidden">抱歉亲，此功能紧急开发中</div>
+                    <img class="phone" src="__PCIMG__/reply_icon.png" alt="在线聊天"><a id="chat-online" href="#" class="phone-num">在线聊一聊</a>
+                    <a class="jump-btn fs14" href="{:U('User/home',array('uid'=>$userinfo['id']))}">进入学员主页</a>
+                </div>
+            </div>
+        </div>
+        <h2 class="org-course-title fs16"><img src="__PCIMG__/organization.png" alt="机构">该类课程推送</h2>
+        <div class="box-wrap" id="pushed_data">
+
+        </div>
+    </div>
+    <div class="content-main">
+        <div class="content-top box-wrap">
+            <h1 class="c-title"><span class="c-time fs12 c999"><img src="__PCIMG__/Time.png" alt="发布时间">{$info['ctime']}</span>{$info['title']}</h1>
+            <div class="c-attr">
+                <p class="c-attr-i fs14"><img src="__PCIMG__/Classification.png" alt="分类"><span>{$info['name']}</span></p>
+                <p class="c-attr-i fs14"><img src="__PCIMG__/Time.png" alt="时间"><span>{$info['mode']}</span></p>
+                <p class="c-attr-i fs14"><img src="__PCIMG__/u_home.png" alt="位置"><span class="clightblue">{$info['nickname']}</span></p>
+            </div>
+            <div class="c-feature">
+                <div class="c-feature-i">
+                    <p class="f-i-title">课程特色</p>
+                    <p class="f-i-cont">
+                    	<foreach name="info['tags']" item="tagsname">
+                    		<span>{$tagsname}</span>
+                    	</foreach>
+                    </p>
+                </div>
+                <div class="c-feature-i">
+                    <p class="f-i-title">截止日期</p>
+                    <p class="f-i-cont">{$info['overtime']}</p>
+                </div>
+            </div>
+        </div>
+        <div id="content-cen" class="content-cen box-wrap">
+            <ul id="c-menu" class="c-menu clearfix fs14">
+                <li class="active" style="width:50%;">课程内容</li>
+                <li  style="width:50%;">学员圈子</li>
+            </ul>
+            <div class="info-box">
+                <p class="course-c-title">课程内容</p>
+                <div class="course-c-cont c666">
+					{$info['content']}
+                </div>
+            </div>
+            <div class="info-box hidden">
+                <div class="comment-area">
+                    <div class="input-wrap mb30">
+                        <input type="text" id="comment_depth_one">
+                        <button id="comment_one_btn">评论</button>
+                    </div>
+                    <!-- 评论模板输出位置 -->
+                    <div id="commentPanel">
+
+
+                    </div>
+
+                </div>
+                <nav style="text-align:right;" id="comment_page_data">
+
+                </nav>
+            </div>
+        </div>
+
+    </div>
+    <div class="sidebar-r">
+        <div class="course-other box-wrap">
+            <div class="c-other-item">
+                <p class="price-txt fs14"><img src="__PCIMG__/Price.png" alt="价格" class="price-img">价格</p>
+                <p>
+		<if condition="$info['pricearr'] neq null">
+                <span class="fs22">{$info['pricearr']['ltnumber']}-{$info['pricearr']['gtnumber']}人</span><span class="p-discount-num fs22">{$info['pricearr']['reference']}元</span><span class="p-origin-num ">3900元</span>
+        <else />   
+            	<span class="p-discount-num fs22">{$info['ltprice']}元</span>
+        </if>
+            </p>
+            </div>
+            <div class="c-other-item">
+                <button class="apply-btn fs16" id="assist_btn"><if condition="$info['checkAssist'] eq 0">跟约<else />已跟约</if>心愿单</button>
+            </div>
+            <div class="c-other-item">
+                <span id="heart" class="heart <if condition="$info['checkCollect'] eq 0"><else />heart-active</if>"><i class="fa fa-heart"></i></span><span class="fav-txt fs16 c666">加入期望单</span>
+            </div>
+            <div class="c-other-item item-padding">
+                <ul class="user-list clearfix" id="assist_info_data">
+                </ul>
+                <if condition="$info['ykcount'] neq 0">
+                	<p class="more-user"><a href="javascript:void(0);" id="look_more_assist_data">显示更多</a></p>
+                </if>
+            </div>
+            <div class="user-apply item-padding fs16">
+                <img src="__PCIMG__/users.png" alt="用户"><span class="user-apply-t">已跟约<span class="clightblue" id="assist_num">{$info['ykasscount']}</span>人</span>
+            </div>
+        </div>
+        <div class="popularize box-wrap clearfix">
+            <img src="__PCIMG__/bincode.png" alt="二维码" class="qr-code">
+            <div class="po-txt">
+                <p class="fs16">关注17约课微信号</p>
+                <p class="po-p">1.开启课程动态通知</p>
+                <p class="po-p">2.领取10-100元奖学金</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</block>
+
+
+<block name="js">
+	<script src="__PCJS__/app.min.js" type="text/javascript"></script>
+	<script src="__PCJS__/all.js" type="text/javascript"></script>
+	<script src="__PCJS__/course_wish.js" type="text/javascript"></script>
+
+<script id="tplpushed" type="text/template">
+{@each pusheds as it,indext}
+            <div class="course-item clearfix">
+				<a href="{:U('Shopkeeper/course')}?id=${it.sinfoid}">
+                	<img src="${it.avatar}" alt="" class="course-img">
+				</a>
+                <p class="course-t">${it.title}</p>
+            </div>
+{@/each}
+</script>
+
+
+<script id="tplassist" type="text/template">
+    {@each assist as it,indext}
+    	<li {@if it.uid==0}data-visitid="${it.visitor_id}"{@/if}><a href="{:U('LookUser/moInfo')}?{@if it.uid!=0}uid=${it.uid}{@else}uid=0&&vid=${it.visitor_id}{@/if}"><img src="${it.avatar}" alt="用户头像"/></a></li>
+    {@/each}
+</script>	
+	
+	
+<script id="tplcomment" type="text/template">
+    {@each comment as it,indext}
+	{@if it.visitor_id!=0}
+                        <div class="comment-wrap" id="delcom${it.id}">
+							<a href="{:U('User/Home')}?uid=0&&vid=${it.visitor_id}">
+                            	<img src="${it.visitor_avatar}" alt="约客头像" class="avatar">
+							</a>
+                            <div class="comment-cont">
+                                <div class="comment-t">
+                                    <p class="comment-name"><a href="{:U('User/Home')}?uid=0&&vid=${it.visitor_id}">${it.name}</a>
+					{@if it.depth!=0}
+									<span class="colorb6">回复：</span>
+						{@if it.answer_u_id!=0}
+							<span class="colorb6">${it.answer_u_name}</span><span class="hidden">${it.answer_u_id}</span>
+                    	{@else if it.answer_s_id!=0}
+							<span class="colorb6">${it.answer_s_name}</span><span class="hidden">${it.answer_s_id}</span>
+						{@else if it.answer_vi_id!=0}
+							<span class="colorb6">${it.answer_vi_name}</span><span class="hidden">${it.answer_vi_id}</span>
+                    	{@/if}
+                    {@/if}	
+                	<span  class="hidden now_com_id">${it.id}</span>
+                	<span  class="hidden now_com_depth">${it.depth}</span>
+
+									</p>
+                                    <p class="comment-time">${it.addtime}</p>
+                                </div>
+                                <p class="comment-c">${it.c_info}</p>
+                                <p class="comment-op">
+
+			{@if it.login_user!=0}
+            	{@if it.login_user==it.uid}
+								<a class="cmt-delete comment_delete_b" href="javascript:void(0);">删除</a>
+				{@else}
+								<img src="__PCIMG__/reply_icon.png" alt="回复" class="reply-icon">
+            	{@/if}
+            {@else if it.login_sk!=0}
+            	{@if it.login_sk==it.sid}
+								<a class="cmt-delete comment_delete_b" href="javascript:void(0);">删除</a>
+				{@else}
+								<img src="__PCIMG__/reply_icon.png" alt="回复" class="reply-icon">
+            	{@/if}
+            {@else if it.login_visitor!=0}
+            	{@if it.login_visitor==it.visitor_id}
+								<a class="cmt-delete comment_delete_b" href="javascript:void(0);">删除</a>
+				{@else}
+								<img src="__PCIMG__/reply_icon.png" alt="回复" class="reply-icon">
+            	{@/if}
+            {@/if}
+                                    
+                                    <a class="cmt-reply comment_answer_btn" href="javascript:void(0);">回复</a>
+                                </p>
+                                <div class="input-wrap cmt-input-mb hidden">
+                                    <input type="text" placeholder="请输入你的评论" class="w355">
+                                    <button class="cmt-reply-btn">回复</button>
+                                </div>
+                            </div>
+                        </div>
+    {@else if it.sid==0}
+                        <div class="comment-wrap" id="delcom${it.id}">
+							<a href="{:U('User/Home')}?uid=${it.uid}">
+                            	<img src="${it.avatar}" alt="用户头像" class="avatar">
+							</a>
+                            <div class="comment-cont">
+                                <div class="comment-t">
+                                    <p class="comment-name"><a href="{:U('User/Home')}?uid=${it.uid}">${it.firstname}${it.lastname}</a>
+					{@if it.depth!=0}
+									<span class="colorb6">回复：</span>
+						{@if it.answer_s_id==0}
+									<span class="colorb6">${it.answer_u_name}</span><span class="hidden">${it.answer_u_id}</span>
+                    	{@else if it.answer_u_id==0}
+									<span class="colorb6">${it.answer_s_name}</span><span class="hidden">${it.answer_s_id}</span>
+                    	{@/if}
+                    {@/if}	
+                	<span  class="hidden now_com_id">${it.id}</span>
+                	<span  class="hidden now_com_depth">${it.depth}</span>
+
+									</p>
+                                    <p class="comment-time">${it.addtime}</p>
+                                </div>
+                                <p class="comment-c">${it.c_info}</p>
+                                <p class="comment-op">
+
+			{@if it.login_user!=0}
+            	{@if it.login_user==it.uid}
+								<a class="cmt-delete comment_delete_b" href="javascript:void(0);">删除</a>
+				{@else}
+								<img src="__PCIMG__/reply_icon.png" alt="回复" class="reply-icon">
+            	{@/if}
+            {@else if it.login_sk!=0}
+            	{@if it.login_sk==it.sid}
+								<a class="cmt-delete comment_delete_b" href="javascript:void(0);">删除</a>
+				{@else}
+								<img src="__PCIMG__/reply_icon.png" alt="回复" class="reply-icon">
+            	{@/if}
+            {@/if}
+                                    
+                                    <a class="cmt-reply comment_answer_btn" href="javascript:void(0);">回复</a>
+                                </p>
+                                <div class="input-wrap cmt-input-mb hidden">
+                                    <input type="text" placeholder="请输入你的评论" class="w355">
+                                    <button class="cmt-reply-btn">回复</button>
+                                </div>
+                            </div>
+                        </div>
+    {@else if it.uid==0}
+                        <div class="comment-wrap" id="delcom${it.id}">
+							<a href="{:U('Shopkeeper/Home')}?id=${it.sid}">
+                            	<img src="${it.skavatar}" alt="游客头像" class="avatar">
+							</a>
+                            <div class="comment-cont">
+                                <div class="comment-t">
+                                    <p class="comment-name"><a href="{:U('Shopkeeper/Home')}?id=${it.sid}">${it.nickname}</a>
+					{@if it.depth!=0}
+									<span class="colorb6">回复：</span>
+						{@if it.answer_s_id==0}
+									<span class="colorb6">${it.answer_u_name}</span><span class="hidden">${it.answer_u_id}</span>
+                    	{@else if it.answer_u_id==0}
+									<span class="colorb6">${it.answer_s_name}</span><span class="hidden">${it.answer_s_id}</span>
+                    	{@/if}
+                    {@/if}	
+                	<span  class="hidden now_com_id">${it.id}</span>
+                	<span  class="hidden now_com_depth">${it.depth}</span>
+
+									</p>
+                                    <p class="comment-time">${it.addtime}</p>
+                                </div>
+                                <p class="comment-c">${it.c_info}</p>
+                                <p class="comment-op">
+
+			{@if it.login_user!=0}
+            	{@if it.login_user==it.uid}
+								<a class="cmt-delete comment_delete_b" href="javascript:void(0);">删除</a>
+				{@else}
+								<img src="__PCIMG__/reply_icon.png" alt="回复" class="reply-icon">
+            	{@/if}
+            {@else if it.login_sk!=0}
+            	{@if it.login_sk==it.sid}
+								<a class="cmt-delete comment_delete_b" href="javascript:void(0);">删除</a>
+				{@else}
+								<img src="__PCIMG__/reply_icon.png" alt="回复" class="reply-icon">
+            	{@/if}
+            {@/if}
+                                    <a class="cmt-reply comment_answer_btn" href="javascript:void(0);">回复</a>
+                                </p>
+                                <div class="input-wrap cmt-input-mb hidden">
+                                    <input type="text" placeholder="请输入你的评论" class="w355">
+                                    <button class="cmt-reply-btn">回复</button>
+                                </div>
+                            </div>
+                        </div>
+    {@/if}
+    {@/each}
+</script>
+	
+<script id="tplcommentpage" type="text/template">
+                    <ul class="pagination my-pagination">
+				{@if page.curPage!=1}
+                        <li><a href="javascript:;" class="page"  index="1">首页</a></li>
+                        <li>
+                            <a href="javascript:;" aria-label="Previous" class="page" index="${page.curPage-1}">
+                                <span aria-hidden="true">上一页</span>
+                            </a>
+                        </li>
+				{@/if}	
+	{@each i in range(page.pageFirst, page.pageMax+1)}
+                        <li index="${i}" class="page {@if i==page.curPage}active{@/if}"><a href="javascript:;">${i}</a></li>
+	{@/each}
+		{@if page.curPage!=page.pageAll}
+                        <li>
+                            <a href="javascript:;" aria-label="Next" index="${parseInt(page.curPage)+1}" class="page">
+                                <span class="clightblue" aria-hidden="true">下一页</span>
+                            </a>
+                        </li>
+		{@/if}
+                    </ul>
+</script>
+	
+<script>
+
+var firstgroup={$info['userpushgroup']};//0不是用户登录， 1当前登录的用户第一次发布心愿单，2当前登录的用户不是第一次发布心愿单,3是该用户未发布过,4当前约课不是当前用户发布的
+var login_type_status={$info['logintype']};//0是未登录，1是当前登录的是商家，2是当前登录的是用户
+//0是用户未上传头像，1已上传
+<if condition="$info['useravatarstatus'] neq null">
+	var user_avatar_status={$info['useravatarstatus']};
+</if>
+//是否约课已经过期了
+var overtime_status={$info['overtimes']}; 
+var visitor_id={$info['visitor']};//是否是游客
+
+
+var gid={$info['id']};
+var assist_page=0;
+var comment_page = 0;
+var push_page = 0;
+var shopinfolist=0;
+
+var answer_p = 0; //回复的父类 
+var answer_d = 0; // 回复的父类深度 
+var delcomid = 0; // 删除的评论id 
+
+var get_assist_href="{:U('Home/LookGroup/assistGroup')}";
+var handleavatar="{:U('Api/User/uploadavatar')}";
+
+var collect_url = "{:U('Api/UserCollect/addCollect')}";
+
+var assist_add_url = "{:U('Api/GroupAssist/addAssist')}";
+
+var get_comment_url = "{:U('Api/Groupcomment/comGroup')}";
+var add_comment_url = "{:U('Api/Groupcomment/commentAdd')}";
+var del_comment_url = "{:U('Api/Groupcomment/delGcom')}";
+
+var get_pushed_url = "{:U('Api/GroupPushed/pushedByGid')}";
+
+
+//获取该约课推送过的课程
+function groupPushed(){
+  push_page = push_page + 1;
+  var pushdata = {};
+  pushdata.page = push_page;
+  pushdata.gid = gid;
+  console.log(pushdata);
+  $.post(get_pushed_url,pushdata,function(data){
+      console.log(data);
+      if(data.status=="200"){
+          var tpl = document.getElementById('tplpushed').innerHTML;
+          var html = juicer(tpl, data.pushed);
+          $('#pushed_data').append(html);
+
+        /*   if(data.pushed.pageAll<=push){
+          } */
+          
+          imgonerror();//默认图片
+      }else if(data.status=="400"){
+    	  $('#pushed_data').html('<p><br/>　暂无商家推送课程</p>');
+      }
+  }, "json");
+}
+groupPushed();
+
+
+
+
+//获取该约课的跟约人信息
+function getAssist(){
+	assist_page = assist_page + 1;
+    var getassistdata = {};
+    getassistdata.gid = gid;
+    getassistdata.page = assist_page;
+    $.get(get_assist_href,getassistdata,function(data){
+    	console.log(data);
+    	if(data.status!=200){
+    		$('#look_more_assist_data').html('');
+    	}else{
+
+            var tpl = document.getElementById('tplassist').innerHTML;
+            var html = juicer(tpl, data.assistdata);
+            $('#assist_info_data').append(html);
+            
+            if(data.assistdata.page.pageAll<=assist_page){
+            	$('#look_more_assist_data').html('');
+            }
+            
+            imgonerror();//默认图片
+            /*       visitor_assist_status() //游客是否已经跟约
+            if(!data){
+                $('#sectionsclear').html('');
+            }else{
+                if(data.assistdata.pageAll<=i){
+                    $('#sectionsclear').html('');
+                }else{
+                    $('#sectionsclear').html('查看更多');
+                }
+            } */
+    	}
+    }, "json");   
+}
+getAssist();
+$("#look_more_assist_data").click(function(){
+	getAssist();
+});
+
+//游客是否跟约--浏览器端判断游客是否跟约
+function visitor_assist_status(){
+	var visitor_status=localStorage.visitor;
+	if(visitor_status!=''&&visitor_status!=null){
+		$("[data-visitid]").each(function() {
+			var visitid_list=$(this).attr("data-visitid");
+			if(visitid_list==visitor_status){
+				 $("#assist_btn").html("取消");
+			}
+		});
+	}
+	return;
+}
+	
+//收藏--约课---
+$("#heart").click(function(e){
+    e.preventDefault();
+    var collectdata={};
+    collectdata.gid=gid;
+	collectdata.nowhref=window.location.href;
+	console.log(collectdata);
+    $.get(collect_url,collectdata, function(data) {
+        console.log(data);
+        
+        if(data.status==401){
+            alert("请先登录!");
+            //setTimeout(function(){window.location.href='{:U("Userregsign/login")}'},800);
+        }else if(data.status==402){
+        	alert("取消成功!");
+            return;
+        }else if(data.status==200){
+            alert("收藏成功!");
+        }
+    }, "json")
+});
+
+
+
+//添加跟约
+function postAssist(){
+	if(overtime_status==1){
+		if(login_type_status==1){
+			alert('用户才能跟约');
+			return;
+		}
+		
+	    $("#assist_btn").unbind('click', postAssist);
+	    
+	    var visitorid=localStorage.visitor;
+	    var assistdata={};
+	    if(visitorid!=null&&visitorid!=''){
+	    	assistdata.visitorid=visitorid;
+	    }
+	    assistdata.nowhref=window.location.href;
+	    assistdata.groupid=gid;
+	    console.log(assistdata);
+	    $.post(assist_add_url,assistdata, function(data) {
+	        console.log(data);
+	        
+	        if(data.status==401){ //401暂时被弃用
+	
+	            alert("请先登录");
+
+	            setTimeout(function(){window.location.href='{:U("Userregsign/login")}'},800);
+	            
+	        }else if(data.status==404){ //已经跟约成功 并且删除成功
+	        	
+	           var yuekekcount=parseInt($("#assist_num").html());
+	
+	            $("#assist_num").html(yuekekcount-1);
+	            
+	            $("#assist_btn").html("跟约心愿单");
+	            $('#assist_info_data').html("");
+	            assist_page=0;
+	            getAssist();
+	            alert("取消成功!");
+
+	        }else if(data.status==200){
+	            var yuekekcount=parseInt($("#assist_num").html());
+	            $("#assist_num").html(yuekekcount+1);
+	            $("#assist_btn").html("已跟约心愿单");
+	            
+	            $('#assist_info_data').html("");
+	            
+	            assist_page=0;
+	            localStorage.visitor=data.visitor;
+	            getAssist();
+//	            visitAssistTrue(); //判断是否游客-则下步操作
+	            
+	            alert('跟约成功');
+	            
+	        }else {
+	            alert(data.assist);
+	        }
+	        
+            $("#assist_btn").bind('click', postAssist);
+            return;
+            
+	    }, "json")
+	}else{
+		alert("该约课已经截止!");
+	}
+}
+$("#assist_btn").bind('click', postAssist);
+
+
+
+
+
+//获取该约课评论
+function postComment(){
+	var comment_data = {};
+	comment_data.page 	= comment_page + 1;
+	comment_data.depth 	= 0;
+	comment_data.gid 	= gid;
+	$.post(get_comment_url,comment_data,function(data){
+	  	
+		console.log(data);
+
+		if(data.status!=200){
+			return;
+		}
+		var tpl = document.getElementById('tplcomment').innerHTML;
+		var html = juicer(tpl, data.comment);
+		$('#commentPanel').html(html);
+		
+		var tplpage = document.getElementById('tplcommentpage').innerHTML;
+		var htmlpage = juicer(tplpage, data.comment);
+		$('#comment_page_data').html(htmlpage);
+		
+		imgonerror();//默认图片
+		
+	}, "json");
+}
+postComment();
+$("#comment_page_data").on("click",".page",function(e){
+	comment_page = $(e.currentTarget).attr("index")-1;
+	postComment();
+});
+
+
+//添加该约课评论
+function addcom(){
+  var com=$('#comment_depth_one').val();
+  if(com==''){
+      alert("评论不能为空");
+  }else{
+      var datas={};
+	    var visitorid=localStorage.visitor;
+	    if(visitorid!=null&&visitorid!=''){
+	    	datas.visitorid=visitorid;
+	    }
+      datas.gid = gid;
+      datas.c_info=com;
+      datas.pid =0;
+      datas.nowhref=window.location.href;
+      console.log(datas);
+      $.post( add_comment_url , datas , function(data){
+          console.log(data);
+          
+          if(data.status=="200"){
+              var tpl = document.getElementById('tplcomment').innerHTML;
+              var html = juicer(tpl, data);
+              $('#commentPanel').prepend(html);
+              
+              $("#comment_depth_one").val("");
+
+	          localStorage.visitor=data.visitor;
+	          
+              imgonerror();//默认图片
+          }else if(data.status=="401"){
+              alert("请先登录");
+//              setTimeout(function(){window.location.href='{:U("Userregsign/login")}'},800);
+          }else if(data.status=="408"){
+              alert(data.comment);
+          }else if(data.status=="410"){
+              alert(data.comment);
+          }else if(data.status=="400"){
+              alert(data.comment);
+          }
+          
+      }, "json");
+  }
+}
+//$("#comment_one_btn").bink('click',addcom);
+$("#comment_one_btn").click(function(){
+	addcom();
+});
+
+//回复 
+//comment tools fold and open
+var formValidator = new FormValidator();
+var $commentPanel = $('#commentPanel');
+$commentPanel.on('click', 'a', function(){
+	
+
+	var subCmtBox = $(this).parent().next();
+
+	var commentName = subCmtBox.parent().find('.comment-t .comment-name');
+	var commentNameA = commentName.find('a');
+	answer_p = commentName.find('.now_com_id').html();
+	answer_d = commentName.find('.now_com_depth').html();
+    // reply
+    if($(this).hasClass('cmt-reply')){
+    	if(subCmtBox.hasClass('hidden')){
+    		subCmtBox.find('input').attr('placeholder', '回复：'+commentNameA.html());
+    		
+    		subCmtBox.removeClass('hidden');
+    	}else
+    		subCmtBox.addClass('hidden');
+    }
+    // delete comment
+    else if($(this).hasClass('cmt-delete')){
+
+        if (!confirm("确认要删除？")) {
+            window.event.returnValue = false;
+        }else{
+        	delcomid = answer_p;
+        	delComment();
+        }
+    	
+    }
+});
+//回复 
+$commentPanel.on('click', 'button', function(){
+    // reply
+    if($(this).hasClass('cmt-reply-btn')){
+        $(this).parent().addClass('hidden');
+        if(!formValidator.isBlank($(this).prev().val())) {
+//        	alert('You just said that ' + $(this).prev().val());
+        	
+        	var answer_info = $(this).prev().val();
+        	
+        	if(answer_info==''){
+                alert("评论不能为空");
+            }else{
+                var datas={};
+        	    var visitorid = localStorage.visitor;
+        	    if(visitorid!=null&&visitorid!=''){
+        	    	datas.visitorid=visitorid;
+        	    }
+                datas.gid = gid;
+                datas.c_info = answer_info;
+                datas.pid = answer_p;
+                datas.depth = answer_d;
+    			datas.nowhref = window.location.href;
+    			console.log(datas);
+                $.post( add_comment_url , datas , function(data){
+                    console.log(data);
+                    if(data.status=="200"){
+                        var tpl = document.getElementById('tplcomment').innerHTML;
+                        var html = juicer(tpl, data);
+                        $('#commentPanel').prepend(html);
+
+        	            localStorage.visitor=data.visitor; //游客
+        	            
+                        imgonerror();//默认图片
+
+                    }else if(data.status=="401"){
+                        alert("请先登录");
+//                        setTimeout(function(){window.location.href='{:U("Userregsign/login")}'},800);
+                    }else if(data.status=="408"){
+                        alert(data.comment);
+                    }else if(data.status=="410"){
+                        alert(data.comment);
+                    }else{
+                        alert(data.comment);
+                    }
+                }, "json");
+            }
+        	
+        	
+        } else {
+        	alert("评论不能为空");
+//        	alert('Oh, guy you did not leave anything here');
+        }
+
+    }
+});
+	
+	
+	
+	
+
+//删除
+function delComment() {
+	if(delcomid==0||delcomid==''){
+		alert('删除失败');
+		return;
+	}
+    var datas = {};
+    datas.comid = delcomid;
+	datas.gid   = gid;
+	datas.nowhref = window.location.href;
+	console.log(datas);
+	$.post(del_comment_url , datas , function(data){
+	  console.log(data);
+	  if(data.status=="401"){
+	      alert("请先登录");
+	      setTimeout(function(){window.location.href='{:U("User/index")}'},800);
+	  }else if(data.status==200){
+	  	console.log(delcomid);
+	      $("#delcom"+delcomid).remove();
+	
+	  }else{
+	      alert(data.data);
+	  }
+	}, "json");
+	
+	console.log(delcomid);
+};
+	 
+
+	
+</script>
+	
+	
+	
+</block>

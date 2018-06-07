@@ -1,0 +1,6 @@
+User-Agent: *
+Allow: /home/shopkeeper/info
+Allow: /home/shopkeeper/cont.html
+Allow: /home/look_user/moinfo.html
+Allow: /home/look_group/onedetail.html
+

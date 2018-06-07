@@ -1,0 +1,88 @@
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+    <meta content="yes"name="apple-mobile-web-app-capable"/>
+    <meta content="black"name="apple-mobile-web-app-status-bar-style"/>
+    <title>主页</title>
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" href="css/2.css"/>
+    <link rel="stylesheet" href="css/4.css"/>
+    <style>
+        #header{
+            width: 100%;
+            position: relative;
+            height: 100%;;
+            background: url("images/Gradual change.png");
+            background-repeat: repeat-x;
+        }
+    </style>
+</head>
+<body>
+<header id="top_header">
+    <div id="header" align="center">
+        <h3 class="identify_title">课程特色</h3>
+        <a href="" class="identify_back"><img src="images/Return2.png" alt=""/>返回</a>
+    </div>
+</header>
+<div class="wrap-page">
+    <section class="page" id="wrap">
+        <div class="page-inner">
+            <div class="course_feature_wrap">
+               <div class="course_feature_add">
+                   <div class="input_wrap course_feature_input">
+                       <input type="text" class="register_input" placeholder="自定义特色，不超过四个字">
+                   </div>
+                   <button class="course_feature_btn">添加</button>
+               </div>
+                <p class="course_feature_select_p">选择3个你的课题特色表情</p>
+                <ul class="course_select_ul">
+                    <li>免费试听</li>
+                    <li>就业推荐</li>
+                    <li>素质培养</li>
+                    <li class="course_select_ul_active">泡女必备</li>
+                    <li>名牌课程</li>
+                    <li>价格超值</li>
+                    <li>幽默风趣</li>
+                    <li>师资雄厚</li>
+                </ul>
+                <button class="register_submit course_save">保存</button>
+            </div>
+        </div>
+
+    </section>
+</div>
+
+<script type="text/javascript" src="js/zepto.min.js"></script>
+<script type="text/javascript" src="js/swipe.js"></script>
+<script type="text/javascript" src="js/lequ.js"></script>
+<script type="text/javascript">
+    $('.course_select_ul').on('click','li',function (event) {
+
+        if($(event.target).hasClass("course_select_ul_active")){
+            $(event.target).removeClass("course_select_ul_active");
+        }
+        else if($('.course_select_ul_active').length==3){
+            alert("最多选择3个")
+        }
+        else{
+            $(event.target).addClass("course_select_ul_active");
+        }
+    });
+    $('.course_feature_btn').click(function (event) {
+        var value = $('.register_input').val();
+        if(value==""){
+            alert("内容不能为空")
+        }
+        else if(value.length>4){
+            alert("长度不能大于4")
+        }
+        else {
+            $('.course_select_ul').append('<li>' + value + '</li>');
+        }
+
+    })
+</script>
+</body>
+</html>

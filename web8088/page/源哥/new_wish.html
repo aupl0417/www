@@ -1,0 +1,124 @@
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+    <meta content="yes"name="apple-mobile-web-app-capable"/>
+    <meta content="black"name="apple-mobile-web-app-status-bar-style"/>
+    <title>主页</title>
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" href="css/2.css"/>
+    <link rel="stylesheet" href="css/4.css"/>
+    <style>
+        #header{
+            width: 100%;
+            position: relative;
+            height: 100%;;
+            background: url("images/Gradual change.png");
+            background-repeat: repeat-x;
+        }
+    </style>
+</head>
+<body>
+<header id="top_header">
+    <div id="header" align="center">
+        <h3 class="identify_title">培训机构</h3>
+        <a href="" class="identify_back"><img src="images/Return2.png" alt=""/>发布心愿</a>
+    </div>
+</header>
+<div class="wrap-page">
+    <section class="page" id="wrap">
+        <div class="page-inner">
+            <div class="new_wish_wrap">
+                <p class="new_wish_title">添加教育机构</p>
+                <p class="new_wish_span">与小伙伴分享你的体验和见解吧!</p>
+                <div class="input-wrap">
+                    <label><span class="require">*</span>名称</label>
+                    <div class="input-wrap-out">
+                        <input type="text" class="input-wrap-input" placeholder="填写机构名称">
+                    </div>
+                </div>
+                <div class="input-wrap">
+                    <label><span class="require">*</span>地址</label>
+                    <div class="input-wrap-out" style="border: none;overflow: visible">
+                        <div class="select_wrap_new">
+                            <p class="select_wrap_new_p" id="first_new_p">请选择</p>
+                            <select class="first_new_select" id="first_new_select">
+                                <option value="">sdsf</option>
+                                <option>sd3s</option>
+                                <option>sfds</option>
+                            </select>
+                        </div>
+                        -
+                        <div class="select_wrap_new">
+                            <p class="select_wrap_new_p" id="second_new_p">请选择</p>
+                            <select class="second_new_select" id="second_new_select">
+                                <option>sds</option>
+                                <option>sds</option>
+                                <option>sds</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-wrap">
+                    <div class="input-wrap-out">
+                        <input type="text" class="input-wrap-input" placeholder="补充完整详细地址">
+                    </div>
+                </div>
+                <div class="input-wrap">
+                    <label><span class="require">*</span>电话</label>
+                    <div class="input-wrap-out">
+                        <input type="text" class="input-wrap-input" placeholder="填写电话">
+                    </div>
+                </div>
+                <div class="input-wrap">
+                    <label><span class="require">*</span>分类</label>
+                    <div class="input-wrap-out" style="border: none;overflow: visible">
+                        <div class="select_wrap_new">
+                            <p class="select_wrap_new_p" id="third_new_p">请选择</p>
+                            <select class="first_new_select" id="third_new_select">
+                                <option value="">sdsf</option>
+                                <option>sd3s</option>
+                                <option>sfds</option>
+                            </select>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="input-wrap">
+                    <label>图片</label>
+                    <input type="file" class="visualization" id="file"/>
+                    <button class="new_wish_upload" id="image">上传机构相关图片</button>
+                </div>
+                <p class="new_wish_chip">单张图片不超过2MB，尺寸不得小于300*300px,支持jpg,png,bmp</p>
+                <button class="new_wish_btn">提交</button>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script type="text/javascript" src="js/zepto.min.js"></script>
+<script type="text/javascript">
+    /**
+     * 选择文件
+     */
+        $('#image').on("click",function (event) {
+            $('#file').trigger("click");
+        })
+    /**
+     *
+     */
+    $('#first_new_select').on("change", function (event) {
+        $('#first_new_p').text($('#first_new_select').val());
+    })
+    $('#second_new_select').on("change", function (event) {
+        $('#second_new_p').text($('#second_new_select').val());
+    })
+    $('#third_new_select').on("change", function (event) {
+        $('#third_new_p').text($('#third_new_select').val());
+    })
+</script>
+</body>
+</html>

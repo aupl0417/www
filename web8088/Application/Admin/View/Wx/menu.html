@@ -1,0 +1,99 @@
+<include file="Public:header" />
+<div id="content">
+
+	
+	<div class="container">
+		
+		<div class="row">
+
+			<include file="Public:nav" />
+
+            <div class="span10">		
+				<div class="widget widget-table">
+					<div class="widget-header">
+						<i class="icon-th-list"></i>
+						<h3>微信菜单管理</h3>
+					</div> <!-- /widget-header -->
+					
+					<div class="widget-content">
+						<div class="span8" style="margin-bottom:20px;">
+						 	<h3 style="margin-top:1em;">菜单管理</h3>
+						 	
+						 	
+							<input type="text" id="code" placeholder="请输入验证码" /><br/>
+							<img src="{:U('Sign/getVerify', 't='.time())}"  id="verify" onclick="document.getElementById('verify').src='{:U('Sign/getVerify')}?q='+Math.random()" alt="" style="width:30%;"/>
+    						<a href="javascript:;" onclick="document.getElementById('verify').src='{:U('Sign/getVerify')}?q='+Math.random()" style="width:30%;">看不清，换一张</a>
+						 	
+						 	
+							<button id="sendBtn">确认发送</button>
+						</div>
+						
+					</div>
+
+
+
+                <hr />
+
+            	</div>
+                
+
+
+
+            </div><!-- /span10 -->
+
+		</div> <!-- /row -->
+		
+	</div> <!-- /container -->
+	<div></div>
+</div> <!-- /content -->
+
+
+<script type="text/javascript">
+
+</script>
+
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="__AJS__/jquery-1.7.2.min.js"></script>
+<script src="__AJS__/excanvas.min.js"></script>
+<!-- 
+<script src="__AJS__/jquery.flot.js"></script>
+<script src="__AJS__/jquery.flot.pie.js"></script>
+<script src="__AJS__/jquery.flot.orderBars.js"></script>
+<script src="__AJS__/jquery.flot.resize.js"></script>
+ -->
+<script src="__AJS__/bootstrap.js"></script>
+<!-- 
+<script src="__AJS__/charts/bar.js"></script>
+ -->
+<script type="text/javascript" src="__HJS__/juicer-min.js"></script>
+<script type="text/javascript">
+var wxCreatMenu = "{:U('Wx/creatMenu')}";
+function postsms(compage){
+	var sendWx={};
+	sendWx.verify=$("#code").val();
+	console.log(sendWx);
+	$.post(wxCreatMenu,sendWx,function(data){
+		console.log(data);
+		if(data.status!=200){
+			alert(data.msg);
+			return;
+		}else{
+			alert('创建微信新菜单成功');
+			return;
+		}
+    }, "json");
+}
+$("#sendBtn").on("click",function(e){
+    if (!confirm("确认创建微信新菜单吗？")) {
+        window.event.returnValue = false;
+    }else{
+		postsms();
+    }
+});
+
+
+
+</script>
+<include file="Public:footer" />

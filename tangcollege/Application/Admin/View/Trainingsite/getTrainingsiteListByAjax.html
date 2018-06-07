@@ -1,0 +1,83 @@
+<div class="data-table">
+<table class="trainingsiteList">
+<tr class="head">
+	<th width="30%">名字</th><th width="60%">地址</th><th width="10%">选择</th>
+</tr>
+<foreach name="trainingsiteList" item="vo" >
+<tr class="item">
+	<td class="name">{$vo.tra_name}</td><td>{$vo.tra_address}</td><td align="center"><input id="trainingsiteId" type="radio" value="{$vo.tra_id}" /></td>
+</tr>
+</foreach>
+<tr>
+	<td colspan="2" align="right"><a href="javascript:void(0)" onclick="trainingsitetrainob.prev(this)" class="prev" <php> if(!($totalPage > 1 && $page > 1)) echo 'style="display:none"';</php>>prev</a>   <a href="javascript:void(0)" onclick="trainingsitetrainob.next(this)" class="next" <php> if(!($totalPage != $page && $totalPage > 1)) echo 'style="display:none"';</php>>next</a> (共<font class="totalPage">{$totalPage}</font>页 当前第<font class="currpage">{$page}</font>页)</a></td><td align="center"><button class="select-btn"  type="button" onclick="trainingsitetrainob.ok(this)">确 定</button></td>
+</tr>
+
+</table>
+</div>
+<script type="text/javascript">
+		function trainingsiteSkip(){ 
+            var trainob = new Object; 
+            trainob.page = {$page};
+			trainob.totalPage = {$totalPage}; 
+            trainob.get = function(){ 
+			    url = "{:U('Trainingsite/lists')}";
+                $.ajax({type:'GET',url:url,data:{page:trainob.page}, dataType: "json", success: function(data){
+                    $(".trainingsiteList .item").remove();
+					html = '';
+					trainob.page = data.page;
+			        trainob.totalPage = data.totalPage;
+					lists = data.lists;
+					$.each(lists,function(i,vo){
+                       html += '<tr class="item"><td class="name">'+vo['tra_name']+'</td><td>'+vo['tra_address']+'</td><td align="center"><input id="trainingsiteId" type="radio" value="'+vo['tra_id']+'" /></td></tr>'; 
+                    });
+					$(".trainingsiteList .head").after(html);  
+                }});
+           }; 
+		   trainob.prev = function(e) {
+			   trainob.get(--trainob.page);
+			   trainob.checkBtn();
+		   };
+		   trainob.next = function(e) {
+			   trainob.get(++trainob.page);
+			   trainob.checkBtn();
+		   }
+		   trainob.ok = function(e) {
+			   selectOb = $('[id="trainingsiteId"]:checked');
+			   if(selectOb.length==0) {
+				   layer.msg('请选择培训地址！');
+				   return false;
+			   }
+			   id = selectOb.val();
+			   text = selectOb.parent().siblings(".name").text();
+			   $(selectTrainingsite.element).siblings("#trainingsiteId").val(id);
+			   $(selectTrainingsite.element).text(text);
+			   layer.close(selectTrainingsite.box); 
+		   }
+		   trainob.checkBtn = function() {
+			  $prev = $('.trainingsiteList .prev');
+			  $next = $('.trainingsiteList .next');
+			  if(trainob.totalPage == 1) {
+				  $prev.hide();
+				  $next.hide();
+			  }
+			  if(trainob.page >= trainob.totalPage) {
+				   $next.hide();
+			  }
+			  if(trainob.page <= 1){
+			     $prev.hide();
+			  }
+			  if(trainob.page > 1 && !$prev.is(":visible")) {
+				 $prev.show();  
+			  }
+			  if(trainob.page < trainob.totalPage && !$next.is(":visible")) {
+				 $next.show();  
+			  }
+			  $('.trainingsiteList .totalPage').text(trainob.totalPage);
+			  $('.trainingsiteList .currpage').text(trainob.page);
+		   };
+		   
+           return trainob; 
+        } 
+		
+		var trainingsitetrainob = trainingsiteSkip();
+</script>		

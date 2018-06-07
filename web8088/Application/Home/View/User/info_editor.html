@@ -1,0 +1,521 @@
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+    <meta content="yes"name="apple-mobile-web-app-capable"/>
+    <meta content="black"name="apple-mobile-web-app-status-bar-style"/>
+    <title>编辑资料 - 17约课</title>
+    <link rel="stylesheet" type="text/css" href="__HCSS__/reset.css">
+    <link rel="stylesheet" href="__HCSS__/2.css"/>
+    <link rel="stylesheet" href="__HCSS__/4.css"/>
+    <meta name="keywords" content="17约课,一起约课,约课,教育培训,约课神器,校园约课,大学生培训,约老师,约女神,驾驶培训,设计培训,职业考证,音乐培训,英语培训,小语种培训,体育培训" />
+    <meta name="description" content="17约课 - 约您身边的良师益友！为您提供约老师，约课程，约女神，约学霸等海量信息，充分满足您免费约课，免费发布课程的需求。" />
+    <style>
+        .input-wrap,.input-wrap-name{
+            margin-bottom: 1em;;
+        }
+    </style>
+</head>
+<body>
+<div class="" id="user_editor">
+    <header id="top_header">
+        <div id="header" align="center">
+            <h3 class="identify_title">编辑资料</h3>
+            <a href="javascript:history.back(-1)" class="identify_back"><img src="__HIMG__/Return2.png" alt=""/>返回</a>
+            <a href="{:U('Index/index')}" class="identify_to_index">首页</a>
+        </div>
+    </header>
+    <div class="wrapper">
+   <!--   <form action="{:U('User/saveInfo')}" method="post" name="saveinfo" id="wanshanuser" enctype="multipart/form-data">-->
+                <div class="blank pr">
+                    <p class="user_info_editor_top">资料完善度</p>
+                    <div class="bar_wrap pa"><div class="bar_cont pa" id="bar">38%</div></div>
+                </div>
+                <div class="user_info_editor_middle blank">
+                    <h3>头像</h3>
+                    <div class="user_info_editor_img_wrap pr">
+                        <img id="img0" src="{$info[avatar]}" alt=""/>
+                        <input name="imgsrc" id="imgsrc" value="{$info['avatar']}" type="hidden"/>
+                        <div class="user_info_editor_select">
+                            <button id="btn"   onclick="return false">选择头像</button>
+                            <p>支持jpg、png格式,不要超过2M</p>
+                            <input name="useravatar" type="file" class="visualization" id ="file" />
+                        </div>
+    .                </div>
+                    <div class="input-wrap user_info_editor_sex">
+                        <label>性别</label>
+                        <input type="radio" name="sex" id="sexnan" value="1" <if condition="$info['sex'] eq 1">checked</if> />男
+                        <input type="radio" name="sex" id="sexnv" value="2" <if condition="($info['sex'] eq 0) or ($info['sex'] eq 2)">checked</if> />女
+                    </div>
+                    <div class="input-wrap-name">
+                        <label>昵称</label>
+                        <div class="input-wrap-out" style="width: 40%; margin-left:1em;">
+                            <input type="text" id="lastname" name="lastname" value="{$info['lastname']}" class="input-wrap-input" placeholder="人总有个名字"/>
+                            <i class="input_close_icon op_0"></i>
+                        </div>
+    <!--                <div class="input-wrap-out-name" style="width: 25%;">
+                            <label style="position: absolute; top: 0; left: -23px;">名</label>
+                            <input type="text" name="lastname" value="{$info['lastname']}" class="input-wrap-input" placeholder="输入名"/>
+                            <i class="input_close_icon op_0"></i>
+                        </div>-->
+                    </div>
+                    <div class="input-wrap">
+                        <label>年龄</label>
+                        <div class="input-wrap-out">
+                        <input type="text" name="age" id="age" value="{$info['age']}" class="input-wrap-input" placeholder="使用真实的年龄容易找到合适的同学哦"/>
+                            <i class="input_close_icon op_0"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="blank" style="padding-top: 0.8em;">
+                    <div class="input-wrap">
+                        <label>爱好</label>
+                        <div class="input-wrap-out">
+                            <input type="text" name="interest" id="interest" value="{$info['interest']}" class="input-wrap-input" placeholder="你喜欢做些什么，对什么感兴趣"/>
+                            <i class="input_close_icon op_0"></i>
+                        </div>
+                    </div>
+                    <a name="text"></a>
+                    <div class="input-wrap input-out-text-wrap">
+                        <label>签名</label>
+                        <div class="input-wrap-out input-wrap-out-text">
+                            <textarea class="input-wrap-input" id="remark" name="remark" placeholder="不装我浑身难受！">{$info['remark']}</textarea>
+                            <i class="input_close_icon op_0"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="blank" style="padding-top: 0.8em;">
+                    <div class="input-wrap">
+                        <label>学校</label>
+                        <div class="input-wrap-out">
+                            <input type="text" name="school" id="school" value="{$info['school']}" class="input-wrap-input" placeholder="跟校友一起去学习，感觉么么哒"/>
+                            <i class="input_close_icon op_0"></i>
+                        </div>
+                    </div>
+                    <div class="input-wrap">
+                        <label>来自</label>
+                        <div class="input-wrap-out">
+                            <input type="text" name="home" id="home" value="{$info['home']}" class="input-wrap-input" placeholder="呦！我的家乡"/>
+                            <i class="input_close_icon op_0"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="blank">
+                    <a href="javascript:;" id="x_hobby">
+                        <p class="user-info_main_btn">专业</p>
+                        <input id="hobby" type="hidden" name="profession" value="{$info['profession']}"/>
+                        <span id="hobbyspan" class="select_chip">
+                            <switch name="info['profession']">
+                               <case value="1">
+                                    计算机/互联网
+                               </case>
+                               <case value="2">
+                                    工艺
+                               </case>
+                               <case value="3">
+                                    金融/银行/投资
+                               </case>
+                               <case value="4">
+                                    广告/文化/传媒
+                               </case>
+                               <case value="5">
+                                    音乐/艺术/表演
+                               </case>
+                               <case value="6">
+                                    农业/林业/畜牧业
+                               </case>
+                               <case value="7">
+                                    律师/法务
+                               </case>
+                                <case value="8">
+                                    教育/培训
+                                </case>
+                                <case value="9">
+                                    其他
+                                </case>
+                               <default />请选择
+                           </switch>
+                           <img src="__HIMG__/Design (7).png" alt=""></span>
+                    </a>
+                </div>
+                <button  id="submitform" class="btn w96 ml2">保存</button>
+        <!--    <button   onclick="return AllCheck(this.form)" id="submitform" class="btn w96 ml2">保存</button> -->
+                <br/>
+                <br/>
+            </div>
+       <!--  </form> -->
+</div>
+
+<div id="checkhobby" class="hidden" style="background-color:#FFFFFF;">
+
+    <header id="top_header">
+        <div id="header" align="center">
+            <h3 class="identify_title">专业兴趣</h3>
+            <a href="javascript:;" id="editor_back" class="identify_back"><img src="__HIMG__/Return2.png" alt=""/>返回</a>
+            <a href="" class="identify_to_index">首页</a>
+        </div>
+    </header>
+    <div class="wrap-page">
+        <section class="page" id="wrap">
+            <div class="page-inner">
+                <p class="user_hobby_select">选择你的专业兴趣</p>
+                <div class="user_hobby_group">
+                    <a href="javascript:;" onClick="checknum(1)"><p class="user_hobby_group_p"><img src="__HIMG__/IT.png" alt="" class="user_hobby_group_img"/>计算机/互联网</p></a>
+                    <a href="javascript:;" onClick="checknum(2)"><p class="user_hobby_group_p"><img src="__HIMG__/Public.png" alt="" class="user_hobby_group_img"/>工艺</p></a>
+                </div>
+                <div class="user_hobby_group">
+                    <a href="javascript:;" onClick="checknum(3)"><p class="user_hobby_group_p"><img src="__HIMG__/Gold.png" alt="" class="user_hobby_group_img"/>金融/银行/投资</p></a>
+                    <a href="javascript:;" onClick="checknum(4)"><p class="user_hobby_group_p"><img src="__HIMG__/Culture.png" alt="" class="user_hobby_group_img"/>广告/文化/传媒</p></a>
+                    <a href="javascript:;" onClick="checknum(5)"><p class="user_hobby_group_p"><img src="__HIMG__/art.png" alt="" class="user_hobby_group_img"/>音乐/艺术/表演</p></a>
+                </div>
+                <div class="user_hobby_group">
+                    <a href="javascript:;" onClick="checknum(6)"><p class="user_hobby_group_p"><img src="__HIMG__/Farming.png" alt="" class="user_hobby_group_img"/>农业/林业/畜牧业</p></a>
+                    <a href="javascript:;" onClick="checknum(7)"><p class="user_hobby_group_p"><img src="__HIMG__/France.png" alt="" class="user_hobby_group_img"/>律师/法务</p></a>
+                    <a href="javascript:;" onClick="checknum(8)"><p class="user_hobby_group_p"><img src="__HIMG__/Teach.png" alt="" class="user_hobby_group_img"/>教育/培训</p></a>
+                 </div>
+                <div class="user_hobby_group">
+                    <a href="javascript:;" onClick="checknum(9)"><p class="user_hobby_group_p"><img src="__HIMG__/qi.png" alt="" class="user_hobby_group_img"/>其他 <img
+                            src="__HIMG__/gou.png" alt="" class="user_hobby_gou hidden"/></p></a>
+                </div>
+                <br/>
+            </div>
+        </section>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="__HJS__/zepto.min.js"></script>
+<include file="Component:alert" />
+<script type="text/javascript">
+var handleEditUrl="{:U('User/saveInfo')}";
+var infoUrl="{:U('LookUser/moInfo')}";
+
+/**
+ * 特技Input框
+ */
+$("input[type='text']").on("focus", function (event) {
+    $("#top_header").addClass("fixedIOSBug");
+    $(event.target).next().removeClass("op_0");
+
+});
+$("input[type='text']").on("blur", function (event) {
+    $("#top_header").removeClass("fixedIOSBug");
+    $(event.target).next().addClass("op_0");
+
+});
+$("textarea").on("focus", function (event) {
+    $("#top_header").addClass("fixedIOSBug");
+    $(event.target).next().removeClass("op_0");
+
+});
+$("textarea").on("blur", function (event) {
+    $(event.target).next().addClass("op_0");
+    $("#top_header").removeClass("fixedIOSBug");
+
+
+});
+$(".input_close_icon").click(function (event) {
+    $(event.target).prev().val("");
+});
+
+    <if condition="$info['profession'] gt 0">
+    $('#hobbyspan').css("color","#444444");
+    </if>
+    /*Input上传图片*/
+    (function(){
+        $('#btn').click(function () {
+            $('#file').trigger('click');
+        });
+        $('#bar').css('width','{$info["degree"]}%').text('{$info["degree"]}%');;
+    })();
+	
+	
+
+	
+	
+	$('#x_hobby').click(function(){
+		$('#checkhobby').removeClass('hidden');
+		$('#user_editor').addClass('hidden');
+	})
+	
+	$("#editor_back").click(function(){
+		$('#user_editor').removeClass('hidden');
+		$('#checkhobby').addClass('hidden');
+	})
+	
+	function checknum(num){
+		$('#user_editor').removeClass('hidden');
+		$('#checkhobby').addClass('hidden');
+		$('#hobby').val(num);
+		var i;
+		switch(num){
+			case 0:
+				i='请选择';
+				break;
+			case 1:
+				i='计算机/互联网';
+                $('#hobbyspan').css("color","#444444");
+                break;
+			case 2:
+				i='工艺';
+                $('#hobbyspan').css("color","#444444");
+                break;
+			case 3:
+				i='金融/银行/投资';
+                $('#hobbyspan').css("color","#444444");
+                break;
+			case 4:
+				i='广告/文化/传媒';
+                $('#hobbyspan').css("color","#444444");
+                break;
+			case 5:
+				i='音乐/艺术/表演';
+                $('#hobbyspan').css("color","#444444");
+                break;
+			case 6:
+				i='农业/林业/畜牧业';
+                $('#hobbyspan').css("color","#444444");
+                break;
+			case 7:
+				i='律师/法务';
+                $('#hobbyspan').css("color","#444444");
+                break;
+            case 8:
+                i='教育/培训';
+                $('#hobbyspan').css("color","#444444");
+                break;
+            case 9:
+                i='其它';
+                $('#hobbyspan').css("color","#444444");
+                break;
+			default:
+				i='请选择';
+				break;
+		}
+		$('#hobbyspan').html(i);
+	}
+
+//*********************************************************************************
+
+String.prototype.lengthB = function( ){
+    var b = 0, l = this.length;
+    if( l ){
+        for( var i = 0; i < l; i ++ ){
+            if(this.charCodeAt( i ) > 255 ){
+                b += 2;
+            }else{
+                b ++ ;
+            }
+        }
+        return b;
+    }else{
+        return 0;
+    }
+}
+
+
+function errtext(a,b){
+	easyAlert(b);
+}
+function TrueNa()			//验证真实姓名
+{
+	var TrlName=$.trim($("#lastname").val());
+	TrlNamelength=TrlName.lengthB();
+	//var lastName=/^[\u4E00-\u9FA5]{2,5}$/;	//只能是汉字
+	//var lastName=/^[\u4e00-\u9fa5]{2,5}$|^[\dA-Za-z]{4,15}$/;	//只能是汉字
+	//var lastName=/^[\s\S]{4,15}$/;	
+	if(TrlName.length==0){
+		easyAlert('呢称未填写');
+		return false;
+	}else if(TrlNamelength>15||TrlNamelength<4){
+		easyAlert('呢称只能是4-15个字母或2-7个汉字');
+		return false;
+	}
+	return true;
+}
+function age(){	    	//验证年龄1~99
+	var agevalue=$.trim($("#age").val());
+	var agetest=/^([0-9]|[0-9]{2}|99)$/;	//只能是数字
+	if(agevalue.length!=0){
+		if(!agetest.test(agevalue)){
+			easyAlert('年龄1~99');
+			return false;
+		}
+		return true;
+	}
+	return true;
+}
+function interest(){			//验证爱好，文字
+	var interestvalue=$.trim($("#interest").val());
+	var interesttest=/^.{1,60}$/;	//字符长度
+	if(interestvalue.length!=0){
+		if(!interesttest.test(interestvalue)){
+			easyAlert('爱好填写过长');
+			return false;
+		}
+		return true;
+	}
+	return true;
+}
+function remark(){				//验证心情
+	var remarkvalue=$.trim($("#remark").val());
+	var remarktest=/^.{1,30}$/;	//字符长度
+	if(remarkvalue.length!=0){
+		if(!remarktest.test(remarkvalue)){
+			easyAlert('签名不能超过30个字');
+			return false;
+		}
+		return true;
+	}
+	return true;
+}
+function school(){						//验证学校
+	var schoolvalue=$.trim($("#school").val());
+	var schooltest=/^[\u4E00-\u9FA5]{1,20}$/;	//只能是中文
+	if(schoolvalue.length!=0){
+		if(!schooltest.test(schoolvalue)){
+			easyAlert('学校格式不正确，请正确填写');
+			return false;
+		}
+		return true;
+	}
+	return true;
+}
+function home1(){				//验证家乡
+	var home1value=$.trim($("#home").val());
+	var home1test=/^.{1,30}$/;	//字符长度
+	if(home1value.length!=0){
+		if(!home1test.test(home1value)){
+			easyAlert('家乡超过长度');
+			return false;
+		}
+		return true;
+	}
+	return true;
+}
+//*********************************************************************************
+function AllCheck(){
+//将上面n个函数打包成一个AllCheck()函数，在前台界面中调用该AllCheck()；
+	if(TrueNa()&&age()&&interest()&&remark()&&school()&&home1()){
+        return true;
+	}else{
+		return false;
+	}
+}
+
+//*********************************************************************************
+</script>
+<script type="text/javascript" src="__HJS__/objimgurl.js"></script>
+<script>
+    $("#file").change(function(){
+        var objUrl = getObjectURL(this.files[0]) ;
+        console.log("objUrl = "+objUrl) ;
+        if (objUrl) {
+            $("#img0").attr("src", objUrl) ;
+            $("#imgsrc").val(objUrl) ;
+        }
+    });
+
+    //男女判断 
+    $("#sexnan").click(function(){
+        var imgsrc00=$("#imgsrc").val()
+        var morenimg1='/Public/Uploads/avatar/1.jpg';
+        var morenimg2='/Public/Uploads/avatar/2.jpg';
+        if(imgsrc00==morenimg1||imgsrc00==morenimg2){
+            $("#img0").attr("src",morenimg1);
+            $("#imgsrc").val(morenimg1) ;
+        }
+    })
+    $("#sexnv").click(function(){
+        var imgsrc00=$("#imgsrc").val()
+        var morenimg1='/Public/Uploads/avatar/1.jpg';
+        var morenimg2='/Public/Uploads/avatar/2.jpg';
+        if(imgsrc00==morenimg1||imgsrc00==morenimg2){
+            $("#img0").attr("src",morenimg2);
+            $("#imgsrc").val(morenimg2) ;
+        }
+    })
+
+
+    
+    
+    
+    
+    
+    
+    $("#submitform").bind("click", submitFormAll);
+    
+    function submitFormAll(){
+		if(AllCheck()){
+			var sex 	 = $.trim($("input[name='sex']:checked").val());
+	        var lastname = $.trim($("#lastname").val());
+	        var age 	 = $.trim($("#age").val());
+	        var interest = $.trim($("#interest").val());
+	        var remark 	 = $.trim($("#remark").val());
+	        var school 	 = $.trim($("#school").val());
+	        var home	 = $.trim($("#home").val());
+	        var hobby 	 = $.trim($("#hobby").val());
+	        var imgsrc 	 = $.trim($("#imgsrc").val());
+	        var files 	 = document.getElementById("file").files;
+
+		    // 校验通过了
+		    var postData = new FormData();
+		    postData.append("sex", sex);
+		    postData.append("lastname", lastname);
+		    postData.append("age", age);
+		    postData.append("interest", interest);
+		    postData.append("remark", remark);
+		    postData.append("school", school);
+		    postData.append("home", home);
+		    postData.append("profession", hobby);
+		    postData.append("imgsrc", imgsrc);
+		
+		    postData.append("useravatar", files[0]);
+		    // 禁用上传操作
+		    $("#submitform").unbind("click", submitFormAll);
+		    easyAlert("正在上传中，请耐心等待");
+		
+		    // 开始上传信息
+		    $.ajax({
+		        url: handleEditUrl,
+		        type: 'POST',
+		        data: postData,
+		        cache: false,
+		        dataType: 'json',
+		        processData: false, // Don't process the files
+		        contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+		        success: function (data, textStatus, jqXHR) {
+		            console.log(data);
+		
+		            if (data.status != "200") {
+			            $("#submitform").bind("click", submitFormAll)
+		                return easyAlert(data.msg)
+		            }
+		            location = infoUrl;
+		
+		        },
+		        error: function (jqXHR, textStatus, errorThrown) {
+		            console.log(jqXHR);
+		            easyAlert('ERRORS: ' + textStatus);
+		            $("#submitform").bind("click", submitFormAll)
+		        }
+		    });
+		}
+    }
+    
+    
+    
+    
+    
+    
+    
+</script>
+<include file="Public:statistics"/>
+</body>
+</html>
+
+
+
+
+

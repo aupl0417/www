@@ -1,0 +1,123 @@
+<extend name="ShopPublic:base" />
+
+<block name="title">密码修改</block>
+
+<block name="main">
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+		
+      <include file="ShopPublic:centerNav" />
+      <!--课程发布-->
+       
+        <section class="content">
+        	<div class="row">
+            <div class="ml40 mr20">
+              <h3 class="fs26 mb25">密码修改</h3>
+              <form action="#" method="post">
+                <div class="form-group my-form-group">
+                  <label for="o-full-name" class="require fs18">新密码</label>
+                  <input id="o-full-name" data-id="pw" class="fs16" type="password" placeholder="请输入6-12位新密码"/>
+                  <span id="errPanel" class="err-info hidden">我是错误信息</span>
+                </div>
+                <div class="form-group my-form-group">
+                  <label for="legal-repre" class="require fs18">确认密码</label>
+                  <input id="legal-repre" data-id="pw1" class="fs16" type="password" placeholder="请再次输入密码"/>
+                </div>
+                <div class="form-group my-form-group">
+                  <button type="button" id="submitBtn" class="fs16 submit-btn bglightblue">提交</button>
+                </div>
+              </form>
+            </div>
+        	</div>				
+        </section>
+
+      </div><!-- /.content-wrapper -->
+
+</block>
+
+<block name="css">
+    <link rel="stylesheet" href="__PCCSS__/publish.css">
+    <link rel="stylesheet" href="__PUBLIC__/Desktop/webuploader/style.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+    .mb25{margin-bottom: 25px;}
+    .my-form-group{margin-left: 100px;position: relative;}
+    .my-form-group label{position: absolute;left: -110px;margin-top: 5px;}
+    .err-info{color: red;}
+    .submit-btn{border: none;width: 125px;height: 35px;color: white;} 
+    </style>
+</block>
+
+<block name="js">
+    <!-- AdminLTE App -->
+    <script src="__PCJS__/app.min.js" type="text/javascript"></script>
+
+    <!-- 全局变量 -->
+    <script type="text/javascript" charset="utf-8">
+        var g = {
+            "changePasswordUrl":    "{:U('Api/Shopkeeper/changePassword')}"
+        };
+    </script>
+
+    <script type="text/javascript" charset="utf-8">
+        $(function() {
+            $("#submitBtn").click(pwCheck);
+        });
+
+        function pwCheck(){
+            var pw=$('input[data-id=pw]').val();
+            var pw1=$('input[data-id=pw1]').val();
+
+            var rule=/^\S{6,12}$/;
+            if(pw==''){
+                errtext('input-wrap','密码未填写');
+                clearpw();
+                return false;
+            }
+            if(pw1==''){
+                errtext('input-wrap','密码未填写');
+                clearpw();
+                return false;
+            }
+            if(pw!=pw1){
+                errtext('input-wrap','密码不一致');
+                clearpw();
+                return false;
+            }
+            if(!rule.test(pw)){
+                errtext('input-wrap','密码必须是6~12个正常字符');
+                clearpw();
+                return false;
+            }
+
+            // 禁用按钮
+            $("#submitBtn").attr("disabled", "disabled");
+            $.post(g.changePasswordUrl, {"reset":"do","password":pw},function(data){
+                console.log(data);
+                $("#submitBtn").removeAttr("disabled")
+
+                // handleNotSignIn(data);
+
+                if(data.status != 200){
+                    errtext('input-wrap',data.msg);
+                    return false;
+                }
+
+                alert("密码修改成功");
+                $("input").val("");
+
+            }, "json");
+            return true;
+        }
+
+function errtext(lj, msg) {
+    $("#errPanel").html(msg);
+    $("#errPanel").removeClass("hidden");
+}
+    </script>
+</block>

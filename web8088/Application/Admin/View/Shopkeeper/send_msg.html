@@ -1,0 +1,159 @@
+<include file="Public:header" />
+<div id="content">
+
+	
+	<div class="container">
+		
+		<div class="row">
+
+			<include file="Public:nav" />
+
+            <div class="span9" style="margin-left: 5em;">
+
+                <div class="row">
+                    <h2> 发送系统消息给商家 </h2>
+                    <mark> * 发送者名字1~16个字，系统消息1~255个字</mark>
+                    <hr />
+                    <label for="msg_sid">To: (发送给谁)</label>
+                    <input type="text" id="msg_sid" disabled="disabled" data-sid="{$sid}" value="{$nickname}" /> <br />
+                    <label for="msg_sender">From: (发送者，默认叫“系统消息”)</label>
+                    <input type="text" id="msg_sender" /> <br />
+                    <label for="msg_content">Content: (系统消息内容)</label>
+                    <textarea id="msg_content" cols="100" rows="10" style="width: 70%;"></textarea> <br />
+                    <hr />
+                    <button id="msg_send" class="btn btn-info">发送系统消息</button>
+                    <span class="alert alert-danger hidden" id="msg_panel" style="margin-left: 1em;"></span>
+                </div>
+
+                <hr />
+
+            </div>
+
+        </div> <!-- /row -->
+
+    </div> <!-- /container -->
+
+</div> <!-- /content -->
+
+
+<script type="text/javascript">
+
+</script>
+
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="__AJS__/jquery-1.7.2.min.js"></script>
+
+<!-- 为什么放在这里，因为flot.js不知道为什么throw一个异常了 -->
+<script type="text/javascript" charset="utf-8">
+
+var g = {
+    "sender":               "admin.msg_sender",
+
+    "sendMsgUrl":           "{:U('Shopkeeper/ajaxSendMsg')}"
+};
+
+/**
+ * 显示成功或者错误信息
+ */
+function showMsg(type, msg) {
+    var $msgPanel = $("#msg_panel");
+    switch (type) {
+    case "success":
+        $msgPanel.addClass("alert-success");
+        $msgPanel.removeClass("alert-danger");
+        break;
+
+    case "error":
+        $msgPanel.addClass("alert-danger");
+        $msgPanel.removeClass("alert-success");
+        break;
+    }
+    $msgPanel.removeClass("hidden");
+    $msgPanel.html(msg);
+}
+
+$(function() {
+
+    // 获取焦点，隐藏信息框
+    $("input,textarea").focus(function() {
+        $("#msg_panel").addClass("hidden");
+    });
+
+    // 获取默认发送者名字
+    $("#msg_sender").val("系统消息");
+    if (window.localStorage) {
+        var sender = localStorage.getItem(g.sender);
+        if (sender) {
+            $("#msg_sender").val(sender);
+        }
+    }
+
+    // 这里是添加一个商家
+    $("#msg_send").bind("click", function() {
+        if (!confirm("您确定要发送系统消息吗？")) {
+            return false;
+        }
+
+        var $sendBtn = $(this);
+
+         // 获取用户输入
+         var inputs = {
+             "sid":      $("#msg_sid").attr("data-sid"),
+             "sender":   $.trim($("#msg_sender").val()),
+             "content":  $.trim($("#msg_content").val())
+         };
+
+         // 先禁用按钮，防止按太多次
+         $sendBtn.html("请稍后。。。");
+         $sendBtn.attr("disabled", "disabled");
+
+         // 连网发送，
+         $.post(g.sendMsgUrl, inputs, function(data) {
+
+                 $sendBtn.removeAttr("disabled");
+                 $sendBtn.html("发送系统消息");
+
+                 if (data.status != 200) {
+                     showMsg("error", data.msg);
+                     return false;
+                 }
+
+                 showMsg("success", "操作成功");
+
+                 // 将当前的发送者名字保存到浏览器，下次使用
+                 if (window.localStorage) {
+                     localStorage.setItem(g.sender, inputs.sender);
+                 }
+
+                 // 删除内容
+                 $("#msg_content").val("");
+
+         }, "json");
+    });
+
+    // 搜索按钮点击事件
+    $("#findBtn").bind("click", function() {
+            var findType = $("#find_type").val();
+            var findWord = $.trim($("#find_word").val());
+
+            location = g.findShopkeeperUrl + "?find_type=" + findType + "&find_word=" + findWord;
+    });
+
+});
+</script>
+
+
+<script src="__AJS__/excanvas.min.js"></script>
+<script src="__AJS__/jquery.flot.js"></script>
+<script src="__AJS__/jquery.flot.pie.js"></script>
+<script src="__AJS__/jquery.flot.orderBars.js"></script>
+<script src="__AJS__/jquery.flot.resize.js"></script>
+
+
+<script src="__AJS__/bootstrap.js"></script>
+<script src="__AJS__/charts/bar.js"></script>
+<include file="Public:footer" />
+
+

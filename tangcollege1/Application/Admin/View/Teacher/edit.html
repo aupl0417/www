@@ -1,0 +1,126 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <div class="main-title">
+        <h2>编辑教师</h2>
+    </div>
+    <form action="{:U()}" method="post" class="form-horizontal">
+        <div class="form-item">
+            <label class="item-label">用户名<span class="check-tips">（用户名会作为默认的昵称）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="username" value="{$info.username}">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">密码<span class="check-tips">（用户密码不能少于6位）</span></label>
+            <div class="controls">
+                <input type="password" class="text input-large" name="password" value="">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">确认密码</label>
+            <div class="controls">
+                <input type="password" class="text input-large" name="repassword" value="">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">手机</label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="mobile" value="{$info.mobile}">
+            </div>
+        </div>
+         <div class="form-item">
+            <label class="item-label">邮箱</label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="email" value="{$info.email}">
+            </div>
+        </div>
+         <div class="form-item">
+            <label class="item-label">生日</label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="te_birthday" value="{$info.te_birthday}" id="time">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">毕业院校</label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="te_fromAcademy" value="{$info.te_fromAcademy}">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">学历</label>
+            <div class="controls">
+                <select name='te_eduLevel' id="class-course-lists">
+            		<option value="">--请选择最高学历--</option>
+                    <option value="0" <if condition="$info['te_eduLevel'] eq 0 ">selected="selected"</if>>小学及以下</option>
+                    <option value="1" <if condition="$info['te_eduLevel'] eq 1 ">selected="selected"</if>>高中或中专</option>
+                    <option value="2" <if condition="$info['te_eduLevel'] eq 2 ">selected="selected"</if>>专科</option>
+                    <option value="3" <if condition="$info['te_eduLevel'] eq 3 ">selected="selected"</if>>本科</option>
+                    <option value="4" <if condition="$info['te_eduLevel'] eq 4 ">selected="selected"</if>>研究生</option>	
+                    <option value="5" <if condition="$info['te_eduLevel'] eq 5 ">selected="selected"</if>>博士</option>	
+                    <option value="6" <if condition="$info['te_eduLevel'] eq 6 ">selected="selected"</if>>博士后</option>					
+            	</select>
+            </div>
+        </div>
+ <link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+<php>if(C('COLOR_STYLE')=='blue_color') echo '<link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">';</php>
+<link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+        <script>
+		     $('#time').datetimepicker({
+                        format: 'yyyy-mm-dd',
+                        language:"zh-CN",
+	                    minView:2,
+	                    autoclose:true
+             });
+             $(document).ready(function(){
+				 var data = {$brachLists};
+                 $('.menu-level').menulevel({data:data});
+              }); 
+        </script>
+        <div class="form-item">
+            <label class="item-label">属所分院<span class="check-tips">（请选择用户所在分院）</span></label>
+            <div class="controls">
+               <div class="menu-level">
+                 <div class="container">
+                  <span class="selected round">{$info.br_name}</span>    
+                  <ul class="items">
+                    <li value="">请选择</li>
+                  </ul>
+                 </div>   
+                <input name="branchId" type="hidden" value="{$info.branchId}" id="menu-level-value"/>
+              </div>
+            </div>
+        </div>
+         <div class="form-item">
+            <label class="item-label">教师等级</label>
+            <div class="controls">
+                <select name='te_level' id="class-course-lists">
+            		<option value="">--请选择--</option>
+                    <foreach name="levelLists" item="vo" >
+                    <option value="{$vo.tl_id}" <if condition="$info['te_level'] eq $vo['tl_id'] ">selected="selected"</if>>{$vo.tl_name}</option>
+                    </foreach>		
+            	</select>
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">简介<span class="check-tips"></span></label>
+            <div class="controls">
+                <textarea id="te_description" type="text" name="te_description" class="text input-large" style="height:200px;">{$info.te_description}</textarea>
+            </div>
+        </div>
+        <div class="form-item">
+            <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+        </div>
+        <input name="id" type="hidden" value="{$info.id}" />
+    </form>
+</block>
+
+<block name="script">
+    <script type="text/javascript">
+        //导航高亮
+        highlight_subnav("{:U('Teacher/Add')}");
+    </script>
+</block>

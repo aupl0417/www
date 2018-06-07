@@ -1,0 +1,86 @@
+<include file="Public:header" />
+<div id="content">
+
+	
+	<div class="container">
+		
+		<div class="row">
+
+			<include file="Public:nav" />
+
+            <div class="span10">		
+				<div class="widget widget-table">
+					<div class="widget-header">
+						<i class="icon-th-list"></i>
+						<h3>微信头像数据转移</h3>
+					</div> <!-- /widget-header -->
+					
+					<div class="widget-content">
+						<div class="span8" style="margin-bottom:20px;">
+						 	<h3 style="margin-top:1em;">微信头像数据从微信服务器转移到本网站服务器</h3>
+						 	
+						 	
+							<input type="text" id="password" placeholder="请输入转移密码" /><br/>
+							<input type="text" id="code" placeholder="请输入验证码" /><br/>
+							<img src="{:U('Sign/getVerify', 't='.time())}"  id="verify" onclick="document.getElementById('verify').src='{:U('Sign/getVerify')}?q='+Math.random()" alt="" style="width:30%;"/>
+    						<a href="javascript:;" onclick="document.getElementById('verify').src='{:U('Sign/getVerify')}?q='+Math.random()" style="width:30%;">看不清，换一张</a>
+						 	
+						 	
+							<button id="sendBtn">确认发送</button>
+						</div>
+						
+					</div>
+
+
+
+                <hr />
+
+            	</div>
+                
+
+
+
+            </div><!-- /span10 -->
+
+		</div> <!-- /row -->
+		
+	</div> <!-- /container -->
+	<div></div>
+</div> <!-- /content -->
+
+
+<script src="__AJS__/jquery-1.7.2.min.js"></script>
+<script src="__AJS__/excanvas.min.js"></script>
+<script src="__AJS__/bootstrap.js"></script>
+<script type="text/javascript" src="__HJS__/juicer-min.js"></script>
+<script type="text/javascript">
+var wxAvatarUpdata = "{:U('Wx/avatarShift')}";
+
+function postupdata(compage){
+	var updata={};
+	updata.verify=$("#code").val();
+	updata.password=$("#password").val();
+	console.log(updata);
+	$.post(wxAvatarUpdata,updata,function(data){
+		console.log(data);
+		if(data.status!=200){
+			alert(data.msg);
+			return;
+		}else{
+			alert('该功能开发中，敬请期待');
+			return;
+		}
+    }, "json");
+}
+$("#sendBtn").on("click",function(e){
+    if (!confirm("确认微信数据转移吗？")) {
+        window.event.returnValue = false;
+    }else{
+    	postupdata();
+    }
+});
+
+
+
+</script>
+<include file="Public:footer" />

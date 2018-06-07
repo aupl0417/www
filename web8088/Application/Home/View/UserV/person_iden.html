@@ -1,0 +1,93 @@
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+    <meta content="yes"name="apple-mobile-web-app-capable"/>
+    <meta content="black"name="apple-mobile-web-app-status-bar-style"/>
+    <title>个人认证 - 17约课</title>
+    <link rel="stylesheet" type="text/css" href="__HCSS__/reset.css">
+    <link rel="stylesheet" href="__HCSS__/2.css"/>
+    <link rel="stylesheet" href="__HCSS__/4.css"/>
+    <meta name="keywords" content="17约课,一起约课,约课,教育培训,约课神器,校园约课,大学生培训,约老师,约女神,驾驶培训,设计培训,职业考证,音乐培训,英语培训,小语种培训,体育培训" />
+    <meta name="description" content="17约课 - 约您身边的良师益友！为您提供约老师，约课程，约女神，约学霸等海量信息，充分满足您免费约课，免费发布课程的需求。" />
+</head>
+<body>
+<header id="top_header">
+    <div id="header" align="center">
+        <h3 class="identify_title">个人认证</h3>
+        <a href="javascript:history.back(-1)" class="identify_back"><img src="__HIMG__/Return2.png" alt=""/>返回</a>
+        <a href="{:U('Index/index')}" class="identify_to_index">首页</a>
+    </div>
+</header>
+<div class="wrapper">
+<form action="{:U('UserV/perIden',array('uploadfile'=>'do'))}" id="uploadfile" method="post" enctype="multipart/form-data">
+        <div id="localImag" class="page-inner">
+            <img src=" <empty name="oldpath">__HIMG__/Photo Frame.png<else />{$oldpath}</empty> " alt="" id="img0" class="identify_file"/>
+
+            <input id="file" type="file" name="file" class="identify_input"/>
+            <input id="text" type="text" value="0" class="hidden"/>
+      	</div>
+        <p class="identify_file_p"><span>证明材料</span>:申请大V的相关资料</p>
+        
+        <a href="javascript:;" id="gerenshenv" class="identify_file_btn ">个人申V</a>
+    </section>
+</form>
+</div>
+
+
+
+<script type="text/javascript" src="__HJS__/zepto.min.js"></script>
+<script type="text/javascript" src="__HJS__/objimgurl.js"></script>
+<include file="Component:alert" />
+<script type="text/javascript">
+    $('.identify_file').click(function () {
+        $(".identify_input").trigger('click');
+    });
+
+    $("#file").change(function(){
+        var objUrl = getObjectURL(this.files[0]) ;
+        console.log("objUrl = "+objUrl) ;
+        if (objUrl) {
+            $("#img0").attr("src", objUrl) ;
+            $("#text").val(1);
+        }
+    });
+
+
+
+    function uploadfile(){
+        var imgcheck=$("#text").val();
+        if(imgcheck==0){
+            easyAlert('请上传认证材料');
+            return false;
+        }
+        document.getElementById('uploadfile').submit();
+        easyAlert('正在上传图片，请耐心等待');
+
+        return true;
+    }
+    $("#gerenshenv").click(function(){
+        uploadfile();
+    });
+
+
+    var error_img='{$pushimgstatus}';
+    if(error_img==1){
+        window.onload=function(){
+            easyAlert('认证资料上传成功');
+            window.location.href='{:U("user_v/bigiden")}';
+        }
+    }else if(error_img!=0){
+        window.onload=function(){
+            easyAlert(error_img);
+            window.location.href='{:U("user_v/bigiden")}';
+        }
+    }
+
+
+</script>
+<include file="Public:statistics"/>
+</body>
+</html>
+

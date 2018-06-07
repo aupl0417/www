@@ -1,0 +1,157 @@
+.tips-bg {
+    width: 100%;
+    height: 60em;
+    background-color: rgba(120, 120, 120, 0.5);
+    z-index: 600;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.tips {
+    position: relative;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 650;
+    -webkit-border-radius: .5em;
+    -moz-border-radius: .5em;
+    -o-border-radius: .5em;
+    border-radius: .5em;
+    border: solid 1px #4E6A78;
+    background-color: #E3F1FE;
+}
+
+.tips .selected {
+    -moz-border-radius: .5em;
+    -webkit-border-radius: .5em;
+    -o-border-radius: .5em;
+    border-radius: .5em;
+    border: 2px dotted white;
+}
+
+.tips #selected1 {
+    position: absolute;
+    width: 2.8em;
+    height: 2.8em;
+    top: -6.5em;
+    right: -4%;
+}
+
+.tips #selected2 {
+    position: absolute;
+    height: 15em;
+    width: 110%;
+    top: -17.4em;
+    left: -5%;
+}
+
+.tips #selected3 {
+    position: absolute;
+    width: 110%;
+    height: 5.8em;
+    top: -7.8em;
+    left: -5%;
+}
+
+.tips #selected4 {
+    position: absolute;
+    width: 110%;
+    height: 5.8em;
+    top: -7.8em;
+    left: -5%;
+}
+
+.tips #selected5 {
+    position: absolute;
+    width: 3.2em;
+    height: 2.8em;
+    left: -5%;
+    top: -6em;
+}
+
+.tips #selected6 {
+    position: absolute;
+    width: 2.8em;
+    height: 2.8em;
+    top: -6em;
+    right: -4%;
+}
+
+
+.tips img {
+    width: 40%;
+    position: absolute;
+    left: 50%;
+    top: -4.1em;
+    height: 4em;
+    z-index: 625;
+}
+
+.tips p {
+    color: #457A95;
+    font-weight: bold;
+    font-size: 1.2em;
+    text-align: center;
+    margin: .8em auto;
+    padding: 0 1em;
+}
+
+.tips p b {
+    color: #FBC251;
+    font-size: 1.1em;
+}
+
+.tips button {
+    display: block;
+    font-size: 1.1em;
+    border-radius: .5em;
+    border: 1px solid #457A95;
+    width: 6em;
+    height: 2em;
+    line-height: 2em;
+    margin: 0 auto 1.5em auto;
+    color: #457A95;
+    background: none;
+}
+
+#tip1 {
+    margin-top: 7em;
+}
+
+#tip1 img {
+    width: 48%;
+}
+
+#tip2 {
+    margin-top: 23em;
+}
+
+#tip3 {
+    margin-top: 13em;
+}
+
+#tip4 {
+    margin-top: 12.5em;
+}
+
+#tip5 {
+    margin-top: 6.5em;
+}
+
+#tip5 img {
+    -webkit-transform: scale(-1, 1);
+    -moz-transform: scale(-1, 1);
+    -o-transform: scale(-1, 1);
+    transform: scale(-1, 1);
+    left: 5%;
+    width: 50%;
+}
+
+#tip6 {
+    margin-top: 6.5em;
+}
+
+#tip6 img {
+    width: 48%;
+}

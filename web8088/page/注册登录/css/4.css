@@ -1,0 +1,296 @@
+.register_wrap{
+    width: 100%;
+    height: 29.5em;
+    background:  -webkit-linear-gradient(#458dff, #4ec1fe);
+    position: relative;
+    margin-bottom: 1em;
+}
+.register_title{
+    width: 43%;
+    display: block;
+    margin: 0 auto;
+    padding-top: 2.5em;
+}
+.first_height{
+    height: 70em!important;
+    margin-bottom: 0px !important;
+}
+.second_height{
+    height: 40em !important;
+    margin-bottom: 0px !important;
+}
+.register_second_back{
+    position: relative;
+    top:2.5em;
+    width: 40%;
+    font-size: 1.2em;
+    left: 5%;color: #ffffff;
+    margin-bottom: 3.5em;
+}
+.register_second_back img{
+    position: relative;
+    top:-0.1em;
+    height: 1.1em;
+    width: 1.1em;
+    margin-right: 0.3em;
+}
+.input_wrap{
+    width: 90%;
+    margin: 0 auto;
+    position: relative;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    height: 3em;
+    background: #fff;
+    margin-bottom: 1.5em;
+    padding: 5px 0px 0px 5px;
+}
+.register_submit{
+    width: 90%;
+    height: 3em;
+    margin: 0 auto;display: block;
+    border: 1px solid #1D80CF;
+    text-align: center;
+    font-size: 15px;
+    color: #fff;
+    text-shadow: 0 1px 1px rgba(0,0,0,.2);
+    background: #80C3F7;
+    background: -webkit-gradient(linear,left top,left bottom,from(#80c3f7),to(#6bbaf8));
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.3),0 1px 1px rgba(50,50,50,.05);
+    border-radius: 5px;
+    cursor: pointer;
+    line-height: 33px;
+    padding: 0 15px;
+    outline: 0;
+    
+}
+.sign-button-white {
+    font-size: 15px;
+    width: 90%;
+    height: 3em;
+    margin: 0 auto;display: block;
+    background: #F2F5F7;
+    background: -webkit-gradient(linear, left top, left bottom, from(#f2f5f7), to(#e0e4e7));
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .5), 0 1px 1px rgba(50, 50, 50, .05);
+    color: #484848;
+    border: 1px solid #3b86c2;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, .8);
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border-radius: 5px;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+.register_input{
+    background: transparent;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    color: #999;
+    font-size: 14px;
+    width: 99%;
+    height: 90%;
+    line-height: 1em;
+    border: 0px;
+    text-transform: none;
+    -webkit-appearance: none;
+    outline-style: none;
+    text-shadow: none;
+    outline: none;
+}
+
+/*商家*/
+.e_first_register{
+
+}
+.e_register_second_title{
+    margin-top: 2.5em;
+    font-size: 1.2em;
+    margin-bottom: 1.2em;
+}
+.e_first_register_path{
+    position: relative;
+    font-size: 1em;
+
+}
+.e_first_register_chip{
+    font-size: 0.8em;
+    margin-top: 1.2em;
+    margin-bottom: 0.3em;
+}
+.e_register_line{
+    width: 1px;
+    height: 1em;
+    background-color: #ffffff;
+    position: relative;
+    top: -0.2em;
+    left: 7%;
+}
+.e_first_register_path img{
+    position: relative;
+    top: -0.2em;
+    margin-right: 0.5em;
+    width: 1em;
+    height: 1em;
+}
+.e_first_register p{
+    padding-left: 5%;
+    color: #ffffff;
+}
+.e_first_phone{
+    margin-left: 5%;
+    width: 30%;
+    display: inline-block;
+}
+
+.e_second_phone{
+    width: 48%;
+    display: inline-block;
+}
+.e_second_phone-link{
+    width: 10%;
+    color: #ffffff;
+    font-size: 2em;
+    display: inline-block;
+    text-align: center;
+}
+.e_register_end{
+    margin-top: 2em;
+}
+.text_margin{
+    margin-left: 5%;
+}
+.back_to_email{
+    margin-bottom: 2em;
+}
+.back_to_email img{
+    width: 1.1em;
+    height: 1.1em;
+    position: relative;
+    top:-0.2em;
+    margin-right: 0.5em;
+}
+.send_email{
+    font-size: 0.9em;
+}
+.regiser_end_line{
+    width: 90%;
+    border-bottom: solid 1px #ffffff;
+    margin-left: 5%;
+    opacity: 0.5;
+    margin-bottom: 2em;
+}
+/*用户*/
+.u_first_name{
+    margin-left: 5%;
+    width: 40%;
+    display: inline-block;
+}
+
+.u_second_name{
+    width: 40%;
+    margin-left: 9.2%;
+    display: inline-block;
+}
+.user_register_nav{
+    margin-top: 2.5em;
+    width: 90%;
+    margin-left: 5%;
+    position: relative;
+    height: 2em;
+    margin-bottom: 0.8em;
+}
+.user_register_nav_left{
+    padding-left: 0px !important;
+    position: absolute;
+    font-size: 1.2em;
+    left: 0px;
+    top: 0px;
+}
+.user_register_nav_left img{
+    position: relative;
+    width: 1.2em;
+    height: 1.2em;
+    top: -0.1em;
+    margin-right: 0.3em;
+}
+.user_register_nav_right{
+    font-size: 1.2em;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+}
+.user_register_nav a{
+    color: #ffffff;
+}
+.user_register_nav_right img{
+    top: -0.1em;
+    position: relative;
+    width: 1.2em;
+    height: 1.2em;
+    margin-left: 0.3em;
+}
+.u_social_account{
+    width: 80%;
+    margin: 0 auto;
+    padding-left: 0px !important;
+    text-align: center;
+    font-size: 1.2em;
+}
+.u_social_account img{
+    width: 1.2em;
+    height: 1.2em;
+    position: relative;
+    top: -0.1em;
+    margin-left: 1em;
+}
+
+.u_register_err{
+    background-color: #3799d8;
+    width: 90%;
+    margin-left: 5%;
+    padding: 10px;
+    display: block;
+    border-radius: 4px;
+    font-size: 13px;
+    color: #fff;
+    margin-bottom:15px;
+    text-shadow: 0 1px 1px rgba(0,0,0,.15);
+    background: rgba(0,0,0,.1);
+    box-shadow: 0 1px 1px rgba(0,0,0,.1) inset,0 1px 0 rgba(255,255,255,.15);
+}
+.register_err_image{
+    width: 1.2em;
+    height: 1.2em;
+    margin-right: 0.5em;
+    position: relative;
+    top: -0.1em;
+}
+.user_login_footer{
+    top: 0px;
+    margin-top: 0.5em;
+    width: 90%;
+    margin-left: 5%;
+    position: relative;
+    height: 2em;
+    margin-bottom: 0.8em;
+}
+.remember_me{
+    background-color: white;
+    border: solid 1px #ffffff;
+}
+.login_register_footer{
+    width: 90%!important;
+    margin-left: 5% !important;
+    
+}
+.login_register_footer_img{
+    margin-left: 0.4em !important;
+}
+.login_register_footer a{
+    color: #ffffff !important;
+}
+.login_margin_0{
+    margin-left: 0px !important;
+    left: -0.2em;
+}

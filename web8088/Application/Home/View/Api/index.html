@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>API测试</title>
+		<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+		  <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		  <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+		<link rel="stylesheet" href="__PUBLIC__/jsonFormater/jsonFormater.css">
+		</head>
+		
+	<body>
+		<div class="container">
+			<div class="row" style="margin-top: 10px;">
+				<div class="col-md-6">
+					<table class="table">
+						<thead>
+							<tr>
+								<td>Key</td>
+								<td>Value</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>url</td>
+								<td><input class="form-control" id="value_url" onkeydown="onEnter(event)"></td>
+							</tr>
+							<for start="0" end="20">
+							<tr>
+								<td><input class="form-control" id="key_{$i}" onkeydown="onEnter(event)"></td>
+								<td><input class="form-control" id="value_{$i}" onkeydown="onEnter(event)"></td>
+							</tr>
+							</for>
+						</tbody>
+					</table>
+				</div>
+				<div class="col-md-6">
+					<div id="result" class="well"></div>
+				</div>
+			</div>
+		</div>
+        <include file="Public:statistics"/>
+	</body>
+	
+	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+	<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+	<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	<script src="__PUBLIC__/jsonFormater/jsonFormater.js"></script>
+	<script>
+		function onEnter(e) {
+			var keynum;
+			if(window.event) // IE
+			{
+				keynum = e.keyCode
+			}
+			else if(e.which) // Netscape/Firefox/Opera
+			{
+				keynum = e.which
+			}
+			if(keynum != 13) {
+				return;
+		    }
+		    
+		    $("#result").html("loading...");
+			var args = {};
+			for (var i = 0; i < 20; i++) {
+				if ($("#key_" + i).val() == "") {
+					continue;
+				}
+				args[$("#key_" + i).val()] = $("#value_" + i).val();
+			}
+			console.log(args);
+			$.post("/" + $("#value_url").val(), args, function(data, textStatus) {
+				var options = {
+					dom : '#result', //对应容器的css选择器
+					imgCollapsed: "__PUBLIC__/jsonFormater/images/Collapsed.gif", //收起的图片路径
+					imgExpanded: "__PUBLIC__/jsonFormater/images/Expanded.gif",  //展开的图片路径
+					isCollapsible: true //是否支持展开收起
+				};
+				var jf = new JsonFormater(options); //创建对象
+				jf.doFormat(data); //格式化json
+				console.log(data);
+			}, 'json');
+		}
+	</script>	
+</html>

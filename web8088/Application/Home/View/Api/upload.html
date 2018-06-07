@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>API测试</title>
+		<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+		  <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		  <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+		<link rel="stylesheet" href="__PUBLIC__/jsonFormater/jsonFormater.css">
+		</head>
+		
+	<body>
+		<div class="container">
+			<div class="row" style="margin-top: 10px;">
+				<div class="col-md-6">
+					<form id="form" action="#" enctype="multipart/form-data" method="post" target="result" onsubmit="return onSubmit()">
+						<table class="table">
+							<thead>
+								<tr>
+									<td>Key</td>
+									<td>Value</td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr><td colspan="2"><button type="submit" class="btn btn-default btn-block">提交表单</button>	</td></tr>
+								<tr>
+									<td>url</td>
+									<td><input class="form-control" id="value_url"></td>
+								</tr>
+								<for start="0" end="2">
+								<tr>
+									<td><input class="form-control" id="key_{$i}"></td>
+									<td><input type="file" class="form-control" id="value_{$i}"></td>
+								</tr>
+								</for>
+								<for start="2" end="15">
+								<tr>
+									<td><input class="form-control" id="key_{$i}"></td>
+									<td><input class="form-control" id="value_{$i}"></td>
+								</tr>
+								</for>
+							</tbody>
+						</table>
+					</form>
+				</div>
+				<div class="col-md-6">
+					<iframe name="result" id="result" width="100%" height="500px"></iframe>
+				</div>
+			</div>
+		</div>
+        <include file="Public:statistics"/>
+	</body>
+	
+	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+	<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+	<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	<script src="__PUBLIC__/jsonFormater/jsonFormater.js"></script>
+	<script>
+		function onSubmit(e) {
+			$("#form").attr("action", "/" + $("#value_url").val())
+			for (var i = 0; i < 20; i++) {
+				if ($("#key_" + i).val() == "") {
+					continue;
+				}
+				$("#value_" + i).attr("name", $("#key_" + i).val())
+			}
+			getJson();
+			return true;
+		}
+		
+		function getJson() {
+			var loop = setInterval(function() {
+				var win = document.getElementById('result').contentWindow;
+				var str = win.document.body.innerText
+				if (str != "") {
+					clearInterval(loop)
+					var obj = JSON.parse(str)
+					console.log(obj)
+				} else {
+					console.log("...")
+				}
+			}, 500)
+		}
+		
+	</script>	
+</html>

@@ -1,0 +1,50 @@
+<div id="main" class="main">
+    <div class="main-title">
+        <h2>{:isset($info['co_id'])?'编辑':'新增'}课程</h2>
+    </div>
+    <form id='form' action="{:U()}" method="post" class="form-horizontal">
+        <div class="form-item">
+            <label class="item-label">课程名称</label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="co_name" value="{$info.co_name|default=''}">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="textarea input-large">
+	            <textarea name="co_description">{$info.co_description|default=''}</textarea>
+            </label>
+        </div>
+        <div class="form-item">
+            <label class="item-label">课程内容</label>
+            <label class="textarea input-large">
+	            <textarea name="co_content">{$info.co_content|default=''}</textarea>
+            </label>
+        </div>
+        <div class="form-item">
+            <label class="item-label">课程学分</label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="co_score" value="{$info.co_score|default=''}">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">课程LOGO</label>
+            <div class="controls">
+                <!-- <input type="text" class="text input-large" name="co_logo" value="{$info.co_logo|default=''}"> -->
+                {:hook('UploadImages')}
+                
+            </div>
+        </div>
+        <div class="form-item">
+            <input type="hidden" name="co_id" value="{$info.co_id|default=''}">
+            <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <button class="btn btn-return" type="button">返 回</button>
+        </div>
+    </form>
+</div>
+
+<script>
+	ajaxSummitForm();
+	$('.btn-return').click(function(){
+		layer.closeAll();
+	});
+</script>

@@ -1,0 +1,84 @@
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+    <meta content="yes"name="apple-mobile-web-app-capable"/>
+    <meta content="black"name="apple-mobile-web-app-status-bar-style"/>
+    <title>主页</title>
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" href="css/2.css"/>
+    <link rel="stylesheet" href="css/4.css"/>
+    <style>
+        #header{
+            width: 100%;
+            position: relative;
+            height: 100%;;
+            background: url("images/Gradual change.png");
+            background-repeat: repeat-x;
+        }
+    </style>
+</head>
+<body>
+<header id="top_header">
+    <div id="header" align="center">
+        <h3 class="identify_title">机构认证</h3>
+        <a href="" class="identify_back"><img src="images/Return2.png" alt=""/>返回</a>
+    </div>
+</header>
+<div class="wrap-page">
+    <section class="page" id="wrap">
+        <div class="page-inner">
+            <div class="blank">
+                <br/>
+                <div class="input-wrap">
+                    <label>机构全称</label>
+                    <div class="input-wrap-out enterprise_input_wrap">
+                        <input type="text" class="input-wrap-input" placeholder="请输入机构名称"/>
+                    </div>
+                </div>
+                <div class="input-wrap">
+                    <label>法人代表</label>
+                    <div class="input-wrap-out enterprise_input_wrap">
+                        <input type="text" class="input-wrap-input" placeholder="请输入法人代表"/>
+                    </div>
+                </div>
+                <div class="input-wrap">
+                    <label>联系电话</label>
+                    <div class="input-wrap-out enterprise_input_wrap">
+                        <input type="text" class="input-wrap-input" placeholder="请输入联系电话"/>
+                    </div>
+                </div>
+            </div>
+            <div class="blank">
+                <p class="constitution_v_title">营业执照</p>
+                <div class="constitution_left">
+                    <div class="constitution_img_wrap">
+                            <div class="constitution_img_icon_1"></div>
+                            <div class="constitution_img_icon_2"></div>
+                        <img src="images/touxiang.png" alt="" class="hidden"/>
+                    </div>
+                </div>
+                <div class="constitution_right">
+                    <p>上传企业营业执照，需要看清文字图片信息</p>
+                    <input type="file" class="visualization" id="file"/>
+                    <button class="btn constitution_upload" id="btn">上传</button>
+                </div>
+                <p class="constitution_v_footer">审核需要一天时间，请耐心等待</p>
+            </div>
+            <button class="btn constitution_v_end">完成</button>
+            <br/>
+            <br/>
+        </div>
+    </section>
+</div>
+
+<script type="text/javascript" src="js/zepto.min.js"></script>
+<script type="text/javascript">
+    $('#btn').click(function (event) {
+        $('#file').trigger("click");
+    })
+</script>
+
+</body>
+</html>

@@ -1,0 +1,172 @@
+<include file="Public:header" />
+<div id="content">
+
+	
+	<div class="container">
+		
+		<div class="row">
+			
+
+			<include file="Public:nav" />
+			
+		<div class="span10">
+
+                <div class="widget widget-table">
+
+                    <div class="widget-header">
+                        <i class="icon-th-list"></i>
+                        <h3>－{$data[0]['firstname']}{$data[0]['lastname']}－课程推送详情</h3>
+                        <a href="javascript:history.back(-1)" class="btn btn-small">返回</a>
+                        <p class="pull-right">已推送{$page.counts}次</p>
+                    </div> <!-- /widget-header -->
+                    <div class="widget-content span10" style="margin-bottom:1em; margin:0;" >
+                       <div class="row" style="margin:0;">
+                  				<volist name='data' id='vo'>
+                  
+                    <div   style="float:left;margin:0; border: 1px solid #D5D5D5;width:388px;">
+<!--                         <div class="span1"><img src="{$vo.who.avatar}" alt="" style="padding-top: 2em;padding-left: 2em;"/></div>
+ -->                        <div class="span4">
+                            <h3 style="margin-top:1em;;">心愿标题：{$vo.title}</h3>
+                         
+                            <p>推送的课程标题：{$vo.tstitle}</p>
+                            <p>商家机构的名称：
+    						 <empty name="vo.nickname">
+									{$vo.companyname}
+									    <else />
+									  {$vo.nickname}
+									    </empty></p>
+                            <p>商家机构的电话：
+                             <empty name="vo.tel">
+									     暂无
+									    <else />
+									  {$vo.tel}
+									    </empty></p>
+									    <p>商家机构的手机：
+                             <empty name="vo.login_phone">
+									     暂无
+									    <else />
+									  {$vo.login_phone}
+									    </empty></p>
+									    <p>商家机构的邮箱：
+                             <empty name="vo.login_email">
+									     暂无
+									    <else />
+									  {$vo.login_email}
+									    </empty></p>
+                            
+                        </div>
+                     
+                    </div>
+                    				</volist>
+                    
+                                            </div>
+                    
+                </div> <!-- /widget-content -->
+                    <br clear="both"/>
+
+					<!-- </div> /widget-content -->
+		
+						<!-- 分页 -->	
+							<thead>
+								<div class="pagination" style="margin-left:10px;">
+									<div class="">
+										<a href="javascript:;" style="border-left: 1px solid #ddd"   id="DataTables_Table_0_previous">{$page['counts']}条记录  {$page['curPage']}/{$page['pageAll']}页</a>
+										<if condition="$page['curPage'] neq 1">
+											<a  href="__ACTION__/id/{$data[0]['id']}/page/1"     class=""  id="DataTables_Table_0_first">第一页</a>
+											<a  href="__ACTION__/id/{$data[0]['id']}/page/{$page['curPage']-1}" class="" id="DataTables_Table_0_previous">上一页</a>
+										</if>
+										
+											<span>
+										<for start="$page['pageFirst']" end="$page['pageMax']+1">
+												<a href="__ACTION__/id/{$data[0]['id']}/page/{$i}" <if condition="$i eq $page['curPage']"> style="color: #FC8D00;background-color: #FFFFFF;"</if> >{$i}</a>
+										</for>
+											</span>
+										<if condition="$page['curPage'] neq $page['pageAll']">
+											<a  href="__ACTION__/id/{$data[0]['id']}/page/{$page['curPage']+1}" class="" id="DataTables_Table_0_next">下一页</a>
+											<a  href="__ACTION__/id/{$data[0]['id']}/page/{$page['pageAll']}"   class="" id="DataTables_Table_0_last">最后一页</a>
+										</if>
+									</div>
+								</div>
+								
+							</thead>
+				</div> <!-- /widget -->
+				
+			</div> <!-- /span10 -->
+			
+		</div> <!-- /row -->
+		
+	</div> <!-- /container -->
+	
+</div> <!-- /content -->
+<!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h3 class="modal-title" id="myModalLabel">详细信息</h3>
+            </div>
+            <div class="modal-body">
+             <p>姓名:<span id = "modal_name"></span></p>
+                <p>电话:<span id ="modal_phone"></span></p>
+                <p>邮箱:<span id ="modal_email"></span></p>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+
+<script src="__AJS__/jquery-1.7.2.min.js"></script>
+<script src="__AJS__/excanvas.min.js"></script>
+<script src="__AJS__/jquery.flot.js"></script>
+<script src="__AJS__/jquery.flot.pie.js"></script>
+<script src="__AJS__/jquery.flot.orderBars.js"></script>
+<script src="__AJS__/jquery.flot.resize.js"></script>
+<script src="__AJS__/delete.js"></script>
+<script type="text/javascript">
+  /*   $(".user__btn").click(function (e) {
+    	
+    	var tr = $(e.target).parents("tr");
+        var uid = tr.find(".user__id").text();
+        var detail;
+		args={uid:uid};
+  	   $.post("{:U('Data/userdata')}",args,function(msg){
+  		 $(msg).each(function(index,item){
+  		   detail=detail+item.area_detail;
+  		});
+  		alert(detail);
+  	 	},'json');
+  	   
+  	   
+        e.preventDefault();
+        var tr = $(e.target).parents("tr");
+        var email = tr.find(".user__email").text();
+        var phone = tr.find(".user__phone").text();
+        var name = tr.find(".user__name").text();
+        var detail = tr.find(".shop__detail").text();
+        $("#modal_name").html(name);
+        $("#modal_detail").html(detail);
+        if(phone==""){
+            $("#modal_phone").html("暂无");
+
+        }
+        else{
+            $("#modal_phone").html(phone);
+
+        }
+        if(email==""){
+            $("#modal_email").html("暂无");
+
+        }
+        else{
+            $("#modal_email").html(email);
+        }
+
+    }) */
+
+</script >
+<script src="__AJS__/bootstrap.js"></script>
+<script src="__AJS__/charts/bar.js"></script>
+<include file="Public:footer" />

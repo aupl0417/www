@@ -1,0 +1,38 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <div class="main-title">
+        <h2>{:isset($info['n_id'])?'编辑':'新增'}公告</h2>
+    </div>
+    <form action="{:U()}" method="post" class="form-horizontal" enctype ="multipart/form-data">
+        <div class="form-item">
+            <label class="item-label">所属分院</label>
+            <div class="controls">
+                <select name='n_branchId'>
+                	<option value=''>--请选择--</option>
+                	<volist name='branch' id='co'>
+                		<option value='{$co.br_id}' <if condition="$info.n_branchId eq $co['br_id']">selected='selected'</if>>{$co.br_name}</option>
+                	</volist>
+                </select>
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="textarea">
+	            <textarea name="n_content">{$info.n_content}</textarea>
+	            {:hook('adminArticleEdit', array('name'=>$field['name'],'value'=>$field['value']))}
+            </label>
+        </div>
+        <div class="form-item">
+        	<input type='hidden' name='n_id' value='{$info.n_id}'>
+            <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+        </div>
+    </form>
+</block>
+
+<block name="script">
+    <script type="text/javascript">
+        //导航高亮
+        highlight_subnav('{:U('Notice/index')}');
+    </script>
+</block>

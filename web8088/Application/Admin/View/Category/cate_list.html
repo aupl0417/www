@@ -1,0 +1,107 @@
+<include file="Public:header" />
+<div id="content">
+
+	
+	<div class="container">
+		
+		<div class="row">
+			
+
+			<include file="Public:nav" />
+			
+			
+			<div class="span9">
+				<div class="widget-header">
+						<i class="icon-th-list"></i>
+						<h3>分类菜单</h3>
+						<a href="{:U('Category/cate_add')}">添加分类</a>
+					
+					</div> <!-- /widget-header -->
+					
+				<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+							
+								<th width="5%">
+									序号
+								</th>
+								<th width="30%">
+									分类名称
+								</th>
+								<th width="20%"> 
+									描述信息
+								</th>
+								<th width="20%"> 
+									LOGO
+								</th>
+								<th width="10%">
+									操作
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+						 
+						
+						<volist name='data' id='vo'>
+							
+							<tr>
+							
+								<td>
+								
+									{$vo.id}
+								</td>
+								<td>						
+							<if condition="$vo['depth'] eq 0"> <font color='red'>
+							<strong>{$vo.catename}</strong>
+						</font><elseif condition="$vo['depth'] eq 1"/><font color='red'>&nbsp;&nbsp;&nbsp;&nbsp;{$vo.catename}</font> 
+						<else /><font color='blue'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$vo.catename}</font> </if></td>
+																	
+								</td>
+								<td>
+								{$vo.desc}
+								</td>
+									<td>
+								<img id="thumb" src="__HUP__{$vo.thumb_logo}"/>
+								</td>
+								<td>
+
+									 <a href="{:U('Category/cate_edit',array('id'=>$vo['id']))}">编辑</a> |
+      								<span class="id" id="{$vo.id}" title="{$vo.catename}"><a href="#" title="移除">移除</a></span>
+								</td>
+							</tr>
+							
+						</volist>
+							
+						</tbody>
+					</table>				
+				
+			</div> <!-- /span9 -->
+			
+			
+		</div> <!-- /row -->
+		
+	</div> <!-- /container -->
+	
+</div> <!-- /content -->
+
+
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script type="text/javascript">
+
+	var deleteURL="{:U('Category/Delete')}";
+	var listURL="{:U('Category/cate_list')}";
+
+</script >
+<script src="__AJS__/jquery-1.7.2.min.js"></script>
+<script src="__AJS__/excanvas.min.js"></script>
+<script src="__AJS__/jquery.flot.js"></script>
+<script src="__AJS__/jquery.flot.pie.js"></script>
+<script src="__AJS__/jquery.flot.orderBars.js"></script>
+<script src="__AJS__/jquery.flot.resize.js"></script>
+<script src="__AJS__/delete.js"></script>
+
+<script src="__AJS__/bootstrap.js"></script>
+<script src="__AJS__/charts/bar.js"></script>
+<include file="Public:footer" />

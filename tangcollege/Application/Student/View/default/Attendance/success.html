@@ -1,0 +1,59 @@
+<extend name="Public/base"/>
+
+	<block name='content'>
+		<div id="content" class="content pt45 mb60">
+			<div class="tang-class-cont">
+				<div class="tang-class-top">
+					<div class="tang-class-time">
+						<div class="time-item">
+							<span>签到时间：{$info.attenTime|strtotime|date="H:i:s",###}</span>
+							<!--<span id="hour_show" class="time">00</span>：-->
+							<!-- <span id="minute_show" class="time">0m</span>：
+							<span id="second_show" class="time">0s</span> -->
+						</div>
+						<!--倒计时模块-->
+					</div>
+				</div>
+				<div class="tang-class-bot">
+					<div class="tang-class-bot-title">
+						《{$info.courseName}》
+					</div>
+					<div class="tang-class-bot-text">
+						课题即将开课，请将您的手机或者电子设 备调为静音或者震动状态，谢谢您的配合。
+					</div>
+				</div>
+				<div class="tang-class-foot bg_white text-center">
+					<a href="{:U('Course/index', array('id'=>$info['courseId'], 'userId'=>$info['userId']))}" class="db c-2a8">
+						查看课程表
+					</a>
+				</div>
+			</div>
+		</div>
+	</block>
+	<block name='script'>
+	<script type="text/javascript">
+		var intDiff = parseInt(3000);//初始日期
+		function timer(intDiff){
+			window.setInterval(function(){
+//						hour=00,
+						minute=00,
+						second=00;//时间默认值
+				if(intDiff > 0){
+//					hour = Math.floor(intDiff / (60 * 60));
+					minute = Math.floor(intDiff / 60) // - (hour * 60);
+					second = Math.floor(intDiff)  /*- (hour * 60 * 60)*/ - (minute * 60);
+				}
+				if (minute <= 9) minute = '0' + minute;
+				if (second <= 9) second = '0' + second;
+//				$('#hour_show').html('<s id="h"></s>'+hour);
+				$('#minute_show').html('<s></s>'+minute);
+				$('#second_show').html('<s></s>'+second);
+				intDiff--;
+			}, 1000);
+		}
+		$(function(){
+			timer(intDiff);
+		});
+	</script>
+	</block>
+<!--倒计时-->

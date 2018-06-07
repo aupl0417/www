@@ -1,0 +1,117 @@
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+    <meta content="yes"name="apple-mobile-web-app-capable"/>
+    <meta content="black"name="apple-mobile-web-app-status-bar-style"/>
+    <title>主页</title>
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" href="css/2.css"/>
+    <link rel="stylesheet" href="css/4.css"/>
+    <style>
+        #header{
+            width: 100%;
+            position: relative;
+            height: 100%;;
+            background: url("images/Gradual change.png");
+            background-repeat: repeat-x;
+        }
+    </style>
+</head>
+<body>
+<header id="top_header">
+    <div id="header" align="center">
+        <h3 class="identify_title">编辑资料</h3>
+        <a href="" class="identify_back"><img src="images/Return2.png" alt=""/>返回</a>
+        <a href="" class="identify_to_index">首页</a>
+    </div>
+</header>
+<div class="wrap-page">
+    <section class="page" id="wrap">
+        <div class="page-inner">
+            <div class="blank pr">
+                <p class="user_info_editor_top">资料完善度</p>
+                <div class="bar_wrap pa"><div class="bar_cont pa" id="bar">38%</div></div>
+            </div>
+            <div class="user_info_editor_middle blank">
+                <h3>头像</h3>
+                <div class="user_info_editor_img_wrap pr">
+                    <img src="images/touxiang.png" alt=""/>
+                    <div class="user_info_editor_select">
+                        <button id="btn">选择头像</button>
+                        <p>支持jpg、png、gif格式,不要超过2M</p>
+                        <input type="file" class="visualization" id ="file"/>
+                    </div>
+.                </div>
+                <div class="input-wrap user_info_editor_sex">
+                    <label>性别</label>
+                    <input type="radio" name="sex" checked/>男
+                    <input type="radio" name="sex"/>女
+                </div>
+                <div class="input-wrap">
+                    <label>年龄</label>
+                    <div class="input-wrap-out">
+                    <input type="text" class="input-wrap-input" placeholder="使用真实的年龄容易找到合适的同学哦"/>
+                    </div>
+                </div>
+                <div class="input-wrap">
+                    <label>姓名</label>
+                    <div class="input-wrap-out">
+                        <input type="text" class="input-wrap-input" placeholder="使用真实的姓名让人更愿意跟你一起学习"/>
+                    </div>
+                </div>
+            </div>
+            <div class="blank">
+                <br/>
+                <div class="input-wrap">
+                    <label>爱好</label>
+                    <div class="input-wrap-out">
+                        <input type="text" class="input-wrap-input" placeholder="你喜欢做些什么，对什么感兴趣"/>
+                    </div>
+                </div>
+                <div class="input-wrap input-out-text-wrap">
+                    <label>签名</label>
+                    <div class="input-wrap-out input-wrap-out-text">
+                        <textarea class="input-wrap-input" placeholder="添加签名，方便与小伙伴沟通"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="blank">
+                <br/>
+                <div class="input-wrap">
+                    <label>学校</label>
+                    <div class="input-wrap-out">
+                        <input type="text" class="input-wrap-input" placeholder="跟校友一起去学习，感觉么么哒"/>
+                    </div>
+                </div>
+                <div class="input-wrap">
+                    <label>家乡</label>
+                    <div class="input-wrap-out">
+                        <input type="text" class="input-wrap-input" placeholder="一起学习，一起回家"/>
+                    </div>
+                </div>
+            </div>
+            <div class="blank">
+                <p class="user-info_main_btn">专业</p>
+                <span class="select_chip">请选择 <img src="images/Design (7).png" alt=""></span>
+            </div>
+            <button class="btn w96 ml2">保存</button>
+            <br/>
+            <br/>
+        </div>
+    </section>
+</div>
+<script type="text/javascript" src="js/zepto.min.js"></script>
+<script type="text/javascript">
+    /*Input上传图片*/
+    (function(){
+        $('#btn').click(function () {
+            $('#file').trigger('click');
+        });
+        $('#bar').css('width','80%').text('80%');;
+    })();
+</script>
+
+</body>
+</html>

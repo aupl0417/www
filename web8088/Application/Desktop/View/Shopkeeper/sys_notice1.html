@@ -1,0 +1,127 @@
+<extend name="ShopPublic:base" />
+
+<block name="title">17约课-系统消息</block>
+
+<block name="main">
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+		
+      <include file="ShopPublic:centerNav" />
+      <!--课程发布-->
+       
+        <section class="content">
+        	<div class="row">
+            <div class="ml40 mr20">
+              <h3 class="fs26 mb25">系统消息</h3>
+              <table class="table table-bordered padding-table">
+                <thead class="bgeee">
+                  <tr>
+                    <th class="fs18 tal fwn">最近通知</th>
+                  </tr>
+                </thead>
+
+                <!-- 模板输出位置 -->
+                <tbody id="msgPanel">
+                </tbody>
+
+              </table>
+
+               <!-- 分页栏 -->
+               <nav id="paginationPanel" style="text-align:right;"></nav>
+
+            </div>
+        	</div>				
+        </section>
+
+      </div><!-- /.content-wrapper -->
+
+        <!-- 分页栏使用到的js -->
+        <include file="ShopPublic:pagination" />
+
+</block>
+
+<block name="css">
+    <link rel="stylesheet" href="__PCCSS__/publish.css">
+    <link rel="stylesheet" href="__PUBLIC__/Desktop/webuploader/style.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+    .mb25{margin-bottom: 25px;}
+    .padding-table th, .padding-table td{padding-left: 16px !important; padding-right: 16px !important;}
+    .padding-table td {padding-top: 16px !important; padding-bottom: 16px !important;}
+    .badge-danger{background-color: red;}
+    .badge-ml {margin-left: 8px;}
+    .time{float: right;}
+    .pagination>.active>a{background-color: #2DA4DE; border-color: #2DA4DE;}
+    .table-bordered>thead>tr>th, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>tbody>tr>td, .table-bordered>tfoot>tr>td{border: 1px solid #d9d9d9 !important;}
+    </style>
+</block>
+
+<block name="js">
+
+    <!-- 模板 -->
+    <script id="msgTpl" type="text/template" charset="utf-8">
+    {@each data as it,index}
+      <tr>
+        <td>
+            <span class="fs16">${it.sender}：${it.content}</span> <!-- <span class="badge badge-danger badge-ml">New</span> -->
+         <span class="time fs14 cb6b6b6">${it.ctime}</span>
+        </td>
+      </tr>
+    {@/each}
+    </script>
+
+    <!-- AdminLTE App -->
+    <script src="__PCJS__/app.min.js" type="text/javascript"></script>
+      <script src="__PCJS__/publish.js" type="text/javascript"></script>
+    <script type="text/javascript" src="__HJS__/juicer-min.js"></script>
+
+    <!-- 全局变量 -->
+    <script type="text/javascript" charset="utf-8">
+        var g ={
+            "listMsgUrl":    "{:U('Api/Shopkeeper/listMsg', array('is_desktop' => 1))}"
+        };
+    </script>
+
+    <script type="text/javascript" charset="utf-8">
+        $(function() {
+            showMsg(1);
+        });
+
+        function showMsg(page) {
+            $.get(g.listMsgUrl, {'page': page}, function(data) {
+                console.log(data);
+
+                // $(".css-loading").addClass("hidden");
+
+                if (data.status != 200) {
+                    // 先处理商家没有登陆的情况
+                    // handleNotSignIn(data.msg);
+
+                    // $(window).bind('scroll', pageScroll);
+                    alert(data.msg);
+                    return false;
+                }
+
+                if (data.data == null) {
+                    alert("暂无数据");
+                    return false;
+                }
+
+                // 拼接模板了
+                var tpl = document.getElementById("msgTpl").innerHTML;
+                var html = juicer(tpl, data);
+                $("#msgPanel").html(html);
+
+                showPagination("paginationPanel", page, data.totalPages, "showMsg");
+
+            }, "json");
+
+        }
+    </script>
+
+</block>

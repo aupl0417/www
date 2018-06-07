@@ -1,0 +1,31 @@
+<div id="main" class="main">
+  <div class="main-title">
+        <h2>查看班级的学生</h2>
+    </div>
+    <div class="data-table">
+		<table>
+            <!-- 表头 -->
+            <thead>
+                <tr>
+                    <th>学生ID</th>
+                    <th>学生用户名</th>
+                    <th>班级</th>
+                    <th>进入时间</th>
+                </tr>
+            </thead>
+
+            <!-- 列表 -->
+            <tbody class="class-table-lists">
+               <volist name='lists' id='data' empty="$empty">
+                	<tr>
+                		<td>{$data.id}</td>
+                        <td>{$data.username}</td>
+                		<td>{$data.cl_name}</td>
+                		<td>{$data.cs_createTime}</td>
+                	</tr>
+               </volist>      
+            </tbody>
+        </table>
+	</div>
+</div>  
+ 

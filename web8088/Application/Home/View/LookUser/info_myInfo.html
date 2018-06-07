@@ -1,0 +1,123 @@
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+    <meta content="yes"name="apple-mobile-web-app-capable"/>
+    <meta content="black"name="apple-mobile-web-app-status-bar-style"/>
+    <title>个人信息 - 17约课</title>
+    <link rel="stylesheet" type="text/css" href="__HCSS__/reset.css">
+    <link rel="stylesheet" href="__HCSS__/2.css"/>
+    <link rel="stylesheet" href="__HCSS__/4.css"/>
+    <meta name="keywords" content="17约课,一起约课,约课,教育培训,约课神器,校园约课,大学生培训,约老师,约女神,驾驶培训,设计培训,职业考证,音乐培训,英语培训,小语种培训,体育培训" />
+    <meta name="description" content="17约课 - 约您身边的良师益友！为您提供约老师，约课程，约女神，约学霸等海量信息，充分满足您免费约课，免费发布课程的需求。" />
+
+</head>
+<body>
+<header id="top_header">
+    <div id="header" align="center">
+        <h3 class="identify_title">个人信息</h3>
+        <a href="<if condition='$returnIndex eq 1'>{:U('Index/index')}<else />javascript:history.back(-1)</if>" class="identify_back"><img src="__HIMG__/Return2.png" alt=""/>返回</a>
+        <if condition="$loginuser neq 0">
+        		<a href="{:U('User/editor')}" class="identify_to_index">编辑</a>
+        </if>
+    </div>
+</header>
+<div class="wrapper" style="margin-top: 44px;">
+           <div class="user-myInfo-top">
+                    <div class="user_my_info_img_wrap">
+                        <img src="{$info['avatar']}" onerror="javascript:this.src='__IMGDEFAULT__';" alt="" class="user_my_info_img_wrap_img"/>
+                        <if condition="($info['vtype'] eq 1) and ($info['vstatus'] eq 1)">
+                        	<img src="__HIMG__/RV.png" alt="" class="user_my_info_img_wrap_V"/>
+                        <elseif condition="($info['vtype'] eq 2) and ($info['vstatus'] eq 1)"/>
+                        	<img src="__HIMG__/Plus V.png" alt="" class="user_my_info_img_wrap_V"/>
+                   	    </if>
+                    </div>
+                   <p class="user-myInfo-top_p">{$info['firstname']}{$info['lastname']}
+                   <if condition="$info['sex'] eq 2">
+                       <span class="woman_color"><img src="__HIMG__/Woman.png" alt=""/>{$info['age']}</span>
+                   <elseif condition="$info['sex'] eq 1"/>
+                       <span class="man_color"><img src="__HIMG__/Male.png" alt=""/>{$info['age']}</span>
+                   </if>
+                   <switch name="info['profession']">
+                       <case value="1">
+                       		<img src="__HIMG__/Interest.png" alt="" class="user-myInfo-top_p_img"/>
+                       </case>
+                       <case value="2">
+                       		<img src="__HIMG__/Public.png" alt="" class="user-myInfo-top_p_img"/>
+                       </case>
+                       <case value="3">
+                       		<img src="__HIMG__/Gold.png" alt="" class="user-myInfo-top_p_img"/>
+                       </case>
+                       <case value="4">
+                       		<img src="__HIMG__/Culture.png" alt="" class="user-myInfo-top_p_img"/>
+                       </case>
+                       <case value="5">
+                       		<img src="__HIMG__/art.png" alt="" class="user-myInfo-top_p_img"/>
+                       </case>
+                       <case value="6">
+                       		<img src="__HIMG__/Farming.png" alt="" class="user-myInfo-top_p_img"/>
+                       </case>
+                       <case value="7">
+                       		<img src="__HIMG__/France.png" alt="" class="user-myInfo-top_p_img"/>
+                       </case>
+                       <case value="8">
+                       		<img src="__HIMG__/Teach.png" alt="" class="user-myInfo-top_p_img"/>
+                       </case>
+                       <case value="9">
+                       		<img src="__HIMG__/qi.png" alt="" class="user-myInfo-top_p_img"/>
+                       </case>
+                       <default />
+                   </switch>
+                   
+                   <if condition="$info['telstatus'] eq 1">
+                   		<img src="__HIMG__/Phone verification.png" alt="" class="user-myInfo-top_p_img"/></p>
+                   </if>
+           </div>
+      <if condition="$info['count'] neq 0">
+            <div class="user-myInfo-middle">
+                <div class="user-myInfo-middle_trend">
+                    <h2>动态</h2>
+                    <p>{$info['count']}</p>
+                </div>
+                
+	                <div class="user-myInfo-middle_info_wrap">
+	                <if condition="$info['environ'] eq ''">
+	                    <img src="__HIMG__/Farming.png" alt=""/>
+	                <else/>
+	                    <img src="{$info['environ']}" onerror="javascript:this.src='__IMGDEFAULT__';" alt=""/>
+	                </if>
+	                    <div class="user-myInfo-middle_info">
+	                        <a href="{:U('LookUser/groupList',array('uid'=>$info['id']))}"><h2>{$info['title']}</h2></a>
+	                        <p>约课{$info['assist']}</p>
+	                        <img src="__HIMG__/right.png" alt=""/>
+	                    </div>
+	                </div>
+                
+            </div>
+       </if>
+            
+            <div class="clear"></div>
+            <div class="user-myInfo-bottom">
+                <div class="user-myInfo-bottom-left">
+
+                </div>
+                <div class="user-myInfo-bottom-right">
+                    <p><if condition="$info['id'] eq ''">暂无数据<else/>{$info['id']}</if><span>约课号</span></p>
+                    <p><if condition="$info['remark'] eq ''">暂无数据<else/>{$info['remark']}</if><span>签名</span></p>
+                    <p><if condition="$info['school'] eq ''">暂无数据<else/>{$info['school']}</if><span>学校</span></p>
+                    <p><if condition="$info['home'] eq ''">暂无数据<else/>{$info['home']}</if><span>家乡</span></p>
+                    <p><if condition="$info['interest'] eq ''">暂无数据<else/>{$info['interest']}</if><span>兴趣</span></p>
+                </div>
+
+</div>
+
+<div id="user-img-bg" class="hidden">
+    <img src="" />
+</div>
+
+<script type="text/javascript" src="__HJS__/zepto.min.js"></script>
+<script type="text/javascript" src="__HJS__/user/user_img.js"></script>
+    <include file="Public:statistics"/>
+</body>
+</html>

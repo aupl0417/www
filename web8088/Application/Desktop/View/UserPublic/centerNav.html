@@ -1,0 +1,60 @@
+<aside class="main-sidebar2">
+
+    <section class="sidebar">
+
+        <div class="user-panel">
+            <div class="pull-left image">
+                <img src="{$userInfo['avatar']}" class="img-square" alt="User Image">
+            </div>
+            <div class="pull-left info">
+                <p>{$userInfo['name']}</p>
+                <a>  
+                	<span class="tap-blue"><i class="fa fa-mars"></i>&nbsp;{$userInfo['age']}</span>&nbsp;
+                	<span class="tap-lightblue">
+                            <switch name="userInfo['profession']">
+                               <case value="1">
+                                    IT
+                               </case>
+                               <case value="2">
+                                    工
+                               </case>
+                               <case value="3">
+                                    金
+                               </case>
+                               <case value="4">
+                                    文
+                               </case>
+                               <case value="5">
+                                    艺
+                               </case>
+                               <case value="6">
+                                    农
+                               </case>
+                               <case value="7">
+                                    法
+                               </case>
+                                <case value="8">
+                                    教
+                                </case>
+                                <case value="9">
+                                    其
+                                </case>
+                           </switch></span>&nbsp;
+                	<if condition="$userInfo['telstatus'] eq 1">
+                		<img src="/Public/Desktop/img/phone_validate.png" alt="phone_validate">
+                	</if>
+                </a>
+            </div>
+        </div>
+        <p class="slogan h-16">{$userInfo['remark']}</p>
+        <ul class="sidebar-menu">
+            <li class="treeview"><a href="{:U('User/edit')}"><i class="icons-text"></i><span>资料编辑</span></a></li>
+            <li class="treeview"><a href="{:U('User/mywish')}"><i class="icons-honer"></i><span>我的期望单</span></a></li>
+            <li class="treeview"><a href="{:U('User/course')}"><i class="icons-book"></i><span>课程动态</span></a></li>
+            <li class="treeview "><a href="{:U('User/certification')}"><i class="icons-card"></i><span>个人认证</span></a></li>
+            <li class="treeview"><a href="{:U('User/message')}"><i class="icons-info"></i><span>消息</span></a></li>
+            <li class="treeview"><a href="{:U('User/set')}"><i class="icons-setting"></i><span>设置</span></a></li>
+
+        </ul>
+    </section>
+</aside>

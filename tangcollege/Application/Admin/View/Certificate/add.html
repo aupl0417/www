@@ -1,0 +1,41 @@
+<div id="main" class="main">
+    <div class="main-title">
+        <h2>{:isset($info['cce_id'])?'编辑':'新增'}证书</h2>
+    </div>
+    <form id='form' action="{:U()}" method="post" class="form-horizontal" enctype ="multipart/form-data">
+        <div class="form-item">
+            <label class="item-label">年级：</label>
+            <div class="controls">
+                <select name='cce_gradeId'>
+                	<option value=''>--请选择--</option>
+                	<volist name='grade' id='grade'>
+                		<option value='{$grade.gr_id}' <if condition="$info.cce_gradeId eq $grade['gr_id']">selected='selected'</if>>{$grade.gr_name}</option>
+                	</volist>
+                </select>
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">证书类型：</label>
+            <div class="controls">
+                <input type='radio' name='cce_type' checked value='0'>电子文档证书　　<input type='radio' name='cce_type' <if condition='$info.cce_type eq 1'>checked</if> value='1'>实物文件邮寄
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">{:isset($info['cce_id'])?'编辑':'新增'}证书：</label>
+            <div class="controls">
+                {:hook('UploadImages')}
+            </div>
+        </div>
+        <div class="form-item">
+        	<input type='hidden' name='cce_id' value='{$info.cce_id}'>
+            <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <button class="btn btn-return" type="button">返 回</button>
+        </div>
+    </form>
+</div>
+<script>
+	ajaxSubmitForm();
+	$('.btn-return').click(function(){
+		layer.closeAll();
+	});
+</script>

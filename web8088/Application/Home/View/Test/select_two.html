@@ -1,0 +1,418 @@
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+    <meta content="yes"name="apple-mobile-web-app-capable"/>
+    <meta content="black"name="apple-mobile-web-app-status-bar-style"/>
+    <meta name="format-detection"content="telphone=no"/>
+    <title>筛选课程 - 17约课</title>
+    <link rel="stylesheet" type="text/css" href="__HCSS__/reset.css">
+    <link rel="stylesheet" href="__HCSS__/2.css"/>
+    <link rel="stylesheet" href="__HCSS__/4.css"/>
+    <meta name="keywords" content="17约课,一起约课,约课,教育培训,约课神器,校园约课,大学生培训,约老师,约女神,驾驶培训,设计培训,职业考证,音乐培训,英语培训,小语种培训,体育培训" />
+    <meta name="description" content="17约课 - 约您身边的良师益友！为您提供约老师，约课程，约女神，约学霸等海量信息，充分满足您免费约课，免费发布课程的需求。" />
+    <style type="text/css">
+        .course_institution_nav_img{
+            display: inline-block;
+            position: relative;
+            left: 0.3em;;
+            top: -0.15em;;
+            background-image: url(__HIMG__/icon2.png);
+            width: 0.8em;
+            height: 0.45em;
+            background-size: 0.8em;;
+        }
+        .course_institution_nav_img_active{
+            background-image: url(__HIMG__/icon1.png) !important;
+        }
+        .over_hidden{
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+<header id="top_header">
+    <div id="header" align="center">
+        <h3 class="identify_title">筛选</h3>
+        <a href="{:U('Index/index')}" class="identify_back"><img src="__HIMG__/Return2.png" alt=""/>首页</a>
+    </div>
+</header>
+<div class="wrapper" style="margin-top: 3.8em;">
+    <img src="__HIMG__/loading.gif" alt="" class="loading hidden"/>
+    <div class="course-box">
+    </div>
+    <div class="business_relay_input_wrap">
+        <div class="input_wrap course_institution_input_wrap">
+            <input type="text" class="register_input" placeholder="请搜索培训机构名称，分类">
+        </div>
+        <button class="course_institution_btn">搜索</button>
+        <img src="__HIMG__/Search for.png" alt="" class="business_img_search"/>
+    </div>
+    <div class="course_select_nav" style="margin-bottom:0.8em;;">
+        <ul class="course_search_nav_ul">
+            <li id="course_constitution" style="border-right: solid 1px #eee"><span>培训机构</span><div class="course_institution_nav_img" id="constitution-img"></div></li>
+            <li id="course_type"><span>用户发布</span><div class="course_institution_nav_img" id="type-img"></div></li>
+            <li class="course_all_btn" id="course_local"><span>默认地区</span><div class="course_institution_nav_img" id="local-img"></div></li>
+            <li class="course_sort_btn" id="course_sort"><span>默认排序</span><div class="course_institution_nav_img" id="sort-img"></div></li>
+        </ul>
+        <ul class="course_type_select">
+            <li class="course_type_select_li first_select_active">用户发布</li>
+            <li class="course_type_select_li">机构发布</li>
+
+        </ul>
+        <!--分类一级-->
+        <ul class="course_constitution_select_first course_constitution_select_first_2"  id="cate">
+        </ul>
+        <!--分类二级-->
+        <ul class="course_constitution_select_second course_constitution_select_second_2 select_hidden">
+            <li class="course_constitution_select_second_li">华洲街道</li>
+            <li class="course_constitution_select_second_li">华洲街道</li>
+            <li class="course_constitution_select_second_li">华洲街道</li>
+            <li class="course_constitution_select_second_li">华洲街道</li>
+            <li class="course_constitution_select_second_li">华洲街道</li>
+        </ul>
+        <!--分类三级-->
+        <ul class="course_constitution_select_three select_hidden">
+            <li class="course_constitution_select_three_li">华洲街道</li>
+            <li class="course_constitution_select_three_li">华洲街道</li>
+            <li class="course_constitution_select_three_li">华洲街道</li>
+            <li class="course_constitution_select_three_li">华洲街道</li>
+            <li class="course_constitution_select_three_li">华洲街道</li>
+            <li class="course_constitution_select_three_li">华洲街道</li>
+            <li class="course_constitution_select_three_li">华洲街道</li>
+            <li class="course_constitution_select_three_li">华洲街道</li>
+            <li class="course_constitution_select_three_li">华洲街道</li>
+            <li class="course_constitution_select_three_li">华洲街道</li>
+            <li class="course_constitution_select_three_li">华洲街道</li>
+            <li class="course_constitution_select_three_li">华洲街道</li>
+            <li class="course_constitution_select_three_li">华洲街道</li>
+        </ul>
+
+        <ul class="course_sort_select">
+            <li class="course_sort_select_li first_select_active" id="sort"  alt="sort">默认排序</li>
+            <li class="course_sort_select_li" id="nearby"  alt="nearby">离我最近</li>
+            <li class="course_sort_select_li" id="greet"  alt="greet">最受欢迎</li>
+
+        </ul>
+        <!--地区选择第一阶段-->
+        <ul class="course_local_first_select" id="area">
+
+        </ul>
+
+        <!--地区选择第二阶段-->
+        <ul class="course_local_second_select course_local_second_select_hidden" id="secondArea">
+        </ul>
+
+        <!---->
+    </div>
+    <!-- 发布的约课信息 -->
+    <div id="desc">
+    </div>
+
+    <div class="search_nofound visualization">
+        <p class="search_nofound_p">抱歉亲，没有搜索到合适的信息</p>
+    </div>
+
+    <button class="enterprise_cont_submit resbut hidden"  id="resbut">加载更多<img src="__HIMG__/right.png" alt=""/></button>
+</div>
+
+<script id="catename" type="text/template">
+    {@each info as it,index}
+    <li class="course_constitution_select_li"  alt="${it.id}">${it.catename}</li>
+    {@/each}
+</script>
+
+<script id="one" type="text/template">
+    <li class="course_local_first_select_li first_select_active" alt="0">全部地区</li>
+    {@each list as it,index}
+    <li class="course_local_first_select_li" alt="${it.id}">${it.areaname}</li>
+    {@/each}
+</script>
+
+<script id="second" type="text/template">
+    {@each list as it,index}
+    <li class="course_local_first_select_li" alt="${it.id}">${it.areaname}</li>
+    {@/each}
+</script>
+
+<script id="user" type="text/template">
+    {@each info as it,index}
+    <div class="section_item">
+
+        <div class="section_item_title">
+            <div class="span2 section_item_portrait"
+            <a href="{:U('LookUser/moInfo')}?uid=${it.uid}"><img src="${it.avatar}" alt="" class="section_item_portrait_img"></a>
+            <!--<img src="__HIMG__/Plus V.png" alt="" class="section_item_portrait_V"/>-->
+        </div>
+        <a href="{:U('LookGroup/onedetail')}?gid=${it.id}"><div class="span6 section_item_sub"><h3>${it.title}</h3>{@if it.overtimes==0}<span style="color:#a3a3a3">已结束</span>{@/if}
+            <p>${it.firstname}${it.lastname}
+
+                {@if it.telstatus==1}
+                <img src="__HIMG__/Phone verification.png" alt=""/>
+                {@/if}
+                {@if it.profession==1}
+                <img src="__HIMG__/Interest.png" alt=""/>
+                {@else if it.profession==2}<img src="__HIMG__/Public.png" alt=""/>
+                {@else if it.profession==3}<img src="__HIMG__/Gold.png" alt=""/>
+                {@else if it.profession==4}<img src="__HIMG__/Culture.png" alt=""/>
+                {@else if it.profession==5}<img src="__HIMG__/art.png" alt=""/>
+                {@else if it.profession==6}<img src="__HIMG__/Farming.png" alt=""/>
+                {@else if it.profession==7}<img src="__HIMG__/France.png" alt=""/>
+                {@else if it.profession==8}<img src="__HIMG__/Teach.png" alt=""/>
+                {@else}<img src="__HIMG__/qi.png" alt=""/>
+                {@/if}
+                {@if it.vtype==1}
+                {@if it.vstatus==1}
+                <img src="__HIMG__/RV.png" alt=""/>
+                {@/if}
+                {@/if}
+                {@if it.vtype==2}
+                {@if it.vstatus==1}
+                <img src="__HIMG__/Plus V.png" alt=""/>
+                {@/if}
+                {@/if}
+            </p></div>
+            <div class="span2">
+                <div class="section_item_follow">
+                    <p class="section_item_time">${it.ctime}</p>
+                    <p class="section_item_follow_p">跟约<span>${it.number}</span></p>
+                </div>
+            </div>
+        </a>
+        <div class="clear"></div>
+
+    </div>
+    <div class="section_item_cont">
+        <div class="section_item_info span6">
+            <p><img src="__HIMG__/Classification.png" alt="">${it.catename}</p>
+            <p><img src="__HIMG__/Price.png" alt="">${it.ltprice}</p>
+            <p><img src="__HIMG__/Time.png" alt="">${it.mode}</p>
+            <p><img src="__HIMG__/Business.png" alt="">${it.nickname}</p>
+            <p><img src="__HIMG__/Location.png" alt="">{@each it.areaname as it2,index}{@if index>1}${it2}{@/if}{@/each}</p>
+        </div>
+        <a href="{:U('LookGroup/onedetail')}?gid=${it.id}">
+            <div class="section_item_photo span4">
+                <img src="${it.environ}" alt="">
+            </div>
+        </a>
+        <div class="clear"></div>
+    </div>
+    <div class="section_item_feature">
+        <p>课程特色：
+            {@each it.tags as it2,index} <span>${it2}</span>&nbsp;&nbsp;{@/each}</p>
+    </div>
+    <div class="section_item_pv">
+        <p class="section_item_pv_pv"><img src="__HIMG__/Browse.png" alt="">${it.view}</p>
+        <p class="section_item_pv_rep"><img src="__HIMG__/Review.png" alt="">${it.comment}</p>
+        <p class="section_item_pv_home"><img src="__HIMG__/Business2.png" alt="">${it.coursemun}</p>
+    </div>
+    </div>
+    {@/each}
+</script>
+
+<script id="shop" type="text/template">
+    {@each info as it,index}
+    <div class="section_item">
+
+        <div class="section_item_title">
+            <div class="span2 section_item_portrait">
+
+                <a href="{:U('Shopkeeper/info')}?id=${it.sid}"><img src="__UPLOAD__${it.avatar}" alt="" class="section_item_portrait_img"/></a>
+                <!--<img src="__HIMG__/Plus V.png" alt="" class="section_item_portrait_V"/>-->
+            </div>
+            <a href="{:U('Shopkeeper/cont')}?id=${it.id}"> <div class="span6 section_item_sub"><h3>${it.title}</h3>
+                <p>${it.nickname}
+                    {@if it.status==3}
+                    <img src="__HIMG__/Company.png" alt=""/>
+                    {@/if}
+                </p></div>
+                <div class="span2">
+                    <div class="section_item_follow">
+                        <p class="section_item_time">${it.ctime}</p>
+                        <p class="section_item_follow_p">报名<span>${it.user_count}</span></p>
+                    </div>
+                </div>
+            </a>
+            <div class="clear"></div>
+
+        </div>
+        <div class="section_item_cont">
+            <div class="section_item_info span6">
+                <p><img src="__HIMG__/Classification.png" alt=""/>${it.catename}</p>
+                <p><img src="__HIMG__/Price.png" alt=""/>${it.price}</p>
+                <p><img src="__HIMG__/Time.png" alt=""/>${it.mode}</p>
+                <p><img src="__HIMG__/Business.png" alt=""/>${it.nickname}</p>
+                <p><img src="__HIMG__/Location.png" alt=""/>{@each it.areanames as it2,index}{@each it2 as it3,index}${it3}{@/each}{@/each}</p>
+            </div>
+            <a href="{:U('Shopkeeper/cont')}?id=${it.id}">
+                <div class="section_item_photo span4">
+                    <img src="__UPLOAD__${it.environ}" alt=""/>
+                </div>
+            </a>
+            <div class="clear"></div>
+        </div>
+        <div class="section_item_feature">
+            <p>课程特色：
+                {@each it.tags as it2,index} <span>${it2}</span>&nbsp;&nbsp;{@/each}</p>
+            </p>
+        </div>
+        <div class="section_item_pv">
+            <p class="section_item_pv_pv"><img src="__HIMG__/Browse.png" alt=""/>${it.view}</p>
+            <p class="section_item_pv_home"><img src="__HIMG__/Review.png" alt=""/>${it.comment_count}</p>
+
+        </div>
+    </div>
+    {@/each}
+</script>
+
+
+<!--约课信息模板-->
+<script id="shopAndUser" type="text/template">
+    {@each info as it,index}
+
+    {@if it.comment_count==null}
+    <div class="section_item">
+
+        <div class="section_item_title">
+            <div class="span2 section_item_portrait">
+                <a href="{:U('LookUser/moInfo')}?uid=${it.uid}"><img src="${it.avatar}" alt="" class="section_item_portrait_img"></a>
+                <!--<img src="__HIMG__/Plus V.png" alt="" class="section_item_portrait_V"/>-->
+            </div>
+            <a href="{:U('LookGroup/onedetail')}?gid=${it.id}"> <div class="span6 section_item_sub"><h3>${it.title}</h3>{@if it.overtimes==0}<span style="color:#a3a3a3">已结束</span>{@/if}
+                <p>${it.firstname}${it.lastname}
+
+                    {@if it.telstatus==1}
+                    <img src="__HIMG__/Phone verification.png" alt=""/>
+                    {@/if}
+                    {@if it.profession==1}
+                    <img src="__HIMG__/Interest.png" alt=""/>
+                    {@else if it.profession==2}<img src="__HIMG__/Public.png" alt=""/>
+                    {@else if it.profession==3}<img src="__HIMG__/Gold.png" alt=""/>
+                    {@else if it.profession==4}<img src="__HIMG__/Culture.png" alt=""/>
+                    {@else if it.profession==5}<img src="__HIMG__/art.png" alt=""/>
+                    {@else if it.profession==6}<img src="__HIMG__/Farming.png" alt=""/>
+                    {@else if it.profession==7}<img src="__HIMG__/France.png" alt=""/>
+                    {@else if it.profession==8}<img src="__HIMG__/Teach.png" alt=""/>
+                    {@else}<img src="__HIMG__/qi.png" alt=""/>
+                    {@/if}
+                    {@if it.vtype==1}
+                    {@if it.vstatus==1}
+                    <img src="__HIMG__/RV.png" alt=""/>
+                    {@/if}
+                    {@/if}
+                    {@if it.vtype==2}
+                    {@if it.vstatus==1}
+                    <img src="__HIMG__/Plus V.png" alt=""/>
+                    {@/if}
+                    {@/if}
+                </p></div>
+                <div class="span2">
+                    <div class="section_item_follow">
+                        <p class="section_item_time">${it.ctime}</p>
+                        <p class="section_item_follow_p">跟约<span>${it.number}</span></p>
+                    </div>
+                </div>
+            </a>
+            <div class="clear"></div>
+
+        </div>
+        <div class="section_item_cont">
+            <div class="section_item_info span6">
+                <p><img src="__HIMG__/Classification.png" alt="">${it.catename}</p>
+                <p><img src="__HIMG__/Price.png" alt="">${it.ltprice}</p>
+                <p><img src="__HIMG__/Time.png" alt="">${it.mode}</p>
+                <p><img src="__HIMG__/Business.png" alt="">${it.nickname}</p>
+                <p><img src="__HIMG__/Location.png" alt="">{@each it.areaname as it2,index}{@if index>1}${it2}{@/if}{@/each}</p>
+            </div>
+            <a href="{:U('LookGroup/onedetail')}?gid=${it.id}">
+                <div class="section_item_photo span4">
+                    <img src="${it.environ}" alt="">
+                </div>
+            </a>
+            <div class="clear"></div>
+        </div>
+        <div class="section_item_feature">
+            <p>课程特色：
+                {@each it.tags as it2,index} <span>${it2}</span>&nbsp;&nbsp;{@/each}</p>
+        </div>
+        <div class="section_item_pv">
+            <p class="section_item_pv_pv"><img src="__HIMG__/Browse.png" alt="">${it.view}</p>
+            <p class="section_item_pv_rep"><img src="__HIMG__/Review.png" alt="">${it.comment}</p>
+            <p class="section_item_pv_home"><img src="__HIMG__/Business2.png" alt="">${it.coursemun}</p>
+        </div>
+    </div>
+
+    {@/if}
+    {@if it.comment_count!=null}
+    <div class="section_item">
+
+        <div class="section_item_title">
+            <div class="span2 section_item_portrait">
+
+                <a href="{:U('Shopkeeper/info')}?id=${it.sid}"> <img src="__UPLOAD__${it.avatar}" alt="" class="section_item_portrait_img"/></a>
+                <!--<img src="__HIMG__/Plus V.png" alt="" class="section_item_portrait_V"/>-->
+            </div>
+            <a href="{:U('Shopkeeper/cont')}?id=${it.id}"><div class="span6 section_item_sub"><h3>${it.title}</h3>
+                <p>${it.nickname}
+                    {@if it.status==3}
+                    <img src="__HIMG__/Company.png" alt=""/>
+                    {@/if}
+                </p></div>
+                <div class="span2">
+                    <div class="section_item_follow">
+                        <p class="section_item_time">${it.ctime}</p>
+                        <p class="section_item_follow_p">报名<span>${it.user_count}</span></p>
+                    </div>
+                </div>
+            </a>
+            <div class="clear"></div>
+
+        </div>
+        <div class="section_item_cont">
+            <div class="section_item_info span6">
+                <p><img src="__HIMG__/Classification.png" alt=""/>${it.catename}</p>
+                <p><img src="__HIMG__/Price.png" alt=""/>${it.price}</p>
+                <p><img src="__HIMG__/Time.png" alt=""/>${it.mode}</p>
+                <p><img src="__HIMG__/Business.png" alt=""/>${it.nickname}</p>
+                <p><img src="__HIMG__/Location.png" alt=""/>{@each it.areaname[0] as it2,index}{@each it2 as it3,index}${it3}{@/each}{@/each}</p>
+            </div>
+            <a href="{:U('Shopkeeper/cont')}?id=${it.id}">
+                <div class="section_item_photo span4">
+                    <img src="__UPLOAD__${it.environ}" alt=""/>
+                </div>
+            </a>
+            <div class="clear"></div>
+        </div>
+        <div class="section_item_feature">
+            <p>课程特色：
+                {@each it.tags as it2,index} <span>${it2}</span>&nbsp;&nbsp;{@/each}</p>
+            </p>
+        </div>
+        <div class="section_item_pv">
+            <p class="section_item_pv_pv"><img src="__HIMG__/Browse.png" alt=""/>${it.view}</p>
+            <p class="section_item_pv_home"><img src="__HIMG__/Review.png" alt=""/>${it.comment_count}</p>
+
+        </div>
+    </div>
+
+    {@/if}
+    {@/each}
+</script>
+<script type="text/javascript" src="__HJS__/zepto.min.js"></script>
+<script type="text/javascript" src="__HJS__/juicer-min.js"></script>
+<script type="text/javascript" src="__HJS__/select_2.js"></script>
+<include file="Component:alert" />
+<script type="text/javascript">
+    var areaUrl="{:U('Api/Area/getArea')}";
+    var secondUrl="{:U('Api/Area/getSecondArea')}";
+    var areasUrl="{:U('Api/GroupInfo/getGroupInfo')}";
+    var cateUrl="{:U('Api/GroupInfo/getCategory')}";
+    var busUrl="{:U('GroupInfo/business')}";
+    var busajaxUrl="{:U('Api/GroupInfo/getBusiness')}";
+    var searchUrl="{:U('Api/Index/getSearch')}";
+    var userCateUrl="{:U('Api/Index/ajaxGroup')}";
+    var shopCateUrl="{:U('Api/Index/ajaxShop')}";
+</script>
+</body>
+</html>

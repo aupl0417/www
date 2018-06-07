@@ -1,0 +1,208 @@
+<include file="Public:header" />
+<style>
+.loading {
+  display: block;
+  position: fixed;
+  top: 200px;
+  left: 45%;
+  width: 10%;
+  margin: 0 auto;
+  z-index: 2888;
+}
+</style>
+<img src="__HIMG__/loading.gif" alt=""  class="loading hidden"/>
+<div id="content">
+
+	
+	<div class="container">
+		
+		<div class="row">
+		
+			<include file="Public:nav" />
+
+	
+			
+			
+			<div class="span10">
+				
+				<div class="widget widget-table">
+										
+					<div class="widget-header">
+						<i class="icon-th-list"></i>
+						<h3>邀请码详情</h3>
+                        <a href="javascript:history.back(-1)" class="btn btn-small">返回</a>
+					</div> <!-- /widget-header -->
+
+					<div class="widget-content" style="margin-bottom:1em;">
+	                	　<div class="span8">
+                              <table class="table table-striped table-bordered">
+                              		<tr>
+                              			<td>id：</td>
+                              			<td style="max-width:690px;">{$info['id']}</td>
+                              		</tr>
+                              		<tr>
+                              			<td>邀请码：</td>
+                              			<td>{$info['code']}</td>
+                              		</tr>
+                              		<tr>
+                              			<td>类型：</td>
+                              			<td>
+                              				<if condition="$info['uniqueness'] eq 1">
+                              					仅可用一次
+                              				<else />
+                              					多次
+                              				</if>
+                              			</td>
+                              		</tr>
+                              		<tr>
+                              			<td>生成时间：</td>
+                              			<td>{$info['ctime']}</td>
+                              		</tr>
+                              		<tr>
+                              			<td>过期时间：</td>
+                              			<td>{$info['endtime']}</td>
+                              		</tr>
+                              		<tr>
+                              			<td>是否失效：</td>
+                              			<td>
+                              				<if condition="$info['status'] eq 1">
+                              					有效
+                              				<else />
+                              					无效
+                              				</if>
+                              			</td>
+                              		</tr>
+                              		<tr>
+                              			<td>是否过期：</td>
+                              			<td>
+                              				<if condition="$info['overtime'] eq 1">
+                              					未过期
+                              				<else />
+                              					已过期
+                              				</if>
+                              			</td>
+                              		</tr>
+                              		<tr>
+                              			<td>使用人数：</td>
+                              			<td>{$info[codenum]}</td>
+                              		</tr>
+                              </table>
+						　</div>
+					</div> <!-- /widget-content -->
+					
+					
+					
+					
+					<div id="use_num_info">			
+					</div>
+					
+					<!-- 分页 -->	
+							<thead>
+								<div id="use_num_page" class="pagination" style="margin-left:10px;">
+										
+								</div>
+								
+							</thead>
+							
+							
+					
+				</div> <!-- /widget -->
+				
+			</div> <!-- /span10 -->
+			
+		</div> <!-- /row -->
+		
+	</div> <!-- /container -->
+	
+</div> <!-- /content -->
+
+
+<script id="tpl" type="text/template">
+						<div class="widget-content" style="margin-bottom:1em;">
+		                	　<div class="span8">
+	                              <h3 style="margin-top:1em;">邀请码使用人</h3>
+	                              <table class="table table-striped table-bordered">
+	                              		<tr>
+	                              			<td>序号：　</td>
+	                              			<td>使用人id：　</td>
+	                              			<td>使用人姓名：　</td>
+	                              			<td>手机：　</td>
+	                              			<td>邮箱：　</td>
+	                              		</tr>
+{@each info as it,index}
+	                              		<tr>
+{@if !isNaN(index)}
+	                              			<td>${numxunhuan=parseInt(index)+1}</td>
+{@/if}
+	                              			<td>${it.inviteduid}</td>
+	                              			<td>${it.firstname}${it.lastname}<input type="hidden" value="${it.inviteduid}"/></td>
+	                              			<td>${it.phone}</td>
+	                              			<td>${it.email}</td>
+	                              		</tr>
+{@/each}
+	                              </table>
+							　</div>
+						</div>	
+</script>
+<script src="__AJS__/jquery-1.7.2.min.js"></script>
+<script src="__AJS__/excanvas.min.js"></script>
+<script src="__AJS__/bootstrap.js"></script>
+<script type="text/javascript" src="__HJS__/juicer-min.js"></script>
+
+<script type="text/javascript">
+
+var get_info_code = "{:U('Invite/getUseInfo')}";
+
+var page=1;
+var id={$info.id};
+
+var gid={$info['id']};
+function showLoading(){
+    $('.loading').removeClass("hidden");
+}
+function hiddenLoading(){
+    $('.loading').addClass("hidden");
+}
+function getinvite(asistpage){
+	showLoading();
+	var datainfo={};
+	datainfo.id=id;
+	datainfo.page=page;
+	console.log(datainfo);
+	$.get(get_info_code,datainfo,function(data){
+
+		console.log(data);
+		
+		var tpl = document.getElementById('tpl').innerHTML;
+		var html = juicer(tpl, data.info);
+		$('#use_num_info').html(html);
+		
+		hiddenLoading();
+     
+    }, "json");
+}
+getinvite(1);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+<include file="Public:footer" />
+

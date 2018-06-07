@@ -1,0 +1,808 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="dns-prefetch" href="//17yueke.cn">
+    <meta property="qc:admins" content="35453643725535636"/>
+    <meta property="wb:webmaster" content="bf89ead32fce5edd"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui"/>
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>首页 - 17约课</title>
+    <meta name="keywords" content="17约课,一起约课,约课,教育培训,约课神器,校园约课,大学生培训,约老师,约女神,驾驶培训,设计培训,职业考证,音乐培训,英语培训,小语种培训,体育培训"/>
+    <meta name="description" content="17约课 - 约您身边的良师益友！为您提供约老师，约课程，约女神，约学霸等海量信息，充分满足您免费约课，免费发布课程的需求。"/>
+    <link rel="stylesheet" type="text/css" href="__HCSS__/reset.css">
+    <link rel="stylesheet" href="__HCSS__/2.css"/>
+    <link rel="apple-touch-icon" href="__HIMG__/iPhone.png"/>
+    <link rel="apple-touch-icon-precomposed" href="__HIMG__/iPhone.png"/>
+    <!--百度统计-->
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?641d884caa630fba65723a697348fe74";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+
+<body>
+
+<header id="top_header">
+    <div id="header" align="center">
+        <if condition="$array.user neq false">
+            <a href="#" id="panelSwitch" class=""><img class="header_img" src="__HIMG__/Left navigation.png"
+                                                       alt=""/></a>
+
+            <p id="red_dian_user" class="red_info hidden"></p>
+            <a href="{:U('Index/loginregister')}"><img class="header_middle_img" src="__HIMG__/logo.png" alt=""/></a>
+            <a href="{:U('GroupInfo/Release')}" class=""><img class="header_right_img" src="__HIMG__/Editor.png"
+                                                              alt=""/></a>
+            <elseif condition="$array.shopkeeper neq false"/>
+            <a href="#" id="panelSwitch" class=""><img class="header_img" src="__HIMG__/Left navigation.png"
+                                                       alt=""/></a>
+
+            <p class="red_info hidden"></p>
+            <a href="{:U('Index/loginregister')}"><img class="header_middle_img" src="__HIMG__/logo.png" alt=""/></a>
+            <a href="{:U('Shopkeeper/course')}" class=""><img class="header_right_img" src="__HIMG__/Editor.png"
+                                                              alt=""/></a>
+            <else/>
+            <a href="{:U('Userregsign/index')}" class="index-register">注册</a>
+            <a href="{:U('Index/loginregister')}"><img class="header_middle_img" src="__HIMG__/logo.png" alt=""/></a>
+            <a href="{:U('Userregsign/login')}" class="index-login">登陆</a>
+        </if>
+    </div>
+    <section class="panel_wrap"></section>
+    <section class="panel op_0" id="panelNav">
+        <switch name="array.rank">
+            <case value="user">
+                <div class="panel_person_info">
+                    <div class="span4">
+                        <div class="panel_img_wrap">
+
+                            <a href="{:U('LookUser/moInfo',array('uid'=>$array['user']['id']))}"><img
+                                    class="panel_person_images" src="{$array.user.avatar}" alt=""/></a>
+
+                        </div>
+                    </div>
+                    <div class="span6 panel_person_name_wrap">
+                        <p>{$array.user.name}</p>
+
+                        <div>
+                            <eq name="array.user.telstatus" value="1"><img src="__HIMG__/Phone verification.png"
+                                                                           alt=""/></eq>
+                            <eq name="array.user.profession" value="1"><img src="__HIMG__/Interest.png" alt=""/></eq>
+                            <eq name="array.user.profession" value="2"><img src="__HIMG__/Public.png" alt=""/></eq>
+                            <eq name="array.user.profession" value="3"><img src="__HIMG__/Gold.png" alt=""/></eq>
+                            <eq name="array.user.profession" value="4"><img src="__HIMG__/Culture.png" alt=""/></eq>
+                            <eq name="array.user.profession" value="5"><img src="__HIMG__/art.png" alt=""/></eq>
+                            <eq name="array.user.profession" value="6"><img src="__HIMG__/Farming.png" alt=""/></eq>
+                            <eq name="array.user.profession" value="7"><img src="__HIMG__/France.png" alt=""/></eq>
+                            <eq name="array.user.profession" value="8"><img src="__HIMG__/Teach.png" alt=""/></eq>
+                            <eq name="array.user.profession" value="9"><img src="__HIMG__/qi.png" alt=""/></eq>
+                            <eq name="array.user.vstatus" value="1">
+                                <eq name="array.user.vtype" value="1"><img src="__HIMG__/RV.png" alt=""/></eq>
+                            </eq>
+                            <eq name="array.user.vstatus" value="1">
+                                <eq name="array.user.vtype" value="2"><img src="__HIMG__/Plus V.png" alt=""/></eq>
+                            </eq>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <p class="panel_person_chip">
+                    <a href="{:U('User/editor')}#text"><img src="__HIMG__/Editor2.png" alt=""/></a>
+                    <empty name="array.user.remark">
+                        留下你的个性签名吧！
+                        <else/>
+                        {$array.user.remark}&nbsp;
+                    </empty>
+                </p>
+                <ul class="nav-aside">
+                    <li><a href="{:U('User/collect')}"><img class="nav-aside_img" src="__HIMG__/Collect.png" alt=""/>收藏的课程</a><img
+                            src="__HIMG__/right.png" class="panel_to_icon"></li>
+                    <li><a href="{:U('User/course')}"><img class="nav-aside_img" src="__HIMG__/Dynamic.png" alt=""/>动态课程</a><img
+                            src="__HIMG__/right.png" class="panel_to_icon"></li>
+                    <li><a href="{:U('UserV/idenc')}"><img class="nav-aside_img" src="__HIMG__/Authenticate.png"
+                                                           alt=""/>个人认证</a><img src="__HIMG__/right.png"
+                                                                                class="panel_to_icon"></li>
+                    <li><a href="{:U('User/news')}"><img class="nav-aside_img" src="__HIMG__/News.png" alt=""/>消息<p
+                            class="panel_info hidden" id="news_panel"></p><span id="newsUserRedot"
+                                                                                style="color:red"></span></a><img
+                            src="__HIMG__/right.png" class="panel_to_icon"></li>
+                    <li><a href="{:U('User/set')}"><img class="nav-aside_img" src="__HIMG__/Set up.png" alt=""/>设置<p
+                            class="panel_info hidden" id="set_panel"></p><span id="setUserRedot"
+                                                                               style="color:red"></span></a><img
+                            src="__HIMG__/right.png" class="panel_to_icon"></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </case>
+            <case value="shopkeeper">
+                <div class="panel_person_info">
+                    <div class="span4">
+                        <div class="panel_img_wrap">
+                            <a href="{:U('Shopkeeper/info')}"><img class="panel_person_images"
+                                                                   src="__UPLOAD__{$array.shopkeeper.avatar}"
+                                                                   alt=""/></a>
+                        </div>
+                    </div>
+                    <div class="span6 panel_person_name_wrap">
+                        <p>{$array.shopkeeper.nickname}</p>
+
+                        <div>
+                            <eq name="array.shopkeeper.status" value="3"><img src="__HIMG__/Company.png" alt=""/></eq>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <p class="panel_person_chip"><a href="{:U('Shopkeeper/editor')}#text"> <img src="__HIMG__/Editor2.png"
+                                                                                            alt=""/></a>
+                    <empty name="array.shopkeeper.remark">
+                        留下你的个性签名吧！
+                        <else/>
+                        <?php
+        if (mb_strlen($array['shopkeeper']['remark'], 'utf-8') > 20) {
+                        echo mb_substr($array['shopkeeper']['remark'], 0, 20, 'utf-8') . '...';
+                        } else {
+                        echo $array['shopkeeper']['remark'];
+                        }
+                        ?>&nbsp;
+                    </empty>
+                </p>
+                <ul class="nav-aside">
+                    <li><a href="{:U('Shopkeeper/tend')}"><img class="nav-aside_img" src="__HIMG__/Collect.png" alt=""/>求学意向
+                        <p id="enrollPanelInfo" class="panel_info"></p><span id="enrollRedot"></span></a><img
+                            src="__HIMG__/right.png" class="panel_to_icon"></li>
+                    <li><a href="{:U('Shopkeeper/mycourse', ['id'=>session('shopkeeper.id')])}"><img
+                            class="nav-aside_img" src="__HIMG__/Dynamic.png" alt=""/>动态课程</a><img
+                            src="__HIMG__/right.png" class="panel_to_icon"></li>
+                    <li><a href="{:U('Shopkeeper/v')}"><img class="nav-aside_img" src="__HIMG__/Authenticate.png"
+                                                            alt=""/>商家认证</a><img src="__HIMG__/right.png"
+                                                                                 class="panel_to_icon"></li>
+                    <li><a href="{:U('Shopkeeper/msg')}"><img class="nav-aside_img" src="__HIMG__/News.png" alt=""/>消息
+                        <p id="commentPanelInfo" class="panel_info"></p><span id="commentRedot"></span></a><img
+                            src="__HIMG__/right.png" class="panel_to_icon"></li>
+                    <li><a href="{:U('Shopkeeper/system')}"><img class="nav-aside_img" src="__HIMG__/Set up.png"
+                                                                 alt=""/>设置</a><img src="__HIMG__/right.png"
+                                                                                    class="panel_to_icon"></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+
+                </ul>
+            </case>
+
+            <default/>
+
+
+        </switch>
+
+    </section>
+</header>
+<div id="container">
+    <div class="index_show_dialog">
+        <p>当前&nbsp;&nbsp;&nbsp;<span>450<b>+</b></span>入驻机构&nbsp;&nbsp;&nbsp;<span>1634<b>+</b></span>学生 &nbsp;&nbsp;&nbsp;<span>150<b>+</b></span>报名
+        </p>
+    </div>
+    <a href="#" class="back_to_top hidden" id="top"><img src="__HIMG__/Back to top.png" alt=""/></a>
+
+    <div id="search">
+        <a href="{:U('Index/select')}">
+            <div class="input_outer">
+                <input type="text" class="search" id="input_win">
+
+                <div class="search_middle">
+                    <p class="search_font"><img src="__HIMG__/Search for.png" alt=""/><span></span>搜索</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    <style type="text/css">
+        .guang_guang {
+            background: url(__HUP__{$Ad.advert});
+            margin-top: 0.8em;
+            width: 100%;
+            height: 3.8em;
+            background-size: 100% 100%;
+            transition: height 1s linear;
+            opacity: 0.75;
+            -webkit-animation-delay: 3s;
+            -webkit-animation-duration: 0.5s;
+            -webkit-animation-fill-mode: both;
+        }
+
+        @-webkit-keyframes guangIn {
+            0% {
+                height: 3.8em;
+            }
+
+            50% {
+                height: 1.9em;
+            }
+
+            100% {
+                height: 0;
+            }
+        }
+
+
+    </style>
+    <!--广告位-->
+    <a href="{$Ad.url}" alt="{$Ad.adname}">
+        <div class="guang_guang guangOut">
+
+        </div>
+    </a>
+    <!--广告位-->
+    <!--第一级导航-->
+    <div class="nav_first">
+        <ul class="nav_ul">
+            <volist name="data" id="vo">
+                <li><a href="#"><img src="__HUP__{$vo.logo}" index="{$vo.id}" class="nav_photo nav_1"
+                                     id="{$vo.catename}" onload=""/></a>
+
+                    <p class="text-center">{$vo.byname}</p>
+                </li>
+
+            </volist>
+        </ul>
+    </div>
+    <!--第一级导航-->
+    <!--滑动导航-->
+    <div class="nav_second">
+        <div class="wrap" id="swipeSlide" style="margin-bottom: 0.8em;">
+            <ul class="inline-float">
+                <li class="inline-float_li">
+                    <ul class="nav_second_ul">
+                        <volist name="shname" id="sh" offset="0" length='4'>
+                            <li><a href="{:U('Shopkeeper/info',array('id'=>$sh['sid']))}"><img
+                                    src="__UPLOAD__{$sh.avatar}" alt="" class="nav_photo"/></a>
+
+                                <p class="text-center">{$sh.nickname}</p>
+                            </li>
+                        </volist>
+                    </ul>
+                </li>
+                <li class="inline-float_li">
+                    <ul class="nav_second_ul">
+                        <volist name="shname" id="sh" offset="4" length='4'>
+                            <li><a href="{:U('Shopkeeper/info',array('id'=>$sh['sid']))}"><img
+                                    src="__UPLOAD__{$sh.avatar}" alt="" class="nav_photo"/></a>
+
+                                <p class="text-center">{$sh.nickname}</p>
+                            </li>
+                        </volist>
+                    </ul>
+                </li>
+                <li class="inline-float_li">
+                    <ul class="nav_second_ul">
+                        <volist name="shname" id="sh" offset="8" length='4'>
+                            <li><a href="{:U('Shopkeeper/info',array('id'=>$sh['sid']))}"><img
+                                    src="__UPLOAD__{$sh.avatar}" alt="" class="nav_photo"/></a>
+
+                                <p class="text-center">{$sh.nickname}</p>
+                            </li>
+                        </volist>
+                    </ul>
+                </li>
+            </ul>
+            <div class="clear"></div>
+
+            <p class="slide-bullet" style="bottom: 0px">
+                <i class="icon-bullet active"></i>
+                <i class="icon-bullet"></i>
+                <i class="icon-bullet"></i>
+            </p>
+        </div>
+        <p class="index_slide_pre hidden">上一页</p>
+        <p class="index_slide_next hidden">下一页</p>
+    </div>
+    <!--滑动导航-->
+    </div>
+    <!--主要展示部分-->
+    <div id="main">
+        <div id="info" class="section section_margin">
+        </div>
+
+
+        <button class="index_load_more hidden" id="info_more">
+            <img src="__HIMG__/loading.gif" alt="" id="index_load_img"/>
+            <span id="index_load_span">查看更多</span>
+            <img src="__HIMG__/index_more.png" alt="" id="load_more_down">
+        </button>
+        <!--课程推广-->
+        <div class="section_spread">
+            <div class="section_spread_title">
+                <p class="section_spread_title_brand">课程推广</p>
+
+                <h2>热门课程</h2>
+
+                <h3>组课热门课程八折优惠</h3>
+            </div>
+            <div class="section_spread_cont">
+                <volist name="gener" id="ge">
+                    <div class="span5 section_spread_item">
+
+                        <div class="section_spread_img_wrap">
+                            <a href="{:U('Shopkeeper/info', ['id'=>$ge['sid']])}">
+                                <img src="__UPLOAD__{$ge.avatar}" alt=""/>
+                            </a>
+                        </div>
+                        <a href="{:U('Shopkeeper/cont', ['id'=>$ge['id']])}">
+                            <p class="section_spread_first_title">
+                                {$ge.title}
+                            </p>
+                        </a>
+
+                        <p class="section_spread_second_title">
+                            {$ge.nickname}
+                        </p>
+
+                    </div>
+                </volist>
+            </div>
+        </div>
+
+        <!--课程推广-->
+    </div>
+    <!--主要展示部分-->
+
+    <footer id="footer">
+        <?php if (session('?user')): ?>
+        <a href="{:U('LookUser/moinfo', ['uid' => session('user.id')])}"
+           class="has_login_name">{:session('user.name')}</a>
+        <a href="{:U('User/outLogout', ['zk' => 'out'])}" class="index-exit">退出</a>
+        <?php elseif (session('?shopkeeper')): ?>
+        <a href="{:U('Shopkeeper/info')}" class="has_login_name">{:session('shopkeeper.nickname')}</a>
+        <a href="{:U('Shopkeeper/signOut')}">退出</a>
+        <?php else: ?>
+        <a href="{:U('Userregsign/index')}">注册</a>
+        <a href="{:U('Index/loginregister')}">登陆</a>
+        <?php endif; ?>
+        <p class="footer_city_label">城市: </p><a href="" class="footer_city" id="addr">广州市</a>
+
+        <div class="clear"></div>
+        <div class="footer_auth">
+            <div class="span2">
+                <div class="footer_line"></div>
+            </div>
+            <div class="span6"><p>移动端 &nbsp;&nbsp;| &nbsp;&nbsp;17约课网 v1.2<br>粤icp备14082321号</p></div>
+            <div class="span2">
+                <div class="footer_line"></div>
+            </div>
+        </div>
+    </footer>
+</div>
+
+
+<input type="hidden" name="ip" id="ip" value="{$Think.server.REMOTE_ADDR}"/>
+<!--约课信息模板-->
+<script id="shopAndUser" type="text/template">
+    {@each info as it,index}
+    {@if it.title!=null}
+
+
+    <div class="section_item">
+
+        <div class="section_item_title">
+            <div class="span2 section_item_portrait">
+                <a href="{:U('LookUser/moInfo')}?uid=${it.uid}"><img src="${it.avatar}" alt=""
+                                                                     class="section_item_portrait_img"></a>
+                <!--<img src="__HIMG__/Plus V.png" alt="" class="section_item_portrait_V"/>-->
+            </div>
+            <a href="{:U('LookGroup/onedetail')}?gid=${it.id}" class="section_item_portrait_a">
+                <div class="span6 section_item_sub"><h3>${it.title}</h3>{@if it.overtimes==0}<span style="color:#a3a3a3">已结束</span>{@/if}
+
+                    <p>${it.firstname}${it.lastname}
+
+                        {@if it.telstatus==1}
+                        <img src="__HIMG__/Phone verification.png" alt=""/>
+                        {@/if}
+                        {@if it.profession==1}
+                        <img src="__HIMG__/Interest.png" alt=""/>
+                        {@else if it.profession==2}<img src="__HIMG__/Public.png" alt=""/>
+                        {@else if it.profession==3}<img src="__HIMG__/Gold.png" alt=""/>
+                        {@else if it.profession==4}<img src="__HIMG__/Culture.png" alt=""/>
+                        {@else if it.profession==5}<img src="__HIMG__/art.png" alt=""/>
+                        {@else if it.profession==6}<img src="__HIMG__/Farming.png" alt=""/>
+                        {@else if it.profession==7}<img src="__HIMG__/France.png" alt=""/>
+                        {@else if it.profession==8}<img src="__HIMG__/Teach.png" alt=""/>
+                        {@else}<img src="__HIMG__/qi.png" alt=""/>
+                        {@/if}
+                        {@if it.vtype==1}
+                        {@if it.vstatus==1}
+                        <img src="__HIMG__/RV.png" alt=""/>
+                        {@/if}
+                        {@/if}
+                        {@if it.vtype==2}
+                        {@if it.vstatus==1}
+                        <img src="__HIMG__/Plus V.png" alt=""/>
+                        {@/if}
+                        {@/if}
+                    </p></div>
+            </a>
+
+            <div class="span2">
+                    <div class="section_item_follow">
+                        <p class="section_item_time">${it.ctime}</p>
+
+                        <p class="section_item_follow_p">跟约<span>${it.number}</span></p>
+                    </div>
+                </div>
+
+            <div class="clear"></div>
+
+        </div>
+        <div class="section_item_cont">
+            <div class="section_item_info span6">
+                <p><img src="__HIMG__/Classification.png" alt="">${it.catename}</p>
+
+                <p><img src="__HIMG__/Price.png" alt="">${it.ltprice}</p>
+
+                <p><img src="__HIMG__/Time.png" alt="">${it.mode}</p>
+
+                <p><img src="__HIMG__/Business.png" alt="">${it.nickname}</p>
+
+                <p><img src="__HIMG__/Location.png" alt="">{@each it.areaname as it2,index}{@if
+                    index>1}${it2}{@/if}{@/each}</p>
+            </div>
+            <a href="{:U('LookGroup/onedetail')}?gid=${it.id}">
+                <div class="section_item_photo span4">
+                    <img src="${it.environ}" alt="">
+                </div>
+            </a>
+
+            <div class="clear"></div>
+        </div>
+        <div class="section_item_feature">
+            <p>课程特色：
+                {@each it.tags as it2,index} <span>${it2}</span>&nbsp;&nbsp;{@/each}</p>
+        </div>
+        <div class="section_item_pv">
+            <p class="section_item_pv_pv"><img src="__HIMG__/Browse.png" alt="">${it.view}</p>
+
+            <p class="section_item_pv_rep"><img src="__HIMG__/Review.png" alt="">${it.comment}</p>
+
+            <p class="section_item_pv_home"><img src="__HIMG__/Business2.png" alt="">${it.coursemun}</p>
+        </div>
+    </div>
+    {@/if}
+    <!-- 发布课程的信息-->
+    {@if it.less.title!=null}
+    <div class="section_item">
+
+        <div class="section_item_title">
+            <div class="span2 section_item_portrait">
+
+                <a href="{:U('Shopkeeper/info')}?id=${it.less.sid}"> <img src="__UPLOAD__${it.less.avatar}" alt=""
+                                                                          class="section_item_portrait_img"/></a>
+                <!--<img src="__UPLOAD__${it.less.environ}" alt="" class="section_item_portrait_V"/>-->
+            </div>
+            <a href="{:U('Shopkeeper/cont')}?id=${it.less.id}" class="section_item_portrait_a">
+                <div class="span6 section_item_sub"><h3>${it.less.title}</h3>
+
+                    <p>${it.less.nickname}
+                        {@if it.less.status==3}
+                        <img src="__HIMG__/Company.png" alt=""/>
+                        {@/if}
+                        {@if it.less.isTimeOut}<span class="time_end">已结束</span>{@/if}
+                    </p>
+                </div>
+            </a>
+
+            <div class="span2">
+                    <div class="section_item_follow">
+                        <p class="section_item_time">${it.less.ctime}</p>
+
+                        <p class="section_item_follow_p" style="color:#4887cd;">报名<span>${it.less.user_count}</span></p>
+                    </div>
+                </div>
+
+            <div class="clear"></div>
+
+        </div>
+        <div class="section_item_cont">
+            <div class="section_item_info span6">
+                <p><img src="__HIMG__/Classification.png" alt=""/>${it.less.catename}</p>
+
+                <p><img src="__HIMG__/Price.png" alt=""/>${it.less.price}</p>
+
+                <p><img src="__HIMG__/Time.png" alt=""/>${it.less.mode}</p>
+
+                <p><img src="__HIMG__/Business.png" alt=""/>${it.less.nickname}</p>
+
+                <p><img src="__HIMG__/Location.png" alt=""/>{@each it.less.areanames[0] as it2,index}{@each it2 as
+                    it3,index}${it3}{@/each}{@/each}</p>
+            </div>
+            <a href="{:U('Shopkeeper/cont')}?id=${it.less.id}">
+                <div class="section_item_photo span4">
+                    <img src="__UPLOAD__${it.less.environ}" alt=""/>
+                </div>
+            </a>
+
+            <div class="clear"></div>
+        </div>
+        <div class="section_item_feature">
+            <p>课程特色：
+                {@each it.less.tags as it2,index} <span>${it2}</span>&nbsp;&nbsp;{@/each}</p>
+            </p>
+        </div>
+        <div class="section_item_pv">
+            <p class="section_item_pv_pv"><img src="__HIMG__/Browse.png" alt=""/>${it.less.view}</p>
+
+            <p class="section_item_pv_home"><img src="__HIMG__/Review.png" alt=""/>${it.less.comment_count}</p>
+
+        </div>
+    </div>
+    {@/if}
+    {@/each}
+</script>
+<script type="text/javascript" src="__HJS__/zepto.min.js"></script>
+<script type="text/javascript" src="__HJS__/swipe.js"></script>
+<script type="text/javascript" src="__HJS__/juicer-min.js"></script>
+<script type="text/javascript" src="__HJS__/lequ.js"></script>
+<script type="text/javascript">
+
+
+    function showLoading() {
+        $('#index_load_img').removeClass("hidden");
+        $('#load_more_down').addClass("hidden");
+        $('#index_load_span').text("正在为您加载");
+    }
+    function hiddenLoading() {
+        $('#index_load_img').addClass("hidden");
+        $('#load_more_down').removeClass("hidden");
+        $('#index_load_span').text("查看更多");
+
+
+    }
+
+    function showPages() {
+        $('.index_load_more').removeClass("hidden");
+    }
+    function hiddenPages() {
+        $('.index_load_more').addClass("hidden");
+    }
+    //隐藏广告
+    setTimeout(function () {
+        $(".guang_guang").addClass("height_0");
+    }, 20000);
+
+    //获取当期用户的IP地址
+    var $ip = $('#ip').val();
+    (function () {
+        $('.nav_1').click(function (event) {
+
+            cateid = $(event.target).attr('index');
+            sessionStorage.cateid = cateid;
+
+            catename = $(event.target).attr('id');
+            sessionStorage.catename = catename;
+
+            location.href = "{:U('Index/select')}";
+        });
+
+        /*
+         *  主页的约课信息和发布课程
+         *
+         */
+        var pages = 1;
+
+        function getInfo(flat, first) {
+            var args = {pages: pages};
+            $.post("{:U('Index/shopAnduser')}", args, function (msg) {
+                var tpl = document.getElementById('shopAndUser').innerHTML;
+                //     var data ={}
+
+                var html = juicer(tpl, msg);
+                if (msg.info.length == 0) {
+                    hiddenPages();
+
+
+                } else {
+                    showPages();
+                    hiddenLoading();
+
+                    $("#info").append(html);
+                }
+
+            }, 'json');
+
+        }
+
+        getInfo();      //进入首页后立即执行
+
+
+        $('#info_more').click(function () {
+            showLoading();
+            pages = pages + 1;
+
+            getInfo();
+        });
+
+        /**
+         * 下拉出现小火箭
+         */
+        $(window).scroll(function (e) {
+            var height = $('body').scrollTop();
+            if (height > 750) {
+                $('#top').removeClass("hidden");
+            }
+            else {
+                $('#top').addClass("hidden");
+            }
+        });
+        /**
+         * 点击小火箭
+         */
+        $('#top').tap(function (event) {
+            $('body').scrollTop(0);
+        });
+
+        /**
+         * 侧滑导航的代码
+         */
+        window.addEventListener('DOMContentLoaded', function () {
+            var $slide = document.getElementById('swipeSlide'),
+                    aBullet = $slide.querySelectorAll('.icon-bullet'),
+                    len = aBullet.length;
+
+            var mySwipe = new Swipe($slide, {
+                continuous: true,
+                disableScroll: false,
+                stopPropagation: false,
+                callback: function (i) {
+                    $('.icon-bullet').removeClass('active');
+                    aBullet[i].classList.add('active');
+                }
+            });
+            $(".index_slide_pre").click(function () {
+                mySwipe.prev();
+            });
+            $(".index_slide_next").click(function () {
+                mySwipe.next();
+            });
+        });
+    })()
+</script>
+<!-- 轮询小红点 -->
+<script type="text/javascript" charset="utf-8">
+    <if condition = "session('?shopkeeper')" >
+    $(function () {
+        // 没十秒查看一次商家的小红点有没有更新
+        shopRedot("enroll", enrollUrl) // 商家收到的课程
+        shopRedot("comment", commentUrl) // 商家收到的课程
+
+        setInterval(function () {
+            shopRedot("enroll", enrollUrl) // 商家收到的课程
+            shopRedot("comment", commentUrl) // 商家收到的课程
+        }, 120000)
+    });
+
+    // 全局变量
+    var g = {
+        has_enroll: false,
+        has_comment: false
+    };
+    var enrollUrl = "{:U('Api/ShopInfo/numEnrollUpdate')}";
+    var commentUrl = "{:U('Api/ShopComment/numUpdate')}";
+
+    /**
+     * 商家红点通用方法
+     */
+    function shopRedot(type, url) {
+        $.get(url, function (data) {
+            console.log("shop_redot_" + type + ":", data)
+
+            if (data.status != 200) {
+                // $("#"+type+"Redot").html("")
+                g["has_" + type] = false;
+                return
+            }
+
+            if (data.data == 0) {
+                $("#" + type + "PanelInfo").addClass("hidden")
+                // $("#"+type+"Redot").html("")
+                g["has_" + type] = false;
+                return
+            }
+
+            $("#" + type + "PanelInfo").removeClass("hidden")
+            // $("#"+type+"Redot").html(data.data)
+            g["has_" + type] = true;
+
+            if (g.has_comment || g.has_enroll) {
+                $(".red_info").removeClass("hidden");
+            } else {
+                $(".red_info").addClass("hidden");
+            }
+
+        }, "json");
+    }
+    ;
+    </if>
+</script>
+
+
+<if condition="$array.rank eq user">
+    <script type="text/javascript" charset="utf-8">
+        var assist = 0;
+        var comment = 0;
+        var pushed = 0;
+        var newsNum = 0;
+        var system = 0;
+        $(function () {
+            // 没15秒查看一次user的小红点有没有更新
+
+            userRedot("newsUserRedot1", "{:U('Api/GroupAssist/newsAssist')}") // user消息
+            userRedot("newsUserRedot2", "{:U('Api/Groupcomment/newsComment')}") // user消息
+            userRedot("newsUserRedot3", "{:U('Api/GroupPushed/newsPushed')}") // user消息
+            userRedot("setUserRedot", "{:U('Api/UserSystem/newsSystem')}") // user设置
+
+            setInterval(function () {
+                userRedot("newsUserRedot1", "{:U('Api/GroupAssist/newsAssist')}") // user消息
+                userRedot("newsUserRedot2", "{:U('Api/Groupcomment/newsComment')}") // user消息
+                userRedot("newsUserRedot3", "{:U('Api/GroupPushed/newsPushed')}") // user消息
+                userRedot("setUserRedot", "{:U('Api/UserSystem/newsSystem')}") // user设置
+            }, 10000)
+        });
+
+        /**
+         * user红点通用方法
+         */
+        function userRedot(type, url) {
+            $.get(url, function (data) {
+                console.log("user_redot_" + type + ":", data)
+
+                if (data.status != 200) {
+                    return false;
+                }
+
+                if (type == "newsUserRedot1") {
+                    assist = parseInt(data.data);
+                } else if (type == "newsUserRedot2") {
+                    comment = parseInt(data.data);
+                } else if (type == "newsUserRedot3") {
+                    pushed = parseInt(data.data);
+                    newsNum = assist + comment + pushed;
+                    if (newsNum > 0) {
+                        $("#red_dian_user").removeClass("hidden");
+                        $("#news_panel").removeClass("hidden");
+                        //		$("#newsUserRedot").html(newsNum);
+                    } else {
+                        $("#red_dian_user").addClass("hidden");
+                        $("#news_panel").addClass("hidden");
+                        //		$("#newsUserRedot").html("");
+                    }
+                } else {
+                    system = parseInt(data.data);
+                    if (system > 0) {
+                        $("#red_dian_user").removeClass("hidden");
+                        $("#set_panel").removeClass("hidden");
+                        //		$("#setUserRedot").html(data.data);
+                    } else {
+                        var newsNumAll = 0;
+                        newsNumAll = newsNum + system;
+                        if (newsNumAll > 0) {
+                            $("#red_dian_user").removeClass("hidden");
+                        } else {
+                            $("#red_dian_user").addClass("hidden");
+                        }
+
+                        $("#set_panel").addClass("hidden");
+                        //		$("#setUserRedot").html("");
+                    }
+                }
+                return data.data;
+            }, "json");
+        }
+        ;
+    </script>
+</if>
+</body>
+</html>
+
+

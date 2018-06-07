@@ -1,0 +1,40 @@
+<div class="data-table">
+  <form id="course-table-temp-form" action="{:U('Grade/editClassTableTempletByAjax')}" method="post">
+  <table>
+       <thead>
+               <tr> <th width="20%">字段名</th><th width="80%">输入值</th></tr>
+       </thead>
+       <tbody>
+              <tr><td>教师</td><td><button class="select-btn select-selectTeacher" target-form="form-horizontal" type="button" onclick="selectTeacher.get(this)">{$info.username|default="点击选择"}</button>
+              <input name="ctt_teacherId" type="hidden" value="{$info.ctt_teacherId|default='0'}" id="teacherId"></td></tr>
+              <tr><td>课程</td><td><select name="ctt_courseId"><option value="">请选择</option>
+                 <foreach name="gradeCourses" item="vo" >
+                    <option value="{$vo.gc_courseId}" <if condition="$vo['gc_courseId'] eq $info['ctt_courseId']">selected</if> >{$vo.co_name}</option>
+                 </foreach></select></td></tr>
+              <tr><td>培训地址</td><td><button class="select-btn select-selectSite" target-form="form-horizontal" type="button" onclick="selectTrainingsite.get(this)">{$info.tra_name|default='点击选择'}</button><input name="ctt_trainingsiteId" type="hidden" value="{$info.ctt_trainingsiteId|default='0'}" id="trainingsiteId"></td></tr>
+              <tr><td>描叙</td><td><textarea class="text input-mini" style="width:90%; height:50px;" name="ctt_description">{$info.ctt_description|default=''}</textarea></td></tr>
+              <tr><td colspan="2" align="right"><button class="btn submit-btn ajax-post" id="submitF" type="submit" target-form="form-horizontal" onclick="courseTableTemplent.saveInput(this);return false;">保 存</button></td></tr>
+      </tbody>
+  </table>
+  <input name="id" type="hidden" value="{$info.ctt_id}" />
+ </form>
+</div>
+<script>
+var options = {
+		   beforeSubmit: function (formData, jqForm, options) {
+			  loading = layer.load(); 
+		   },
+			success: function (data) {
+	                    layer.close(loading);
+					    layer.msg(data.info,{time:1000},function(){
+							if(data.status == 1) {
+							  layer.close(classTableTemplet.box);	
+					          url = "{:U('Grade/lookClassTableTempletByAjax',['id'=>$info['ctt_gradeId']])}";
+							  $('.lookClassTableTempletByAjax').offsetParent().empty().load(url);
+							}
+						});
+					   
+	                }
+	            }; 
+ 	$("#course-table-temp-form").ajaxForm(options);
+</script>

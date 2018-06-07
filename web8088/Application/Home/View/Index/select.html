@@ -1,0 +1,294 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+    <meta content="yes"name="apple-mobile-web-app-capable"/>
+    <meta content="black"name="apple-mobile-web-app-status-bar-style"/>
+    <meta name="format-detection"content="telphone=no"/>
+    <title>筛选课程 - 17约课</title>
+    <link rel="stylesheet" type="text/css" href="__HCSS__/reset.css">
+    <link rel="stylesheet" href="__HCSS__/2.css"/>
+    <link rel="stylesheet" href="__HCSS__/4.css"/>
+    <meta name="keywords" content="17约课,一起约课,约课,教育培训,约课神器,校园约课,大学生培训,约老师,约女神,驾驶培训,设计培训,职业考证,音乐培训,英语培训,小语种培训,体育培训" />
+    <meta name="description" content="17约课 - 约您身边的良师益友！为您提供约老师，约课程，约女神，约学霸等海量信息，充分满足您免费约课，免费发布课程的需求。" />
+    <style type="text/css">
+        .course_institution_nav_img{
+            display: inline-block;
+            position: relative;
+            left: 0.3em;;
+            top: -0.15em;;
+            background-image: url(__HIMG__/icon2.png);
+            width: 0.8em;
+            height: 0.45em;
+            background-size: 0.8em;;
+        }
+        .course_institution_nav_img_active{
+            background-image: url(__HIMG__/icon1.png) !important;
+        }
+        .over_hidden{
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+<header id="top_header">
+    <div id="header" align="center">
+        <h3 class="identify_title">筛选</h3>
+        <a href="{:U('Index/index')}" class="identify_back"><img src="__HIMG__/Return2.png" alt=""/>首页</a>
+    </div>
+</header>
+<div class="wrapper" style="margin-top: 3em;">
+<!--<img src="__HIMG__/loading.gif" alt="" class="loading hidden"/>-->
+        <div class="css-loading hidden">
+            <div class="ball-holder">
+                <div class="ball"></div>
+            </div>
+        </div>
+        <div class="course-box">
+        </div>
+        <div class="business_relay_input_wrap">
+            <div class="input_wrap course_institution_input_wrap">
+                <input type="text" class="register_input" placeholder="请搜索培训机构名称，分类">
+            </div>
+            <button class="course_institution_btn">搜索</button>
+            <img src="__HIMG__/Search for.png" alt="" class="business_img_search"/>
+        </div>
+        <div class="course_select_nav" style="margin-bottom:0.8em;;">
+            <ul class="course_search_nav_ul">
+                <li id="course_constitution" style="border-right: solid 1px #eee"><span>培训机构</span><div class="course_institution_nav_img" id="constitution-img"></div></li>
+                <li id="course_type"><span>机构发布</span><div class="course_institution_nav_img" id="type-img"></div></li>
+                <li class="course_all_btn" id="course_local"><span>默认地区</span><div class="course_institution_nav_img" id="local-img"></div></li>
+                <li class="course_sort_btn" id="course_sort"><span>默认排序</span><div class="course_institution_nav_img" id="sort-img"></div></li>
+            </ul>
+            <ul class="course_type_select">
+                <li class="course_type_select_li">用户发布</li>
+                <li class="course_type_select_li first_select_active">机构发布</li>
+
+            </ul>
+            <!--分类一级-->
+            <ul class="course_constitution_select_first"  id="cate">
+    			<li class="course_constitution_select_li"  alt="all">全部</li>
+            </ul>
+			<!--分类二级-->
+            <ul class="course_constitution_select_second select_hidden" id="thirdcate">
+
+            </ul>
+
+            <ul class="course_sort_select">
+                <li class="course_sort_select_li first_select_active" id="sort"  alt="sort">默认排序</li>
+                <li class="course_sort_select_li" id="nearby"  alt="nearby">离我最近</li>
+                <li class="course_sort_select_li" id="greet"  alt="greet">最受欢迎</li>
+
+            </ul>
+            <!--地区选择第一阶段-->
+            <ul class="course_local_first_select" id="area">
+       
+            </ul>
+
+            <!--地区选择第二阶段-->
+                 <ul class="course_local_second_select course_local_second_select_hidden" id="secondArea">
+				 </ul>
+
+            <!---->
+        </div>
+        <!-- 发布的约课信息 -->
+        	<div id="desc">
+			</div>
+
+             <!--<div class="search_nofound visualization">
+                <p class="search_nofound_p">抱歉亲，没有搜索到合适的信息</p>
+            </div>-->
+            <div class="search_nofound visualization">
+                <img src="__HIMG__/m_upset_mascot.png" alt="not found"/>
+                <p class="">抱歉亲，此课程很快就有了，别生气啦。</p>
+                <p><a href="{:U('GroupInfo/addwish')}">添加机构</a></p>
+            </div>
+
+        <button class="enterprise_cont_submit resbut hidden"  id="resbut">加载更多<img src="__HIMG__/right.png" alt=""/></button>
+</div>
+
+<script id="catename" type="text/template">
+    {@each info as it,index}
+    <li class="course_constitution_select_li"  alt="${it.id}">${it.catename}</li>
+    {@/each}
+</script>
+
+<script id="one" type="text/template">
+    <li class="course_local_first_select_li first_select_active" alt="0">全部地区</li>
+    {@each list as it,index}
+    <li class="course_local_first_select_li" alt="${it.id}">${it.areaname}</li>
+    {@/each}
+</script>
+
+<script id="second" type="text/template">
+    {@each list as it,index}
+    <li class="course_local_first_select_li" alt="${it.id}">${it.areaname}</li>
+    {@/each}
+</script>
+
+<script id="third" type="text/template">
+    {@each info as it,index}
+    <li class="course_constitution_select_second_li" alt="${it.id}">${it.catename}</li>
+    {@/each}
+</script>
+
+<script id="user" type="text/template">
+    {@each info as it,index}
+      <div class="section_item clearfix">
+                <div class="section_item_box">
+                    	<img class="section_item_title_icon" src="__HIMG__/laba.png" alt="">
+					<a href="{:U('LookGroup/onedetail')}?gid=${it.id}" style="color:#636363;  margin-left: 1.1em;">
+                    	<span class="section_item_title_text" >${it.title}</span>
+					</a>
+                </div>
+                <div class="section_item_other clearfix">
+                    <div class="section_item_other_l">
+					<a href="{:U('LookUser/moInfo')}?uid=${it.uid}">
+						<img src="${it.avatar}"  onerror="javascript:this.src='__IMGDEFAULT__';" alt="" class="section_item_cont_avator">
+					</a>
+                        <span style="font-size: small;color: #666565">${it.firstname}${it.lastname}</span>
+                    </div>
+                    <div class="section_item_other_r"  style="color: #5A5A5A;">
+						{@if it.pricearr!=null}
+                        	<span class="section_people">${it.pricearr.ltnumber}-${it.pricearr.gtnumber}人</span>
+							<span class="l_price">${it.pricearr.ltprice}元</span>
+							<span class="h_price">${it.pricearr.reference}元</span>
+						{@else}
+							<span class="l_price">${it.ltprice}元</span>
+						{@/if}
+                    </div>
+                </div>
+            </div>
+    {@/each}
+</script>
+
+<script id="shop" type="text/template">
+    {@each info as it,index}
+
+
+        <div class="section_item clearfix">
+            <div class="section_item_box">
+                	<img class="section_item_title_icon" src="__HIMG__/laba.png" alt="">
+            	<a href="{:U('Shopkeeper/cont')}?id=${it.id}" style="  margin-left: 1.1em;">
+					<span class="section_item_title_text" style="color:#636363;">${it.title}</span>
+				</a>
+            </div>
+            <div class="section_item_other clearfix">
+                <div class="section_item_other_l">
+					<a href="{:U('Shopkeeper/info')}?id=${it.sid}">
+                    	<img class="section_item_cont_avator" src="__UPLOAD__${it.avatar}" onerror="javascript:this.src='__IMGDEFAULT__';" alt="">
+					</a>
+                    <span style="font-size: small;color: #666565">${it.nickname}</span>
+                </div>
+                <div class="section_item_other_r"  style="color: #5A5A5A;">
+					${it.price}元
+					{@if it.preferent}
+						<span> ${it.preferent} </span>
+						<img src="__HIMG__/Hui2.png" alt="" />
+					{@/if}
+				</div>
+            </div>
+        </div>
+
+
+    {@/each}
+</script>
+
+
+<!--约课信息模板-->
+<script id="shopAndUser" type="text/template">
+    {@each info as it,index}
+
+    {@if it.comment_count==null}
+
+
+            
+            <div class="section_item clearfix">
+                <div class="section_item_box">
+                    	<img class="section_item_title_icon" src="__HIMG__/laba.png" alt="">
+					<a href="{:U('LookGroup/onedetail')}?gid=${it.id}" style="color:#636363;margin-left: 1.1em;">
+                    	<span class="section_item_title_text" >${it.title}</span>
+					</a>
+                </div>
+                <div class="section_item_other clearfix">
+                    <div class="section_item_other_l">
+					<a href="{:U('LookUser/moInfo')}?uid=${it.uid}">
+						<img src="${it.avatar}"  onerror="javascript:this.src='__IMGDEFAULT__';" alt="" class="section_item_cont_avator">
+					</a>
+                        <span style="font-size: small;color: #666565">${it.firstname}${it.lastname}</span>
+                    </div>
+                    <div class="section_item_other_r" style="color: #5A5A5A;" >
+						{@if it.pricearr!=null}
+                        	<span class="section_people">${it.pricearr.ltnumber}-${it.pricearr.gtnumber}人</span>
+							<span class="l_price">${it.pricearr.ltprice}元</span>
+							<span class="h_price">${it.pricearr.reference}元</span>
+						{@else}
+							<span class="l_price">${it.ltprice}元</span>
+						{@/if}
+                    </div>
+                </div>
+            </div>
+
+
+
+    {@/if}
+
+
+
+
+    {@if it.comment_count!=null}
+
+        <div class="section_item clearfix">
+            <div class="section_item_box">
+                	<img class="section_item_title_icon" src="__HIMG__/laba.png" alt="">
+            	<a href="{:U('Shopkeeper/cont')}?id=${it.id}" style="  margin-left: 1.1em;">
+					<span class="section_item_title_text" style="color:#636363;">${it.title}</span>
+				</a>
+            </div>
+            <div class="section_item_other clearfix">
+                <div class="section_item_other_l">
+					<a href="{:U('Shopkeeper/info')}?id=${it.sid}">
+                    	<img class="section_item_cont_avator" src="__UPLOAD__${it.avatar}" onerror="javascript:this.src='__IMGDEFAULT__';" alt="">
+					</a>
+                    <span style="font-size: small;color: #666565">${it.nickname}</span>
+                </div>
+                <div class="section_item_other_r" style="color: #5A5A5A;" >
+					${it.price}元
+					{@if it.preferent}
+						<span> ${it.preferent} </span>
+						<img src="__HIMG__/Hui2.png" alt="" />
+					{@/if}
+				</div>
+            </div>
+        </div>
+
+
+    {@/if}
+    {@/each}
+</script>
+
+
+<script type="text/javascript" src="__HJS__/zepto.min.js"></script>
+<script type="text/javascript" src="__HJS__/juicer-min.js"></script>
+<script type="text/javascript" src="__HJS__/select.js"></script>
+<include file="Component:alert" />
+<script type="text/javascript">
+	var areaUrl="{:U('Api/Area/getArea')}";
+	var secondUrl="{:U('Api/Area/getSecondArea')}";
+	var areasUrl="{:U('Api/GroupInfo/getGroupInfo')}";
+	var cateUrl="{:U('Api/GroupInfo/getCategory')}";
+	var thirdcateUrl="{:U('Api/GroupInfo/thirdCategory')}";
+	var busUrl="{:U('GroupInfo/business')}";
+	var busajaxUrl="{:U('Api/GroupInfo/getBusiness')}";
+	var searchUrl="{:U('Api/Index/getSearch')}";
+	var userCateUrl="{:U('Api/Index/ajaxGroup')}";
+	var shopCateUrl="{:U('Api/Index/ajaxShop')}";
+
+    var g = {
+        "cateid":       {$cateid},
+        "catenameMap":  '{$catenameMap}'
+    };
+</script>
+<include file="Public:statistics"/>
+</body>
+</html>

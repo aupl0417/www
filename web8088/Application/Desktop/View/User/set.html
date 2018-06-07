@@ -1,0 +1,311 @@
+<extend name="UserPublic:tpl" />
+
+<block name="title">设置</block>
+
+<block name="css">
+    <link rel="stylesheet" href="__PCCSS__/main.css">
+
+    <style type="text/css" media="all">
+        .content {
+            min-height: 850px;
+        }
+    </style>
+    <link rel="stylesheet" href="__PCCSS__/system.css">
+</block>
+
+
+
+<block name="main">
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+  <!--约课-->
+
+    <include file="UserPublic:centerNav" />
+
+    <section class="content">
+        <ul id="m-menu" class="m-menu clearfix fs16">
+            <li class="active" id="reset_pw_btn"><span>修改密码</span></li>
+            <li id="feedback_btn"><span>意见反馈</span></li>
+            <li id="system_btn"><span>系统消息</span></li>
+        </ul>
+        <div id="switcher" >
+            <!--modify password-->
+            <div class="switch-helper" id="reset_pw_data">
+                <div class="switch-cont">
+                    <h3 class="mod-pass-title fs20">密码修改</h3>
+                        <div class="f-slice-wrap">
+                            <label for="new-pw" class="require fs18 c999">新密码</label>
+                            <input id="new-pw" data-id="pw" class="fs16" type="password" placeholder="请输入6-12位新密码"/>
+                            <span id="errPanel" class="err-info"></span>
+                        </div>
+                        <div class="f-slice-wrap">
+                            <label for="re-pw" class="require fs18 c999">确认密码</label>
+                            <input id="re-pw" data-id="pw1" class="fs16" type="password" placeholder="请再次输入新密码"/>
+                        </div>
+                        <div class="f-slice-wrap">
+                            <button type="submit" id="reset_submit_btn" class="fs18 submit-btn bglightblue">提交</button>
+                        </div>
+                </div>
+            </div>
+            <!--feedback-->
+            <div class="switch-helper hidden" id="feedback_data">
+                <div class="switch-cont clearfix">
+                    <h3 class="fs20 feedback-title">意见反馈</h3>
+                        <textarea class="feedback fs16" name="feedback" id="feedback" cols="30" rows="10" placeholder="您的建议，是促使我们前进的动力！"></textarea>
+                        <button type="submit" id="submit-btn-fb" class="fs18 submit-btn submit-btn-fb bglightblue">提交</button>
+                </div>
+            </div>
+            <!--system notice-->
+            <div class="switch-helper hidden" id="system_data">
+                <div class="switch-cont">
+                    <h3 class="fs20 sys-notice">系统消息</h3>
+                    <table class="table table-bordered padding-table">
+                        <thead class="bgeee">
+                        <tr>
+                            <th class="fs18 tal fwn">最近通知</th>
+                        </tr>
+                        </thead>
+
+                        <!-- 模板输出位置 -->
+                        <tbody id="system_data_tpl">
+                            <tr>
+                                <td>
+                                    <span class="fs16 c666">系统通知：欢迎使用17约课，您现在可以完善资料并发布课程</span><span class="badge badge-danger badge-ml">New</span>
+                                    <span class="time fs14 cb6b6b6">今天12：20</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="fs16 c666">系统通知：欢迎使用17约课，您现在可以完善资料并发布课程</span>
+                                    <span class="time fs14 cb6b6b6">今天12：20</span>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+
+                    <!-- 分页栏 -->
+                    <nav style="text-align:right;" id="system_page_data">
+                        <ul class="pagination my-pagination">
+                            <li><a href="#">首页</a></li>
+                            <li>
+                                <a href="#" aria-label="Previous">
+                                    <span aria-hidden="true">上一页</span>
+                                </a>
+                            </li>
+                            <li class="active"><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li>
+                                <a href="#" aria-label="Next">
+                                    <span class="clightblue" aria-hidden="true">下一页</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+  </div><!-- /.content-wrapper -->
+
+</block>
+
+<block name="js">
+    <script src="__PCJS__/all.js" type="text/javascript"></script>
+    <script src="__PCJS__/main.js" type="text/javascript"></script>
+    
+<script id="tplsystem" type="text/template">
+{@each info as it,index}
+    <tr>
+        <td>
+            <span class="fs16 c666">系统通知：${it.title}</span><span class="badge badge-danger badge-ml">New</span>
+            <span class="time fs14 cb6b6b6">${it.ctime}</span>
+        </td>
+    </tr>
+{@/each}
+</script>    
+<script id="tplsystempage" type="text/template">
+                        <ul class="pagination my-pagination">
+				{@if page.curPage!=1}
+                            <li><a href="javascript:;" class="page"  index="1">首页</a></li>
+                            <li>
+                                <a href="javascript:;" aria-label="Previous" class="page" index="${page.curPage-1}">
+                                    <span aria-hidden="true">上一页</span>
+                                </a>
+                            </li>
+				{@/if}	
+	{@each i in range(page.pageFirst, page.pageMax+1)}
+                            <li index="${i}" class="page {@if i==page.curPage}active{@/if}"><a href="javascript:;">${i}</a></li>
+	{@/each}
+		{@if page.curPage!=page.pageAll}
+                            <li>
+                                <a href="javascript:;" aria-label="Next" index="${parseInt(page.curPage)+1}" class="page">
+                                    <span class="clightblue" aria-hidden="true">下一页</span>
+                                </a>
+                            </li>
+		{@/if}
+                        </ul>
+</script>
+    
+<script type="text/javascript">
+//重置密码 
+var post_url = "{:U('Home/User/resetPw')}";
+//反馈 
+var feedback_url = "{:U('Api/User/feedback')}";
+var feedbackvalue = '';
+
+//系统消息 
+var system_url = "{:U('Api/UserSystem/systemList')}";
+var system_page = 0;
+
+$("#reset_pw_btn").click(function(){
+	$("#reset_pw_data").removeClass('hidden');
+	$("#feedback_data").addClass('hidden');
+	$("#system_data").addClass('hidden');
+	$("#reset_pw_btn").addClass('active');
+	$("#feedback_btn").removeClass('active');
+	$("#system_btn").removeClass('active');
+});
+$("#feedback_btn").click(function(){
+	$("#reset_pw_data").addClass('hidden');
+	$("#system_data").addClass('hidden');
+	$("#feedback_data").removeClass('hidden');
+	$("#reset_pw_btn").removeClass('active');
+	$("#feedback_btn").addClass('active');
+	$("#system_btn").removeClass('active');
+});
+$("#system_btn").click(function(){
+	$("#reset_pw_data").addClass('hidden');
+	$("#feedback_data").addClass('hidden');
+	$("#system_data").removeClass('hidden');
+	$("#reset_pw_btn").removeClass('active');
+	$("#feedback_btn").removeClass('active');
+	$("#system_btn").addClass('active');
+});
+
+
+function clearpw(){
+	$("#new-pw").val("");
+	$("#re-pw").val("");
+}
+function pwCheck(){
+	var pw_one = $("#new-pw").val();
+	var pw_two = $("#re-pw").val();
+    var rule=/^\S{6,12}$/;
+    if(pw_one==''){
+        $("#errPanel").html('密码未填写');
+        clearpw();
+        return false;
+    }
+    if(pw_two==''){
+        $("#errPanel").html('密码未填写');
+        clearpw();
+        return false;
+    }
+    if(pw_one!=pw_two){
+        $("#errPanel").html('两次输入的密码不正确');
+        clearpw();
+        return false;
+    }
+    if(!rule.test(pw_one)){
+        $("#errPanel").html('密码必须是6~12个字符');
+        clearpw();
+        return false;
+    }
+    var resetData = {};
+    resetData.reset = 'do';
+    resetData.password = pw_one;
+    $.post(post_url,resetData,function(data){
+        console.log(data);
+        if(data.msg!=200){
+        	$("#errPanel").html(data.data);
+            clearpw();
+        }else{
+        	$("#errPanel").html('密码修改成功');
+        	clearpw();
+            //setTimeout(window.location.href=set_url,5000);
+        }
+    }, "json");
+    return true;
+}
+$("#reset_submit_btn").click(function(){
+	pwCheck();
+});
+
+
+
+
+
+//反馈
+function AllCheckFeedback(){
+    feedbackvalue = $("#feedback").val();
+    var remarktest = /^.{1,500}$/;	//字符长度
+    if(feedbackvalue.length==0){
+    	alert('反馈信息未填写');
+        return false;
+    }
+    else if(!remarktest.test(feedbackvalue)){
+    	alert('反馈信息不能超过250个字');
+        return false;
+    }
+    return true;
+}
+function postFeedback(){
+	if(AllCheckFeedback()){
+		var feedbackData = {};
+		feedbackData.feedback = feedbackvalue;
+		$.post( feedback_url , feedbackData , function(data){
+			if(data.status!=200){
+				alert(data.msg);
+			}else{
+				$("#feedback").val('');
+				alert('反馈成功');
+			}
+		},'json');
+	}
+}
+$("#submit-btn-fb").click(function(){
+	postFeedback();
+});
+
+
+
+
+
+
+function postSystem(){
+	system_page = system_page + 1;
+    var systemData = {};
+    systemData.page = system_page;
+    console.log(systemData);
+    $.post(system_url , systemData , function(data){
+        console.log(data);
+
+        var tpl = document.getElementById('tplsystem').innerHTML;
+        var html = juicer(tpl, data.info);
+        $('#system_data_tpl').html(html);
+
+        var tplpage = document.getElementById('tplsystempage').innerHTML;
+        var htmlpage = juicer(tplpage, data.info);
+        $('#system_page_data').html(htmlpage);
+        
+    }, "json");
+}
+postSystem();
+$("#system_page_data").on("click",".page",function(e){
+	system_page = $(e.currentTarget).attr("index") -1;
+	postSystem();
+});
+</script>
+</block>
+
+
+
+
+

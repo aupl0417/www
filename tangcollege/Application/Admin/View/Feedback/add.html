@@ -1,0 +1,33 @@
+<div id="main" class="main">
+    <div class="main-title">
+        <h2>{:isset($info['n_id'])?'编辑':'新增'}留言</h2>
+    </div>
+    <form id='form' action="{:U()}" method="post" class="form-horizontal">
+        <div class="form-item">
+            <label class="item-label">留言标题：<input type="text" class="text input-midle" name="f_name" value="{$info.f_name|default=''}"></label>
+        </div>
+        <div class="form-item">
+            <label class="item-label">联系邮箱：<input type="text" class="text input-midle" name="f_email" value="{$info.f_email|default=''}"></label>
+        </div>
+        <div class="form-item">
+        	<label class="item-label">留言内容：</label>
+            <div class="textarea input-large">
+	            <textarea name="f_content" width="500px;">{$info.f_content|default=''}</textarea>
+            </div>
+        </div>
+        <div class="form-item">
+        	<input type='hidden' name='f_id' value='{$info.f_id}'>
+            <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <button class="btn btn-return" type="button">返 回</button>
+        </div>
+    </form>
+</div>
+
+
+    <script type="text/javascript">
+    	ajaxSubmitForm();
+		
+		$('.btn-return').click(function(){
+			layer.closeAll();
+		});
+    </script>

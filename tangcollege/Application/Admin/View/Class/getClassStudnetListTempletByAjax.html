@@ -1,0 +1,59 @@
+<div id="main" class="main lookClassTableTempletByAjax">
+  <div class="main-title">
+        <h2>查看班级的学生</h2>
+    </div>
+    <div class="data-table">
+		<table>
+            <!-- 表头 -->
+            <thead>
+                <tr>
+                    <th>学生ID</th>
+                    <th>学生用户名</th>
+                    <th>班级</th>
+                    <th>进入时间</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+
+            <!-- 列表 -->
+            <tbody class="class-table-lists">
+               <volist name='lists' id='data' empty="$empty">
+                	<tr>
+                		<td>{$data.id}</td>
+                        <td>{$data.username}</td>
+                		<td>{$data.cl_name}</td>
+                		<td>{$data.cs_createTime}</td>
+                        <td><a class="sch-btn" href="javascript:void(0)" onclick="classStudentManager.del({$data.cl_id},{$data.id})">移除</a></td>
+                	</tr>
+               </volist>      
+            </tbody>
+        </table>
+	</div>
+</div>  
+<script type="text/javascript">
+function classStudentManager(){ 
+            var manager = new Object; 
+            manager.del = function(classId,stuId){ 
+			   if(!confirm('确认删除？'))
+			     return false;
+			   url = "{:U('Class/delstudent')}";
+               $.ajax({type:'GET',url:url,data:{classId:classId,stuId:stuId}, dataType: "json", success: function(data){
+                   if(data.status == 1) {
+					  layer.msg('删除成功', function(){
+                           url = "{:U('Class/getClassStudnetListTempletByAjax')}?id="+classId;
+						   $('.lookClassTableTempletByAjax').offsetParent().empty().load(url);
+                      });
+				  }else{
+					  layer.msg(data.info, {
+                         time: 2000
+                      });
+				  }
+              }});
+           }; 
+           return manager; 
+        } 
+		
+		var classStudentManager = classStudentManager();
+
+
+</script> 

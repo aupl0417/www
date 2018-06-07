@@ -1,0 +1,190 @@
+			<div class="span2">
+				
+				<ul id="main-nav" class="nav nav-tabs nav-stacked">
+					
+					<li class="active">
+						<a href="{:U('Index/index')}">
+							<i class="icon-home"></i>
+							Dashboard 		
+						</a>
+					</li>
+					
+					<li>
+						<a href="{:U('Category/cate_list')}">
+							<i class="icon-pushpin"></i>分类菜单	
+						</a>
+					</li>
+					
+					<li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle " href="#">
+                            <i class="icon-user"></i>邀请码
+                        </a>
+                        <ul class="dropdown-menu nav_sec">
+                            <li><a href="{:U('Invite/index')}"><i class="icon-user"></i> 官方邀请码 </a></li>
+                        </ul>
+					</li>
+					
+					
+					 <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle " href="#">
+                            <i class="icon-user"></i>微信
+                        </a>
+                        <ul class="dropdown-menu nav_sec">
+                            <li><a href="{:U('Wx/menu')}"><i class="icon-user"></i> 微信菜单管理 </a></li>
+                            <li><a href="{:U('Wx/wxList')}"><i class="icon-user"></i> 微信用户 </a></li>
+                            <li><a href="{:U('Wx/wxUpdata')}"><i class="icon-user"></i> 微信头像数据转移 </a></li>
+                        </ul>
+                    </li>
+                    
+                    
+					<!-- <li>
+						<a href="{:U('User/index')}">
+							<i class="icon-user"></i>
+							用户	
+						</a>
+					</li> -->
+					 <li class="dropdown">
+
+                        <a data-toggle="dropdown" class="dropdown-toggle " href="#">
+                            <i class="icon-user"></i>
+                            用户
+                        </a>
+
+                        <ul class="dropdown-menu nav_sec">
+                            <li>
+                                <a href="{:U('Data/userdata')}"><i class="icon-user"></i> 用户数据 </a>
+                            </li>
+
+                            <li>
+                                <a href="{:U('User/dynamic')}"><i class="icon-lock"></i> 心愿单 </a>
+                            </li>
+                            <li>
+                                <a href="{:U('User/perAuthen')}"><i class="icon-lock"></i> 个人认证 </a>
+                            </li>
+
+                            <li>
+                                <a href="{:U('User/stAuthen')}"><i class="icon-lock"></i> 社团认证 </a>
+                            </li>
+
+                            <li>
+                                <a href="{:U('User/promotion')}"><i class="icon-lock"></i> 短信推广 </a>
+                            </li>
+
+                            <li class="divider"></li>
+
+                            <li>
+                                <a href="{:U('Sign/handleLogout')}"><i class="icon-off"></i> Logout</a>
+                            </li>
+                        </ul>
+                    </li>
+                     <li class="dropdown">
+
+                        <a data-toggle="dropdown" class="dropdown-toggle " href="#">
+                            <i class="icon-user"></i>
+                            商家
+                        </a>
+
+                        <ul class="dropdown-menu nav_sec">
+                            <li>
+                            <a href="{:U('Shopkeeper/addAndModify')}"'}"><i class="icon-user"></i> 商家操作 </a>
+                            </li>
+
+                            <li>
+                            <a href="{:U('Data/shopkeeperdata', ['isus'=>1])}"><i class="icon-user"></i> 合作商家 </a>
+                            </li>
+
+                            <li>
+                                <a href="{:U('Data/shopkeeperdata', ['isus'=>0])}"><i class="icon-lock"></i> 第三方商家 </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="{:U('Shopkeeper/listShopInfo')}">
+                            <i class="icon-lock"></i>
+                            商家课程
+                        </a>
+                    </li>
+
+
+                     <li class="dropdown">
+
+                        <a data-toggle="dropdown" class="dropdown-toggle " href="#">
+                            <i class="icon-user"></i>
+                            商家反馈&消息
+                        </a>
+
+                        <ul class="dropdown-menu nav_sec">
+                            <li>
+                                <a href="{:U('Shopkeeper/feedback')}"'}"><i class="icon-user"></i> 商家反馈信息 </a>
+                            </li>
+
+                            <li>
+                                <a href="{:U('Shopkeeper/sendMsg')}"><i class="icon-lock"></i> 发送系统消息给全部商家 </a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+					<!-- <li>
+                        <a href="{:U('User/perAuthen')}">
+                            <i class="icon-user"></i>
+                            个人认证
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{:U('User/stAuthen')}">
+                            <i class="icon-flag"></i>
+                            社团认证
+                        </a>
+                    </li> -->
+					<!--<li>-->
+						<!--<a href="{:U('Shopkeeper/index')}">-->
+							<!--<i class="icon-th-large"></i>-->
+							<!--商家-->
+						<!--</a>-->
+					<!--</li>-->
+					<li>
+						<a href="{:U('Advert/adlist')}">
+							<i class="icon-signal"></i>
+							广告管理
+						</a>
+					</li>
+					
+					<li>
+						<a href="{:U('Shopkeeper/addAndModify')}">
+							<i class="icon-user"></i>
+                            商家添加修改
+						</a>
+					</li>
+					
+					<li>
+						<a href="{:U('Shopkeeper/enroll')}">
+							<i class="icon-lock"></i>
+                            用户报名商家课程
+						</a>
+					</li>
+
+				<!--<li>
+                        <a href="{:U('Data/userdata')}">
+                            <i class="icon-lock"></i>
+                            用户数据
+                        </a>
+                    </li> -->
+                    <li>
+                        <a href="{:U('Data/catedata')}">
+                            <i class="icon-lock"></i>
+                            分类数据
+                        </a>
+                    </li>
+				</ul>
+				
+				<hr />
+				
+				<div class="sidebar-extra">
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>
+				</div> <!-- .sidebar-extra -->
+				
+				<br />
+		
+			</div> <!-- /span1 -->

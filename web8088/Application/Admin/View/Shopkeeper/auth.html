@@ -1,0 +1,96 @@
+<include file="Public:header" />
+<div id="content">
+
+	
+	<div class="container">
+		
+		<div class="row">
+			
+
+			<include file="Public:nav" />
+			
+			
+			<div class="span10">
+				
+				<div class="widget widget-table">
+										
+						<a href="{$referer}" class="btn btn-small">&lt; 返回</a> &nbsp;&nbsp;
+						
+						<span id="btn_span">
+						<switch name="status" >
+						<case value="2"><a href="javascript:passAuth({$row.sid}, this)" class="btn btn-warning">点击这里通过审核！</a></case>
+						<case value="3"><a href="javascript:void(0)" class="btn btn-default disabled">已经通过审核</a></case>
+						<default />
+						</switch>
+						</span>
+						
+						<br /><br />
+						
+						<empty name="row">
+                        没有认证数据
+						<else />
+						<table class="table table-striped">
+							<tr>
+								<td>公司名称</td>
+								<td>{$row.company_name}</td>
+							</tr>
+							<tr>
+								<td>法人代表</td>
+								<td>{$row.legal_name}</td>
+							</tr>
+							<tr>
+								<td>固定电话</td>
+								<td>{$row.tel}</td>
+							</tr>
+							<tr>
+								<td>修改时间</td>
+								<td>{$row.ctime}</td>
+							</tr>
+							<tr>
+								<td>营业执照</td>
+								<td><img src="__PUBLIC__/Uploads/cardpic/{$row.cardpic}" width="450px" alt="营业执照" title="点击看大图" class="img-thumbnail"></td>
+							</tr>
+						</table>
+						</empty>
+						
+				</div> <!-- /widget -->
+				
+			</div> <!-- /span10 -->
+			
+		</div> <!-- /row -->
+		
+	</div> <!-- /container -->
+	
+</div> <!-- /content -->
+
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="__AJS__/jquery-1.7.2.min.js"></script>
+<script src="__AJS__/excanvas.min.js"></script>
+<script src="__AJS__/jquery.flot.js"></script>
+<script src="__AJS__/jquery.flot.pie.js"></script>
+<script src="__AJS__/jquery.flot.orderBars.js"></script>
+<script src="__AJS__/jquery.flot.resize.js"></script>
+<script src="__AJS__/bootstrap.js"></script>
+<script src="__AJS__/charts/bar.js"></script>
+<include file="Public:footer" />
+
+
+<script>
+function passAuth(sid, node) {
+	if (!confirm("您确定要让这位商家通过审核？")) {
+		return
+	}
+	var url = "{:U('Shopkeeper/ajaxHandleAuth', array('sid' => 'REPLACE'))}"
+	url = url.replace(/REPLACE/, sid)
+	$.post(url, function(data) {
+		if (!data.status) {
+			$("#btn_span").html('<a href="javascript:void(0)" class="btn btn-default disabled">已经通过审核</a>')
+		} else {
+			$(node).html("审核失败，原因是： " + data.msg)
+		}
+	}, 'json')
+	
+}
+</script>

@@ -1,0 +1,53 @@
+<div id="main" class="main">
+    <div class="main-title">
+        <h2>查看学生证书</h2>
+    </div>
+    <form id='form' class="form-horizontal">
+        <div class="form-item">
+            <label class="item-label">选择班级<span class="check-tips">（请选择班级）</span></label>
+            <div class="controls">
+               <button disabled class="select-btn select-selectClass" target-form="form-horizontal" type="button" onclick="selectClass.get(this)">{$info.cl_name|default='点击选择'}</button>
+               <input name="se_classId" type="hidden" value="{$info.se_classId|default=''}" id="classId"/>
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">选择学生<span class="check-tips">（点击选择该级别需要学习的课程）</span></label>
+            <div class="controls">
+                <button disabled class="select-btn select-student" target-form="form-horizontal" type="button" onclick="selectStudent.get(this,appendStudent)">{$info.studentName|default='选 择'}</button>
+                <input type="hidden" name="se_studentId" value="{$info.se_studentId}" id="studentId" />
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">上传证书</label>
+            <div class="controls">
+                {:hook('UploadImages')}
+            </div>
+        </div>
+        <div class="form-item">
+            <button class="btn submit-btn" id="submit" type="button">确 定</button>
+            <button class="btn btn-return" type="button">返 回</button>
+        </div>
+    </form>
+</div>
+
+<block name="script">
+	<link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+	<php>if(C('COLOR_STYLE')=='blue_color') echo '<link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">';</php>
+	<link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+	<script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+    <script type="text/javascript">
+        function appendStudent(id,name) {
+        	$('.select-student').text(name);
+        	$('#studentId').val(id);
+        	
+        }
+        $(function(){
+    		$('#upload_picture').hide();
+    	});
+        ajaxSubmitForm();
+        $('.btn').click(function(){
+        	layer.closeAll();
+    	});
+    </script>
+</block>

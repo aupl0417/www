@@ -1,0 +1,26 @@
+/* shopkeeper */
+.mb25{margin-bottom: 25px;}
+.my-form-group{margin-left: 100px;position: relative;}
+.my-form-group label{position: absolute;left: -110px;margin-top: 5px;}
+.upload-btn{background-color: #eee;border: 1px solid #ddd;width: 94px;height: 95px;line-height: 95px;display: inline-block;text-align: center;}
+.err-info{color: red;}
+.upload-hint{display: inline-block;}
+.save-btn{border: none;width: 125px;height: 35px;color: white;font-size: 18px;}
+/* user */
+.switcher{background-color: white;list-style: none;}
+.switcher li{float: left;height:50px;line-height:50px;width: 50%;text-align: center;border-right: 1px solid #ddd;border-bottom:1px solid #ddd;cursor: pointer;}
+.switcher li:last-child{border-right: none;}
+.switcher li.active{color: #2DA4DE;border-bottom: 1px solid #2DA4DE;}
+
+.s-item-sub{background-color: white; padding: 30px 55px 1px 55px; margin-bottom: 3px;}
+.item-sub-title{margin: 0 0 20px 0;}
+.uploader-wrap{margin-top: 20px;}
+
+.phone-cert-wrap{background-color: white; padding: 30px 55px;}
+.form-row{position: relative;margin:0 0 20px 120px;}
+.form-row-title{position: absolute;left: -115px;width: 90px; text-align: right;}
+.form-row input {height: 35px; width: 240px;padding: 0 7px;}
+.ver-code-send{border: 1px solid #2DA4DE; background-color: white;height: 35px; color: #2DA4DE;padding: 0 20px;transition: all .3s ease;-webkit-transition: all .3s ease; -moz-transition: all .3s ease;}
+.ver-code-send[disabled]{background-color: #eee; }
+.send-tip{display: inline; margin-left: 10px;}
+.send-tip span {color: #2DA4DE;}

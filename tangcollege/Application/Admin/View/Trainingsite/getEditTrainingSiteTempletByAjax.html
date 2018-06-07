@@ -1,0 +1,91 @@
+ <div id="main" class="main">
+	 <form action="{:U()}" method="post" class="form-horizontal" id="addSiteForm">
+		<div class="form-item cf">
+			<label class="item-label">培训地址名<span class="check-tips"></span></label>
+			<div class="controls">
+				<input type="text" class="text input-large" name="tra_name" value="{$info.tra_name}">
+			</div>
+		</div>
+         <script type="text/javascript" src="__JS__/plug/areaSelect.js"></script>
+		 <script>
+             $(document).ready(function(){
+				var data = {$brachLists};
+                $('.menu-level').menulevel({data:data});
+				url = '{:U('Trainingsite/getAreaInfoByAjax')}';
+				ids = {$info.tra_area};
+				$('.select-area').areaSelect({url:url,ids:ids});
+		      }); 
+        </script>
+        <div class="form-item cf">
+            <label class="item-label">属所分院<span class="check-tips">（请选择用户所在分院）</span></label>
+            <div class="controls">
+               <div class="menu-level">
+                 <div class="container">
+                  <span class="selected round">{$info.br_name}</span>    
+                  <ul class="items" style="top:-170px;">
+                    <li value="">请选择</li>
+                  </ul>
+                 </div>   
+               <input name="tra_branchId" type="hidden" value="{$info.tra_branchId}" id="menu-level-value"/>
+              </div>
+            </div>
+        </div>
+		<div class="form-item cf">
+			<label class="item-label">所在地区<span class="check-tips"></span></label>
+			<div class="controls select-area">
+				<select  id="province">
+                  <option>选择省</option>
+				</select>
+                <select id="city">
+                  <option>选择市</option>
+				</select>
+                <select name="tra_areaId" id="area">
+                   <option>选择县/区</option>
+				</select>
+			</div>
+		</div>
+        <div class="form-item cf">
+			 <label class="item-label">详细地址</label>
+            <div class="controls">
+               <input type="text" class="text input-large" name="tra_address" value="{$info.tra_address}">
+            </div>
+		</div>
+		<div class="form-item cf">
+			<label class="item-label">产权类型</label>
+            <div class="controls">
+               <select name="tra_holdType">
+                  <option value="0" <if condition="$info['tra_holdType'] eq 0 ">selected="selected"</if>>自主拥有</option>
+                  <option value="1" <if condition="$info['tra_holdType'] eq 1 ">selected="selected"</if>>临时租用</option>
+				</select>
+            </div>
+		</div>
+
+		<div class="form-item">
+			
+			<button type="submit" class="btn submit-btn ajax-post" target-form="form-horizontal">确 定</button>
+		</div>
+        <input name="id" type="hidden" value="{$info.tra_id}" />
+	</form>
+ </div>  
+<script type="text/javascript">
+var loading  = null;
+$("#addSiteForm").ajaxForm({
+   beforeSubmit: function(formData) {
+	   loading  = layer.load();
+   },
+   success: function(response) {
+	  layer.close(loading); 
+	  if(response.status == 1) { 
+	    layer.msg('提交成功！', {
+            time: 1000
+        }, function(){
+            location.reload();
+        });   
+	  }else{
+		layer.msg(response.info, {
+            time: 2000
+        });    
+	  }
+   },
+});
+ </script>

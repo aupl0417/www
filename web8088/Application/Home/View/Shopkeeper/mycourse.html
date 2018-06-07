@@ -1,0 +1,112 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+    <meta content="yes"name="apple-mobile-web-app-capable"/>
+    <meta content="black"name="apple-mobile-web-app-status-bar-style"/>
+    <title>机构发布 - 17约课</title>
+    <link rel="stylesheet" type="text/css" href="__HCSS__/reset.css">
+    <link rel="stylesheet" href="__HCSS__/2.css"/>
+    <link rel="stylesheet" href="__HCSS__/4.css"/>
+    <meta name="keywords" content="17约课,一起约课,约课,教育培训,约课神器,校园约课,大学生培训,约老师,约女神,驾驶培训,设计培训,职业考证,音乐培训,英语培训,小语种培训,体育培训" />
+    <meta name="description" content="17约课 - 约您身边的良师益友！为您提供约老师，约课程，约女神，约学霸等海量信息，充分满足您免费约课，免费发布课程的需求。" />
+  
+</head>
+<body>
+<header id="top_header">
+    <div id="header" align="center">
+        <h3 class="identify_title">课程动态</h3>
+        <a href="javascript:history.back(-1)" class="identify_back"><img src="__HIMG__/Return2.png" alt=""/>返回</a>
+		<?php if ($isMe): ?><a href="{:U('Shopkeeper/course')}" class="identify_to_index">编辑</a><?php endif; ?>
+    </div>
+</header>
+<div class="wrapper" id="wrap">
+    <!--<img src="__HIMG__/loading.gif" alt="" class="loading hidden"/>-->
+    <div class="css-loading hidden">
+        <div class="ball-holder">
+            <div class="ball"></div>
+        </div>
+    </div>
+    <div class="nodata_wrap hidden">
+        <img src="/Public/Home/img/nodata.png" alt="">
+        <p class="nodata_p">还没有课程呢</p>
+    </div>
+</div>
+
+<script id="tpl" type="text/template">
+	{@each data as it,index}
+   <div id="infoPanel${it.id}">
+
+
+
+
+
+        <div class="section_item clearfix">
+            <div class="section_item_box">
+                	<img class="section_item_title_icon" src="__HIMG__/laba.png" alt="">
+            	<a href="{:U('Shopkeeper/cont')}?id=${it.id}" style="  margin-left: 1.1em;">
+					<span class="section_item_title_text" style="color:#333333;">${it.title}</span>
+				</a>
+            </div>
+            <div class="section_item_other clearfix"  style="  position: relative;">
+<?php if ($isMe): ?>
+					<div style="position: absolute;right: 8px; font-size: 12px; top: -2em;color: #F40518;">
+  						<img src="__HIMG__/Shape 7.png" alt="" style=" width: 14px;">
+						<span  onclick="deleteInfo(${it.id})" style="vertical-align: middle;">删除</span>
+					</div>
+<?php endif; ?>
+                <div class="section_item_other_l">
+					<a href="{:U('Shopkeeper/info')}?id=${it.sid}">
+                    	<img class="section_item_cont_avator" src="__UPLOAD__${it.avatar}" onerror="javascript:this.src='__IMGDEFAULT__';" alt="">
+					</a>
+                    <span style="font-size: small;color: #666565">${it.nickname}</span>
+                </div>
+                <div class="section_item_other_r" style="color: #5A5A5A;" >
+					${it.price}元
+					{@if it.preferent}
+						<span> ${it.preferent} </span>
+						<img src="__HIMG__/Hui2.png" alt="" />
+					{@/if}
+				</div>
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+    {@/each}
+</script>
+
+<script type="text/javascript" src="__HJS__/zepto.min.js"></script>
+<script type="text/javascript" src="__HJS__/juicer-min.js"></script>
+<include file="Component:alert" />
+<script type="text/javascript" charset="utf-8">
+    var s_sign_timeout_loc = "__SELF__";
+    var mycourse_url =  "{:U('Api/shopInfo/mycourse', ['id' => $sid])}";
+    var signin_url =  "{:U('Shopkeeper/signin')}";
+    var deleteInfo_url = "{:U('Api/ShopInfo/deleteInfo')}";
+    /**
+     * 删除一条课程信息
+     */
+    function deleteInfo(infoId) {
+        if (!confirm("您确定要删除这条课程信息吗？")) {
+            return
+        }
+
+
+        $.post(deleteInfo_url, {"id": infoId}, function(data) {
+
+            if (data.status != 200) {
+                return easyAlert(data.msg)
+            }
+
+            $("#infoPanel" + infoId).remove()
+        }, "json")
+    }
+</script>
+<script type="text/javascript" src="__HJS__/shopkeeper/mycourse.js" charset="utf-8"></script>
+<include file="Public:statistics"/>
+</body>
+</html>

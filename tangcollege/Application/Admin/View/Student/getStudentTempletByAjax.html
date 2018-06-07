@@ -1,0 +1,94 @@
+ <div class="pop-search-box">
+        <div class="condition">
+           <div class="branchs">
+          
+            </div>
+            <form  method="post" id="search" style="display:inline">
+               <script>
+               $(document).ready(function(){
+				  var data = {$brachLists};
+                 $('.menu-level').menulevel({data:data,callBack:initClassSelect});
+               }); 
+			   function initClassSelect(v) {
+				   searchStudent.getClass(v);
+				   
+			   }
+             </script>
+             <div class="menu-level" style="display:inline-block; float:left;">
+                 <div class="container">
+                  <span class="selected round">选择分院</span>    
+                  <ul class="items">
+                    <li value="">选择分院</li>
+                  </ul>
+                 </div> 
+             </div>      
+              <input name="cl_branchId" type="hidden" value="" id="menu-level-value"/>
+              <select name="classId" id="select-classId"></select>
+              <input name="words" type="text" class="input" placeholder="    关键字"/>
+              <button class="ok" type="submit">搜 索</button>
+            </form>
+        </div>
+        <ul class="result">
+                                 
+        </ul>
+        <div class="footer"><button class="ok" onclick="searchStudent.ok(this)">确 定</button></div> 
+        <div class="class-loading"></div>
+   </div>
+    <script type="text/javascript">
+		function searchStudent(){ 
+            var object = new Object; 
+            object.box = null; 
+            object.getStudent = function(searchData){ 
+			   $('.pop-search-box .class-loading').show();
+			   url = "{:U('Student/getStudentListByAjax')}";
+			   var liHtml = '';
+               $.ajax({type:'GET',url:url,dataType: "JSON",data:searchData, success:function(data){
+				  if(data.length > 0) { 
+                    $.each(data, function(name, value) {
+                      liHtml += '<li><div class="l">'+value.username+'</div><div class="m"><label>所在班级：</label>'+value.cl_name+'</div><div class="r"><input name="classId" type="radio" value="'+value.id+'" /></div></li>';
+                    });
+				  }else{
+					  liHtml = '<li style="text-align:center">没有记录</>'
+				  }
+				  $('.pop-search-box .class-loading').hide();
+				  $('.pop-search-box .result').html(liHtml);
+               }});
+           }; 
+		   object.getClass = function(branchId){ 
+			   url = "{:U('Class/getselectClassListByAjax')}";
+			   var selectHtml = '<option>请选择班级</option>';
+			   $.ajax({type:'GET',url:url,data:{branchId:branchId}, dataType: "json", success: function(data){
+                  $.each(data, function(name, value) {
+                      selectHtml += '<option value="'+value.cl_id+'">'+value.cl_name+'</option>';
+                  });
+				  $('#select-classId').html(selectHtml);
+              }});
+           }; 
+		   object.ok = function(e) {
+			 var selectOb = $('.pop-search-box [name="classId"]:checked'); 
+			 if(selectOb.length > 0) {  
+			   var val = selectOb.val();
+			   var text = selectOb.parent().parent().find('.l').html();
+			   selectStudent.callBack(val,text);
+			   layer.close(selectStudent.box);
+			 }else{
+			    layer.msg('没选择任何学生！');	
+			 }
+		   }
+          
+		   object.init = function(e) {
+			  object.getStudent([]);
+			  object.getClass(); 
+			   $('.pop-search-box #search').submit(function(e){   
+				   object.getStudent({branchId:$('.pop-search-box [name="branchId"]').val(),time:$('.pop-search-box [name="time"]').val(),words:$('.pop-search-box [name="words"]').val()});
+                   return false;
+               });
+ 
+		   }
+		   return object; 
+        } 
+		var searchStudent = searchStudent();
+		searchStudent.init();
+		
+		
+	</script>

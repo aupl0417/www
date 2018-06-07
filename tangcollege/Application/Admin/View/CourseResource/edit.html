@@ -1,0 +1,98 @@
+<div id="main" class="main">
+    <div class="main-title">
+        <h2>{:isset($info['cr_id'])?'编辑':'新增'}资源</h2>
+    </div>
+    <form id='form' action="{:U()}" method="post" class="form-horizontal" enctype ="multipart/form-data">
+    	<div class="form-item">
+            <label class="item-label">资源名字：</label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="cr_name" value="{$info.cr_name|default=''}">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">资源简介：</label>
+            <div class="controls">
+            	<label class="textarea input-large">
+					<textarea name="cr_description">{$info.cr_description|default=''}</textarea>
+				</label>
+            </div>
+        </div>
+        <script>
+           	function appendCourse(id,name) {
+           		$('#courseId').val(id);
+           		$('.select-course').text(name);
+           	}
+        </script>
+        <div class="form-item">
+            <label class="item-label">选择课程<span class="check-tips">（点击选择该级别需要学习的课程）</span></label>
+            <div class="controls">
+                <input type='hidden' name='cr_courseId' value='{$info.cr_courseId}' id="courseId">
+                <button class="select-btn select-course" target-form="form-horizontal" type="button" onclick="selectCourse.get(this,appendCourse)">{$courseName|default='选择课程'}</button>
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">是否共享：<span class="check-tips">（包括该资源下的文件、网页文章和题库是否共享）</span></label>
+            <div class="controls">
+                <input type='radio' name='cr_isPublic' checked value='0'>否 　　<input type='radio' name='cr_isPublic' <if condition='$info.cr_isPublic eq 1'>checked</if> value='1'>是
+            </div>
+        </div>
+        <if condition="$type eq 0">
+	        <div class="form-item">
+	            <label class="item-label">{:isset($info['cce_id'])?'编辑':'新增'}资源：</label>
+	            <div class="controls">
+	                {:hook('UploadImages')}
+	            </div>
+	        </div>
+	    <elseif condition="$type eq 1"/>
+	    	<script>
+		    	function delVideo(obj){
+					$(obj).parent().remove();
+				}
+	    	</script>
+	    	<div class="form-item video">
+	    		<volist name='info.crd_url' id='co' key="k">
+	    			<label class="item-label">
+	    				<input type="text" class="text input-large" name="{$uploadData.name|default='icon'}[]" value="{$co.url}">
+		    			<if condition="$k eq 1">
+		            		<button type='button' id='addVideo' class='sub'>添加地址</button>
+		        		<else/>
+		        			<button type="button" onclick="delVideo(this);" class="sub delVideo">删除</button>
+		        		</if>
+	        		</label>
+	        	</volist>
+	        </div>
+	    <elseif condition="$type eq 3"/>
+	    	<div class="form-item">
+	            <label class="textarea">
+		            <textarea name="crp_content">{$info.crp_content}</textarea>
+		            <!-- {:hook('adminArticleEdit', array('name'=>'crp_content','value'=>$info['crp_content']))} -->
+	            </label>
+	        </div>
+        <else/>
+	        <div class="form-item">
+	            <label class="textarea">
+		            <textarea name="crp_content">{$info.crp_content}</textarea>
+		            <!-- {:hook('adminArticleEdit', array('name'=>'crp_content','value'=>$info['crp_content']))} -->
+	            </label>
+	        </div>
+        </if>
+        <div class="form-item">
+        	<input type='hidden' name='cr_id' value='{$info.cr_id}'>
+            <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <button class="btn btn-return" type="button">返 回</button>
+        </div>
+    </form>
+</div>
+
+<script>
+	ajaxSubmitForm();
+	$(function(){
+		$('#addVideo').click(function(){
+			var html = '<label class="item-label"><input type="text" class="text input-large" name="{$uploadData.name|default='icon'}[]"> <button type="button" onclick="delVideo(this);" class="sub delVideo">删除</button></label>';
+			$('.video').append(html);
+		});
+	});
+	$('.btn-return').click(function(){
+		layer.closeAll();
+	});
+</script>

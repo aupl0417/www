@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+    <meta content="yes"name="apple-mobile-web-app-capable"/>
+    <meta content="black"name="apple-mobile-web-app-status-bar-style"/>
+    <title>用户登陆 - 17约课</title>
+    <link rel="stylesheet" type="text/css" href="__HCSS__/reset.css">
+    <link rel="stylesheet" href="__HCSS__/4.css"/>
+    <link rel="stylesheet" href="__HCSS__/2.css"/>
+    <meta name="keywords" content="17约课,一起约课,约课,教育培训,约课神器,校园约课,大学生培训,约老师,约女神,驾驶培训,设计培训,职业考证,音乐培训,英语培训,小语种培训,体育培训" />
+    <meta name="description" content="17约课 - 约您身边的良师益友！为您提供约老师，约课程，约女神，约学霸等海量信息，充分满足您免费约课，免费发布课程的需求。" />
+</head>
+<body>
+<div class="register_wrap e_first_register login_height">
+
+    <img src="__HIMG__/logo2.png" alt="" class="register_title"/>
+    <div class="user_register_nav">
+        <p class="user_register_nav_left"><a href="{:U('Index/index')}"><img src="__HIMG__/back.png" alt=""/>返回</a></p>
+        <p class="user_register_nav_right"><a href="{:U('Userregsign/index')}">注册<img src="__HIMG__/go.png" alt=""/></a></p>
+    </div>
+    <div class="input_wrap validate">
+        <input type="text"  name="logintype"  class="register_input" id="phone" placeholder="手机号码">
+        <i class="input_close_icon op_0"></i>
+        <div class="validate_wrap">
+            <input type="text" name="logintype" id="phone_code"  class="register_input" placeholder="输入验证码">
+        </div>
+        <input type="text" name="type" id="hiddentype" class="register_input hidden">
+        <button id="send_phone_code" class="validate_btn">发送验证码</button>
+    </div>
+
+    <!--出错了就把Hidden去掉就会显示了，有多少个错误就在多少行li-->
+    <div id="reg_err" class="u_register_err hidden">
+        <ul>
+            <li><img src="__HIMG__/Exclamation.png" alt="" class="register_err_image"/><span id="reg_err_text">请填写正确的手机号码</span></li>
+        </ul>
+    </div>
+
+
+    <button id="login" class="register_submit" style="margin-top: 2em;"><img src="__HIMG__/loading.gif" alt="" class="hidden" id="loading_img"/><span id="login_info">登陆</span></button>
+
+</div>
+
+
+<script type="text/javascript" src="__HJS__/zepto.min.js"></script>
+<include file="Component:confirm" />
+<script type="text/javascript">
+var code_post_url="{:U('userregsign/loginByCode')}";
+var send_post_url="{:U('userregsign/sendPhone')}";
+var index_url    ="{:U('Index/index')}";
+</script>
+<script type="text/javascript">
+    (function () {
+        var oldScroll = $(".login_height").height();
+        $("input").on("focus", function (event) {
+            var height = oldScroll + 150;
+            $(".login_height").css("height",height+"px");
+        }).on("blur", function (event) {
+            $(".login_height").css("height",oldScroll+"px");
+        });
+        var btn = $(".validate_btn");
+        btn.prop("disabled",true);
+        $("#phone").on("input", function (e) {
+            var data = $("#phone").val();
+            if(data.length==11){
+                btn.prop("disabled",false);
+                btn.addClass("validate_btn_active");
+            }
+            else{
+                btn.prop("disabled",true);
+                btn.removeClass("validate_btn_active");
+            }
+        });
+        btn.click(function () {
+            /**
+             * 这里判断手机合法性
+             */
+
+	          if(checkphone()){
+	        	   var typevalue=$("#phone").val();
+	               var datacode={};
+	               datacode.phone=typevalue;
+	               $.ajax({
+	                   type: 'POST',
+	                   url:send_post_url,
+	                   dataType: 'json',
+	                   data:datacode,
+	                   success: function(data) {
+	                	   console.log(data);
+	                       if(data.status!=200){
+	                           $('#reg_err').removeClass('hidden');
+	                           $("#reg_err_text").html(data.msg);
+	                       }else{
+							   $('#reg_err').removeClass('hidden');
+							   $("#reg_err_text").html("发送成功！");
+								//倒计时
+					            btn.prop("disabled",true);
+					            btn.removeClass("validate_btn_active");
+					            var time=61;
+					            var timeInter =setInterval(function () {
+					                time = time - 1;
+					                if(time>=0){
+					                    btn.text(time+"s后重发")
+					                }
+					                else{
+					                    clearInterval(timeInter);
+					                    btn.text("重新发送");
+					                    btn.prop("disabled",false);
+				
+					                    if(checkphone()){
+					                    	btn.addClass("validate_btn_active");
+					                    }
+					                    /**
+					                     * 这里判断手机合法性如果合法，添加   btn.addClass("validate_btn_active");
+					                     */
+					
+					                }
+					            },1000);//倒计时
+	                       }
+	                   },
+	                   error:function(data){
+	                       $('#reg_err').removeClass('hidden');
+	                       $("#reg_err_text").html('请重新刷新页面再登录');
+	                   }
+	               });
+	           
+             
+	           }
+
+        });
+
+        /*登陆成功的时候*/
+        function loginSussess() {
+            $("#loading_img").removeClass("hidden");
+            $("#login_info").text("登陆中...");
+        }
+
+        /*登陆按钮点击的逻辑*/
+        $("#login").click(function () {
+
+			loginSussess();
+        	logindata();
+        	
+        })
+        
+        
+        
+        
+    //隐藏错误提示
+	function ontext(){
+	  document.getElementById('reg_err').className='u_register_err hidden';
+	}
+    //错误提示
+	function errtext(classn,etext){
+	  document.getElementById('reg_err').className=classn;
+	  document.getElementById('reg_err_text').innerHTML =etext;
+	}
+        //检查类型
+       function checkphone(){
+           var type=$("#phone").val();
+           type=$.trim(type);
+           var tel=/^(1)\d{10}$/;	//包括移动电话和固定电话，但是必须大于7位
+          if(tel.test(type)){
+                return true;
+           }else{
+                errtext('u_register_err','请输入正确的电话号码或邮箱');
+                return false;
+           }
+        }
+       function codecheck(){
+	       	var code=$("#phone_code").val();
+	       	var codese=/^\d{6}$/;
+	       	if(!codese.test(code)){
+	       		errtext('u_register_err','验证码必须是6为数字');
+	               return false;
+	       	}
+            return true;
+       }
+       /*function sendphonecode(){
+		   // 禁用滚动
+		   $('#send_phone_code').unbind('click', sendphonecode)
+           if(checkphone()){
+               var typevalue=$("#phone").val();
+               var datacode={};
+               datacode.phone=typevalue;
+               $.ajax({
+                   type: 'POST',
+                   url:send_post_url,
+                   dataType: 'json',
+                   data:datacode,
+                   success: function(data) {
+                       if(data.status!=200){
+                           $('#reg_err').removeClass('hidden');
+                           $("#reg_err_text").html(data.msg);
+                       }else{
+						   $('#reg_err').removeClass('hidden');
+						   $("#reg_err_text").html("登录成功！");
+//   									setTimeout("window.location.href='{:U("Index/index")}'",1200);
+                           //window.location.href=index_url;
+                       }
+						//绑定滚动事件
+						$('#send_phone_code').bind('click', sendphonecode);
+                   },
+                   error:function(data){
+                       $('#reg_err').removeClass('hidden');
+                       $("#reg_err_text").html('请重新刷新页面再登录');
+						//绑定滚动事件
+						$('#register_sendCode').bind('click', regsendcode);
+                   }
+               });
+           }else{
+               return false;
+           }
+       }*/
+       function logindata(){
+           if(codecheck()){
+               var phone_code=$("#phone_code").val();
+               var datalogin={};
+               datalogin.code=phone_code;
+               $.ajax({
+                   type: 'POST',
+                   url:code_post_url,
+                   dataType: 'json',
+                   data:datalogin,
+                   success: function(data) {
+                       if(data.status!=200){
+                           $('#reg_err').removeClass('hidden');
+                           $("#reg_err_text").html(data.msg);
+                       }else{
+//							$('#reg_err').removeClass('hidden');
+//							$("#reg_err_text").html("登录成功！");
+
+//   									setTimeout("window.location.href='{:U("Index/index")}'",1200);
+							if(data.histhref==''||data.histhref==null){
+								window.location.href=index_url;
+							}else{
+								window.location.href=data.histhref;
+							}
+                           
+                       }
+                   },
+                   error:function(data){
+                       $('#reg_err').removeClass('hidden');
+                       $("#reg_err_text").html('请重新刷新页面再登录');
+                   }
+               });
+           }else{
+               return false;
+           }
+       }
+
+
+        
+        
+    })()
+</script>
+<include file="Public:statistics"/>
+</body>
+</html>
+

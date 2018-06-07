@@ -1,0 +1,111 @@
+<div id="main" class="main getClassTableListTempletByAjax">
+  <div class="main-title">
+        <h2>查看课时</h2>
+    </div>
+    <div class="data-table">
+		<table>
+            <!-- 表头 -->
+            <thead>
+                <tr>
+                    <th>排序</th>
+                    <th>ID</th>
+                    <th>班级</th>
+                    <th>教师</th>
+                    <th>课程</th>
+                    <th>培训地址</th>
+                    <th>开始时间</th>
+                    <th>结束时间</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+
+            <!-- 列表 -->
+            <tbody class="class-table-lists">
+               <volist name='lists' id='data' empty="$empty">
+                	<tr>
+                        <td><input type="text" class="text input-mini courseSortNum" name="cta_sort" id="courseSortNum" value="{$data.cta_sort}" style="width:50px" data-id="{$data.cta_id}"></td>
+                        <td>{$data.cta_id}</td>
+                		<td>{$data.cl_name}</td>
+                		<td>{$data.username}</td>
+                		<td>{$data.co_name}</td>
+                		<td>{:msubstr($data['tra_address'],0,30)}</td>
+                		<td>{$data.cta_startTime}</td>
+                		<td>{$data.cta_endTime}</td>
+                        <td><a class="sch-btn" href="javascript:void(0)"  onclick="classTableManager.edit({$data.cta_id})">编辑</a> <a class="sch-btn" href="javascript:void(0)" onclick="classTableManager.del({$data.cta_id})">删除</a> <a class="sch-btn" href="javascript:void(0)" onclick="classTableManager.image({$data.cta_id})">查看二维码</a></td>
+                	</tr>
+               </volist>      
+            </tbody>
+        </table>
+	</div>
+</div>  
+<script type="text/javascript">
+function classTableManager(){ 
+            var manager = new Object; 
+            manager.box = null; 
+            manager.del = function(id){ 
+			   if(!confirm('确认删除？'))
+			     return false;
+			   url = "{:U('ClassTable/del')}";
+               $.ajax({type:'GET',url:url,data:{ids:id}, dataType: "json", success: function(data){
+                   if(data.status == 1) {
+					  layer.msg('删除成功', function(){
+                          url = "{:U('ClassTable/getClassTableListTempletByAjax',['classId'=>$info['cl_id']])}";
+			              $('.getClassTableListTempletByAjax').offsetParent().empty().load(url);
+                      });
+				  }else{
+					  layer.msg(data.info, {
+                         time: 2000
+                      });
+				  }
+              }});
+           }; 
+		  
+		   manager.add = function() {
+			  $.get("{:U('ClassTable/getAddClassTableTempletByAjax')}", function(str){
+                manager.box = layer.open({
+                       type: 1,
+                       content: str,
+					   scrollbar: false,
+                     });
+              }); 
+		   };
+		   
+		   manager.image = function(id) {
+               $.get("{:U('ClassTable/getClassTableImageByAjax')}",{id:id}, function(str){
+                manager.box = layer.open({
+                       type: 1,
+                       content: '<img src="'+str+'" />',
+					   scrollbar: false,
+                     });
+              }); 
+              
+		   };
+		   
+		   
+		   
+		   manager.edit = function(id) {
+			  $.get("{:U('ClassTable/getEditClassTableTempletByAjax')}", {id:id,act:1}, function(str){
+                manager.box = layer.open({
+                       type: 1,
+                       content: str,
+					   scrollbar: false,
+                     });
+              }); 
+		   };
+		   
+           return manager; 
+        } 
+		
+  var classTableManager = classTableManager();
+  $(".courseSortNum").blur(function(){
+               url = "{:U('ClassTable/sortClassTableByAjax')}";
+               $.ajax({type:'GET',url:url,data:{id:$(this).attr('data-id'),cta_sort:$(this).val()},success: function(data){
+                   layer.msg(data.info,{time:1000},function(){
+					   if(data.status == 1) {
+						    url = "{:U('ClassTable/getClassTableListTempletByAjax',['classId'=>$classId])}";
+			                $('.getClassTableListTempletByAjax').offsetParent().empty().load(url);
+					   }
+				   });
+              }});
+});
+</script> 

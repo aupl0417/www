@@ -1,0 +1,130 @@
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+    <meta content="yes"name="apple-mobile-web-app-capable"/>
+    <meta content="black"name="apple-mobile-web-app-status-bar-style"/>
+    <meta name="format-detection"content="telphone=no"/>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="__HCSS__/reset.css">
+    <link rel="stylesheet" href="__HCSS__/2.css"/>
+    <link rel="stylesheet" href="__HCSS__/4.css"/>
+    <meta name="keywords" content="17约课,一起约课,约课,教育培训,约课神器,校园约课,大学生培训,约老师,约女神,驾驶培训,设计培训,职业考证,音乐培训,英语培训,小语种培训,体育培训" />
+    <meta name="description" content="17约课 - 约您身边的良师益友！为您提供约老师，约课程，约女神，约学霸等海量信息，充分满足您免费约课，免费发布课程的需求。" />
+</head>
+<body>
+<header id="top_header">
+    <div id="header" align="center">
+        <h3 class="identify_title">机构详情</h3>
+        <a href="{:U('GroupInfo/organiza')}" class="identify_back"><img src="__HIMG__/Return2.png" alt=""/>返回</a>
+    </div>
+</header>
+<div class="wrapper" style="padding-bottom: 4em;">
+            <div class="business_top_wrap">
+                <div class="business_img_wrap">
+                    <a href="{:U('Shopkeeper/info')}" id="photo_link"><img  id="avatar" src="__UPLOAD__/shop_avatar/shop_default_avatar.jpg" path="__UPLOAD__"/></a>
+                </div>
+                <div class="business_info">
+                    <h3>正在获取</h3>
+                    <p>正在获取</p>
+                </div>
+                    <a href="#" id="phone_a"><p class="business_info_p" id="phone"><img src="__HIMG__/phone.png" alt=""/><span id="phone_info">正在获取</span></p></a>
+
+                <div class="business_info_p">
+                    <p class="" id="addr"><img src="__HIMG__/Location2.png" alt=""/><span id="add_info">正在获取</span></p>
+                </div>
+            </div>
+            <p class="business_reply_title">全部评论</p>
+            <div class="business_reply_wrap">
+                <div class="business_relay_input_wrap">
+                    <div class="input_wrap business_reply_input">
+                        <input type="text" class="register_input" placeholder="写下你的评论">
+                    </div>
+                    <button class="business_reply_btn">评论</button>
+                </div>
+               <div id="business"></div>
+
+                <p class="business_relay_more hidden" >查看更多评论</p>
+            </div>
+
+            <!--热门课程-->
+            <div class="section_spread">
+                        <div class="section_spread_title">
+                            <p class="section_spread_title_brand">课程推广</p>
+                            <h2>热门课程</h2>
+                            <h3>组课热门课程八折优惠</h3>
+                        </div>
+                        <div class="section_spread_cont">
+                        	<volist name="gener" id="ge">
+                            <div class="span5 section_spread_item">
+                            	
+                                <div class="section_spread_img_wrap">
+                                 <a href="{:U('Shopkeeper/info', ['id'=>$ge['sid']])}">
+                                <img src=" __UPLOAD__{$ge.avatar}" alt=""/>
+                                </a>
+                                </div>
+                                <a href="{:U('Shopkeeper/cont', ['id'=>$ge['id']])}">
+                                <p class="section_spread_first_title">
+                                    {$ge.title}
+                                </p></a>
+                                <p class="section_spread_second_title">
+                                  	{$ge.nickname}
+                                </p>
+								
+                            </div>      
+							</volist>                     
+                        </div>                    
+            	</div>
+            <button class="business_set">设为心愿机构</button>
+</div>
+<!--商家模板-->
+<script id="comment" type="text/template">
+    {@each shopkeepercomment as it,index}
+<div id="delcom${it.id}">
+    <div class="business_reply_item">
+        <a href="{:U('LookUser/moInfo')}?uid=${it.uid}"><img src="${it.avatar}" alt="" class="business_reply_img"/> </a>
+        <div class="business_reply_info">
+            <h2><b class="name_comment_1">${it.firstname}${it.lastname}</b>
+						{@if it.depth!=0}
+                            <b class="name_comment">回复{@if it.answer_u_id!=0}${it.answer_u_name}</b><span class="hidden">${it.answer_u_id}</span>
+							{@/if}:
+						{@/if}
+			</h2>
+            <p>${it.content}</p>
+						<span  class="hidden now_com_id">${it.id}</span>
+						<span  class="hidden now_com_depth">${it.depth}</span>
+        </div>
+        <span>${it.ctime}</span>
+					<a  href="#" class="comment_rep_b">回复</a>
+                    {@if it.login_user!=0}
+						{@if it.login_user==it.uid}
+							<a href="#" class="comment_delete_b">删除</a>
+						{@/if}
+					{@/if}
+    </div>
+	<div class="business_relay_input_wrap comment_rep_wrap hidden">
+        <div class="input_wrap business_reply_input">
+            <input type="text" class="register_input" placeholder="请输入你的评论">
+            <i class="input_close_icon op_0" style="top: 0.6em;"></i>
+        </div>
+        <button  class="business_reply_btn">回复</button>
+    </div>
+</div>
+    {@/each}
+</script>
+<script type="text/javascript" src="__HJS__/zepto.min.js"></script>
+<script type="text/javascript" src="__HJS__/juicer-min.js"></script>
+<script type="text/javascript" src="__HJS__/business.js"></script>
+<include file="Component:alert" />
+<script type="text/javascript">
+	var busajaxUrl="{:U('Api/GroupInfo/getBusiness')}";
+	var comajaxUrl="{:U('Api/GroupInfo/getComment')}";
+	var commUrl="{:U('Api/GroupInfo/insertComment')}";
+	var commDel="{:U('Api/GroupInfo/delComment')}";
+	var busUrl="{:U('GroupInfo/business')}";
+	var relUrl="{:U('GroupInfo/release')}";
+</script>
+<include file="Public:statistics"/>
+</body>
+</html>

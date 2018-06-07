@@ -1,0 +1,119 @@
+/* organization popularize */
+.as-title{padding: 15px 25px;background: white;margin-bottom: 2px;}
+.as-title span{margin-left: 8px;font-weight: normal;}
+.po-item{position: relative; background-color: white;margin-bottom: 2px;padding: 20px 25px 50px 25px;}
+.po-item h2{margin-bottom: 18px;}
+/* .po-menu, .pr-menu{margin-bottom: 16px;} */
+.po-item-wrap{ }
+.po-menu li, .pr-menu li{/* -webkit-transition: all .3s;-moz-transition: all .3s;-ms-transition: all .3s;-o-transition: all .3s;transition: all .3s; */position: relative;float: left;width: 25%;height: 70px;line-height: 70px;cursor: pointer;text-align: center;background-color: #e5e5e5;word-spacing: -1px;letter-spacing: -1px;}
+.po-menu li:hover, .po-menu .active, .pr-menu li:hover, .pr-menu .active{background-color: white;border-top: 4px solid #3199CE;height: 66px;}
+.po-img{float: left;}
+.po-cont{margin-left: 332px;}
+.po-c-title{margin: 20px 0;}
+.po-c-other{padding: 16px 0;}
+.bj-c{margin: 0 20px;}
+.po-i-mh{min-height: 310px;}
+/* contact us */
+.section{position: relative; margin-bottom: 15px;overflow: hidden;}
+
+.about-album, .about-intro, .c-help, .c-service, .c-agency{padding-bottom: 1000px; margin-bottom: -1000px;}
+
+.about-album{ float: left;width: 370px;margin-right: 20px;}
+.about-intro{margin-left: 390px;padding-left: 20px;padding-right: 20px;padding-top: 30px;}
+.about-intro p{text-indent: 2em;}
+
+.about-intro, .c-help, .c-service, .c-agency, .c-service-station, .hotline-wrap{background-color: white;}
+
+.c-help, .c-service, .c-agency, .c-service-station{padding-top: 20px;padding-left: 20px;padding-right: 20px;}
+.c-help, .c-service, .c-agency{float: left; margin-right: 10px;}
+.c-help{width: 330px;}
+.c-service{width: 245px;}
+.c-agency{width: 285px; margin-right: 0px;}
+.c-help h1, .c-service h1, .c-agency h1, .c-service-station h1, .h-title h1, .h-number .number{color: #555;}
+.c-help h1, .c-service h1, .c-agency h1, .c-service-station h1{font-size:20px;font-weight:bold;padding-bottom: 10px;}
+.c-cont{padding-bottom: 20px;}
+.c-cont .smaller, .c-cont a{font-size: 14px;}
+.c-cont p{color:#999;line-height: 2;font-size: 16px;}
+.c-cont a{color: #2C9ACF;}.c-cont a:hover{color: #37BDFD;}
+
+.hotline-wrap{padding: 20px 25px;}
+.h-phone{float: left;margin-right: 20px;}
+.h-title{float: left;}
+.h-number{float: right;text-align: right;}
+.h-title h1, .h-number .number{font-size: 24px; font-weight: bold;padding-top: 10px;}
+.h-number .number{letter-spacing: -2px;}
+.h-title p, .h-number p{color: #999;}
+
+/* join us */
+.main{width:764px;float:left;}
+.j-jumbotron{background-color: white;padding: 50px 40px 40px 40px;}
+.j-logo{float: left;}
+.j-main{float: left;margin: 5px 0 0 30px;width: 490px;}
+.j-main h1{font-size: 20px;line-height: 40px;}
+.j-main p{color: #666;margin-top: 10px;}
+.j-tip{margin-top: 20px;color: #666;}
+.j-tip span{padding: 0 5px;color: #2C9ACF; font-weight: bold;}
+
+.recruitments{background-color: white;margin-top: 15px;min-height: 1000px;}
+.re-item{padding: 30px 20px;border-bottom: 1px solid #eee;}
+.re-main{height: 24px;line-height: 24px;}
+.re-position{float: left;}.re-position a{color: #2C9ACF;font-size: 18px;text-decoration: none;}
+.re-location{color: #999;float: left;margin-left: 16px;}
+.re-postdate{color: #999;float: right;}
+.re-other{margin-top: 10px;color: #444;}
+
+.sidebar{float: right;width: 220px;}
+.s-table{display:block;margin-bottom: 10px;}
+.s-table tbody {display: block;}
+.s-table tr, .s-table th, .s-table td{display: block;}
+.s-table tr{position: relative; margin-bottom: 5px;}
+.s-table th, .s-table td {background-color: white;padding: 0 15px;line-height: 40px;}
+.s-table th {position: absolute;}
+.s-table td {margin-left: 69px; margin-right: 0;}
+.s-item{background-color: white;margin-bottom: 10px;padding: 10px 15px 20px 15px;}
+.s-i-title{font-size:18px;color: #444;line-height: 40px;}
+.s-i-cont, .s-table{color: #666;}
+.intro{margin-top: 10px;position: relative;}
+.intro-text{position: absolute;bottom: 0;right: 30px;text-align: right; color: #666;}
+.intro-t-name{font-size: 20px;}
+.intro-t-poss{font-size: 14px;}
+
+/* occupation page */
+.o-jumbotron{background-color: #3199CE;height: 310px;}
+.o-jumbotron h1{font-size: 60px;color: white;padding-top: 55px;text-align: center;}
+
+.paper{position: relative;margin: 0 auto;padding: 30px 45px;top: -145px;background-color: white;width: 700px;min-height: 1000px;}
+.brief{position: relative;border-bottom: 1px solid #3199CE;margin: 0 -45px;padding: 0 45px 25px 45px;}
+.b-title{height: 32px;line-height: 32px;padding-bottom: 10px;}
+.b-title h2{font-size: 30px;color: #3199CE;float: left;}
+.b-title p{float: right;}
+.b-tags{position: relative; left: 24px; padding-bottom: 5px;}
+.b-tags li{float: left; margin-right: 24px; list-style-image: url(../img/o_tag.png);}
+.red-tag{color:red;}
+.temptation{}
+
+.infobox{position: relative;}
+.infobox h3{font-size: 20px;font-weight: bold;color: #666;padding: 20px 0;}
+.infobox ol{position: relative; left: 32px;margin-right: 32px;}
+.infobox li {line-height: 1.5;list-style-type: decimal;}
+.infobox p {line-height: 1.5;}
+
+/* problem */
+.pr-h1{font-size: 24px;margin: 30px;color: #6a6a6a;}
+.pr-menu{margin-bottom: 0;}
+.pr-menu li{width: 50%;height: 60px;line-height: 60px;}
+.pr-menu li:hover, .pr-menu .active{height: 56px;}
+
+#pr-item-wrap{background-color: white;padding: 48px 32px 0 32px;}
+.pr-i-mh{min-height: 700px;}
+.pr-item-i{padding-bottom: 48px;}
+.pr-item-i .underline{text-decoration: underline;}
+.pr-item-i h2{font-size: 20px;margin-bottom: 16px;}
+
+.feedback{margin: 0 16px 65px 16px;}
+.textarea-wrap{margin-bottom: 16px;padding: 16px;background-color: white;}
+.textarea{border: none;display: block;width: 100%;height: 200px;font-size: 20px;outline: none;color: #6a6a6a;}
+.op1, .op2{float: left;margin-right: 32px;}
+.op1 input, .op2 input{border: none;padding: 8px;height: 32px;font-size: 110%;outline: none;}
+.f-op button{float:right;background-color: #a4a4a4;cursor: pointer;font-size: 20px;border: none;color: white;width: 120px;height: 48px;transition:all .5s ease;-webkit-transition:all .5s ease; -moz-transition:all .5s ease;}
+.f-op button:hover{background-color: #2C9ACF;}

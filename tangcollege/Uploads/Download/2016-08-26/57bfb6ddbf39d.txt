@@ -1,0 +1,11 @@
+1、设置字体大小
+	http://jingyan.baidu.com/article/fd8044faf4cda95030137a47.html
+
+2、设置编码
+	窗口->首先项->常规->工作空间->文本文件编码
+	
+3、黑暗主题
+	从菜单：File| Import,然后选择General|preferences，Next,选择那个刚刚下载的epf文件，Import All，点击Finished.
+	
+4、设置主题
+	http://eclipse-color-theme.github.com/update/

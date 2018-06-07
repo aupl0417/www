@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+    <meta content="yes"name="apple-mobile-web-app-capable"/>
+    <meta content="black"name="apple-mobile-web-app-status-bar-style"/>
+    <title>用户登陆 - 17约课</title>
+    <link rel="stylesheet" type="text/css" href="__HCSS__/reset.css">
+    <link rel="stylesheet" href="__HCSS__/4.css"/>
+    <link rel="stylesheet" href="__HCSS__/2.css"/>
+    <meta name="keywords" content="17约课,一起约课,约课,教育培训,约课神器,校园约课,大学生培训,约老师,约女神,驾驶培训,设计培训,职业考证,音乐培训,英语培训,小语种培训,体育培训" />
+    <meta name="description" content="17约课 - 约您身边的良师益友！为您提供约老师，约课程，约女神，约学霸等海量信息，充分满足您免费约课，免费发布课程的需求。" />
+</head>
+<body>
+<div class="register_wrap e_first_register" style="height: 54em; margin-bottom: 0">
+    <img src="__HIMG__/logo2.png" alt="" class="register_title"/>
+    <div class="user_register_nav" style="margin-bottom:1.5em;;">
+        <p class="user_register_nav_left"><a href="javascript:history.back(-1)"><img src="__HIMG__/back.png" alt=""/>返回</a></p>
+    </div>
+    <a href="{:U('Userregsign/login')}"><button class="register_submit">用户登陆</button></a>
+    <a href="{:U('Shopkeeper/SignIn')}"><button class="register_submit_second" style="position: relative;top: -5px;margin-top:1em;margin-bottom:1em;;">商家登陆</button></a>
+    <a href="{:U('Userregsign/index')}"><button class="sign-button-white">注册约课</button></a>
+    <p class="u_social_account login_register_footer">
+    	<a href="{:U('Userregsign/qqlogin')}"><img src="__HIMG__/qq.png" alt="" class="login_margin_0"/>QQ登陆</a>
+    	<a href="{:U('Userregsign/sinaLogin')}"><img src="__HIMG__/weibo.png" alt="" class="login_register_footer_img"/>微博登陆</a>
+        <a href="{:U('Shopkeeper/signUpStart')}"><img src="__HIMG__/Log in.png" alt="" class="login_register_footer_img"/>机构加盟</a></p>
+</div>
+<include file="Public:statistics"/>
+</body>
+</html>

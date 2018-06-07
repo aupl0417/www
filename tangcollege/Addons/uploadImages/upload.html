@@ -1,0 +1,260 @@
+<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+<script type="text/javascript" src="__ADDONROOT__/js/myQuery.js"></script>
+
+<style type="text/css">
+    .btn-close{
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        width: 17px;
+        height: 17px;
+        background: url('__ADDONROOT__/images/bg_icon.png') no-repeat -25px 0;
+        cursor: pointer;
+    }
+
+    .btn-close:hover {
+        text-decoration: none;
+        border-bottom: 0 none;
+    }
+
+    .upload-img-box .upload-pre-item{
+        position: relative;
+        margin-bottom: 8px;
+    	height:auto;
+        overflow: visible;
+    }
+
+    /* 上传图片点击弹出层 */
+    .upload-img-popup {
+        position: fixed;
+        z-index: 999999999;
+        padding: 3px;
+        border: 1px solid #c3c3c3;
+        background-color: #fff;
+        box-shadow: 0 0 4px rgba(0,0,0,.5);
+    }
+
+    .upload-img-popup img{
+        display: inline-block;
+        max-height: 500px;
+        max-width: 500px;
+        cursor: pointer;
+    }
+
+    .upload-img-popup .close-pop {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        width: 17px;
+        height: 17px;
+        background: url('__ADDONROOT__/images/bg_icon.png') no-repeat -25px 0;
+    }
+    .upload-img-popup .close-pop:hover {
+        text-decoration: none;
+        border-bottom: 0 none;
+    }
+    .upload-img-popup img {
+        display: block;
+    }
+    .upload_icon_all {
+        width: 15px;
+        height: 15px;
+        background: url('__ADDONROOT__/images/attachment_1.png');
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 5px
+    }
+    .sub {
+		width:50px;
+    	height:24px;
+    	font-size:10px;
+    	margin-left:15px;
+    	background-color:#4bbd00;
+    	color:#fff;
+    	font-weithg:bold;
+    	border:0px;
+    }
+    .file_box input {
+    	margin-top:5px;
+    	margin-bottom:15px;
+    	height : 25px;
+    	border:0px;
+    	
+    }
+</style>
+<div id="tab1" class="tab-pane in tab1">
+    <div class="controls">
+        <input type="file" id="upload_picture">
+        <div class="upload-img-box">
+            <notempty name="picture">
+                 <volist name="picture" id="picture">
+                    <div class="upload-pre-item">
+                        <input type="hidden" name="{$uploadData.name|default='icon'}[]" value="{$picture['path']}" data-id="{$picture['id']}" class="icon" />
+                        <img src="__ROOT__{$picture['path']}" data-id="{$picture['id']}" type="{$uploadData.type}"/>
+                        <span class='btn-close' title='删除图片'></span>
+                    </div>
+                 </volist>
+            <else/>
+                <notempty name='info.co_logo'>
+                	<div class="upload-pre-item">
+	                	<input type="hidden" name="{$uploadData.name|default='icon'}[]" value="{$info.co_logo}" data-id="{$picture['id']}" class="icon" />
+	                	<img src="__ROOT__{$info.co_logo}" data-id="{$picture['id']}"/>
+	                	<span class='btn-close' title='删除图片'></span>
+                	</div>
+                </notempty>
+                <notempty name='info.cce_url'>
+                	<div class="upload-pre-item">
+	                	<input type="hidden" name="{$uploadData.name|default='icon'}[]" value="{$info.cce_url}" data-id="{$picture['id']}" class="icon" />
+	                	<img src="__ROOT__{$info.cce_url}" data-id="{$picture['id']}"/>
+	                	<span class='btn-close' title='删除图片'></span>
+                	</div>
+                </notempty>
+                <notempty name='info.crd_url'>
+                	<volist name='info.crd_url' id='data'>
+               			<div class='file_box' id='file{$key}'>
+               				<input type='text' readonly name='{$uploadData.name|default='icon'}[]' style='width:250px;' class='icon' value='{$data.url}'/><button type='button' class='sub'>删除</button>
+               			</div>
+                	</volist>
+                </notempty>
+                <notempty name='info.crdUrl'>
+                	<volist name='info.crdUrl' id='data'>
+               			<div class='file_box' id='file{$key}'>
+               				<input type='text' readonly name='{$uploadData.name|default='icon'}[]' style='width:450px;' class='icon' value='{$data.url}'/>
+               			</div>
+                	</volist>
+                </notempty>
+                <notempty name='info.se_url'>
+                	<div class="upload-pre-item">
+	                	<input type="hidden" name="{$uploadData.name|default='icon'}[]" value="{$info.se_url}" data-id="{$picture['id']}" class="icon" />
+	                	<img src="__ROOT__{$info.se_url}" data-id="{$picture['id']}" type="picture"/>
+	                	<span class='btn-close' title='删除图片'></span>
+                	</div>
+                </notempty>
+            </notempty>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    //上传图片
+    var buttonName = '{$uploadData.title}'== '' ? '上传图片' : "{$uploadData.title}";
+    //var url = '{$uploadData.url}' == '' ? "{:U('File/uploadFile',array('session_id'=>session_id()))}" : "{$uploadData.url}";
+    var url = "{:U('File/uploadFile',array('session_id'=>session_id()))}";
+    if("{$uploadData.action}" == 'add'){
+    	$('.upload-img-box').hide();
+    }
+    var exts = '';
+    if("{$uploadData.type}" == 'file'){
+    	exts = "{$uploadData.ext}";
+    }else {
+    	exts = 'jpg,gif,png,jpeg';
+    }
+	var extArr = exts.split(',');
+	exts = '';
+	for(var i=0; i<extArr.length; i++){
+		exts += '*.'+ extArr[i] + ';';
+	}
+    /* 初始化上传插件 */
+    $("#upload_picture").uploadify({
+        "height"          : 30,
+        "swf"             : "__STATIC__/uploadify/uploadify.swf",
+        "fileObjName"     : "download",
+        "buttonText"      : buttonName,
+        "uploader"        : url,
+        "width"           : 120,
+        'removeTimeout'   : 1,
+        'fileTypeExts'    : exts,
+        "onUploadSuccess" : uploadPicture,
+        'onFallback' : function() {
+            alert('未检测到兼容版本的Flash.');
+        }
+    });
+    function uploadPicture(file, data){
+        var data = $.parseJSON(data);
+        var src = '';
+        if(data.status){
+        	if('{$uploadData.url}' == ''){
+        		$('.upload-img-box').html('');
+        	}
+        	
+        	if("{$uploadData.type}" == 'file'){
+            	var ext = data.data.ext;
+            	data.path = '/Uploads/'+data.data.download.savepath + data.data.download.savename;
+            	data.id = data.data.download.md5;
+            	//创建input
+            	$_file_path = $("<div class='file_box' id='file"+data.id+"'><input type='text' readonly name='{$uploadData.name|default='icon'}[]' style='width:250px;' class='icon' index='"+data.data.download.md5+"' data-id='"+data.id+"' value='"+data.path+"'/><input type='text' readonly style='width:200px;margin-left:15px;' value='"+data.data.download.name+"'><button type='button' onclick='del(file"+data.id+");' value='{$uploadData.type}' class='sub'>删除</button></div>");  
+                $(".upload-img-box").append($_file_path);
+            }else {
+            	//创建<div class="upload-pre-item">
+            	$_upload_item = $("<div class='upload-pre-item'></div>");
+            	
+                var ext = data.data.download.ext//文件后缀
+				data.path = '/Uploads/' + data.data.download.savepath + data.data.download.savename;
+              	//创建img input close-btn
+                $_img_path = $("<input type='hidden' name='{$uploadData.name|default='icon'}[]' data-id='"+data.id+"' class='icon' value='"+data.path+"'/>");
+                src = data.url || '__ROOT__' + data.path;
+                $_upload_img = $("<img src=" + src +" title='点击显示大图' data-id="+data.id+" type={$uploadData.type} index='"+data.md5+"'> ");
+                $_img_del = $("<span class='btn-close' title='删除图片'></span>");
+
+                //加入到upload-img-box
+                $_upload_item.append($_upload_img);
+                $_upload_item.append($_img_del);
+
+                $("#tab1 .controls").append($_img_path);
+                $(".icon").parent().find('.upload-img-box').append($_upload_item);
+            }
+        	showButton();
+            $('.upload-img-box').show();
+        } else {
+            setTimeout(function(){
+                $('#top-alert').find('button').click();
+                $(that).removeClass('disabled').prop('disabled',false);
+            },1500);
+        }
+    }
+    
+    //删除
+    function del(obj){
+    	var id = obj.id;
+    	var $this = $('#'+id)
+    	var type = $this.find('button').val();
+    	var md5 = $this.find('input').eq(0).attr('index');
+    	var fileId = $this.find('input').eq(0).data('id');
+		console.log(type);
+		console.log(md5);
+		console.log(fileId);
+		console.log(id);
+    	var url = 'index.php?s=/Admin/File/delFile';
+    	$.ajax({
+    		type     : 'post',
+    		url      : url,
+    		data     : {id : fileId, type : type, md5:md5},
+    		dataType : 'json',
+    		success  : function (data){
+    			console.log(data);
+    			if(data.state == 1){
+    				obj.remove();
+    			}else {
+    				console.log(data.msg);
+    			}
+    		}
+    	});
+    }
+    
+   	$('.sub').click(function(){
+   		$(this).parent().remove();
+   	});
+   	
+   	function showButton(){
+   		$('.sub').hide();
+   	   	$('.sub').parent().each(function(){
+   	   		var $button = $(this).find('button');
+   	   		$(this).mouseover(function(){
+   	   			$button.show();
+   	   		});
+   	   		$(this).mouseout(function(){
+   	   			$button.hide();
+   	   		});
+   	   	});
+   	}
+   	showButton();
+</script>

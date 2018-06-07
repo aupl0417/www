@@ -1,0 +1,105 @@
+<extend name="Public/base"/>
+
+	<block name='content'>
+		<div id="content" class="content pt45 mb60">
+			<!--banner S-->
+			<div class="tang-details-banner">
+				<div class="tang-details-banner-title">
+					<!-- C+商业模式系统讲解实战课堂--基础讲解(上) -->
+					{$info.cl_name}
+				</div>
+				<div class="tang-details-banner-title">
+					<img src="__IMG__/tang-people-icon.png" alt="" class="tang-li-icon mb4" width="22">
+					报名人数{$info.count}/{$info.cl_allowableNumber}人
+				</div>
+			</div>
+			<!--banner E-->
+
+			<!--content S-->
+			<div class="tang-details-content">
+				<div class="tang-details-notice solid-b bg_white">
+					{$info.cl_name}
+				</div>
+				
+				<div class="tang-details-cont">
+					<div class="panel-group" id="accordion">
+					<volist name='list' id='list'>
+						<div class="panel panel-default bor_no">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion"
+									   href="#collapseOne">
+										<div class="tang-cont-title">
+										<!-- 第一课：商业模式介绍 -->
+										{$list.co_name}
+										</div>
+										<div class="tang-cont-time">
+											<!-- 09月17日-09月18日 -->
+											<!-- {$list.cta_startTime|strtotime|date="Y年m月d日", ###}-{$list.cta_endTime|strtotime|date="Y年m月d日",###}  -->
+											{$list.cta_startTime|strtotime|date="m月d日 H:i", ###}-{$list.cta_endTime|strtotime|date="m月d日 H:i", ###}
+										</div>
+									</a>
+								</h4>
+							</div>
+							<div id="collapseOne" class="panel-collapse collapse in">
+								<div class="panel-body">
+									<ul class="tang-details-ul list-unstyled">
+										<li>
+											<div class="tang-details-li-title">
+												课程描述
+											</div>
+											<div class="tang-details-li-time">
+												{$list.cta_description}
+											</div>
+										</li>
+										<li>
+											<div class="tang-details-li-title">
+												教师
+											</div>
+											<div class="tang-details-li-time">
+												{$list.username}
+											</div>
+										</li>
+										<li>
+											<div class="tang-details-li-title">
+												上课地址
+											</div>
+											<div class="tang-details-li-time">
+												{$list.tra_address}
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</volist>
+						
+					</div>
+				</div>
+			</div>
+			<!--content E-->
+
+			<footer class="bf100 fix b0 box-shadow-black bg-f8f tang-details-footer">
+				<div class="row mg0">
+					<div class="col-xs-4 text-center pd0">
+						<a href="" class="btn btn-green bf100 bor_r0 text-center pb0">
+							<img src="__IMG__/tang-details-jl-icon.png" alt="" class="inline-block mb2" width="20"><br>
+							签到记录
+						</a>
+
+					</div>
+					<div class="col-xs-4 text-center pd0">
+						<!--<a href="" class="btn btn-green bf100 bor_r0 text-center pb0">-->
+							<!--<img src="__IMG__/tang-details-xz-icon.png" alt="" class="inline-block mb2" width="20"><br>-->
+							<!--下载</a>-->
+					</div>
+					<div class="col-xs-4 text-center pd0">
+						<!--<a href="" class="btn btn-green bf100 bor_r0 text-center pb0">-->
+							<!--<img src="__IMG__/tang-details-zx-icon.png" alt="" class="inline-block mb2" width="20"><br>-->
+							<!--资讯-->
+						<!--</a>-->
+					</div>
+				</div>
+			</footer>
+		</div>
+	</block>

@@ -1,0 +1,412 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui"/>
+    <meta content="yes" name="apple-mobile-web-app-capable"/>
+    <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+    <title>发布课程信息 - 17约课</title>
+    <link rel="stylesheet" type="text/css" href="__HCSS__/reset.css">
+    <link rel="stylesheet" href="__HCSS__/2.css"/>
+    <link rel="stylesheet" href="__HCSS__/4.css"/>
+    <link rel="stylesheet" href="__HCSS__/test2.css"/>
+    <meta name="keywords" content="17约课,一起约课,约课,教育培训,约课神器,校园约课,大学生培训,约老师,约女神,驾驶培训,设计培训,职业考证,音乐培训,英语培训,小语种培训,体育培训"/>
+    <meta name="description" content="17约课 - 约您身边的良师益友！为您提供约老师，约课程，约女神，约学霸等海量信息，充分满足您免费约课，免费发布课程的需求。"/>
+</head>
+<body>
+<div id="info">
+    <header id="top_header">
+        <div id="header" align="center">
+            <input type="file" class="visualization" id="file"/>
+
+            <h3 class="identify_title">发布课程信息</h3>
+            <a href="javascript:history.back(-1)" class="identify_back"><img src="__HIMG__/Return2.png" alt=""/>返回</a>
+        </div>
+    </header>
+    <div class="wrapper">
+        <img src="__HIMG__/loading.gif" alt="" class="loading hidden"/>
+
+        <div class="course_request_slide">
+            <div id="swipeSlide" class="wrap course-wrap">
+                <ul class="inline-float">
+                    <li class="inline-float_li">
+                        <ul class="course_slide" index="0">
+                            <li class="course_active"><img src="__HIMG__/Design_8a.png" alt="8"/>
+
+                                <p>学术交流</p></li>
+                            <li><img src="__HIMG__/Design_2.png" alt="1"/>
+
+                                <p>外语培训</p></li>
+                            <li><img src="__HIMG__/Design_7.png" alt="2"/>
+
+                                <p>音乐培训</p></li>
+                            <li><img src="__HIMG__/Design_6.png" alt="3"/>
+
+                                <p>职业考证</p></li>
+                        </ul>
+                    </li>
+                    <li class="inline-float_li">
+
+                        <ul class="course_slide" index="1">
+                            <li><img src="__HIMG__/Design_1.png" alt="4"/>
+
+                                <p>设计培训</p></li>
+                            <li><img src="__HIMG__/Design_3.png" alt="5"/>
+
+                                <p>驾驶培训</p></li>
+                            <li><img src="__HIMG__/Design_9.png" alt="6"/>
+
+                                <p>生活兴趣</p></li>
+                            <li><img src="__HIMG__/Design_4.png" alt="7"/>
+
+                                <p>体育培训</p></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <p class="slide-bullet" id="course_slide">
+                    <i class="icon-bullet active"></i>
+                    <i class="icon-bullet"></i>
+                </p>
+            </div>
+        </div>
+
+        <div class="course_type_content">
+            <p class="business_time_out">
+                <b>培训类型</b>
+                <b class="release_err hidden" id="course_select_type">培训类型不能为空</b>
+                <span>
+                    <b class="model">平面设计/高级班</b>
+                    <img src="/Public/Home/img/Design (7).png" alt="">
+                </span>
+            </p>
+
+            <p class="business_time_out" id="course_select_price">
+                <b >课程价格</b>
+                <b class="release_err hidden" id="course_release_err">课程价格不能为空</b>
+                <span>
+                    <b class="price_preview_up"> <img src="/Public/Home/img/Yuan.png" class="price_image_yuan" alt="">&nbsp;5500元</b>
+                    <b class="price_preview_down"><img src="/Public/Home/img/Hui.png" class="price_image_hui" alt="">&nbsp;满10人报名，优惠1000元以上啦,ssasasa</b>
+                    <img class="" src="/Public/Home/img/Design (7).png" alt="">
+                </span>
+            </p>
+
+            <p class="business_time_out">
+                <b>上课时间</b>
+                <b class="release_err hidden" id="course_select_attendtime">上课时间不能为空</b>
+                <span>
+                    <b class="model">请选择</b>
+                    <img src="/Public/Home/img/Design (7).png" alt="">
+                </span>
+            </p>
+
+            <p class="business_time_out">
+                <b>课程特色</b>
+                <b class="release_err hidden" id="course_select_feature">课程特色不能为空</b>
+                <span>
+                    <b class="model">请选择</b>
+                    <img src="/Public/Home/img/Design (7).png" alt="">
+                </span>
+            </p>
+        </div>
+
+        <div class="course_request_content2">
+            <p class="business_time_out"><b id="">截止日期</b> <b class="release_err hidden" id="time_err">约课模式不能为空</b>
+                <span><b id="time" class="model">请选择</b><img src="__HIMG__/Design (7).png" alt=""/></span>
+                <select name="business" class="course_select" id="course_select_time">
+                    <option id="course_select_time_option_0" value="0">请选择</option>
+                    <?php foreach ($timeList as $key => $value): ?>
+                    <option id="course_select_time_option_{$key+1}" value="{$key+1}">{$value}</option>
+                    <?php endforeach; ?>
+                </select>
+            </p>
+            <b class=" release_input_err op_0" id="course_phone">联系电话不能为空</b>
+
+            <div class="course_request_content_title">
+                <p>联系电话</p>
+
+                <div class="input_wrap course_request_content_input">
+                    <input type="text" id="phone" class="register_input" placeholder="请输入您的联系电话">
+                    <i class="input_close_icon op_0" style="margin-top: -0.45em;"></i>
+                </div>
+            </div>
+            <b class=" release_input_err op_0" id="course_address">机构地址不能为空</b>
+            <div class="course_request_content_title">
+                <p>机构地址</p>
+
+                <div class="input_wrap course_request_content_input">
+                    <input type="text" id="address" class="register_input" placeholder="请输入机构详细地址">
+                    <i class="input_close_icon op_0" style="margin-top: -0.45em;"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="course_teacher_info">
+            <b class=" release_input_err op_0" id="course_teacher_year">教师教龄不能为空</b>
+            <div class="course_request_content_title">
+                <p>教师教龄</p>
+
+                <div class="input_wrap course_request_content_input">
+                    <input type="text" id="year" class="register_input" placeholder="请填写教师教龄">
+                    <i class="input_close_icon op_0" style="margin-top: -0.45em;"></i>
+                </div>
+            </div>
+
+            <b class=" release_input_err op_0" id="course_experiment">教师资历不能为空</b>
+            <div class="course_request_content_title">
+                <p>教师资历</p>
+
+                <div class="input_wrap course_request_content_input">
+                    <input type="text" id="experiment" class="register_input" placeholder="请填写教师资历">
+                    <i class="input_close_icon op_0" style="margin-top: -0.45em;"></i>
+                </div>
+            </div>
+
+            <b class=" release_input_err op_0" id="teacher_brief_info">教师简介不能为空</b>
+            <div class="course_teacher_info_content" style="top: -1em;">
+                <p>老师简介</p>
+                <div class="input_wrap course_request_content_text">
+                    <textarea id="brief_info" placeholder="请填写老师简介"></textarea>
+                    <i class="input_close_icon op_0" style="margin-top: -0.45em;"></i>
+                </div>
+            </div>
+
+            <b class=" release_input_err op_0" id="course_special">教学特点不能为空</b>
+            <div class="course_teacher_info_content" style="top: -1em;">
+                <p>教学特点</p>
+                <div class="input_wrap course_request_content_text">
+                    <textarea id="special" placeholder="请输入教育的教学特点"></textarea>
+                    <i class="input_close_icon op_0" style="margin-top: -0.45em;"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="course_model_info">
+            <b class=" release_input_err op_0" id="course_title">约课标题不能为空</b>
+            <div class="course_request_content_title">
+                <p>约课标题</p>
+
+                <div class="input_wrap course_request_content_input">
+                    <input type="text" id="title" class="register_input" placeholder="不要超过十五个字数">
+                    <i class="input_close_icon op_0" style="margin-top: -0.45em;"></i>
+                </div>
+            </div>
+
+            <b class=" release_input_err op_0" id="course_content">课程内容不能为空</b>
+
+                <div class="course_model_info_content" style="top: -1em;">
+                    <p>课程内容</p>
+                    <div class="input_wrap course_request_content_text">
+                        <textarea id="content" placeholder="请介绍该课程的具体内容"></textarea>
+                        <i class="input_close_icon op_0" style="margin-top: -0.45em;"></i>
+                    </div>
+                </div>
+        </div>
+
+        <div class="course_upload_wrap" style="position: relative">
+            <b class=" release_input_err_3 op_0" id="photo_err">请添加机构场景图</b>
+
+            <div class="course_upload_left">
+                <img src="__HIMG__/Photo Frame.png" alt="" id="image"/>
+            </div>
+            <div class="course_upload_right">
+                <p class="course_upload_right_1p" id="test">添加培训机构相关图片</p>
+
+                <p class="course_upload_right_2p">图片大小不超过1M</p>
+            </div>
+        </div>
+        <div class="course_btn_content">
+            <button id="submitBtn" class="course_public_btn">发布</button>
+            <button id="previewBtn" class="course_preview_btn">预览</button>
+            <p class="course_chip">温馨提示:您发布的信息内容应合法，真实，健康,共创良好环境</p>
+        </div>
+    </div>
+
+</div>
+
+<!-- feature -->
+<div id="feature" class="hidden">
+    <header id="top_header">
+        <div id="header" align="center">
+            <h3 class="identify_title">课程特色</h3>
+            <span id="comeBackInfoBtn" class="identify_back"><img src="__HIMG__/Return2.png" alt=""/>返回</span>
+        </div>
+    </header>
+    <br/>
+
+    <div class="wrapper">
+        <div class="course_feature_wrap">
+            <div class="course_feature_add">
+                <div class="input_wrap course_feature_input">
+                    <input type="text" id="feature_input" class="register_input" placeholder="自定义特色，不超过四个字">
+                </div>
+                <button class="course_feature_btn">添加</button>
+            </div>
+            <p class="course_feature_select_p">选择3个你的课题特情</p>
+            <ul class="course_select_ul">
+                <li>免费试听</li>
+                <li>就业推荐</li>
+                <li>素质培养</li>
+                <li>泡女必备</li>
+                <li>名牌课程</li>
+                <li>价格超值</li>
+                <li>幽默风趣</li>
+                <li>师资雄厚</li>
+            </ul>
+            <button id="saveFeaturesBtn" class="register_submit course_save">保存</button>
+        </div>
+    </div>
+
+</div>
+
+<div class="course_price_box hidden">
+    <div class="course_price_wrap">
+
+        <div class="course_price_input_content">
+            <label class="price_label">课程价格</label>
+            <div class="price_input_wrap">
+                <input type="text" id="phone_tel" class="input-wrap-input" placeholder="课程原有价格">
+                <i class="input_close_icon op_0"></i>
+            </div>
+        </div>
+        <div class="course_price_cheap_content" style="top: -1em;">
+            <label class="special_label">教学特点</label>
+            <div class="course_price_cheap_warp">
+                <textarea id="course_textarea" placeholder="请输入教育的教学特点"></textarea>
+                <i class="input_close_icon op_0" style="margin-top: -0.45em;"></i>
+            </div>
+        </div>
+        <div class="course_price_cheap_button">
+            <button class="price_preview_button">确定</button>
+        </div>
+    </div>
+</div>
+
+<div class="public_preview_box hidden">
+    <div class="public_preview_wrap">
+        <div class="section_item_title">
+            <div class="span2 section_item_portrait">
+                <a href="/home/shopkeeper/info/id/379.html"><img src="" alt="" class="section_item_portrait_img"></a>
+            </div>
+            <div class="span6 section_item_sub"><h3 class="detail_h3">一起组队报名新东方</h3>
+                <p>新东方<img src="/Public/Home/img/Phone verification.png" alt="">
+                <span class="preview-tag-info">英语</span>
+                    <span class="preview-tag-info2">12年校龄</span>
+                    <img src="/Public/Home/img/i.png" style="height: 20px;width: 20px" alt="">
+                </p>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="section_item_cont">
+            <div class="section_item_info span6">
+                <p><img src="/Public/Home/img/Classification.png" alt="">出国留学</p>
+                <p><img src="/Public/Home/img/Price.png" alt="">1000--2000</p>
+                <p><img src="/Public/Home/img/Time.png" alt="">周末班</p>
+                <p><img src="/Public/Home/img/Business.png" alt="">天琥设计培训</p>
+                <p class="address_p"><img src="/Public/Home/img/Location.png" alt="">天河区石牌街道广州市天河区岗顶天河商贸大厦903</p>
+                <p><img src="/Public/Home/img/phone.png" alt="">13560333419</p>
+            </div>
+
+            <div class="section_item_photo span4">
+                <img src="/Public/Uploads//shop_environ/2015/04/17/5530d21deda93.jpg" alt="">
+            </div>
+            <div class="clear"></div>
+            <div class="section_item_feature">
+                    <p>截止日期：&nbsp;&nbsp;2015年5月1号</p>
+                    <p>课程特色：
+                    <span>素质培养</span>&nbsp;<span>泡女必备</span>&nbsp;<span>幽默风趣</span>&nbsp;                    </p>
+                    <p class="section_course_p">课程内容：<span class="section_course_info append-ellipsis">每人独立制作一份属于自己的牛油曲奇饼干，制作全过程自己完成，老师指导，制作设备和材料商家均提供，制作完成后用户可打包带走作品。</span>
+                    <img src="/Public/Home/img/index_more.png" class="section_course_img" height="8px" width="16px"></p>
+
+                     <p class="section_course_p">课程价格：<span class="section_course_info append-ellipsis">原价：5000元。优惠：满10人报名，优惠1000元</span>
+                    <img src="/Public/Home/img/index_more.png" class="section_course_img" height="8px" width="16px"></p>
+
+                    <p class="section_course_p">教学特点：<span class="section_course_info append-ellipsis">幽默风趣</span>
+                     <img src="/Public/Home/img/index_more.png" class="section_course_img" height="8px" width="16px"></p></p>
+                    <p class="section_course_p">老师教龄：<span class="section_course_info "> 11年</span>
+                     <img src="/Public/Home/img/index_more.png" class="section_course_img" height="8px" width="16px"></p></p>
+                    <p class="section_course_p">教师资历：<span class="section_course_info append-ellipsis">毕业与中山大学，曾担任xxx主管</span>
+                     <img src="/Public/Home/img/index_more.png" class="section_course_img" height="8px" width="16px"></p></p>
+                    <p class="section_course_p">老师简历：<span class="section_course_info append-ellipsis">毕业与中山大学，曾担任xxx主管</span>
+                     <img src="/Public/Home/img/index_more.png" class="section_course_img" height="8px" width="16px"></p></p>
+                </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="__HJS__/zepto.min.js"></script>
+<script type="text/javascript" src="__HJS__/swipe.js"></script>
+<script type="text/javascript" src="__HJS__/objimgurl.js"></script>
+<script type="text/javascript">
+    // 全局变量
+    var g = {
+        "checkCanSendUrl": "{:U('Api/ShopInfo/checkCanSend')}",
+        "addCourseUrl": "{:U('api/shop_info/addcourse')}",
+        "addCourseSuccessUrl": "{:U('shopkeeper/coursesuccess', array('t'=>time()))}",
+        "getAreaIdUrl": "{:U('Api/Area/getByParentId')}",
+        "rightArrowIcon": ' <img src="__HIMG__/Design (7).png" alt=""/>'
+    };
+    var $slide = document.getElementById('swipeSlide'),
+            aBullet = $slide.querySelectorAll('.icon-bullet'),
+            len = aBullet.length;
+    console.log($slide)
+    var mySwipe = new Swipe($slide, {
+        continuous: false,
+        stopPropagation: true,
+        callback: function (i) {
+            if (i >= 0 || i < len) {
+                $('.icon-bullet').removeClass('active');
+                aBullet[i].classList.add('active');
+            }
+        }
+    });
+    (function() {
+        $('#course_select_price').click(
+                function (e){
+                    e.preventDefault();
+                    $('.course_price_box').toggleClass("hidden");
+                }
+        );
+        $('.course_price_box').click(
+                function (e){
+                    e.preventDefault();
+                   if($(e.target).hasClass('course_price_box')){
+                       $('.course_price_box').addClass("hidden");
+                   }
+                }
+        );
+        $('.section_course_img').click(
+            function(e){
+                e.preventDefault();
+                var self=$(e.target);
+                var item=$(e.target).siblings('.section_course_info');
+                if(item.hasClass('hidden-show')){
+                    item.removeClass('hidden-show');
+                    self.attr("src","/Public/Home/img/index_more.png");
+                }else{
+                    item.addClass('hidden-show');
+                    self.attr("src","/Public/Home/img/up.png");
+                }
+            }
+            ); 
+            $('#previewBtn').click(
+            function(e){
+                e.preventDefault();
+                $('.public_preview_box').toggleClass('hidden');
+            }
+            ); 
+
+            $('.public_preview_box').click(
+                    function(e){
+                        if($(e.target).hasClass('public_preview_box'))
+                            $('.public_preview_box').addClass('hidden');
+                    }
+                );
+
+    }
+    )();
+</script>
+<include file="Component:alert"/>
+<script type="text/javascript" src="__HJS__/shopkeeper/course.js" charset="utf-8"></script>
+
+</body>
+</html>

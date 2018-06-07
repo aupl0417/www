@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+    <meta content="yes"name="apple-mobile-web-app-capable"/>
+    <meta content="black"name="apple-mobile-web-app-status-bar-style"/>
+    <title>微信账号关联 - 17约课</title>
+    <link rel="stylesheet" type="text/css" href="__HCSS__/reset.css">
+    <link rel="stylesheet" href="__HCSS__/4.css"/>
+    <link rel="stylesheet" href="__HCSS__/2.css"/>
+    <meta name="keywords" content="17约课,一起约课,约课,教育培训,约课神器,校园约课,大学生培训,约老师,约女神,驾驶培训,设计培训,职业考证,音乐培训,英语培训,小语种培训,体育培训" />
+    <meta name="description" content="17约课 - 约您身边的良师益友！为您提供约老师，约课程，约女神，约学霸等海量信息，充分满足您免费约课，免费发布课程的需求。" />
+</head>
+<body>
+<div class="register_wrap e_first_register login_height">
+    <!--<img src="__HIMG__/loading.gif" alt="" class="loading hidden"/>-->
+    <img src="__HIMG__/logo2.png" alt="" class="register_title"/>
+    <div class="user_register_nav">
+        <p class="user_register_nav_left"><a href="{:U('Wx/isweixin')}"><img src="__HIMG__/back.png" alt=""/>直接微信登录</a></p>
+        <p class="user_register_nav_right"><a href="{:U('Userregsign/index')}">注册17账号<img src="__HIMG__/go.png" alt=""/></a></p>
+    </div>
+
+    <div class="input_wrap validate">
+        <div class="css-loading hidden" style="position: absolute;left: 50%;top: 2.5em;">
+            <div class="ball-holder">
+                <div class="ball"></div>
+            </div>
+        </div>
+        <img src="__HIMG__/user.png" alt="" class="validate_i"/>
+        	<input type="text" name="logintype" id="logintype" class="register_input register_input_login" id="phone" placeholder="手机号码/邮箱">
+        <i class="input_close_icon op_0"></i>
+        <div class="validate_wrap">
+            <img src="__HIMG__/Shape-1.png" alt="" class="validate_i"/><input type="password" name="password" id="password"   class="register_input register_input_login" placeholder="密码">
+            <i class="input_close_icon_second op_0" ></i>
+        </div>
+        <input type="text" name="type" id="hiddentype" class="register_input hidden">
+    </div>
+   
+
+
+    <!--出错了就把Hidden去掉就会显示了，有多少个错误就在多少行li-->
+    <div id="reg_err" class="u_register_err hidden">
+        <ul>
+            <li><img src="__HIMG__/Exclamation.png" alt="" class="register_err_image"/><span id="reg_err_text">密码未填写</span></li>
+        </ul>
+    </div>
+
+   
+    <button id="loginyueke" class="register_submit" style="margin-top: 2em;">确定关联17账号</button>
+</div>
+
+
+<script type="text/javascript" src="__HJS__/zepto.min.js"></script>
+<script type="text/javascript">
+
+var post_url="{:U('Wx/wxRelUserLogin')}";
+var user_moInfo_url="{:U('LookUser/moInfo')}";
+
+//隐藏错误提示
+  function ontext(){
+      document.getElementById('reg_err').className='u_register_err hidden';
+  }
+//错误提示
+  function errtext(classn,etext){
+      document.getElementById('reg_err').className=classn;
+      document.getElementById('reg_err_text').innerHTML =etext;
+  }
+  function showLoading(){$(".css-loading").removeClass("hidden");}
+  function hiddeLoading(){$(".css-loading").addClass("hidden");}
+//检查类型
+  function checktype(){
+      var type=$("#logintype").val();
+      type=$.trim(type);
+      var email=/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;//邮件地址必须包含@符号和.com等网络域名
+      var tel=/^(1)\d{10}$/;	//包括移动电话和固定电话，但是必须大于7位
+      if(email.test(type))
+      {
+          document.getElementById('hiddentype').value ='email';
+          return true;
+      }else if(tel.test(type)){
+          document.getElementById('hiddentype').value ='phone';
+          return true;
+      }else{
+          errtext('u_register_err','请输入正确的电话号码或邮箱');
+          return false;
+      }
+  }
+//检查密码
+  function pwcheck(){
+      var pw=$("#password").val();
+      var passw=/^\S{6,12}$/;
+      if(!passw.test(pw)){
+          errtext('u_register_err','密码必须是6~12个字符');
+          return false;
+      }
+      return true;
+  }
+//*********************************************************************************
+  function AllCheck()
+  {
+//将上面n个函数打包成一个AllCheck()函数，在前台界面中调用该AllCheck()；
+      if(checktype()&&pwcheck()){
+          return true;
+      }else{
+          return false;
+      }
+  }
+
+  function logindata(){
+      if(AllCheck()){
+          showLoading();
+          var type=$("#hiddentype").val();
+          var typevalue=$("#logintype").val();
+          var password=$("#password").val();
+          var datalogin={};
+          datalogin.type=type;
+          datalogin.typevalue=typevalue;
+          datalogin.password=password;
+          $.ajax({
+              type: 'POST',
+              url:post_url,
+              dataType: 'json',
+              data:datalogin,
+              success: function(data) {
+                  hiddeLoading();
+                  if(data.status!=200){
+                      $('#reg_err').removeClass('hidden');
+                      $("#reg_err_text").html(data.msg);
+                  }else{
+                  	if(data.histhref!=400){
+                  		window.location.href=data.histhref;
+	                   	}else{
+	                  		window.location.href=user_moInfo_url;
+	                   	}
+                  }
+              },
+              error:function(data){
+                  hiddeLoading();
+                  $('#reg_err').removeClass('hidden');
+                  $("#reg_err_text").html('请重新刷新页面再登录');
+              }
+          });
+      }else{
+          return false;
+      }
+  }
+
+  $("#loginyueke").click(function(){
+      logindata();
+  });
+
+</script>
+<include file="Public:statistics"/>
+</body>
+</html>
+

@@ -1,0 +1,59 @@
+<div id="main" class="main">
+ <div class="main-title">
+        <h2>新增学习级别</h2>
+    </div>
+    <form action="{:U()}" method="post" class="form-horizontal" id="addSiteForm">
+        <div class="form-item">
+            <label class="item-label">级别名<span class="check-tips">（输入学习级别的名称）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="gr_name" value="">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">选择课程<span class="check-tips">（点击选择该级别需要学习的课程）</span></label>
+            <div class="controls course-lists">
+                <button class="select-btn select-course" target-form="form-horizontal" type="button" onclick="selectCourse.get(this,appendCourse)">选 择</button>
+            </div>
+        </div>
+        <div class="form-item">
+            <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+var loading  = null;
+$("#addSiteForm").ajaxForm({
+   beforeSubmit: function(formData) {
+	   loading  = layer.load();
+   },
+   success: function(response) {
+	  layer.close(loading); 
+	  if(response.status == 1) { 
+	    layer.msg('提交成功！', {
+            time: 1000
+        }, function(){
+            location.reload();
+        });   
+	  }else{
+		layer.msg(response.info, {
+            time: 2000
+        });    
+	  }
+   },
+});
+
+function appendCourse(id,name) {
+	var flag = false;
+	$(".course-lists :checkbox").each(function(){
+         if($(this).val() == id) {
+			 layer.msg('您已经选择了该课程！');
+			  flag = true;
+			  return;
+		 }
+		
+    });
+	if(!flag)
+	  $('.select-course').before('<input name="courseId[]" checked="checked" type="checkbox" value="'+id+'" />'+name+' ');
+}
+ </script>

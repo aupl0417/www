@@ -1,0 +1,120 @@
+﻿17组课
+数据库设计：
+数据库名：lesson   表前缀：ls
+
+用户表（ls_user）-》
+Id（主键）、firstname（姓）、lastname（名）、password(密码)、phone（手机）、email（邮箱）、age（年龄）、sex（性别）、remark（签名）、school（学校）、home（家乡）、prof(身份)、avatar(头像)、ctime(创建时间)，status(状态)
+
+create table ls_user (
+id int unsigned primary key auto_increment comment '主键',
+firstname varchar(10) not null default '' comment '姓',
+lastname varchar(15) not null default'' comment '名',
+password char(32) not null default '' comment '密码',
+phone char(11) not null default '' comment '手机',
+email varchar(255) not null default '' comment '邮箱',
+age tinyint unsigned not null default 0 comment '年龄',
+sex tinyint not null default 0 comment '性别',
+remark varchar(255) not null default '' comment '签名',
+school varchar(255) not null default '' comment '学校',
+home varchar(255) not null default '' comment '家乡',
+prof tinyint not null default 0 comment '身份',
+avatar varchar(255) not null default '' comment '头像',
+ctime datetime not null default 0 comment '创建时间',
+status tinyint not null default 0 comment '状态',
+) comment 'ls_user';
+
+分类表（ls_category）-》
+Id（主键）、catename（分类名称）、level(级别)、parent_id(顶级ID)
+
+
+组团信息表（ls_group_info）-》
+Id(主键)、uid（用户的ID）、title（标题）、cateid类型)、areaid(地区)、price(价格)、mode(模式or上课时间，如暑假)、tags(标签)
+
+
+组表（点赞,收藏表ls_group_assist）-》
+Id(主键)、whoid(用户的id)、groupid(组团信息的ID)
+
+
+<<<<<<< HEAD
+组团评论表(ls_groupcomment)-》
+ID(主键)、cid（用户id)、gid（组团信息的ID）、c_info(评论的内容信息)、addtime(评论的时间)
+
+组团回复表(ls_groupanswer)-》
+ID(主键)、cid（用户id)、gid（组团信息的ID）、commid(组团信息评论的ID)、a_info(回复的内容信息)、ctime(回复的时间)
+
+
+课程评论表(ls_lessoncomment)-》
+ID(主键)、cid（用户id)、lid（课程信息的ID）、c_info(评论的内容信息)、addtime(评论的时间)
+
+课程回复表(ls_lessonanswer)-》
+ID(主键)、cid（用户id)、lid（课程信息的ID）、commid(评论的ID)、a_info(回复的内容信息)、ctime(回复的时间)
+=======
+用户评论表(ls_usercomment)-》
+ID(主键)、cid（用户id)、gid（组信息的ID）、info(内容信息)、pid（父级评论的id）、ctime（评论时间）
+>>>>>>> 538ab9ac0dad897361fa33141ce8e0da59635080
+
+
+商家表（ls_shopkeeper）-》
+Id（主键）、firstname（姓）、lastname（名）、password(密码)、phone（手机）、email（邮箱）、ctime(创建时间)，status(状态)
+
+
+商家详细表（ls_shopdetail）-》
+ID(主键)、sid（商家的id）、name(机构名称)、areaid(地址)、legalname(法人姓名)、number（身份证号码）、cardpic(营业执照)、remark(商家签名)、cateid(分类名称)、logo（logo头像）ftime（修改时间)
+
+商家课程表（ls_lesson）-》
+id（主键）、sid（商家的ID）、title（标题）、cateid类型)、areaid(地区)、price(价格)、mode(模式)、tags(标签)、ctime（创建时间）
+
+后台的管理员表（ls_admin）-》
+ID（主键）、username(管理员名称)、password（密码）
+
+
+
+
+
+缺
+商家课程表
+收藏表
+collect
+
+
+用户表（ls_user）-》
+
+增加，最后一次登录时间：lasttime datetime not null default comment '最后一次登录时间',
+
+
+
+组团信息表（ls_group_info）-》
+增加，组团信息创建时间ctime   ,  教师需求teacherneed ,课堂内容content,商家的id（sid）,
+
+
+
+用户评论表(ls_usercomment)-》
+增加，ctime（评论时间）
+
+
+
+
+
+QQ:3105913203
+密码:1234567890
+
+微博：3105913203@qq.com
+密码:1234567890
+
+
+短信：
+用户名：17yueke
+密码：yk8h5g3k
+负责人姓名：纪德财
+电话：020-28107517/18826484032
+公司名称：广州乐莘网络科技有限公司
+
+http://sms.56dxw.com/sms/User/index.aspx
+
+
+
+给管理员发送一条，用户发布约课的时候。
+有跟约的时候给全部跟约人发一条短信
+
+
+

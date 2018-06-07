@@ -1,0 +1,187 @@
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+    <meta content="yes"name="apple-mobile-web-app-capable"/>
+    <meta content="black"name="apple-mobile-web-app-status-bar-style"/>
+    <title>收藏的课程 - 17约课</title>
+    <link rel="stylesheet" type="text/css" href="__HCSS__/reset.css">
+    <link rel="stylesheet" href="__HCSS__/2.css"/>
+    <link rel="stylesheet" href="__HCSS__/4.css"/>
+    <meta name="keywords" content="17约课,一起约课,约课,教育培训,约课神器,校园约课,大学生培训,约老师,约女神,驾驶培训,设计培训,职业考证,音乐培训,英语培训,小语种培训,体育培训" />
+    <meta name="description" content="17约课 - 约您身边的良师益友！为您提供约老师，约课程，约女神，约学霸等海量信息，充分满足您免费约课，免费发布课程的需求。" />
+</head>
+<body>
+<header id="top_header">
+    <div id="header" align="center">
+        <h3 class="identify_title">收藏的课程</h3>
+        <a href="javascript:location.replace(document.referrer);" class="identify_back"><img src="__HIMG__/Return2.png" alt=""/>返回</a>
+        <!-- <a href="{:U('index/index')}" class="identify_back"><img src="__HIMG__/Return2.png" alt=""/>返回</a>-->
+    </div>
+</header>
+<div class="wrapper">
+    <!--<img src="__HIMG__/loading.gif" alt="" class="loading hidden"/>-->
+    <div class="css-loading hidden">
+        <div class="ball-holder">
+            <div class="ball"></div>
+        </div>
+    </div>
+            <ul class="collect-ul w94 ml3 bdr5">
+                <li id="group" class="collect-ul-active">约课社区</li>
+                <li id="shop">课程商店</li>
+            </ul>
+    <div class="nodata_wrap hidden">
+        <img src="__HIMG__/nodata.png" alt=""/>
+        <p class="nodata_p">没有收藏任何课程</p>
+        <p>请收藏自己喜欢的约课信息吧</p>
+    </div>
+            <div class="section" id="sectionscroll">
+
+
+            
+            
+                <div class="section_items">
+                <if condition="$info eq null">
+                    <div class="nodata_wrap">
+                        <img src="__HIMG__/nodata.png" alt=""/>
+                        <p class="nodata_p">没有收藏任何课程</p>
+                        <p>请收藏自己喜欢的约课信息吧</p>
+                    </div>
+                    <else/>
+                <foreach name='info' item='value'>
+                
+                
+		                	
+		            <div class="section_item clearfix">
+		                <div class="section_item_box">
+		                    	<img class="section_item_title_icon" src="__HIMG__/laba.png" alt="">
+							<a href="{:U('LookGroup/onedetail')}?gid={$value.id}" style="color:#333333;  margin-left: 1.1em;">
+		                    	<span class="section_item_title_text" >{$value.title}</span>
+							</a>
+		                </div>
+		                <div class="section_item_other clearfix">
+		                    <div class="section_item_other_l">
+							<a href="{:U('LookUser/moInfo')}?uid=${it.uid}">
+								<img src="{$value.avatar}"  onerror="javascript:this.src='__IMGDEFAULT__';" alt="" class="section_item_cont_avator">
+							</a>
+		                        <span style="font-size: small;color: #666565">{$value.firstname}{$value.lastname}</span>
+		                    </div>
+		                    <div class="section_item_other_r" style="color: #5A5A5A;" >
+		                    <if condition="$value['pricearr'] neq null">
+		                    	<span class="section_people">{$value.pricearr.ltnumber}-{$value.pricearr.gtnumber}人</span>
+								<span class="l_price">{$value.pricearr.ltprice}元</span>
+								<span class="h_price">{$value.pricearr.reference}元</span>
+							<else />
+								<span class="l_price">{$value.ltprice}元</span>
+							</if>
+		                    </div>
+		                </div>
+		            </div>
+                
+
+                </foreach>
+
+                </if>
+                </div>
+            </div>
+    <br/>
+
+</div>
+<script id="tpl" type="text/template">
+    {@each info as it,index}
+
+
+            <div class="section_item clearfix">
+                <div class="section_item_box">
+                    	<img class="section_item_title_icon" src="__HIMG__/laba.png" alt="">
+					<a href="{:U('LookGroup/onedetail')}?gid=${it.id}" style="color:#333333;  margin-left: 1.1em;">
+                    	<span class="section_item_title_text" >${it.title}</span>
+					</a>
+                </div>
+                <div class="section_item_other clearfix">
+                    <div class="section_item_other_l">
+					<a href="{:U('LookUser/moInfo')}?uid=${it.uid}">
+						<img src="${it.avatar}"  onerror="javascript:this.src='__IMGDEFAULT__';" alt="" class="section_item_cont_avator">
+					</a>
+                        <span style="font-size: small;color: #666565">${it.firstname}${it.lastname}</span>
+                    </div>
+                    <div class="section_item_other_r" style="color: #5A5A5A;" >
+						{@if it.pricearr!=null}
+                        	<span class="section_people">${it.pricearr.ltnumber}-${it.pricearr.gtnumber}人</span>
+							<span class="l_price">${it.pricearr.ltprice}元</span>
+							<span class="h_price">${it.pricearr.reference}元</span>
+						{@else}
+							<span class="l_price">${it.ltprice}元</span>
+						{@/if}
+                    </div>
+                </div>
+            </div>
+
+
+    {@/each}
+</script>
+
+<script id="tplshop" type="text/template">
+    {@each info as shop,index}
+    {@each shop as it,index}
+
+
+		<div class="section_item clearfix">
+            <div class="section_item_box">
+                	<img class="section_item_title_icon" src="__HIMG__/laba.png" alt="">
+            	<a href="{:U('Shopkeeper/cont')}?id=${it.id}" style="  margin-left: 1.1em;">
+					<span class="section_item_title_text" style="color:#333333;">${it.title}</span>
+				</a>
+            </div>
+            <div class="section_item_other clearfix">
+                <div class="section_item_other_l">
+					<a href="{:U('Shopkeeper/info')}?id=${it.sid}">
+                    	<img class="section_item_cont_avator" src="__UPLOAD__${it.avatar}" onerror="javascript:this.src='__IMGDEFAULT__';" alt="">
+					</a>
+                    <span style="font-size: small;color: #666565">${it.nickname}</span>
+                </div>
+                <div class="section_item_other_r" style="color: #5A5A5A;" >
+					${it.price}元
+					{@if it.preferent}
+						<span> ${it.preferent} </span>
+						<img src="__HIMG__/Hui2.png" alt="" />
+					{@/if}
+				</div>
+            </div>
+        </div>
+
+
+
+
+    {@/each}
+    {@/each}
+</script>
+<script type="text/javascript" src="__HJS__/zepto.min.js"></script>
+<script type="text/javascript" src="__HJS__/juicer-min.js"></script>
+<script>
+    var url = "{:U('User/collect')}";
+
+</script>
+<script type="text/javascript">
+function imgonerror(){
+    var imgs = document.images; 
+	for(var i = 0;i < imgs.length;i++){ 
+	    imgs[i].onerror = function(){ 
+	        this.src = "http://<?php echo $_SERVER['SERVER_NAME'] ?>__IMGDEFAULT__"; 
+	    } 
+	}
+}
+imgonerror();
+</script>
+<script type="text/javascript" src="__HJS__/user/collect.js"></script>
+
+<include file="Public:statistics"/>
+</body>
+</html>
+
+
+              
+
+            	  
+                

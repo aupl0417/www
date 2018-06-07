@@ -1,0 +1,85 @@
+<style type="text/css">
+ .course-table-list{
+	height:420px; 
+	overflow:scroll;
+	overflow-x:hidden  
+ }
+ .course-table-footer{
+	height:40px;
+	width:100%; 
+	text-align:right;
+	
+ }
+</style>
+<!-- 数据表格 -->
+<form method="post" action="{:U('Class/importclassTableTemplet')}" id="importclassTableTempletFrom">
+    <div class="data-table course-table-list">
+		<table>
+            <!-- 表头 -->
+            <thead>
+                <tr>
+                    <th class="row-selected row-selected">
+                        <input class="check-all-classTable" type="checkbox" checked>
+                    </th>
+                    <th>ID</th>
+                    <th>描叙</th>
+                    <th>教师</th>
+                    <th>课程</th>
+                    <th>培训教室</th>
+                </tr>
+            </thead>
+
+            <!-- 列表 -->
+            <tbody>
+                <volist name='lists' id='data' empty='$empty'>
+                	<tr>
+                		<td><input class="ids" type="checkbox" value="{$data.ctt_id}" name="classTableTempletIds[]" checked></td>
+                		<td>{$data.ctt_id}</td>
+                		<td>{$data.ctt_description}</td>
+                		<td>{$data.username}</td>
+                        <td>{$data.co_name}</td>
+                        <td>{$data.tra_name}</td>
+                	</tr>
+                </volist>
+            </tbody>
+        </table>
+	</div>
+<div class="course-table-footer"><button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal" onclick="courseTableTemplent.saveAllInput(this);return false;">导 入</button>  </div>  
+<input name="id" type="hidden" value="{$id}">
+</form>   
+<script>
+//全选的实现
+	$(" .course-table-list .check-all-classTable").click(function(){
+		$(" .course-table-list .ids").prop("checked", this.checked);
+	});
+	$(".course-table-list .ids").click(function(){
+		var option = $(".ids");
+		option.each(function(i){
+			if(!this.checked){
+				$(".check-all").prop("checked", false);
+				return false;
+			}else{
+				$(".check-all").prop("checked", true);
+			}
+		});
+	});
+	
+    var loading = null;
+	var options = {
+		   beforeSubmit: function (formData, jqForm, options) {
+			  loading = layer.load(); 
+		   },
+			success: function (data) {
+	                    layer.close(loading);
+					    layer.msg(data.info,{time:1000},function(){
+							if(data.status == 1) {
+								self.location.reload();
+							}
+						});
+					   
+	                }
+	            }; 
+	$("#importclassTableTempletFrom").ajaxForm(options);	
+	
+	
+</script>

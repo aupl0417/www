@@ -1,0 +1,152 @@
+/* 首页 */
+#fullpage .section{text-align: center;color: white;font-size: 300%;}
+
+#text-1{position: absolute;left: 100px;bottom: 110px;}
+#barcode-1{position: absolute;top: -85px;left: 175px;}
+#phone-1{position: absolute;top: -250px;right: -40px;}
+
+#text-2{position: absolute;bottom: 45px;left: 0;}
+#map-2{position: absolute;left: 540px;top: -50px;}
+#mascot-2{position: absolute;top: 70px;left: 420px;}
+.text-2-in{
+	-webkit-animation: text-2-in .7s ease-out;
+	-moz-animation: text-2-in .7s ease-out;
+	-o-animation: text-2-in .7s ease-out;
+	animation: text-2-in .7s ease-out;
+}
+@keyframes text-2-in {0%{opacity:0;bottom: 400px;} 100%{opacity:1;bottom: 45px;}}
+@-webkit-keyframes text-2-in {0%{opacity:0;bottom: 400px;} 100%{opacity:1;bottom: 45px;}}
+@-moz-keyframes text-2-in {0%{opacity:0;bottom: 400px;} 100%{opacity:1;bottom: 45px;}}
+@-o-keyframes text-2-in {0%{opacity:0;bottom: 400px;} 100%{opacity:1;bottom: 45px;}}
+.map-2-in{
+	-webkit-animation: map-2-in .7s ease-out;
+	-moz-animation: map-2-in .7s ease-out;
+	-o-animation: map-2-in .7s ease-out;
+	animation: map-2-in .7s ease-out;
+}
+@keyframes map-2-in {0%{opacity:0;left: 1040px;top:-550px;}100%{opacity:1;left: 540px;top: -50px;}}
+@-webkit-keyframes map-2-in {0%{opacity:0;left: 1040px;top:-550px;}100%{opacity:1;left: 540px;top: -50px;}}
+@-moz-keyframes map-2-in {0%{opacity:0;left: 1040px;top:-550px;}100%{opacity:1;left: 540px;top: -50px;}}
+@-o-keyframes map-2-in {0%{opacity:0;left: 1040px;top:-550px;}100%{opacity:1;left: 540px;top: -50px;}}
+.mascot-2-in{
+	-webkit-animation: mascot-2-in .7s ease-out;
+	-moz-animation: mascot-2-in .7s ease-out;
+	-o-animation: mascot-2-in .7s ease-out;
+	animation: mascot-2-in .7s ease-out;
+}
+@keyframes mascot-2-in {0%{opacity:0;left: -120px;top:570px;}100%{opacity:1;left: 420px;top: 70px;}}
+@-webkit-keyframes mascot-2-in {0%{opacity:0;left: -120px;top:570px;}100%{opacity:1;left: 420px;top: 70px;}}
+@-moz-keyframes mascot-2-in {0%{opacity:0;left: -120px;top:570px;}100%{opacity:1;left: 420px;top: 70px;}}
+@-o-keyframes mascot-2-in {0%{opacity:0;left: -120px;top:570px;}100%{opacity:1;left: 420px;top: 70px;}}
+
+#text-3{position: absolute;bottom: 27px;left: 496px;}
+#phone-3{position: absolute;left: 98px;top: -204px;}
+#mascot-3{position: absolute;top: 40px;left: 568px;}
+.text-3-in{
+	-webkit-animation: text-3-in .7s ease-out;
+	-moz-animation: text-3-in .7s ease-out;
+	-o-animation: text-3-in .7s ease-out;
+	animation: text-3-in .7s ease-out;
+}
+@keyframes text-3-in {0%{opacity:0;bottom: 527px;} 100%{opacity:1;bottom: 27px;}}
+@-webkit-keyframes text-3-in {0%{opacity:0;bottom: 527px;} 100%{opacity:1;bottom: 27px;}}
+@-moz-keyframes text-3-in {0%{opacity:0;bottom: 527px;} 100%{opacity:1;bottom: 27px;}}
+@-o-keyframes text-3-in {0%{opacity:0;bottom: 527px;} 100%{opacity:1;bottom: 27px;}}
+.phone-3-in{
+	-webkit-animation: phone-3-in .7s ease-out;
+	-moz-animation: phone-3-in .7s ease-out;
+	-o-animation: phone-3-in .7s ease-out;
+	animation: phone-3-in .7s ease-out;
+}
+@keyframes phone-3-in {0%{opacity:0;left: -450px;top: -900px;} 100%{opacity:1;left: 98px;top: -204px;}}
+@-webkit-keyframes phone-3-in {0%{opacity:0;left: -450px;top: -900px;} 100%{opacity:1;left: 98px;top: -204px;}}
+@-moz-keyframes phone-3-in {0%{opacity:0;left: -450px;top: -900px;} 100%{opacity:1;left: 98px;top: -204px;}}
+@-o-keyframes phone-3-in {0%{opacity:0;left: -450px;top: -900px;} 100%{opacity:1;left: 98px;top: -204px;}}
+.mascot-3-in{
+	-webkit-animation: mascot-3-in .7s ease-out;
+	-moz-animation: mascot-3-in .7s ease-out;
+	-o-animation: mascot-3-in .7s ease-out;
+	animation: mascot-3-in .7s ease-out;
+}
+@keyframes mascot-3-in {0%{opacity:0;top: 500px;left: 1168px;}100%{opacity:1;top: 40px;left: 568px;}}
+@-webkit-keyframes mascot-3-in {0%{opacity:0;top: 500px;left: 1168px;}100%{opacity:1;top: 40px;left: 568px;}}
+@-moz-keyframes mascot-3-in {0%{opacity:0;top: 500px;left: 1168px;}100%{opacity:1;top: 40px;left: 568px;}}
+@-o-keyframes mascot-3-in {0%{opacity:0;top: 500px;left: 1168px;}100%{opacity:1;top: 40px;left: 568px;}}
+
+#text-4{position: absolute;left: 130px;bottom: 47px;}
+#phone-4{position: absolute;left: 592px;top: -240px;}
+#mascot-4{position: absolute;top: 47px;left: 186px;}
+.text-4-in{
+	-webkit-animation: text-4-in .7s ease-out;
+	-moz-animation: text-4-in .7s ease-out;
+	-o-animation: text-4-in .7s ease-out;
+	animation: text-4-in .7s ease-out;
+}
+@keyframes text-4-in {0%{opacity:0;left: -550px;} 100%{opacity:1;left: 130px;}}
+@-webkit-keyframes text-4-in {0%{opacity:0;left: -550px;} 100%{opacity:1;left: 130px;}}
+@-moz-keyframes text-4-in {0%{opacity:0;left: -550px;} 100%{opacity:1;left: 130px;}}
+@-o-keyframes text-4-in {0%{opacity:0;left: -550px;} 100%{opacity:1;left: 130px;}}
+.phone-4-in{
+	-webkit-animation: phone-4-in .7s ease-out;
+	-moz-animation: phone-4-in .7s ease-out;
+	-o-animation: phone-4-in .7s ease-out;
+	animation: phone-4-in .7s ease-out;
+}
+@keyframes phone-4-in {0%{opacity:0;left: 1192px;} 100%{opacity:1;left: 592px;}}
+@-webkit-keyframes phone-4-in {0%{opacity:0;left: 1192px;} 100%{opacity:1;left: 592px;}}
+@-moz-keyframes phone-4-in {0%{opacity:0;left: 1192px;} 100%{opacity:1;left: 592px;}}
+@-o-keyframes phone-4-in {0%{opacity:0;left: 1192px;} 100%{opacity:1;left: 592px;}}
+.mascot-4-in{
+	-webkit-animation: mascot-4-in .7s ease-out;
+	-moz-animation: mascot-4-in .7s ease-out;
+	-o-animation: mascot-4-in .7s ease-out;
+	animation: mascot-4-in .7s ease-out;
+}
+@keyframes mascot-4-in {0%{opacity:0;left: -300px;}100%{opacity:1;left: 186px;}}
+@-webkit-keyframes mascot-4-in {0%{opacity:0;left: -300px;}100%{opacity:1;left: 186px;}}
+@-moz-keyframes mascot-4-in {0%{opacity:0;left: -300px;}100%{opacity:1;left: 186px;}}
+@-o-keyframes mascot-4-in {0%{opacity:0;left: -300px;}100%{opacity:1;left: 186px;}}
+
+#text-5{position: absolute;bottom: 10px;left: 506px;}
+#phone-5{position: absolute;left: 145px;top: -240px;}
+#mascot-5{position: absolute;top: 75px;left: 820px;}
+.text-5-in{
+	-webkit-animation: text-5-in .7s ease-out;
+	-moz-animation: text-5-in .7s ease-out;
+	-o-animation: text-5-in .7s ease-out;
+	animation: text-5-in .7s ease-out;
+}
+@keyframes text-5-in {0%{opacity:0;bottom: 610px;} 100%{opacity:1;bottom:10px;}}
+@-webkit-keyframes text-5-in {0%{opacity:0;bottom: 610px;} 100%{opacity:1;bottom:10px;}}
+@-moz-keyframes text-5-in {0%{opacity:0;bottom: 610px;} 100%{opacity:1;bottom:10px;}}
+@-o-keyframes text-5-in {0%{opacity:0;bottom: 610px;} 100%{opacity:1;bottom:10px;}}
+.phone-5-in{
+	-webkit-animation: phone-5-in .8s ease-out;
+	-moz-animation: phone-5-in .8s ease-out;
+	-o-animation: phone-5-in .8s ease-out;
+	animation: phone-5-in .8s ease-out;
+}
+@keyframes phone-5-in {0%{opacity:0;top:-1040px;} 100%{opacity:1;top:-240px;}}
+@-webkit-keyframes phone-5-in {0%{opacity:0;top:-1040px;} 100%{opacity:1;top:-240px;}}
+@-moz-keyframes phone-5-in {0%{opacity:0;top:-1040px;} 100%{opacity:1;top:-240px;}}
+@-o-keyframes phone-5-in {0%{opacity:0;top:-1040px;} 100%{opacity:1;top:-240px;}}
+.mascot-5-in{
+	-webkit-animation: mascot-5-in .8s ease-out;
+	-moz-animation: mascot-5-in .8s ease-out;
+	-o-animation: mascot-5-in .8s ease-out;
+	animation: mascot-5-in .8s ease-out;
+}
+@keyframes mascot-5-in {0%{opacity:0;top: -700px;}100%{opacity:1;top: 75px;}}
+@-webkit-keyframes mascot-5-in {0%{opacity:0;top: -700px;}100%{opacity:1;top: 75px;}}
+@-moz-keyframes mascot-5-in {0%{opacity:0;top: -700px;}100%{opacity:1;top: 75px;}}
+@-o-keyframes mascot-5-in {0%{opacity:0;top: -700px;}100%{opacity:1;top: 75px;}}
+
+#fp-nav ul li a span {background-color: white;}
+
+@media (max-width: 576px) {
+	.nav-menu {display: none;}
+	.footer {display: none;}
+}
+@media (max-height: 680px) {
+	.footer {display: none;}	
+}

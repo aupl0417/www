@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title><block name="title"></block></title>
+    <meta name="description" content="17约课用户中心" />
+    <meta name="keywords"  content="17约课,一起约课,约课,商家中心" />
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <!-- Bootstrap 3.3.4 -->
+    <link href="__PCCSS__/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!-- FontAwesome 4.3.0 -->
+    <link href="http://cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <!-- 2.0.0
+    <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />     -->
+    <!-- Theme style -->
+    <link href="__PCCSS__/AdminLTE.min.css" rel="stylesheet" type="text/css" />
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link href="__PCCSS__/_all-skins.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="__PCCSS__/all.css">
+    <block name="css"></block>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="skin-blue sidebar-mini">
+<div class="wrapper">
+
+    <header class="main-header">
+
+
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top clearfix" role="navigation">
+            <!-- Sidebar toggle button-->
+
+            <div class="navbar-wraper">
+                <a href="{:U('Shopkeeper/index')}" class="logo">
+                    <!-- mini logo for sidebar mini 50x50 pixels -->
+          <span class="logo-mini">
+            <img src="__PCIMG__/logo-min.png" alt="">
+          </span>
+                    <!-- logo for regular state and mobile devices -->
+          <span class="logo-lg">
+           <img src="__PCIMG__/logo.png" alt="logo" class="logo_img">
+           <img src="__PCIMG__/17yueke.png" alt="yueke" class="logo_txt">
+          </span>
+                </a>
+                <div class="search-wrap">
+                    <form action="{:mergeGetU('Shopkeeper/course_select')}" method="get">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                <span id="searchTypeSpan">课程</span> <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu" >
+                                <li><a href="javascript:changeCurrentSearchType('course', '课程');">课程</a></li>
+                                <li><a href="javascript:changeCurrentSearchType('wish', '心愿');">心愿</a></li>
+                            </ul>
+                        </div>
+                        <input type="text" name="searchWord" class="search-input" placeholder="试试输入 “唱歌”">
+                        <input type="hidden" name="searchType" value="course" />
+                        <button type="submit" class="btn-search"> <i class="fa fa-search icon-large"></i> </button>
+                    </form>
+                </div>
+
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <!-- Notifications: style can be found in dropdown.less -->
+                        <li>
+                            <button class="publish" onclick="location='{:U('Shopkeeper/publish')}'">  <img src="__PCIMG__/fabu.png" alt="发布"/>免费发布课程</button>
+                        </li>
+                        <li class=" ">
+                            <a href="{:U('Shopkeeper/intention')}" >
+                                <img src="__PCIMG__/honer.png"  alt="User Image" style="height:auto;width:14px;" />
+                                <span class="hidden-xs">课程动态</span>
+                            </a>
+                        </li>
+                        <!-- User Account: style can be found in dropdown.less -->
+                        <li class="user user-menu" id="user_menu" style="height:50px !important;">
+                            <a href="/user"  style="height:inherit;">
+                                <img src="__UPLOAD__{:session('shopkeeper.avatar')}" class="user-image" alt="User Image"/>
+                                <span>理查德</span>
+                                <span class="caret" style="color:#fff;"></span>
+                            </a>
+                            <ul class="dropdown-menu" id="setting-menu">
+                                <li><a href="{:U('Shopkeeper/published')}"><i class="icons-book"></i>我的心愿单</a></li>
+                                <li><a href="{:U('Shopkeeper/edit')}"><i class="icons-text"></i>资料编辑</a></li>
+                                <li><a href="{:U('Shopkeeper/message')}"><i class="icons-info"></i>消息</a></li>
+                                <li><a href="{:U('Shopkeeper/certification')}"><i class="icons-card"></i>认证</a></li>
+                                <li><a href="{:U('Shopkeeper/system')}"><i class="icons-setting"></i>设置</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- Control Sidebar Toggle Button -->
+                    </ul>
+                </div>
+            </div>
+
+        </nav>
+
+        <!-- Logo -->
+    </header>
+
+    <!-- Left side column. contains the logo and sidebar -->
+    <!-- sidebar: style can be found in sidebar.less -->
+
+    <!-- /.sidebar -->
+
+
+    <!-- 中部内容 -->
+    <block name="main">
+
+    </block>
+
+
+
+
+
+</div><!-- ./wrapper -->
+
+
+<block name="infoLine">
+
+</block>
+
+<footer class="main-footer">
+    <div class="pull-right footer-right">
+        <p><span class="blue_wrap">24小时</span>资讯服务热线</p>
+        <strong>020-28107517</strong>
+    </div>
+    <div class="footer_left">
+        <p>
+            <a href="{:U('pc/popularize')}">机构推广</a>
+            <span>|</span>
+            <a href="{:U('pc/contact')}">联系我们</a>
+            <span>|</span>
+            <a href="{:U('pc/join')}">加入我们</a>
+            <span>|</span>
+            <a href="{:U('pc/problem')}">常见问题</a>
+            <span>|</span>
+        </p>
+        <p>
+            版权所有@广州乐莘网络有限公司&nbsp;&nbsp;&nbsp;&nbsp;粤ICP备：14082321号
+        </p>
+    </div>
+</footer>
+<!-- login & register box -->
+<div id="login-box" class="login-wrap hidden">
+    <img src="__PCIMG__/l_logo.png" alt="logo" class="l-logo">
+    <img id="l-close-btn" src="__PCIMG__/l_close.png" alt="关闭" class="l-close">
+    <div class="form-wrap">
+        <div id="one-input-wrap" class="l-input-wrap l-user">
+            <img src="__PCIMG__/l_user.png" alt="用户" class="l-left-icon">
+            <input id="one-input" type="text" placeholder="手机号码/邮箱" class="l-input mleft42px width75">
+            <img id="l-u-clr" src="__PCIMG__/l_i_close.png" alt="清空" class="l-right-icon op-0">
+        </div>
+        <div  id="two-input-wrap" class="l-input-wrap">
+            <img src="__PCIMG__/l_password.png" alt="密码" class="l-left-icon">
+            <input id="two-input" type="password" placeholder="密码" class="l-input mleft42px">
+            <img id="l-p-clr" src="__PCIMG__/l_i_close.png" alt="清空" class="l-right-icon  op-0">
+        </div>
+    </div>
+    <div id="option-wrap" class="l-option">
+        <input id="remenber-me" type="checkbox" checked="checked">
+        <label for="remenber-me" class="fs14">记住我</label>
+        <span class="l-forget-pass fs14"><a id="forget-pass" href="javascript:void(0);">忘记密码？</a></span>
+        <a href="javascript:void(0);" class="other-login fs14">教师机构登陆<img src="__PCIMG__/l_go.png" alt="Go"></a>
+    </div>
+    <ul id="info-wrap" class="l-info hidden"></ul>
+    <button id="l-one-btn" class="shining-btn">登陆</button>
+    <!-- <button id="l-two-btn" class="plain-btn">机构注册</button> -->
+    <div class="social-login fs14">
+        <span>社交账号直接登陆</span>
+        <img src="__PCIMG__/l_qq.png" alt="QQ"><img src="__PCIMG__/l_weibo.png" alt="Weibo">
+    </div>
+</div>
+<!-- register first step -->
+<div id="reg-one-box" class="login-wrap hidden">
+    <img src="__PCIMG__/l_logo.png" alt="logo" class="l-logo">
+    <img id="ro-close-btn" src="__PCIMG__/l_close.png" alt="关闭" class="l-close">
+    <ul id="reg-sel" class="r-bread clearfix fs14">
+        <li><a href="javascript:void(0);">老师注册</a></li>
+        <li><a href="javascript:void(0);">机构注册</a></li>
+        <li><a class="active" href="javascript:void(0);">用户注册</a></li>
+    </ul>
+    <div class="form-wrap">
+        <div class="l-input-wrap l-user">
+            <input id="ro-one-input" type="text" placeholder="请输入手机号码/邮箱" class="l-input mleft16px width55">
+            <img id="ro-u-clr" src="__PCIMG__/l_i_close.png" alt="清空" class="l-right-icon op-0">
+            <button id="code-btn" class="code-btn">获取验证码</button>
+        </div>
+        <div class="l-input-wrap l-user">
+            <input id="ro-two-input" type="text" placeholder="请输入验证码" class="l-input mleft16px width85">
+            <img id="ro-c-clr" src="__PCIMG__/l_i_close.png" alt="清空" class="l-right-icon op-0">
+        </div>
+        <div class="l-input-wrap">
+            <input id="ro-three-input" type="text" placeholder="邀请码(选填)" class="l-input mleft16px width85">
+            <img id="ro-ic-clr" src="__PCIMG__/l_i_close.png" alt="清空" class="l-right-icon op-0">
+        </div>
+    </div>
+    <div class="l-option">
+        <input id="ro-agree" type="checkbox" checked="checked">
+        <label for="ro-agree" class="fs12">同意<a href="#" style="color:white;text-decoration:underline;">17约课使用条款</a></label>
+    </div>
+    <ul id="ro-info-wrap" class="l-info hidden"></ul>
+    <button id="ro-one-btn" class="shining-btn">下一步</button>
+    <!-- <button id="ro-two-btn" class="plain-btn">返回登录</button> -->
+</div>
+<!-- register second step -->
+<div id="reg-two-box" class="login-wrap hidden">
+    <img src="__PCIMG__/l_logo.png" alt="logo" class="l-logo">
+    <img id="rt-close-btn" src="__PCIMG__/l_close.png" alt="关闭" class="l-close">
+    <div class="form-wrap">
+        <div class="l-input-wrap l-user">
+            <input id="rt-one-input" type="text" placeholder="请输入机构全称" class="l-input mleft16px width85">
+            <img id="rt-u-clr" src="__PCIMG__/l_i_close.png" alt="清空" class="l-right-icon op-0">
+        </div>
+        <div class="l-input-wrap l-user">
+            <input id="rt-two-input" type="password" placeholder="请输入密码" class="l-input mleft16px width85">
+            <img id="rt-p-clr" src="__PCIMG__/l_i_close.png" alt="清空" class="l-right-icon op-0">
+        </div>
+        <div class="l-input-wrap">
+            <input id="rt-three-input" type="password" placeholder="请重新输入密码" class="l-input mleft16px width85">
+            <img id="rt-r-clr" src="__PCIMG__/l_i_close.png" alt="清空" class="l-right-icon op-0">
+        </div>
+    </div>
+    <div class="l-option">
+        <input id="rt-agree" type="checkbox" checked="checked">
+        <label for="rt-agree" class="fs12">同意<a href="#" style="color:white;text-decoration:underline;">17约课使用条款</a></label>
+    </div>
+    <ul id="rt-info-wrap" class="l-info hidden"></ul>
+    <button id="rt-one-btn" class="shining-btn">提交注册</button>
+    <!-- <button id="rt-two-btn" class="plain-btn">返回登录</button> -->
+</div>
+<!-- forget password first step -->
+<div id="forget-one-box" class="login-wrap hidden">
+    <img src="__PCIMG__/l_logo.png" alt="logo" class="l-logo">
+    <img id="fo-close-btn" src="__PCIMG__/l_close.png" alt="关闭" class="l-close">
+    <div class="form-wrap">
+        <div class="l-input-wrap">
+            <input id="fo-one-input" type="text" placeholder="请输入注册时的手机号码或邮箱" class="l-input mleft16px width85">
+            <img id="fo-u-clr" src="__PCIMG__/l_i_close.png" alt="清空" class="l-right-icon op-0">
+        </div>
+    </div>
+    <ul id="fo-info-wrap" class="l-info hidden"></ul>
+    <button id="fo-one-btn" class="shining-btn">发送验证码</button>
+    <!-- <button id="fo-two-btn" class="plain-btn">返回登录</button> -->
+</div>
+<!-- forget password second step -->
+<div id="forget-two-box" class="login-wrap hidden">
+    <img src="__PCIMG__/l_logo.png" alt="logo" class="l-logo">
+    <img id="ft-close-btn" src="__PCIMG__/l_close.png" alt="关闭" class="l-close">
+    <div class="form-wrap">
+        <div class="l-input-wrap l-user">
+            <input id="ft-one-input" type="text" placeholder="请输入验证码" class="l-input mleft16px width85">
+            <img id="ft-c-clr" src="__PCIMG__/l_i_close.png" alt="清空" class="l-right-icon op-0">
+        </div>
+        <div class="l-input-wrap l-user">
+            <input id="ft-two-input" type="password" placeholder="请输入新密码" class="l-input mleft16px width85">
+            <img id="ft-p-clr" src="__PCIMG__/l_i_close.png" alt="清空" class="l-right-icon op-0">
+        </div>
+        <div class="l-input-wrap">
+            <input id="ft-three-input" type="password" placeholder="请重新输入新密码" class="l-input mleft16px width85">
+            <img id="ft-r-clr" src="__PCIMG__/l_i_close.png" alt="清空" class="l-right-icon op-0">
+        </div>
+    </div>
+    <ul id="ft-info-wrap" class="l-info hidden"></ul>
+    <button id="ft-one-btn" class="shining-btn">重置密码</button>
+    <!-- <button id="ft-two-btn" class="plain-btn">返回登录</button> -->
+</div>
+
+<!-- jQuery 2.1.4 -->
+<script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+
+
+<!-- Bootstrap 3.3.2 JS -->
+<script src="__PCJS__/bootstrap.min.js" type="text/javascript"></script>
+
+<script src="__PCJS__/main.js" type="text/javascript"></script>
+
+<script type="text/javascript" src="__HJS__/juicer-min.js"></script>
+<script type="text/javascript" src="__HJS__/imgerror.js"></script>
+
+
+
+
+<script>
+
+    $("#l-one-btn").click(function(){
+        var loginvalue = $("#one-input").val();
+        var password = $("#two-input").val();
+
+    });
+
+
+
+    //隐藏错误提示
+    function ontext(){
+        document.getElementById('reg_err').className='u_register_err hidden';
+    }
+    //错误提示
+    function errtext(classn,etext){
+        document.getElementById('reg_err').className=classn;
+        document.getElementById('reg_err_text').innerHTML =etext;
+    }
+    function showLoading(){$(".css-loading").removeClass("hidden");}
+    function hiddeLoading(){$(".css-loading").addClass("hidden");}
+    //检查类型
+    function checktype(){
+        var type=$("#logintype").val();
+        type=$.trim(type);
+        var email=/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;//邮件地址必须包含@符号和.com等网络域名
+        var tel=/^(1)\d{10}$/;	//包括移动电话和固定电话，但是必须大于7位
+        if(email.test(type))
+        {
+            document.getElementById('hiddentype').value ='email';
+            return true;
+        }else if(tel.test(type)){
+            document.getElementById('hiddentype').value ='phone';
+            return true;
+        }else{
+            errtext('u_register_err','请输入正确的电话号码或邮箱');
+            return false;
+        }
+    }
+    //检查密码
+    function pwcheck(){
+        var pw=$("#password").val();
+        var passw=/^\S{6,12}$/;
+        if(!passw.test(pw)){
+            errtext('u_register_err','密码必须是6~12个字符');
+            return false;
+        }
+        return true;
+    }
+    //*********************************************************************************
+    function AllCheck()
+    {
+//将上面n个函数打包成一个AllCheck()函数，在前台界面中调用该AllCheck()；
+        if(checktype()&&pwcheck()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    function logindata(){
+        if(AllCheck()){
+            showLoading();
+            var typename=$("#hiddentype").val();
+            var typevalue=$("#logintype").val();
+            var password=$("#password").val();
+            var remember=$("#remember").is(":checked");
+            if(remember){
+                localstorage_user();
+            }else{
+                dellocalstorage();
+            }
+            var datalogin={};
+            var visitorid=localStorage.visitor;
+            if(visitorid!=null&&visitorid!=''){
+                datalogin.visitorid=visitorid;
+            }
+            datalogin.type=typename;
+            datalogin.logintype=typevalue;
+            datalogin.password=password;
+            datalogin.remember=remember;
+            $.ajax({
+                type: 'POST',
+                url:post_url,
+                dataType: 'json',
+                data:datalogin,
+                success: function(data) {
+                    hiddeLoading();
+                    if(data.status!=200){
+                        $('#reg_err').removeClass('hidden');
+                        $("#reg_err_text").html(data.msg);
+                    }else{
+//									$('#reg_err').removeClass('hidden');
+//									$("#reg_err_text").html("登录成功！");
+//									setTimeout("window.location.href='{:U("Index/index")}'",1200);
+                        if(data.histhref!=400){
+                            window.location.href=data.histhref;
+                        }else{
+                            window.location.href=index_url;
+                        }
+                    }
+                },
+                error:function(data){
+                    hiddeLoading();
+                    $('#reg_err').removeClass('hidden');
+                    $("#reg_err_text").html('请重新刷新页面再登录');
+                }
+            });
+        }else{
+            return false;
+        }
+    }
+
+    $("#l-one-btn").click(function(){
+        logindata();
+    });
+
+
+    function dellocalstorage(){
+        localStorage.removeItem("logintype");
+        localStorage.removeItem("hiddentype");
+        localStorage.removeItem("password");
+        return true;
+    }
+    function localstorage_user(){
+        localStorage.logintype=$("#logintype").val();
+        localStorage.hiddentype=$("#hiddentype").val();
+        localStorage.password=$("#password").val();
+        return true;
+    }
+
+    $(function(){
+        var logintype_user=localStorage.logintype;
+        var hiddentype_user=localStorage.hiddentype;
+        var password_user=localStorage.password;
+        if(logintype_user!=null&&logintype_user!=''&&hiddentype_user!=null&&hiddentype_user!=''){
+            $("#logintype").val(logintype_user);
+            $("#hiddentype").val(hiddentype_user);
+        }
+        if(password_user!=null&&password_user!=""){
+            $("#password").val(password_user);
+            $("#remember").prop("checked","checked");
+        }
+    });
+
+
+
+</script>
+
+
+
+
+
+
+
+
+<block name="js"></block>
+
+</body>
+</html>

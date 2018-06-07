@@ -1,0 +1,28 @@
+<aside class="main-sidebar">
+<!-- sidebar: style can be found in sidebar.less -->
+<section class="sidebar">
+  <!-- Sidebar user panel -->
+  <div class="user-panel">
+    <div class="pull-left image">
+        <img src="__UPLOAD__{:session('shopkeeper.avatar')}" class="img-square" alt="User Image" />
+    </div>
+    <div class="pull-left info">
+      <p>{:session('shopkeeper.nickname')}</p>
+
+      <a href="javascript:;">{:session('shopkeeper.company_name')}</a>
+    </div>
+  </div>
+ 
+  <!-- /.search form -->
+  <!-- sidebar menu: : style can be found in sidebar.less -->
+  <ul class="sidebar-menu">
+      <li class="treeview <?php echo ACTION_NAME=='edit'?'active':''; ?>">      <a href="{:U('Shopkeeper/edit')}"><i class="icons-text"></i><span>资料编辑</span></a></li>
+      <li class="treeview <?php echo ACTION_NAME=='intention'?'active':''; ?>">    <a href="{:U('Shopkeeper/intention')}"><i class="icons-honer"></i><span>求学意向</span></a></li>
+      <li class="treeview <?php echo ACTION_NAME=='published'?'active':''; ?>">    <a href="{:U('Shopkeeper/published')}"><i class="icons-book"></i><span>课程动态</span></a></li>
+      <li class="treeview <?php echo ACTION_NAME=='certification'?'active':''; ?>">    <a href="{:U('Shopkeeper/certification')}"><i class="icons-card"></i><span>商家认证</span></a></li>
+      <li class="treeview <?php echo ACTION_NAME=='message'?'active':''; ?>">    <a href="{:U('Shopkeeper/message')}"><i class="icons-info"></i><span>消息</span></a></li>
+      <li class="treeview <?php echo ACTION_NAME=='system'?'active':''; ?>">    <a href="{:U('Shopkeeper/system')}"><i class="icons-setting"></i><span>设置</span></a></li>
+  </ul>
+</section>
+<!-- /.sidebar -->
+</aside>

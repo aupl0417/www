@@ -1,0 +1,204 @@
+<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+<script type="text/javascript" src="__ADDONROOT__/js/myQuery.js"></script>
+
+<style type="text/css">
+    .btn-close{
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        width: 17px;
+        height: 17px;
+        background: url('__ADDONROOT__/images/bg_icon.png') no-repeat -25px 0;
+        cursor: pointer;
+    }
+
+    .btn-close:hover {
+        text-decoration: none;
+        border-bottom: 0 none;
+    }
+
+    .upload-img-box .upload-pre-item{
+        position: relative;
+        margin-bottom: 8px;
+    	height:auto;
+        overflow: visible;
+    }
+
+    /* 上传图片点击弹出层 */
+    .upload-img-popup {
+        position: fixed;
+        z-index: 9999;
+        padding: 3px;
+        border: 1px solid #c3c3c3;
+        background-color: #fff;
+        box-shadow: 0 0 4px rgba(0,0,0,.5);
+    }
+
+    .upload-img-popup img{
+        display: inline-block;
+        max-height: 500px;
+        max-width: 500px;
+        cursor: pointer;
+    }
+
+    .upload-img-popup .close-pop {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        width: 17px;
+        height: 17px;
+        background: url('__ADDONROOT__/images/bg_icon.png') no-repeat -25px 0;
+    }
+    .upload-img-popup .close-pop:hover {
+        text-decoration: none;
+        border-bottom: 0 none;
+    }
+    .upload-img-popup img {
+        display: block;
+    }
+    .upload_icon_all {
+        width: 15px;
+        height: 15px;
+        background: url('__ADDONROOT__/images/attachment_1.png');
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 5px
+    }
+</style>
+<div id="tab1" class="tab-pane in tab1">
+    <div class="controls">
+        <input type="file" id="upload_picture">
+        <div class="upload-img-box">
+            <notempty name="picture">
+                 <volist name="picture" id="picture">
+                    <div class="upload-pre-item">
+                        <input type="hidden" name="icon[]" value="{$picture['path']}" data-id="{$picture['id']}" class="icon" />
+                        <img src="__ROOT__{$picture['path']}" data-id="{$picture['id']}"/>
+                        <span class='btn-close' title='删除图片'></span>
+                    </div>
+                 </volist>
+            <else/>
+                <notempty name='info.co_logo'>
+                	<div class="upload-pre-item">
+	                	<input type="hidden" name="icon[]" value="{$info.co_logo}" data-id="{$picture['id']}" class="icon" />
+	                	<img src="__ROOT__{$info.co_logo}" data-id="{$picture['id']}"/>
+	                	<span class='btn-close' title='删除图片'></span>
+                	</div>
+                </notempty>
+                <notempty name='info.cce_url'>
+                	<div class="upload-pre-item">
+	                	<input type="hidden" name="icon[]" value="{$info.cce_url}" data-id="{$picture['id']}" class="icon" />
+	                	<img src="__ROOT__{$info.cce_url}" data-id="{$picture['id']}"/>
+	                	<span class='btn-close' title='删除图片'></span>
+                	</div>
+                </notempty>
+                <notempty name='info.crd_url'>
+                	<volist name='info.crd_url' id='data'>
+                		<if condition="$data.type neq 'image'">
+                			<div>
+                				<input type='text' name='icon[]' data-id='{$data.id}' style='width:400px;' class='icon' value='{$data.url}'/><br><br>
+                			</div>
+                		<else/>
+	                		<div class="upload-pre-item">
+	                			<input type="hidden" name="icon[]" value="{$data.url}" data-id="{$picture['id']}" class="icon" />
+	                			<img src="__ROOT__{$data.url}" data-id="{$picture['id']}"/>
+	                			<span class='btn-close' title='删除图片'></span>
+	                		</div>
+                		</if>
+                	</volist>
+                </notempty>
+            </notempty>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    //上传图片
+    var buttonName = '{$uploadData.title}'== '' ? '上传图片' : "{$uploadData.title}";
+    var url = '{$uploadData.url}' == '' ? "{:U('File/uploadPicture',array('session_id'=>session_id()))}" : "{$uploadData.url}";
+    if("{$uploadData.action}" == 'add'){
+    	$('.upload-img-box').hide();
+    }
+    var exts = '';
+    if("{$uploadData.type}" == 'file'){
+    	exts = "{$uploadData.ext}";
+    }else {
+    	exts = 'jpg,gif,png,jpeg';
+    }
+	var extArr = exts.split(',');
+	exts = '';
+	for(var i=0; i<extArr.length; i++){
+		exts += '*.'+ extArr[i] + ';';
+	}
+    /* 初始化上传插件 */
+    $("#upload_picture").uploadify({
+        "height"          : 30,
+        "swf"             : "__STATIC__/uploadify/uploadify.swf",
+        "fileObjName"     : "download",
+        "buttonText"      : buttonName,
+        "uploader"        : url,
+        "width"           : 120,
+        'removeTimeout'   : 1,
+        'fileTypeExts'    : exts,
+        "onUploadSuccess" : uploadPicture,
+        'onFallback' : function() {
+            alert('未检测到兼容版本的Flash.');
+        }
+    });
+    function uploadPicture(file, data){
+        var data = $.parseJSON(data);
+        console.log(data);
+        
+        var src = '';
+        if(data.status){
+        	if('{$uploadData.url}' == ''){
+        		$('.upload-img-box').html('');
+        	}
+        	//创建<div class="upload-pre-item">
+        	$_upload_item = $("<div class='upload-pre-item'></div>");
+        	
+        	if("{$uploadData.type}" == 'file'){
+            	var ext = data.data.ext;
+            	data.path = 'Uploads/Download/'+data.data.savepath + data.data.savename;
+            	data.id = data.data.id;
+            	//创建img input close-btn
+            	if(ext != 'jpg' && ext != 'gif' && ext != 'png' && ext != 'jpeg'){
+            		$_file_path = $("<input type='text' name='icon[]' data-id='"+data.id+"' style='width:400px;' class='icon' value='"+data.path+"'/><br><br>");
+            	}else {
+            		$_file_path = $("<input type='hidden' name='icon[]' data-id='"+data.id+"' class='icon' value='"+data.path+"'/>");
+            		src = data.url || '__ROOT__' + data.path;
+                    $_upload_img = $("<img src=" + src +" title='点击显示大图' data-id="+data.id+"> ");
+                    $_img_del = $("<span class='btn-close' title='删除图片'></span>");
+                  	//加入到upload-img-box
+                    $_upload_item.append($_upload_img);
+                    $_upload_item.append($_img_del);
+            	}
+                
+                $("#tab1 .controls").append($_file_path);
+            }else {
+            	var extStart = data.path.lastIndexOf(".");
+                var ext = data.path.substring(extStart, data.path.length).toLowerCase();//文件后缀
+              	//创建img input close-btn
+                $_img_path = $("<input type='hidden' name='icon[]' data-id='"+data.id+"' class='icon' value='"+data.path+"'/>");
+                src = data.url || '__ROOT__' + data.path;
+                $_upload_img = $("<img src=" + src +" title='点击显示大图' data-id="+data.id+"> ");
+                $_img_del = $("<span class='btn-close' title='删除图片'></span>");
+
+                //加入到upload-img-box
+
+                $_upload_item.append($_upload_img);
+                $_upload_item.append($_img_del);
+
+                $("#tab1 .controls").append($_img_path);
+            }
+        	console.log(data);
+
+            $(".icon").parent().find('.upload-img-box').append($_upload_item);
+            $('.upload-img-box').show();
+        } else {
+            setTimeout(function(){
+                $('#top-alert').find('button').click();
+                $(that).removeClass('disabled').prop('disabled',false);
+            },1500);
+        }
+    }
+</script>

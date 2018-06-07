@@ -1,0 +1,467 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+    <meta content="yes"name="apple-mobile-web-app-capable"/>
+    <meta content="black"name="apple-mobile-web-app-status-bar-style"/>
+    <title>{$resArr.title} - 17约课</title>
+    <link rel="stylesheet" type="text/css" href="__HCSS__/reset.css">
+    <link rel="stylesheet" href="__HCSS__/2.css"/>
+    <link rel="stylesheet" href="__HCSS__/4.css"/>
+    <meta name="keywords" content="{$resArr.title}" />
+    <meta name="description" content="{$resArr.title} - 17约课 " />
+    <style>
+        #commentPanel{
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+
+<header id="top_header">
+
+    <!-- 第一次引导 -->
+    <div class="tips-bg hidden">
+        <div id="tip31" class="tips hidden">
+            <div id="selected31" class="selected"></div>
+            <img src="__HIMG__/guide_pointer.png" />
+            <p>点击报名该课程，老师会<b>主动联系您。</b></p>
+            <button class="">我知道了</button>
+        </div>
+    </div>
+
+    <div id="header" align="center">
+        <h3 class="identify_title">{$resArr.title}</h3>
+        <a href="javascript:history.back(-1)" class="identify_back"><img src="__HIMG__/Return2.png" alt=""/>返回</a>
+        <a href="{:U('Shopkeeper/Editor')}" class="identify_to_index {$resArr['isMe']?'':'hidden'}">编辑</a>
+        <a href="{:U('Index/index')}" class="identify_to_index">首页</a>
+    </div>
+</header>
+<div class="wrapper">
+    <!-- 这是没有手机的用户需要输入手机号码 -->
+    <section class="window_bg hidden">
+        <div class="picker_wrap"  style="top: 150px; padding-top: 0em;position: fixed">
+            <p class="post-phone-p" style="padding-top: 10px;padding-bottom: 10px; font-size: 1.1em;">留下手机号码，方便商家联系您</p>
+            <div class="pick_bottom_wrap"  id="shoplistselect">
+                <div class="pick-input-wrap">
+                    <div class="pick-input-wrap-out" style="border: none;overflow: visible">
+                        <div class="post-phone-input-wrap">
+                            <input type="text" id="phoneInput" class="pick_input" placeholder="请输入手机号"/>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="pick-input-wrap">
+                    <div class="pick-input-wrap-out" style="border: none;overflow: visible">
+                        <div class="pick_select_wrap_code">
+                            <input type="text" id="smsVerifyInput" class="pick_input" placeholder="输入验证码"/>
+                        </div>
+                        <button id="getSmsVerifyBtn" class="post-phone-code-btn">获取验证码</button>
+                    </div>
+                </div>
+                <div class="pick_sub_wrap">
+                    <button class="post-phone-cancel" id="winCancelBtn">考虑一下</button><button class="pick_submit" style="margin-right: 0;" id="winSubmitBtn">确定</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--<img src="__HIMG__/loading.gif" alt="" class="loading hidden"/>-->
+    <div class="css-loading hidden">
+        <div class="ball-holder">
+            <div class="ball"></div>
+        </div>
+    </div>
+
+            <div class="section_item section_item_course">
+
+                <div class="section_item_title">
+                    <div class="span2 section_item_portrait">
+                        <a href="{:U('Shopkeeper/info', ['id'=>$resArr['sid']])}"><img src="{$resArr.avatar}" alt="" class="section_item_portrait_img" onerror="this.src='__HIMG__/iPhone.png'"></a>
+                    </div>
+                    <div class="span6 section_item_sub"><h3 class="detail_h3">{$resArr.title}</h3>
+                        <p>{$resArr.nickname}<eq name="resArr.status" value="3"><img src="__HIMG__/Company.png" alt="" /></eq>
+                        <?php if ($resArr['isTimeOut']): ?><span class="time_end">已结束</span><?php endif; ?>
+                        </p>
+                    </div>
+
+                    <div class="clear"></div>
+
+                </div>
+                <div class="section_item_cont">
+                    <div class="section_item_info span6">
+                        <p><img src="__HIMG__/Classification.png" alt="">{$resArr.catename}</p>
+                        <p><img src="__HIMG__/Price.png" alt="">{$resArr.price}
+                            <?php if ($resArr['preferent']): ?>
+                            <br />
+                            <span style="/*margin-left: 1.8em; */margin-right: 1.2em; display: inline-block; color: #ff9019; font-size: 0.9em;">
+                            <img src="__HIMG__/Hui2.png" alt="" style="position: static !important; margin-right: 0;vertical-align: top;" />
+                            <span> {$resArr.preferent} </span>
+                            </span>
+                            <?php endif; ?>
+                        </p>
+                        <p><img src="__HIMG__/Time.png" alt="">{$resArr.mode}</p>
+                        <p><img src="__HIMG__/Business.png" alt="">{$resArr.nickname}</p>
+                        <p class="address_p"><img src="__HIMG__/Location.png" alt="">{$resArr.area_detail}</p>
+                        <p><img src="__HIMG__/phone.png" alt="">{$resArr.phone_tel}</p>
+
+                    </div>
+                    <div class="section_item_photo span4">
+                        <img src="__UPLOAD__/{$resArr.environ}" alt="" onerror="this.src='__HIMG__/iPhone.png'" />
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="section_item_feature">
+                    <p class="section_course_time_out">截止日期：<span class="section_course_info">{$resArr['overtime']}</span></p>
+
+                    <p class="section_course_freature">课程特色：
+                	<volist name="resArr.tags" id="vo">
+                    <span>{$vo}</span>&nbsp;
+                    </volist>
+                    </p>
+                    <?php if ($resArr['content']): ?>
+                    <p class="section_course_wrap">
+                        <span class="section-title">课程内容：</span>
+                        <span class="section-value">{$resArr.content}</span>
+                        <img class="toggle-img" width="8px" height="4px" src="__HIMG__/icon2.png" alt="">
+                    </p>
+                    <?php endif; ?>
+                    <?php if ($resArr['teacher_feature']): ?>
+                    <p class="section_course_wrap">
+                        <span class="section-title">教学特点：</span>
+                        <span class="section-value">{$resArr.teacher_feature}</span>
+                        <img class="toggle-img" width="8px" height="4px" src="__HIMG__/icon2.png" alt="">
+                    </p>
+                    <?php endif; ?>
+                    <?php if ($resArr['teacher_age']): ?>
+                    <p class="section_course_wrap">
+                        <span class="section-title">老师教龄：</span>
+                        <span class="section-value pick-up">{$resArr.teacher_age}年</span>
+                        <!--<img class="toggle-img" width="8px" height="4px" src="__HIMG__/icon2.png" alt="">-->
+                    </p>
+                    <?php endif; ?>
+                    <?php if ($resArr['teacher_exp']): ?>
+                    <p class="section_course_wrap">
+                        <span class="section-title">老师资历：</span>
+                        <span class="section-value pick-up">{$resArr.teacher_exp}</span>
+                        <img class="toggle-img" width="8px" height="4px" src="__HIMG__/icon2.png" alt="">
+                    </p>
+                    <?php endif; ?>
+                    <?php if ($resArr['teacher_remark']): ?>
+                    <p class="section_course_wrap">
+                        <span class="section-title">老师简介：</span>
+                        <span class="section-value pick-up">{$resArr.teacher_remark}</span>
+                        <img class="toggle-img" width="8px" height="4px" src="__HIMG__/icon2.png" alt="">
+                    </p>
+                    <?php endif; ?>
+                </div>
+                <p class="section_item_join_p">已报名用户<span id="enrollUserCount">{$resArr.user_count}</span>人 &gt;</p>
+                <ul id="uAvatars" class="section_item_touxiang_ul">
+                	<div id="uAvatarPanel"></div>
+                    <li id="uAvatarsMore" class="section_item_more hidden">显示更多....</li>
+                </ul>
+                <div class="clear"></div>
+                <div class="section_item_pv">
+                    <p class="section_item_pv_pv"><img src="__HIMG__/Browse.png" alt="">{$resArr.view}</p>
+                    <p class="section_item_pv_home"><img src="__HIMG__/Review.png" alt="">{$resArr.comment_count}</p>
+                </div>
+            </div>
+
+            <p class="business_reply_title">全部评论</p>
+            <div id="comments" class="business_reply_wrap">
+                <div class="business_relay_input_wrap">
+                    <div class="input_wrap business_reply_input">
+                        <input type="text" id="commentInput" class="register_input"  placeholder="请输入你的评论">
+                        <i class="input_close_icon op_0" style="top: 0.6em;"></i>
+                    </div>
+                    <button id="commentBtn" class="business_reply_btn">评论</button>
+                </div>
+                <div id="commentPanel"></div>
+                <p id="commentsMore" class="business_relay_more hidden">显示全部评论</p>
+            </div>
+
+            <p class="business_reply_title">商家已发布课程</p>
+            <div id="shopInfos" class="blank w96 ml2 business_course_list" style="padding-bottom: 0">
+            	<div id="shopInfoPanel"></div>
+            	<p id="shopInfosMore" class="business_course_more hidden" style="position: relative;top: -0.6em;">查看更多商家</p>
+            </div>
+            <div class="section_spread" style="margin-bottom: 5em;">
+                <div class="section_spread_title">
+                    <p class="section_spread_title_brand">课程推广</p>
+                    <h2>热门课程</h2>
+                    <h3>组课热门课程八折优惠</h3>
+                </div>
+                
+                <div id="generPanel" class="section_spread_cont">
+                </div>
+                
+            </div>
+                <!--<button class="enterprise_cont_submit">查看全部组课<img src="__HIMG__/right.png" alt=""/></button>-->
+
+            <div class="enterprise_cont_footer {:session('?shopkeeper')?'hidden':''}">
+                <a href="javascript:;" id="enrollBtn" class="enterprise_cont_footer_join" ><?php if ($isUserEnroll): ?>已报名<?php else: ?>报名<?php endif; ?></a>
+                <a href="javascript:;" id="share_btn" class="enterprise_cont_footer_share" ><img src="__HIMG__/link.png" alt=""/>分享</a>
+                <a href="javascript:;" id="starBtn" class="enterprise_cont_footer_collect"><img src="__HIMG__/star.png" alt=""/><?php if ($isUserStar): ?>已收藏<?php else: ?>收藏<?php endif; ?></a>
+            </div>
+
+    <br/>
+    <br/>
+    <br/>
+
+
+</div>
+
+
+<!-- 游客报名成功 -->
+<div class="tourist_succ_bg hidden">
+    <div id="tourist_succ">
+        <div class="succ_title">
+            <span class="succ_title_pic"><img src="__HIMG__/succ.png"></span>
+            <span id="succ_title_hint">报名成功</span>
+        </div>
+        <p>亲，你还没有注册或登录！是无法成功约到课程的。</p>
+        <button id="t_reg_btn">注册</button>
+        <button id="t_login_btn">立即登陆</button>
+        <button id="t_refuse_btn">残忍拒绝</button>
+    </div>
+</div>
+<!-- 游客选择头像 -->
+<div class="t_avatar_bg hidden">
+    <div id="t_avatar_wrap">
+        <img id="btn" src="__HIMG__/user.png" alt="游客头像"/>
+        <input name="useravatar" type="file" class="visualization" id="file">
+        <input type="hidden" id="imgsrc" />
+        <h3>请上传头像</h3>
+        <p>上传真实的头像，可以更好地约课</p>
+    </div>
+    <!-- 游客点击选择头像时弹出的菜单 -->
+    <!--<div class="t_menu_bg" style="z-index: 5000">
+        <div class="t_menu_wrap">
+            <div id="t_take_p">拍照</div>
+            <div id="t_sel_p">选取现有的</div>
+            <div id="t_close">取消</div>
+        </div>
+    </div>-->
+</div>
+
+<!-- 模板 -->
+
+<script id="uAvatarTpl" type="text/template">
+	{@each data as it,i}
+		{@if it.visitor_id==0}
+	<li data-id="${it.id}"><a href="{:U('LookUser/moinfo')}?uid=${it.id}"><img src="${it.avatar}" alt=""  onerror="this.src='__HIMG__/iPhone.png'"/></a></li>
+		{@else}
+	<li data-id="0" data-visitid="${it.visitor_id}"><a href="{:U('LookUser/moinfo')}?uid=0{@if it.visitor_id!=null || it.visitor_id!=''}&&vid=${it.visitor_id}{@/if}">
+		<img src="{$visitor_avatar}" alt=""/></a>
+	</li>
+		{@/if}
+	{@/each}
+</script>
+
+<script id="commentTpl" type="text/template">
+	{@each data as it,i}
+    <div id="comment_id_${it.id}" class="business_reply_item">
+		{@if it.uid > 0}<a href="{:U('LookUser/moinfo')}?uid=${it.uid}">{@else if it.sid>0}<a href="{:U('Shopkeeper/info')}?id=${it.sid}">{@else}<a href="{:U('LookUser/moinfo')}?uid=0&&vid=${it.vid}">{@/if}
+			<img src="${it.avatar}" alt="" class="business_reply_img"  onerror="this.src='__HIMG__/iPhone.png'">
+		</a>
+	    <div class="business_reply_info">
+            <h2>
+                <b class="name_comment_1">${it.nickname}</b>
+                {@if it.parent_nickname}<b class="name_comment"> 回复 ${it.parent_nickname}：</b>{@/if}
+            </h2>
+	        <p>${it.content}</p>
+	    </div>
+	    <span>${it.ctime}</span>
+        <b class="comment_rep_b" onclick="showSubCommentPanel(${it.id})">回复</b>
+        {@if it.isMe}<b class="comment_delete_b" onclick="deleteComment(this, ${it.id})">删除</b>{@/if}
+		</div>
+    </div>
+    <div id="comment_sub_id_${it.id}" class="comment_sub_id business_relay_input_wrap comment_rep_wrap hidden">
+        <div class="input_wrap business_reply_input">
+            <input type="text" id="comment_sub_input_${it.id}" class="register_input" placeholder="回复 ${it.nickname} ：">
+            <i class="input_close_icon op_0" style="top: 0.6em;"></i>
+        </div>
+        <button id="comment_sub_btn_${it.id}" class="business_reply_btn" onclick="postSubComment(this, ${it.id})">回复</button>
+    </div>
+	{@/each}
+</script>
+
+<script id="shopInfoTpl" type="text/template">
+	{@each data as it,i}
+   <div class="business_course_list_div">
+        <div class="business_course_list_img">
+            <a href="{:U('Shopkeeper/info')}?id=${it.sid}"><img src="${it.avatar}" alt="" onerror="this.src='__HIMG__/iPhone.png'" /></a>
+        </div>
+        <a href="{:U('Shopkeeper/cont')}?id=${it.id}"><p class="business_course_list_title">${it.title}</p></a>
+        <!--<p class="business_course_list_cont">$${it.content}</p>-->
+       <div class="bz_course_wrap">
+           <p class="bz_course_cont">$${it.content}</p>
+           <img width="8px" height="4px" src="__HIMG__/icon2.png" alt="">
+       </div>
+        <p class="business_course_list_phone"><img src="__HIMG__/phone.png" alt=""/>${it.tel}</p>
+        <span class="business_course_list_time">${it.ctime}</span>
+    </div>
+    {@/each}
+</script>
+
+<script id="generTpl" type="text/template">
+	{@each data as it,i}
+	<div class="span5 section_spread_item">
+	    <div class="section_spread_img_wrap">
+	        <a href="{:U('Shopkeeper/info')}?id=${it.sid}"><img src="${it.avatar}" alt=""  onerror="this.src='__HIMG__/iPhone.png'"></a>
+	    </div>
+	    <a href="{:U('Shopkeeper/cont')}?id=${it.id}">
+	    	<p class="section_spread_first_title">
+	        	${it.title}
+	    	</p>
+	    </a>
+	    <p class="section_spread_second_title">
+	        ${it.nickname}
+	    </p>
+	</div>
+	{@/each}
+</script>
+
+<!-- /模板 -->
+
+<script type="text/javascript" src="__HJS__/zepto.min.js"></script>
+<include file="Component:share" />
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<script type="text/javascript" src="__HJS__/objimgurl.js"></script>
+<script type="text/javascript" src="__HJS__/juicer-min.js"></script>
+<include file="Component:alert" />
+
+<!-- 全局变量 -->
+<script type="text/javascript" charset="utf-8">
+	var infoId = {$resArr.id};
+	var shopkeeperId = {$resArr.sid};
+
+    var visitUserId = "{:session('user.id')}";
+    var visitUserPhone = "{:session('user.phone')}";
+
+    var isShopkeepSign="{$isShopkeepSignIn}";
+    var isUserSignIn = "{$isUserSignIn}";
+    var isUserEnroll = "{$isUserEnroll}";
+    var isUserHasAvatar = "{$isUserHasAvatar}";
+    var userScore = "{$userScore}";
+
+    var userAvatarUrl = "{:U('Api/ShopInfo/getUsersInfo')}";
+    var commentUrl = "{:U('Api/ShopComment/listUserOrShopComment')}";
+    var shopInfoUrl = "{:U('Api/ShopInfo/getHotShopInfos')}";
+    var postCommentUrl = "{:U('Api/ShopComment/postComment')}";
+    var deleteCommentUrl = "{:U('Api/ShopComment/deleteComment')}";
+    var enrollUrl = "{:U('Api/ShopInfo/enroll')}";
+    var starUrl = "{:U('Api/ShopInfo/star')}";
+    var generUrl = "{:U('Api/ShopInfo/gener')}";
+    var loginRegisterUrl = "{:U('userregsign/login')}";
+    var regUserUrl = "{:U('Userregsign/index')}";
+    var getSmsVerifyUrl = "{:U('Api/ShopInfo/sendSmsVerify')}";
+
+    var starIcon = '<img src="__HIMG__/star.png" alt=""/>';
+
+    var share = new social_shareWin();
+
+    var uAvatarPage = 1;
+	var commentPage = 1;
+	var shopInfoPage = 1;
+
+    var nowshref=window.location.href;
+    
+    <if condition = "session('?shopkeeper')" >
+    	var login_type_status=1;
+    <elseif condition="session('?user')" />
+    	var login_type_status=2;
+    <else />
+    	var login_type_status=0;
+    </if>
+    
+    var userData = {
+        "id":       "{:session('user.id')}",
+        "avatar":   "{:session('user.avatar')}",
+    };
+    
+    //游客
+    var visitor_avatar="{$visitor_avatar}";
+    
+    var handleavatar="{:U('Api/User/uploadavatar')}";
+</script>
+
+<script type="text/javascript" src="__HJS__/shopkeeper/cont.js" charset="utf-8"></script>
+
+
+<script type="text/javascript" charset="utf-8">
+/* 分享的内容 */
+var jiathis_config = {
+    url:location.href,
+    title:"{:clean_js_content($resArr['title'])}" + " - 17约课",
+    summary:"{:clean_js_content($resArr['content'])}",
+    pic:"http://17yueke.cn__UPLOAD__{$resArr.environ}",
+}
+</script>
+
+<!-- 第一次引导开始 -->
+<script type="text/javascript">
+    $(function () {
+        var startIndex;
+        var endIndex;
+
+        // 如果是普通登陆用户和游客第一次打开商家发布的课程时
+        if((login_type_status == 2 || login_type_status == 0)
+                && typeof(localStorage.UserFirstOpenCourse) == "undefined") {
+            localStorage.UserFirstOpenCourse = false;
+            startIndex = 31;
+            endIndex = 31;
+        } else {
+            return;
+        }
+        //
+        document.addEventListener("touchmove", function(e) {
+            if(startIndex > 0 && startIndex <= endIndex) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        }, false);
+
+        var $tipsBg = $(".tips-bg");
+        $tipsBg.removeClass("hidden");
+        $tipsBg.find("#tip" + startIndex).removeClass("hidden");
+        var $btns = $(".tips>button");
+        $btns.click(function(e) {
+            $(e.target).parent().addClass("hidden");
+            if (++startIndex <= endIndex) {
+                $("#tip" + startIndex).removeClass("hidden");
+            } else {
+                $tipsBg.addClass("hidden");
+                $btns.unbind("click");
+            }
+        });
+    });
+    // 点击条目展开信息
+    $(".section-value").click(function() {
+        var $this = $(this);
+        var $next = $this.next();
+        if(this.style.whiteSpace == "normal") {
+            this.style.whiteSpace = "nowrap";
+            $next.attr("src", "__HIMG__/icon2.png");
+        }else {
+            this.style.whiteSpace = "normal";
+            $next.attr("src", "__HIMG__/icon1.png");
+        }
+    });
+    // 商家已发布课程中，点击展开介绍
+    $("#shopInfoPanel").on("click", "p", function(){
+        var $this = $(this);
+        if($this.attr("class") == "bz_course_cont") {
+            var $sibling = $this.next();
+            if($this.css("white-space") === 'nowrap') {
+                $this.css("white-space", "normal");
+                $sibling.attr("src","__HIMG__/icon1.png");
+            } else {
+                $this.css("white-space", "nowrap");
+                $sibling.attr("src","__HIMG__/icon2.png");
+            }
+        }
+    });
+</script>
+<include file="Public:statistics"/>
+</body>
+</html>

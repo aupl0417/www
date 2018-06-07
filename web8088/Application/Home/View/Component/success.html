@@ -1,0 +1,47 @@
+<div class="alert_box_bg hidden" id="success_box_bg">
+    <div class="alert_box_wrap" id="successwrap">
+        <p class="alert_cont" id="success_cont"><img src="__HIMG__/Design-(20).png" alt=""/>恭喜您发布成功</p>
+        <a href="{:U('User/course')}"><button  type="button" class="success_show">查看发布内容</button></a>
+        <button  type="button" class="success_resend">继续发布</button>
+    </div>
+</div>
+<script type="text/javascript">
+
+    function successWin(){
+
+        function show(){
+            $('#success_box_bg').removeClass("hidden");
+        }
+        function hidden(){
+            $('#success_box_bg').addClass("hidden");
+        }
+
+        function work(){
+            $('#success_show').click(function () {
+                $('#success_box_bg').addClass("hidden");
+                location.href=indexUrl;
+            });
+            $('#success_resend').click(function () {
+                $('#success_box_bg').addClass("hidden");
+            });
+            $('#success_box_bg').click(function (e) {
+                if($(e.target).hasClass("alert_box_bg")){
+                    $('#success_box_bg').addClass("hidden");
+                }
+
+            });
+            $(".success_resend").click(function () {
+                sessionStorage.clear();
+                location.reload();
+            })
+
+
+        }
+
+        return {
+            show:show,
+            hidden:hidden,
+            work:work
+        }
+    }
+</script>

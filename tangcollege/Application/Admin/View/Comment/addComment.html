@@ -1,0 +1,61 @@
+<extend name="Public/base"/>
+<block name="body">
+    <div class="main-title">
+        <h2>新增评价</h2>
+    </div>
+    <form action="{:U()}" method="post" class="form-horizontal">
+    	<div class="form-containers">
+	        <div class="form-item">
+	            <label class="item-label">老师ID：</label>
+	            <div class="controls">
+	            	<input type="text" class="text" name="tc_teacherId">
+	            </div>
+	        </div>
+        </div>
+        <div class="form-containers">
+	        <div class="form-item">
+	            <label class="item-label">课时ID：</label>
+	            <div class="controls">
+	            	<input type="text" class="text" name="tc_classTableId">
+	            </div>
+	        </div>
+        </div>
+        <script>
+             $(document).ready(function(){
+				 var data = {$tags};
+                $('.menu-level').menulevel({data:data});
+              }); 
+        </script>
+        <div class="form-item">
+            <label class="item-label">标签列表<span class="check-tips">（请选择评论标签）</span></label>
+            <div class="controls">
+               <div class="menu-level">
+                 <div class="container">
+                  <span class="selected round">--请选择--</span>    
+                  <ul class="items">
+                    <li value="">--请选择--</li>
+                  </ul>
+                 </div>
+                <input name="tc_tagId" type="hidden" value="{$info.cr_branchId}" id="menu-level-value"/>
+              </div>
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="textarea">
+	            <textarea name="tc_content">{$info.tc_content}</textarea>
+	            {:hook('adminArticleEdit', array('name'=>'tc_content','value'=>$info['tc_content']))}
+            </label>
+        </div>
+        <div class="form-item">
+            <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+        </div>
+    </form>
+</block>
+
+<block name="script">
+    <script type="text/javascript">
+        //导航高亮
+        highlight_subnav('{:U('Comment/index')}');
+    </script>
+</block>

@@ -1,0 +1,66 @@
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+    <meta content="yes"name="apple-mobile-web-app-capable"/>
+    <meta content="black"name="apple-mobile-web-app-status-bar-style"/>
+    <title>密码修改 - 17约课</title>
+    <link rel="stylesheet" type="text/css" href="__HCSS__/reset.css">
+    <link rel="stylesheet" href="__HCSS__/2.css"/>
+    <link rel="stylesheet" href="__HCSS__/4.css"/>
+    <meta name="keywords" content="17约课,一起约课,约课,教育培训,约课神器,校园约课,大学生培训,约老师,约女神,驾驶培训,设计培训,职业考证,音乐培训,英语培训,小语种培训,体育培训" />
+    <meta name="description" content="17约课 - 约您身边的良师益友！为您提供约老师，约课程，约女神，约学霸等海量信息，充分满足您免费约课，免费发布课程的需求。" />
+</head>
+<body>
+<header id="top_header">
+    <div id="header" align="center">
+        <h3 class="identify_title">密码修改</h3>
+        <a href="javascript:history.back(-1)" class="identify_back"><img src="__HIMG__/Return2.png" alt=""/>返回</a>
+    </div>
+</header>
+<div class="wrapper">
+
+            <div class="blank">
+                <br/>
+                <div class="input-wrap">
+                    <label style="text-align: right">新密码</label>
+                    <div class="input-wrap-out enterprise_input_wrap">
+                        <input id="pw"  type="password" name="password" class="input-wrap-input" placeholder="请输入6-12位新密码"/>
+                        <i class="input_close_icon op_0"></i>
+                    </div>
+                </div>
+                <div class="input-wrap">
+                    <label>确认密码</label>
+                    <div class="input-wrap-out enterprise_input_wrap">
+                        <input id="pw1" type="password" name="password1" class="input-wrap-input" placeholder="请再次输入密码"/>
+                        <i class="input_close_icon op_0"></i>
+                    </div>
+                </div>
+                
+                <div id="reg_err" class="input-wrap hidden">
+                    <label id="err_text" style="color:#03F">密码未填写</label>
+                </div>
+            </div>
+            <button id="submitBtn" class="btn constitution_v_end">提交</button>
+            <br/>
+            <br/>
+
+</div>
+
+<script type="text/javascript" src="__HJS__/zepto.min.js"></script>
+<include file="Component:alert" />
+
+<script type="text/javascript">
+
+    var signup_url = "{:U('Shopkeeper/signin')}";
+    var s_sign_timeout_loc = "__SELF__";
+    var changePassword_url = "{:U('Api/Shopkeeper/changePassword')}";
+    var index_url = "{:U('Index/index')}";
+
+</script>
+
+<script type="text/javascript" src="__HJS__/shopkeeper/reset_pw.js" charset="utf-8"></script>
+<include file="Public:statistics"/>
+</body>
+</html>

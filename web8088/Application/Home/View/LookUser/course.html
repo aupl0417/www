@@ -1,0 +1,163 @@
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+    <meta content="yes"name="apple-mobile-web-app-capable"/>
+    <meta content="black"name="apple-mobile-web-app-status-bar-style"/>
+    <title>约课动态 - 17约课</title>
+    <link rel="stylesheet" type="text/css" href="__HCSS__/reset.css">
+    <link rel="stylesheet" href="__HCSS__/2.css"/>
+    <link rel="stylesheet" href="__HCSS__/4.css"/>
+    <meta name="keywords" content="17约课,一起约课,约课,教育培训,约课神器,校园约课,大学生培训,约老师,约女神,驾驶培训,设计培训,职业考证,音乐培训,英语培训,小语种培训,体育培训" />
+    <meta name="description" content="17约课 - 约您身边的良师益友！为您提供约老师，约课程，约女神，约学霸等海量信息，充分满足您免费约课，免费发布课程的需求。" />
+</head>
+<body>
+<header id="top_header">
+    <div id="header" align="center">
+        <h3 class="identify_title">约课动态</h3>
+        <a href="javascript:location.replace(document.referrer);" class="identify_back"><img src="__HIMG__/Return2.png" alt=""/>返回</a>
+        <!-- <a href="javascript:history.back(-1)" class="identify_back"><img src="__HIMG__/Return2.png" alt=""/>返回</a>-->
+    </div>
+</header>
+<div class="wrapper">
+<!--<img src="__HIMG__/loading.gif" alt="" class="loading hidden"/>-->
+    <div class="css-loading hidden">
+        <div class="ball-holder">
+            <div class="ball"></div>
+        </div>
+    </div>
+
+            <div class="section">
+                <div class="section_items"  id="sectionscroll">
+                	
+              
+                 </div>
+
+                <br/>
+</div>
+
+<script type="text/javascript" src="__HJS__/zepto.min.js"></script>
+<script type="text/javascript" src="__HJS__/juicer-min.js"></script>
+
+<script type="text/javascript" >
+var i=0;
+var u={$nowUser};
+
+    var ajaxflat={};
+    ajaxflat.publish=true;
+    function showLoading(){
+        $('.css-loading').removeClass("hidden");
+    }
+    function hiddenLoading(){
+        $('.css-loading').addClass("hidden");
+    }
+//绑定滚动事件
+$(window).bind('scroll', pageScroll)
+
+function pageScroll() {
+	var totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop());
+	if ($("body").height()-5 <= totalheight){
+		ajaxflat={}
+		ajaxflat.publish=true;
+		hiddenLoading();
+		// 禁用滚动
+		$(window).unbind('scroll', pageScroll);
+		postgroup();/*ajax获取更多数据*/
+	}
+}
+
+
+
+function postgroup(){
+	i=i+1;
+	var grouppage={};
+	grouppage.page=i;
+	grouppage.uid=u;
+	$.post("{:U('LookUser/course_group')}",grouppage,function(data){
+		var tpl = document.getElementById('tplpublish').innerHTML;
+		var html = juicer(tpl, data);
+		console.log(data);
+       // if(ajaxflat.publish) {
+            $('#sectionscroll').append(html);
+            hiddenLoading();
+    //    }
+    }, "json");
+    $(window).bind('scroll', pageScroll);
+}
+postgroup();
+
+<if condition="$checkUser neq 0">
+function delGroup(n){
+	var postgid={};
+	postgid.gid=n;
+	console.log(postgid.gid);
+    if (!confirm("确认删除？")) {
+        window.event.returnValue = false;
+    }else{
+		$.post("{:U('User/delGroup')}",postgid,function(data){
+			console.log(data);
+			if(data.status!=200){
+				alert('删除失败，请刷新重试');
+			}else{
+				$("#groupinfoid" + n).remove()
+				alert('删除成功');
+			}
+		}, "json");
+    }
+}
+</if>
+</script>
+
+
+  	
+           	 <script id="tplpublish" type="text/template">
+				{@each info as it,index}
+		<div id="groupinfoid${it.id}">
+
+
+
+            <div class="section_item clearfix">
+                <div class="section_item_box">
+                    	<img class="section_item_title_icon" src="__HIMG__/laba.png" alt="">
+					<a href="{:U('LookGroup/onedetail')}?gid=${it.id}" style="color:#333333;  margin-left: 1.1em;">
+                    	<span class="section_item_title_text" >${it.title}</span>
+					</a>
+                </div>
+                <div class="section_item_other clearfix" style="  position: relative;">
+<if condition="$checkUser neq 0">
+					<div class="get_del_user_id" style="position: absolute;right: 8px; font-size: 12px; top: -2em;color: #F40518;">
+  						<img src="__HIMG__/Shape 7.png" alt="" style=" width: 14px;">
+						<input type="hidden" class="hidden_del_git" value="${it.id}"/>
+						<span  ontouchend="delGroup(${it.id})" class="section_item_pv_delete_user" style="vertical-align: middle;">删除</span>
+					</div>
+</if>
+                    <div class="section_item_other_l">
+					<a href="{:U('LookUser/moInfo')}?uid=${it.uid}">
+						<img src="${it.avatar}"  onerror="javascript:this.src='__IMGDEFAULT__';" alt="" class="section_item_cont_avator">
+					</a>
+                        <span style="font-size: small;color: #666565">${it.firstname}${it.lastname}</span>
+                    </div>
+                    <div class="section_item_other_r"  style="color: #5A5A5A;">
+						{@if it.pricearr!=null}
+                        	<span class="section_people">${it.pricearr.ltnumber}-${it.pricearr.gtnumber}人</span>
+							<span class="l_price">${it.pricearr.ltprice}元</span>
+							<span class="h_price">${it.pricearr.reference}元</span>
+						{@else}
+							<span class="l_price">${it.ltprice}元</span>
+						{@/if}
+                    </div>
+                </div>
+            </div>
+
+
+
+		</div>
+				{@/each}
+                </script>
+
+
+
+    <include file="Public:statistics"/>
+</body>
+</html>

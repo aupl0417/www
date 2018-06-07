@@ -1,0 +1,58 @@
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+    <meta content="yes"name="apple-mobile-web-app-capable"/>
+    <meta content="black"name="apple-mobile-web-app-status-bar-style"/>
+    <title>手机认证 - 17约课</title>
+    <link rel="stylesheet" type="text/css" href="__HCSS__/reset.css">
+    <link rel="stylesheet" href="__HCSS__/2.css"/>
+    <link rel="stylesheet" href="__HCSS__/4.css"/>
+    <meta name="keywords" content="17约课,一起约课,约课,教育培训,约课神器,校园约课,大学生培训,约老师,约女神,驾驶培训,设计培训,职业考证,音乐培训,英语培训,小语种培训,体育培训" />
+    <meta name="description" content="17约课 - 约您身边的良师益友！为您提供约老师，约课程，约女神，约学霸等海量信息，充分满足您免费约课，免费发布课程的需求。" /></head>
+<body>
+<header id="top_header">
+    <div id="header" align="center">
+        <h3 class="identify_title">手机认证</h3>
+        <a href="javascript:history.back(-1)" class="identify_back"><img src="__HIMG__/Return2.png" alt=""/>返回</a>
+        <a href="{:U('Index/index')}" class="identify_to_index">首页</a>
+    </div>
+</header>
+<div class="wrapper">
+
+            <div class="identify_phone_wrap" style="border-top: solid 1px #DDD8CE; border-bottom: solid 1px #eee">
+                <div class="phone_identify_validate">
+                    <p class="phone_identify_label">手机号码</p>
+                    <div class="input_wrap phone_identify_border">
+                        <input type="text" id="phone" class="register_input" placeholder="输入手机号">
+                    </div>
+                </div>
+                <a href="javascript:;" id="sendtel" class="bigV-btn_first phone_identify_btn">发送验证码</a>
+                <p class="phone_identify_tip"><span id="munid">60s</span>内没收到验证码，请重新发送</p>
+
+            </div>
+            <div class="identify_phone_wrap">
+                <p class="phone_identify_label">验证码</p>
+                <div class="input_wrap phone_identify_border">
+                    <input type="text" id="telcode" class="register_input" placeholder="输入验证码">
+                </div>
+                <a href="javascript:;" id="ontelcode" class="bigV-btn_second phone_identify_btn">完成</a>
+
+            </div>
+
+</div>
+
+<script type="text/javascript" src="__HJS__/zepto.min.js"></script>
+<include file="Component:alert" />
+<script type="text/javascript">
+    var phoneCodeSend_url  = "{:U('UserV/phoneCodeSend')}";
+    var phoneCode_url  = "{:U('UserV/phonecode')}";
+    var yuekehref="{:U('UserV/idenc')}";
+</script>
+<script type="text/javascript" src="__HJS__/UserV/phone_iden.js"></script>
+<include file="Public:statistics"/>
+</body>
+</html>
+
+

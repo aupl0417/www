@@ -1,0 +1,368 @@
+<extend name="ShopPublic:base" />
+
+<block name="title">17约课-商家中心</block>
+
+<block name="main">
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+  <!--课程-->
+
+    <include file="ShopPublic:cateNav" />
+
+    <!-- 广告栏 -->
+    <section class="content" id="bar">
+        <img src="__PCIMG__/ads.png" alt="ad" class="ads">
+    </section>
+    <section class="content-header">
+      <h1>
+        最新发布
+      </h1>
+      <div class="swift">
+        <a href="{:U("Shopkeeper/course_select")}?seachType=wish">查看全部</a>
+        <button id="info_less" class="btn-circle-gray" id="new-pre"><i class="fa fa-angle-left"></i></button>
+        <button id="info_more" class="btn-circle-gray" id="new-next"><i class="fa fa-angle-right"></i></button>	
+      </div>
+    </section>
+    <section class="content">
+        <div id="shopinfo" class="row swift-content" data-range=1>
+        </div>
+    </section>
+
+      <!--心愿单-->
+         <section class="content-header">
+      <h1>
+        心愿单
+      </h1>
+      <div class="swift">
+       <a href="{:U("Shopkeeper/course_select")}?seachType=wish">查看全部</a>
+        <button class="btn-circle-gray"><i class="fa fa-angle-left"></i></button>
+        <button class="btn-circle-gray"><i class="fa fa-angle-right"></i></button>  
+      </div>
+    </section>
+    
+
+    <section class="content">
+        <div id="userinfo" class="row">
+        </div>
+    </section>
+
+      <!--热门课程-->
+      <section class="content-header">
+      <h1>
+        热门课程
+      </h1>
+    </section>
+    
+ <section class="content">
+  <div class="row">
+
+    <volist name="gener" id="ge">
+      <div class="col-xs-4">
+      <div class="course">
+        <div class="course-logo-wrap">
+          <div class="logo_model">
+              {$ge.teacher_feature}
+          </div>
+          <img src="__UPLOAD__/{$ge.environ}" class="course-logo" alt="course pic">
+        </div>
+        
+        <div class="course-content">
+        <img src="__PCIMG__/laba.png" alt=""/>
+        <a href="{:U("Shopkeeper/course")}?id={$ge.id}">
+            {$ge.title}
+        </a>
+        </div>
+              <div class="course_brief clearfix">
+                  <li><i class="icons-time" ></i>{$ge.mode}</li>
+                  <li><i class="icons-msg"></i>{$ge.comment_count}条评论</li>
+                  <li><i class="icons-user"></i>{$ge.user_count}人报名</li>
+              </div>
+        <div class="course-bottom">
+          <div class="bottom-left">
+              <img src="__UPLOAD__{$ge.avatar}" alt="avator">&nbsp;&nbsp;&nbsp;{$ge.nickname}
+          </div>
+          <div class="bottom-right">
+              <!-- 3-5人 -->  &nbsp;<span class="price-now business">{$ge.price}元</span> <!-- <span class="price-past">800元</span> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    </volist>
+
+    </div>
+      </section>
+
+
+    <!--合作机构-->
+      <section class="content-header">
+      <h1>
+        合作机构
+      </h1>
+    </section>
+
+    <section class="content">
+      <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                  <div class="item clearfix active">
+                    <volist name="shname" id="sh" offset="0" length='8'>
+                    <div class="co-wrap">
+                      <img src="__UPLOAD__{$sh.avatar}" alt="co" class="co-img">
+                    </div> 
+                    </volist>
+                  </div>
+
+                   <div class="item clearfix">
+                    <volist name="shname" id="sh" offset="8" length='8'>
+                    <div class="co-wrap">
+                      <img src="__UPLOAD__{$sh.avatar}" alt="co" class="co-img">
+                    </div> 
+                    </volist>
+                  </div>
+
+                   <div class="item clearfix">
+                    <volist name="shname" id="sh" offset="16" length='8'>
+                    <div class="co-wrap">
+                      <img src="__UPLOAD__{$sh.avatar}" alt="co" class="co-img">
+                    </div> 
+                    </volist>
+                  </div>
+
+                </div>
+
+                <a class="left carousel-control" id="to-left" href="#carousel-example-generic" data-slide="prev">
+                  <span class="fa fa-angle-left"></span>
+                </a>
+                <a class="right carousel-control" id="to-right" href="#carousel-example-generic" data-slide="next">
+                  <span class="fa fa-angle-right"></span>
+                </a>
+          </div>
+    </section>
+
+      <!--友情链接-->
+    <section class="content links" >
+        <div class="link-head">
+            <h4>友情链接</h4>
+        </div>
+        <ul class="link-list clearfix">
+            <li><a href="http://ke.qq.com">腾讯课堂</a></li>
+            <li><a href="http://www.chuanke.com/">百度传课</a></li>
+            <li><a href="http://class.hujiang.com/">沪江网校</a></li>
+            <li><a href="http://www.houxue.com/">厚学网</a></li>
+            <li><a href="http://www.jikexueyuan.com/">极客学院</a></li>
+            <li><a href="http://edu.yy.com/">YY课堂</a></li>
+            <li><a href="https://www.udemy.com/">Udemy</a></li>
+            <li><a href="http://www.soke163.com/">搜客网</a></li>
+            <li><a href="http://www.xdf.cn/">新东方</a></li>
+            <li><a href="http://www.hxsd.cn/">火星时代</a></li>
+            <li><a href="http://www.wsi.com.cn/cn/index.html">华尔街英语</a></li>
+            <li><a href="http://www.duobei.com/">多贝公开课</a></li>
+            <li><a href="http://mooc.guokr.com/">Mooc学院</a></li>
+            <li><a href="http://www.taoke.com/">淘课网</a></li>
+            <li><a href="http://gz.genshuixue.com/">跟谁学</a></li>
+            <li><a href="http://www.topu.com/">顶你学堂</a></li>
+            <li><a href="http://www.91waijiao.com/">91外教</a></li>
+            <li><a href="http://www.imooc.com/">慕课网</a></li>
+        </ul>
+    </section>
+  </div><!-- /.content-wrapper -->
+
+    </div><!-- ./wrapper -->
+
+</block>
+
+<block name="css">
+    <link rel="stylesheet" href="__PCCSS__/main.css">
+</block>
+
+<block name="js">
+
+    <!-- 商家课程模板 -->
+    <script id="Shop" type="text/template" charset="utf-8">
+        {@each info as it,index}
+        <div class="col-xs-4">
+            <div class="course">
+                <div class="course-logo-wrap">
+                    <div class="logo_model">
+                    ${it.teacher_feature}
+                    </div>
+                    <img src="__UPLOAD__/${it.environ}" class="course-logo" alt="course pic">
+                </div>
+                
+                <div class="course-content">
+                <img src="__PCIMG__/laba.png" alt=""/>
+                <a href="{:U('Shopkeeper/course')}?id=${it.id}">
+                    ${it.title}
+                    </a>
+                </div>
+                <div class="course_brief clearfix">
+            <li><i class="icons-time" ></i>${it.mode}</li>
+            <li><i class="icons-msg"></i>${it.comment_count}条评论</li>
+            <li><i class="icons-user"></i>${it.user_count}人报名</li>
+          </div>
+                <div class="course-bottom">
+                    <div class="bottom-left">
+                        <img src="__UPLOAD__/${it.avatar}" alt="avator">&nbsp;&nbsp;&nbsp;${it.nickname}
+                    </div>
+                    <div class="bottom-right">
+                        <!-- 3-5人 --> &nbsp;<span class="price-now business">${it.price}元</span> <!-- {@if it.preferent}<span class="price-past">${it.preferent}元</span>{@/if} -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        {@/each}
+    </script>
+
+    <!-- 心愿单模板 -->
+    <script id="User" type="text/template" charset="utf-8">
+    {@each info as it,index}
+        <div class="col-xs-4">
+          <div class="course">
+            <div class="course-logo-wrap">
+              <div class="logo_model">
+                ${it.name}
+              </div>
+              <img src="${it.environ}" class="course-logo" alt="course pic">
+            </div>
+
+            <div class="course-content">
+            <img src="__PCIMG__/laba.png" alt=""/>
+            <a href="{:U('User/onedetail')}?gid=${it.id}">
+              ${it.title}
+              </a>
+            </div>
+                  <div class="course_brief clearfix">
+                    <li><i class="icons-time" ></i>${it.mode}</li>
+                    <li><i class="icons-msg"></i>${it.comment}条评论</li>
+                    <li><i class="icons-user"></i>${it.number}人报名</li>
+                  </div>
+            <div class="course-bottom">
+              <div class="bottom-left">
+                <img src="__UPLOAD__${it.avatar}" alt="avator">&nbsp;&nbsp;&nbsp;${it.firstname}${it.lastname}
+              </div>
+              <div class="bottom-right">
+                ${it.pricearr.ltnumber}-${it.pricearr.gtnumber}人 &nbsp;<span class="price-now">${it.pricearr.ltprice}元</span> <span class="price-past">${it.pricearr.reference}元</span>
+              </div>
+            </div>
+          </div>
+        </div>
+    {@/each}
+    </script>
+
+    <!-- 广告模板 -->
+    <script id="tplbar" type="text/template" charset="utf-8" >
+    {@each bar as it,index}
+        <img src="__ADIMG__${it.bigpic}" alt="${it.adname}" class="ads">
+    {@/each}
+    </script>
+
+    <!-- 全局变量 -->
+    <script type="text/javascript" charset="utf-8">
+        var g = {
+            "userinfoUrl":      "{:U('Index/userinfo')}",
+            "shopinfoUrl":      "{:U('Index/shopinfo')}",
+
+            "mainJsUrl":        "__PCJS__/main.js"
+        };
+    </script>
+
+    <script type="text/javascript" src="__HJS__/juicer-min.js"></script>
+    <script id="main_js" src="__PCJS__/main.js" type="text/javascript"></script>
+
+    <script type="text/javascript" charset="utf-8">
+        /*
+         *  主页的约课信息和发布课程
+         *
+         */
+        var info_pages = 1;
+        var wish_pages = 1;
+
+        //首页广告 
+        var bar_url = "{:U('Index/getBar')}";
+
+        $(function() {
+            getbar();
+            getUserInfo();      //进入首页后立即执行
+            getShopInfo();
+
+            $('#info_more').click(function () {
+                // showLoading();
+                info_pages++;
+
+                getShopInfo();
+            });
+
+            $('#info_less').click(function () {
+                // showLoading();
+                if (info_pages <= 1) {
+                    return false;
+                }
+                info_pages--;
+
+                getShopInfo();
+            });
+
+            $('#wish_more').click(function () {
+                // showLoading();
+                wish_pages++;
+
+                getUserInfo();
+            });
+
+            $('#wish_less').click(function () {
+                // showLoading();
+                if (wish_pages <= 1) {
+                    return false;
+                }
+                wish_pages--;
+
+                getUserInfo();
+            });
+
+        });
+
+        function getUserInfo(flat, first) {
+            var args = {pages: wish_pages};
+            $.post(g.userinfoUrl, args, function (msg) {
+                var tpl = document.getElementById('User').innerHTML;
+
+                var html = juicer(tpl, msg);
+                console.log(msg.info);
+                $("#userinfo").append(html);
+
+
+            }, 'json');
+
+        }
+
+        function getShopInfo(flat, first) {
+            var args = {pages: info_pages};
+            $.post(g.shopinfoUrl, args, function (msg) {
+                var tpl = document.getElementById('Shop').innerHTML;
+
+                var html = juicer(tpl, msg);
+                console.log(msg.info);
+                $("#shopinfo").html(html);
+
+
+            }, 'json');
+
+        }
+
+        // 首页广告
+        function getbar(){
+            $.get(bar_url,function(data){
+                console.log(data);
+                if(data.status!=200){
+                    alert("无广告");
+                    return;
+                } 
+                var tplbar = document.getElementById('tplbar').innerHTML;
+                var htmlbar = juicer(tplbar, data);
+                $('#bar').html(htmlbar);
+                imgonerror();//默认图片
+            }, "json");
+        }
+
+    </script>
+</block>

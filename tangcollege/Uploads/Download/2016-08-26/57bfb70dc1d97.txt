@@ -1,0 +1,42 @@
+一、切换数据库连接
+$DB = M('','','DB_CONFIG1');
+
+
+'Brands'=> array(
+		'mapping_type'=>self::BELONGS_TO,
+		'class_name'=>'Brands',		//class_name 对应的是要关联的数据库表的名字
+		'foreign_key'=>'brand_id',	//为主表的一个外键
+		'mapping_fields'=>'brands_name',	//映射到关联表的一个字段
+		'as_fields'=>'brands_name:brands_name'	//把该字段对别名
+	),
+	
+	
+配置虚拟主机步骤：（2015 06 26 上午）
+1、在httpd.conf中找到# Virtual hosts
+把 #Include conf/extra/httpd-vhosts.conf前的 # 去掉
+
+2、打开httpd-vhosts.conf，添加如下代码
+<VirtualHost *:80>
+        DocumentRoot "E:/wamp/www/haipin_taqu/Api/"
+        ServerName api.taqu.haipin.com
+        <Directory "E:/wamp/www/haipin_taqu/Api/">
+            Options Indexes FollowSymLinks
+            AllowOverride None
+            Order allow,deny
+            Allow from all
+        </Directory>
+</VirtualHost>
+
+代码说明：
+DocumentRoot 指的是指定文件目录
+ServerName  是设置虚拟主机名，不能以 'http://' 开头，否则出现还得加项目名称才能访问
+
+
+3、修改C:\Windows\System32\drivers\etc\hosts
+添加 127.0.0.1 api.taqu.haipin.com
+
+4、重启apache
+
+
+二、引入外部的类文件
+import('Class.Page',APP_PATH);

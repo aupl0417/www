@@ -1,0 +1,272 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+    <meta content="yes"name="apple-mobile-web-app-capable"/>
+    <meta content="black"name="apple-mobile-web-app-status-bar-style"/>
+    <title>发布心愿 - 17约课</title>
+    <link rel="stylesheet" type="text/css" href="__HCSS__/reset.css">
+    <link rel="stylesheet" href="__HCSS__/2.css"/>
+    <link rel="stylesheet" href="__HCSS__/4.css"/>
+    <meta name="keywords" content="17约课,一起约课,约课,教育培训,约课神器,校园约课,大学生培训,约老师,约女神,驾驶培训,设计培训,职业考证,音乐培训,英语培训,小语种培训,体育培训" />
+    <meta name="description" content="17约课 - 约您身边的良师益友！为您提供约老师，约课程，约女神，约学霸等海量信息，充分满足您免费约课，免费发布课程的需求。" />
+</head>
+<body>
+<header id="top_header">
+    <div id="header" align="center">
+       <form action="" id="form">
+                        <input type="file" class="visualization" id="file"/>
+                    </form>
+        <h3 class="identify_title">发布心愿</h3>
+        <a href="{:U('Index/index')}" class="identify_back"><img src="__HIMG__/Return2.png" alt=""/>返回</a>
+    </div>
+</header>
+<div class="wrapper">
+        <!--轮播部分代码-->
+            <div class="course_request_slide">
+                <div id="swipeSlide" class="wrap course-wrap">
+                    <ul class="inline-float">
+                        <li class="inline-float_li">
+                            <ul class="course_slide" index="0">
+                             <li  class="course_active"><img src="__HIMG__/Design_8.png" alt="8"/><p>学术活动</p></li>
+                              <li><img src="__HIMG__/Design_2.png" alt="1"/><p>语言培训</p></li>
+                              <li><img src="__HIMG__/Design_7.png" alt="2"/><p>艺术培训</p></li>
+                                <li><img src="__HIMG__/Design_6.png" alt="3"/><p>职业技能</p></li>
+                            </ul>
+                        </li>
+                        <li class="inline-float_li">
+
+                            <ul class="course_slide" index="1">
+                             <li><img src="__HIMG__/Design_1.png" alt="4"/><p>设计培训</p></li>
+                            <li><img src="__HIMG__/Design_3.png" alt="5"/><p>IT培训</p></li>
+                                <li><img src="__HIMG__/Design_9.png" alt="6"/><p>生活兴趣</p></li>
+                                <li><img src="__HIMG__/Design_4.png" alt="7"/><p>体育培训</p></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <p class="slide-bullet" id="course_slide">
+                        <i class="icon-bullet active"></i>
+                        <i class="icon-bullet"></i>
+                    </p>
+                </div>
+                <p class="index_slide_pre hidden">上一页</p>
+                <p class="index_slide_next hidden">下一页</p>
+            </div>
+    <!--轮播部分代码-->
+    <div class="course_request_info">
+    		<p id="realease-select-type"><b id="">培训类型</b> <b class="release_err hidden" id="catename_err">培训分类类型不能为空</b>
+                <span><b id="xzcate" class="cate">请选择</b> <img src="/Public/Home/img/Design (7).png" alt=""></span>
+           </p>
+    
+                <p style="border-bottom: none" id="price_wrap"><b id="course_select_price_p">组团价格</b> <b class="release_err hidden" id="course_release_err">课程价格不能为空</b>
+                    <span><b id="price" class="price">请选择</b> <img src="__HIMG__/Design (7).png" alt=""/></span>
+                    <select name="business" class="course_select" id="price_select">
+
+                    </select>
+
+                    <!--<input type="text" class="course_select_price_input" placeholder="输入价格"/>-->
+                  </p>
+            <a href="{:U('GroupInfo/organiza')}"><p id="course_local" style="    border-top: solid 1px #eee;"><b id="course_local_b">培训机构</b> <b class="release_err hidden" id="ora_release_err">培训机构不能为空</b>  <span><b id="local" class="local">请选择</b> <img src="__HIMG__/Design (7).png" alt=""/></span>
+                </p></a>
+                <p><b id="course_select_model_p">约课模式</b> <b class="release_err hidden" id="model_release_err">约课模式不能为空</b> <span><b id="model" class="model">请选择</b><img src="__HIMG__/Design (7).png" alt=""/></span>
+                    <select name="business" class="course_select" id="course_select_model">
+						<volist name='mode' id='vo'>
+                         <option value="{$key}">{$vo}</option>
+                       </volist>
+                    </select>
+                </p>
+                  <a href="{:U('GroupInfo/feature')}"><p id="course_feature" style="border-bottom: none"><b id="course_select_feature_p">课程特色</b>  <b class="release_err hidden" id="feature_release_err">课程特色不能为空</b> <span><b id="feature" class="feature">请选择</b><img src="__HIMG__/Design (7).png" alt=""/></span>
+                   
+                </p></a>
+            </div>
+            <div class="course_request_content">
+                <p class="business_time_out"><b id="">截止日期</b> <b class="release_err hidden" id="time_err">截止日期不能为空</b> <span><b id="time" class="model">请选择</b><img src="__HIMG__/Design (7).png" alt=""/></span>
+                    <select name="business" class="course_select" id="course_select_time">
+
+                        
+                    </select>
+                </p>
+                <b class=" release_input_err op_0" id="title_err">约课标题不能为空</b>
+                <div class="course_request_content_title">
+                    <p>约课标题</p>
+                    <div class="input_wrap course_request_content_input">
+                        <input type="text" class="register_input tuan_title" id="title" placeholder="输入约课标题(15个字内)">
+                        <i class="input_close_icon op_0" style="top: 0.6em;"></i>
+                    </div>
+                </div>
+                <b class=" release_input_err op_0" id="cont_err">课程内容不能为空</b>
+
+                <div class="course_request_content_info" style="top: -1em; ">
+                    <p style="top: 17px !important;">课程内容</p>
+                    <div class="input_wrap course_request_content_text">
+                        <textarea id="course_textarea" placeholder="请输入您对教育机构的课程要求"></textarea>
+                        <i class="input_close_icon op_0" style="top: 0.6em;"></i>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="course_upload_wrap" style="position: relative">
+                <b class=" release_input_err_3 op_0" id="photo_err">请添加机构场景图</b>
+                <div class="course_upload_left">
+                    <img src="__HIMG__/Photo Frame.png" alt="" id="image"/>
+                </div>
+                <div class="course_upload_right">
+                    <p class="course_upload_right_1p" id="test">添加培训机构相关图片</p>
+                    <p class="course_upload_right_2p">图片大小不超过1M</p>
+                </div>
+            </div>
+            <div class="course_btn_wrap">
+            <input type=hidden name='mypretime' id="mypretime" value='0'>
+                <button class="release_pub_btn" id="wrap_btn">发布</button>  <button class="release_pre_btn release_preview" >预览</button>
+
+                <p class="course_chip">温馨提示:您发布的信息内容应合法,真实,健康,共创良好环境</p>
+            </div>
+</div>
+<!--弹出选择-->
+
+<div class="select_feature hidden">
+    <div class="select_feature_content" id="ercate">
+        <h5 class="select_feature_header" ></h5>
+		<div id="allcate">
+		</div>
+    </div>
+</div>
+<div class="release_box_bg bounceInDown hidden" id="release_box_bg">
+    <div class="release_preview_wrap" id="groupinfo">
+       
+    </div>
+</div>
+
+<div class="alert_box_bg_select hidden" id="alert_box_bg_select">
+    <div class="alert_box_wrap">
+        <p class="alert_cont" id="alert_cont_select">心愿尚未发布，确认退出？</p>
+        <button type="button" class="alert_btn_confirm" id="alert_btn_confirm">退出</button>
+        <button type="button" class="alert_btn_cancel" id="alert_btn_cancel">取消</button>
+    </div>
+</div>
+<script id="er" type="text/template">
+ 
+    {@each list as it,index}
+       <p class="select_feature_item" index="${it.id}" alt="${it.parent_id}">
+           ${it.catename}<i class="select_feature_icon select_feature_icon_down" ></i>
+        </p>
+    {@/each}
+</script>
+<script id="san" type="text/template">
+ 
+   
+    <ul class="select_feature_item_cont clearfix hidden">
+ {@each info as it,index}
+            <li class="select_feature_item_li" index="${it.id}">${it.catename}</li>
+ {@/each}
+        </ul>
+   
+</script>
+
+<script id="textprice" type="text/template">
+  {@if reference!=null}
+                       <optgroup id="iii" label="行业参考价&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${reference}元"></optgroup>
+ {@each info as it,index}
+  {@if it.ltnumber<10}
+                       <option value="${it.id}">约课价${it.ltnumber}-${it.gtnumber}人&nbsp;&nbsp;${it.ltprice}元</option>
+ {@else}  <option value="${it.id}">约课价${it.ltnumber}人以上&nbsp;&nbsp;${it.ltprice}元</option>
+                        {@/if}
+              
+ {@/each}
+ {@else}
+	<option disabled="disabled">请选择</option>
+	<option value="0">免费</option>
+	<option value="0">机构报价</option>
+  {@/if}
+</script>
+
+<script id="info" type="text/template">
+  <div class="section_item_title">
+            <div class="span2 section_item_portrait">
+      <img src="${userinfo.avatar}" alt="" class="section_item_portrait_img">
+            </div>
+            <div class="span6 section_item_sub">
+                <h3 class="detail_h3">一起组团报名新东方</h3>
+                <p>${userinfo.lastname}
+                    {@if userinfo.telstatus==1}
+                <img src="__HIMG__/Phone verification.png" alt=""/>
+                {@/if}
+                {@if userinfo.profession==1}
+                <img src="__HIMG__/Interest.png" alt=""/>
+                {@else if userinfo.profession==2}<img src="__HIMG__/Public.png" alt=""/>
+                {@else if userinfo.profession==3}<img src="__HIMG__/Gold.png" alt=""/>
+                {@else if userinfo.professio==4}<img src="__HIMG__/Culture.png" alt=""/>
+                {@else if userinfo.professio==5}<img src="__HIMG__/art.png" alt=""/>
+                {@else if userinfo.professio==6}<img src="__HIMG__/Farming.png" alt=""/>
+                {@else if userinfo.professio==7}<img src="__HIMG__/France.png" alt=""/>
+                {@else if userinfo.professio==8}<img src="__HIMG__/Teach.png" alt=""/>
+                {@else}<img src="__HIMG__/qi.png" alt=""/>
+                {@/if}
+                {@if userinfo.vtype==1}
+                {@if userinfo.vstatus==1}
+                <img src="__HIMG__/RV.png" alt=""/>
+                {@/if}
+                {@/if}
+                {@if userinfo.vtype==2}
+                {@if userinfo.vstatus==1}
+                <img src="__HIMG__/Plus V.png" alt=""/>
+                {@/if}
+                {@/if}
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="section_item_cont">
+            <div class="section_item_info span6">
+                <p><img src="/Public/Home/img/Classification.png" alt=""><span id="infocatename"></span></p>
+                <p><img src="/Public/Home/img/Price.png" alt=""> 
+                ${priceid.ltnumber}-${priceid.gtnumber}人
+                <span class="spe_price"> ￥${priceid.ltprice}</span> <span style="text-decoration: line-through">￥${priceid.reference}</span></p>
+                <p><img src="/Public/Home/img/Time.png" alt="">${mode}</p>
+                <p><img src="/Public/Home/img/Business.png" alt="">${nickname}</p>
+                <p class="address_p"><img src="/Public/Home/img/Location.png" alt="">{@each areaname as it,index}{@if index>1}${it}{@/if}{@/each}</p>
+            </div>
+			
+            <div class="section_item_photo span4">
+                <img src="${environ}" alt="" id="info_environ">
+            </div>
+            <div class="claer"></div>
+        </div>
+        <div class="section_item_feature">
+            <p class="section_course_time_out">截止日期：<span class="section_course_info">${overtime}</span></p>
+            <p>课程特色：
+                {@each tags as it,index}<span>${it}</span>&nbsp;&nbsp;{@/each}</p>
+            <p class="section_course_p">课程内容：<span class="section_course_info" id="infocontent"></span></p>
+        </div>
+
+
+
+</script>
+
+<!--弹出选择-->
+<script type="text/javascript">
+    var insertUrl="{:U('Api/GroupInfo/insertGroupInfo')}";
+    var checkGroupSend="{:U('Api/GroupInfo/checkGroupSend')}";
+    var checkinfo="{:U('Api/GroupInfo/Score')}";
+    var checkAvatars="{:U('Api/GroupInfo/Avatars')}";
+    var login="{:U('Userregsign/login')}";
+    var moInfo="{:U('User/editor')}";
+    var indexUrl="{:U('Index/index')}";
+    var timelists="{:U('Api/GroupInfo/addOverTime')}";
+    var testUrl = "{:U('Api/GroupInfo/environUpload')}";
+    var cateUrl="{:U('Api/GroupInfo/getAllArea')}";
+    var sencateUrl="{:U('Api/GroupInfo/sendArea')}";
+    var priceUrl="{:U('Api/GroupInfo/getPrice')}";
+    var infoUrl="{:U('Api/GroupInfo/getInfo')}";
+    //var modeUrl="{:U('Api/GroupInfo/getMode')}";
+</script>
+
+<script type="text/javascript" src="__HJS__/zepto.min.js"></script>
+<include file="Component:alert" />
+<include file="Component:success" />
+<script type="text/javascript" src="__HJS__/juicer-min.js"></script>
+<script type="text/javascript" src="__HJS__/swipe.js"></script>
+<script type="text/javascript" src="__HJS__/release.js"></script>
+<include file="Public:statistics"/>
+</body>

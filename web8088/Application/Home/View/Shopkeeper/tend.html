@@ -1,0 +1,92 @@
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+    <meta content="yes"name="apple-mobile-web-app-capable"/>
+    <meta content="black"name="apple-mobile-web-app-status-bar-style"/>
+    <title>收到的求学意向 - 17约课</title>
+    <link rel="stylesheet" type="text/css" href="__HCSS__/reset.css">
+    <link rel="stylesheet" href="__HCSS__/2.css"/>
+    <link rel="stylesheet" href="__HCSS__/4.css"/>
+    <meta name="keywords" content="17约课,一起约课,约课,教育培训,约课神器,校园约课,大学生培训,约老师,约女神,驾驶培训,设计培训,职业考证,音乐培训,英语培训,小语种培训,体育培训" />
+    <meta name="description" content="17约课 - 约您身边的良师益友！为您提供约老师，约课程，约女神，约学霸等海量信息，充分满足您免费约课，免费发布课程的需求。" />
+</head>
+<body>
+<header id="top_header">
+    <div id="header" align="center">
+        <h3 class="identify_title">收到的求学意向</h3>
+        <a href="javascript:history.back(-1)" class="identify_back"><img src="__HIMG__/Return2.png" alt=""/>返回</a>
+    </div>
+</header>
+<div class="wrapper"  id="enrollPanel">
+    <!--<img src="__HIMG__/loading.gif" alt="" class="loading hidden"/>-->
+    <div class="css-loading hidden">
+        <div class="ball-holder">
+            <div class="ball"></div>
+        </div>
+    </div>
+    <div class="nodata_wrap hidden">
+                <img src="/Public/Home/img/nodata.png" alt="">
+                <p class="nodata_p">还没有求学意向呢</p>
+            </div>
+    </div>
+<br/>
+
+<script id="enrollTpl" type="text/template" charset="utf-8">
+	{@each data as it,i}
+	<div class="blank join_tend_item">
+	    <div class="join_tend_top pr w96 ml2">
+	        <a href="{:U('LookUser/moInfo')}?uid=${it.uid}"><img src="${it.avatar}" alt="" class="join_tend_img"/></a>
+	        <div class="join_tend_top_right w100">
+	            <h2>${it.firstname}${it.lastname}</h2>
+	            {# 手机认证}
+                {@if it.telstatus > 0}<img src="__HIMG__/Phone verification.png" alt=""/>{@/if}
+                {# 技能认证}
+				{@if it.profession==1}<img src="__HIMG__/Interest.png" alt=""/>
+				{@else if it.profession==2}<img src="__HIMG__/Public.png" alt=""/>
+				{@else if it.profession==3}<img src="__HIMG__/Gold.png" alt=""/>
+				{@else if it.profession==4}<img src="__HIMG__/Culture.png" alt=""/>
+				{@else if it.profession==5}<img src="__HIMG__/art.png" alt=""/>
+				{@else if it.profession==6}<img src="__HIMG__/Farming.png" alt=""/>
+				{@else if it.profession==7}<img src="__HIMG__/France.png" alt=""/>
+				{@else if it.profession==8}<img src="__HIMG__/Teach.png" alt=""/>
+				{@else if it.profession==9}<img src="__HIMG__/qi.png" alt=""/>
+				{@/if}
+				{# V认证}
+				{@if it.vstatus==1 && it.vtype==1}
+				<img src="__HIMG__/RV.png" alt=""/>
+				{@else if it.vstatus==1 && it.vtype==2}
+				<img src="__HIMG__/Plus V.png" alt=""/>
+				{@/if}
+				
+	            <p class="join_tend_top_right-time pa">${it.ctime}</p>
+	            <p class="join_tend_top_right_info pa">已经报名${it.title}</p>
+	        </div>
+	    </div>
+	    <div class="join_tend_bottom pr w100">
+	        <p>联系电话: <span>${it.phone}</span></p>
+        	<button class="btn" onclick="javascript:location='tel:${it.phone}'" {@if it.phone==""}disabled{@/if}>联系TA <img src="__HIMG__/phone2.png" alt=""/></button>
+	    </div>
+	</div>
+	{@/each}
+</script>
+
+<script type="text/javascript" src="__HJS__/zepto.min.js"></script>
+<script type="text/javascript" src="__HJS__/juicer-min.js"></script>
+<include file="Component:alert" />
+
+<script type="text/javascript" charset="utf-8">
+    var global = {
+        "page":             1,
+
+        "getEnrollsUrl":    "{:U('Api/ShopInfo/getEnrolls')}",
+        "selfUrl":          "__SELF__",
+        "signinUrl":        "{:U('Shopkeeper/signin')}"
+    };
+</script>
+
+<script type="text/javascript" src="__HJS__/shopkeeper/tend.js" charset="utf-8"></script>
+<include file="Public:statistics"/>
+</body>
+</html>

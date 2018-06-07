@@ -1,0 +1,391 @@
+<extend name="UserPublic:tpl" />
+<block name="css">
+	<link rel="stylesheet" href="__PCCSS__/main.css">
+</block>
+    
+<block name="title">17约课</block>
+
+
+<block name="main">
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+
+	    <include file="UserPublic:cateNav" />
+	<!-- ads -->
+		<section class="content" id="bar">
+		  <img src="__PCIMG__/ads.png" alt="ad" class="ads">
+		</section>
+        <!-- main content header -->
+        <section class="content-header">
+          <h1>
+            最新发布
+          </h1>
+          <div class="swift">
+          	<a href="#">查看全部</a>
+          	<span id="shop_page_data">
+	          	<button class="btn-circle-gray" id="new-pre"><i class="fa fa-angle-left"></i></button>
+	          	<button class="btn-circle-gray" id="new-next"><i class="fa fa-angle-right"></i></button>
+	        </span>
+          </div>
+        </section>
+    <!-- main content -->
+		<section class="content" >
+            <div class="row" id="shop_data">
+
+            </div>
+		</section>
+
+          <!--心愿单-->
+			 <section class="content-header">
+                  <h1>
+                    心愿单
+                  </h1>
+                  <div class="swift">
+                    <a href="#">查看全部</a>
+                    <span id="group_page_data">
+	                    <button class="btn-circle-gray"><i class="fa fa-angle-left"></i></button>
+	                    <button class="btn-circle-gray"><i class="fa fa-angle-right"></i></button>
+                    </span>
+                  </div>
+            </section>
+
+<section class="content">
+      <div class="row swift-content" id="group_data">
+        
+        </div>
+          </section>
+
+          <!--热门课程-->
+          <section class="content-header">
+          <h1>
+            热门课程
+          </h1>
+        </section>
+        
+     <section class="content">
+      <div class="row swift-content" id="hotshop_data">
+
+        </div>
+          </section>
+
+
+        <!--热门课程-->
+          <section class="content-header">
+          <h1>
+            合作机构
+          </h1>
+        </section>
+
+        <section class="content">
+          <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner" id="co_data">
+
+                    </div>
+
+                    <a class="left carousel-control" id="to-left" href="#carousel-example-generic" data-slide="prev">
+                      <span class="fa fa-angle-left"></span>
+                    </a>
+                    <a class="right carousel-control" id="to-right" href="#carousel-example-generic" data-slide="next">
+                      <span class="fa fa-angle-right"></span>
+                    </a>
+              </div>
+        </section>
+		<section class="content links" >
+			<div class="link-head">
+				<h4>友情链接</h4>
+			</div>
+			<ul class="link-list clearfix">
+                <li><a href="http://ke.qq.com">腾讯课堂</a></li>
+                <li><a href="http://www.chuanke.com/">百度传课</a></li>
+                <li><a href="http://class.hujiang.com/">沪江网校</a></li>
+                <li><a href="http://www.houxue.com/">厚学网</a></li>
+                <li><a href="http://www.jikexueyuan.com/">极客学院</a></li>
+                <li><a href="http://edu.yy.com/">YY课堂</a></li>
+                <li><a href="https://www.udemy.com/">Udemy</a></li>
+                <li><a href="http://www.soke163.com/">搜客网</a></li>
+                <li><a href="http://www.xdf.cn/">新东方</a></li>
+                <li><a href="http://www.hxsd.cn/">火星时代</a></li>
+                <li><a href="http://www.wsi.com.cn/cn/index.html">华尔街英语</a></li>
+                <li><a href="http://www.duobei.com/">多贝公开课</a></li>
+                <li><a href="http://mooc.guokr.com/">Mooc学院</a></li>
+                <li><a href="http://www.taoke.com/">淘课网</a></li>
+                <li><a href="http://gz.genshuixue.com/">跟谁学</a></li>
+                <li><a href="http://www.topu.com/">顶你学堂</a></li>
+                <li><a href="http://www.91waijiao.com/">91外教</a></li>
+                <li><a href="http://www.imooc.com/">慕课网</a></li>
+			</ul>
+		</section>
+</div><!-- /.content-wrapper -->
+</block>
+
+<!-- 首页的数据条 -->
+<block name="infoLine">
+    <div class="info-bar clearfix">
+        <div class="bar_left">
+            <img src="__PCIMG__/bar-logo.png" alt="bar-logo" class="bar_logo">
+            <div>
+	              <span class="counts"><span class="number">913</span><sup>+</sup>入住机构</span>
+		          <span class="counts"><span class="number">6457</span><sup>+</sup>学生</span>
+		          <span class="counts"><span class="number">1365</span><sup>+</sup>课程</span>
+           </div> 
+        </div>
+        <a href="" class="bar_login">登录</a>
+        <a href="" class="bar_register">极速注册&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></a>
+    </div>
+</block>
+
+<block name="js">
+
+
+<!-- 合作的商家 -->
+<script id="tplco" type="text/template" charset="utf-8">
+	{@each coinfo as itc,indexc}
+                      <div class="item clearfix {@if parseInt(indexc)%8 ==0 }active{@/if}">
+		{@each itc as itco,indexco}
+                        <div class="co-wrap">
+                          <img src="__UPLOAD__/${itco.avatar}" alt="${itco.nickname}" class="co-img">
+                        </div> 
+		{@/each}
+                      </div>
+	{@/each}
+</script>
+<!-- 热门课程 -->
+<script id="tplhotshop" type="text/template" charset="utf-8">
+{@each gener as it,index}
+          <div class="col-xs-4">
+          <div class="course">
+            <div class="course-logo-wrap">
+              <div class="logo_model">
+                ${it.teacher_feature}
+              </div>
+              <img src="__UPLOAD__/${it.environ}" class="course-logo" alt="${it.title}">
+            </div>
+            
+            <div class="course-content">
+            <img src="__PCIMG__/laba.png" alt=""/>
+            <a href="{:U('shopkeeper/course')}?id=${it.id}">
+            	${it.title}
+            </a>
+            </div>
+                  <div class="course_brief clearfix">
+                    <li><i class="icons-time" ></i>${it.mode}</li>
+                    <li><i class="icons-msg"></i>${it.comment_count}条评论</li>
+                    <li><i class="icons-user"></i>${it.user_count}人报名</li>
+                  </div>
+            <div class="course-bottom">
+              <div class="bottom-left">
+                <a href="{:U('shopkeeper/Home')}?id=${it.sid}"><img src="__UPLOAD__/${it.avatar}" alt="avator"></a>&nbsp;&nbsp;&nbsp;${it.nickname}
+              </div>
+              <div class="bottom-right">
+                <span class="price-now business">${it.price}元</span> <span class="price-past">800元</span>
+              </div>
+            </div>
+          </div>
+        </div>
+{@/each}
+</script>
+<!-- 心愿单-->
+<script id="tplgroup" type="text/template" charset="utf-8">
+{@each info as it,index}
+        <div class="col-xs-4">
+          <div class="course">
+            <div class="course-logo-wrap">
+              <div class="logo_model">
+                $${it.content}
+              </div>
+              <img src="${it.environ}" class="course-logo" alt="${it.title}">
+            </div>
+            
+            <div class="course-content">
+            <img src="__PCIMG__/laba.png" alt=""/>
+            <a href="{:U('User/onedetail')}?gid=${it.id}">
+            	${it.title}
+            </a>
+            </div>
+                  <div class="course_brief clearfix">
+                    <li><i class="icons-time" ></i>${it.mode}</li>
+                    <li><i class="icons-msg"></i>${it.comment}条评论</li>
+                    <li><i class="icons-user"></i>${it.number}人跟约</li>
+                  </div>
+            <div class="course-bottom">
+              <div class="bottom-left">
+                <a href="{:U('User/Home')}?uid=${it.uid}"><img src="${it.avatar}" alt="avator"></a>&nbsp;&nbsp;&nbsp;${it.firstname}${it.lastname}
+              </div>
+              <div class="bottom-right">
+		{@if it.pricearr!=null}
+                ${it.pricearr.ltnumber}-${it.pricearr.gtnumber}人 <span class="price-now">${it.pricearr.ltprice}元</span> <span class="price-past">${it.pricearr.reference}元</span>
+		{@else}
+                <span class="price-now">${it.ltprice}元</span>
+		{@/if}
+              </div>
+            </div>
+          </div>
+        </div>
+{@/each}
+</script>
+<!-- 最新课程 -->
+<script id="tplshop" type="text/template" charset="utf-8">
+{@each info as it,index}
+        <div class="col-xs-4">
+          <div class="course">
+            <div class="course-logo-wrap">
+              <div class="logo_model">
+					教学特点：
+                	${it.teacher_feature}
+              </div>
+              <img src="__UPLOAD__/${it.environ}" class="course-logo" alt="${it.title}">
+            </div>
+            
+            <div class="course-content">
+            <img src="__PCIMG__/laba.png" alt=""/>
+            <a href="{:U('shopkeeper/course')}?id=${it.id}">
+            	${it.title}
+            </a>
+            </div>
+                  <div class="course_brief clearfix">
+                    <li><i class="icons-time" ></i>${it.mode}</li>
+                    <li><i class="icons-msg"></i>${it.comment_count}条评论</li>
+                    <li><i class="icons-user"></i>${it.user_count}人报名</li>
+                  </div>
+            <div class="course-bottom">
+              <div class="bottom-left">
+                <a href="{:U('shopkeeper/Home')}?id=${it.sid}"><img src="__UPLOAD__/${it.avatar}" alt="avator"></a>&nbsp;&nbsp;&nbsp;${it.nickname}
+              </div>
+              <div class="bottom-right">
+                <span class="price-now business">${it.preferent}</span> <span class="price-past">${it.price}元</span>
+              </div>
+            </div>
+          </div>
+        </div>
+{@/each}
+</script>
+<script id="tplpage" type="text/template" charset="utf-8" >
+		{@if page.curPage!=1}
+	                    <button class="btn-circle-gray page" index="${page.curPage-1}"><i class="fa fa-angle-left"></i></button>
+		{@/if}
+		${page.curPage}
+		{@if page.curPage!=page.pageAll}
+	                    <button class="btn-circle-gray page" index="${parseInt(page.curPage)+1}"><i class="fa fa-angle-right"></i></button>
+		{@/if}	
+</script>
+<!-- 广告 -->
+<script id="tplbar" type="text/template" charset="utf-8" >
+{@each bar as it,index}
+	<img src="__ADIMG__/${it.bigpic}" alt="${it.adname}" class="ads">
+{@/each}
+</script>
+
+<!-- AdminLTE App -->
+<script>
+//合作机构url  
+var co_url = "{:U('Index/cooperateInfo')}";
+//热门课程url 
+var gener_url = "{:U('Index/getGener')}";
+//发布的心愿单 
+var group_url = "{:U('Index/userinfo')}";
+//最新发布的课程 
+var shop_url = "{:U('Index/shopinfo')}";
+//首页广告 
+var bar_url = "{:U('Index/getBar')}";
+
+
+//心愿单页码 
+var page_group = 0;
+//最新课程页码 
+var page_shop = 0;
+
+
+//合作机构url 
+function getcoinfo(){
+	$.get(co_url,function(data){
+	    console.log(data);
+	    if(data.status==200){
+	        var tplc = document.getElementById('tplco').innerHTML;
+	        var htmlc = juicer(tplc, data);
+	        $('#co_data').html(htmlc);
+	        imgonerror();//默认图片
+	    }
+	}, "json");
+}
+getcoinfo();
+
+//热门课程  
+function getgener(){
+	$.get(gener_url,function(data){
+	    console.log(data);
+	    if(data.status==200){
+	        var tplgener = document.getElementById('tplhotshop').innerHTML;
+	        var htmlgener = juicer(tplgener, data);
+	        $('#hotshop_data').html(htmlgener);
+	        imgonerror();//默认图片
+	    }
+	}, "json");
+}
+getgener();
+//最新的心愿单 
+function getgroup(){
+	var pagedata = {};
+	pagedata.pages = page_group+1;
+	$.post(group_url,pagedata,function(data){
+	    console.log(data);
+	    if(data!=null){
+	        var tplgroup = document.getElementById('tplgroup').innerHTML;
+	        var htmlgroup = juicer(tplgroup, data);
+	        $('#group_data').html(htmlgroup);
+
+	        var tplpage = document.getElementById('tplpage').innerHTML;
+	        var htmlpage = juicer(tplpage, data);
+	        $('#group_page_data').html(htmlpage);
+	        imgonerror();//默认图片
+	    } 
+	}, "json");
+}
+getgroup();
+$("#group_page_data").on("click",".page",function(e){
+	page_group = $(e.currentTarget).attr("index") -1;
+	getgroup();
+});
+
+//最新的课程 
+function getshop(){
+	var pagedata={};
+	pagedata.pages=page_shop+1;
+	$.post(shop_url,pagedata,function(data){
+	    console.log(data);
+	    if(data!=null){
+	    	var tplshop = document.getElementById('tplshop').innerHTML;
+	        var htmlshop = juicer(tplshop, data);
+	        $('#shop_data').html(htmlshop);
+
+	    	var tplpage = document.getElementById('tplpage').innerHTML;
+	        var htmlpage = juicer(tplpage, data);
+	        $('#shop_page_data').html(htmlpage);
+	        
+	        imgonerror();//默认图片
+	    } 
+	}, "json");
+}
+getshop();
+$("#shop_page_data").on("click",".page",function(e){
+	page_shop = $(e.currentTarget).attr("index") -1;
+	getshop();
+});
+//首页广告  
+function getbar(){
+	$.get(bar_url,function(data){
+	    console.log(data);
+	    if(data.status!=200){
+	    	alert("无广告");
+	    	return;
+	    } 
+    	var tplbar = document.getElementById('tplbar').innerHTML;
+        var htmlbar = juicer(tplbar, data);
+        $('#bar').html(htmlbar);
+        imgonerror();//默认图片
+	}, "json");
+}
+getbar();
+</script>
+
+
+</block>

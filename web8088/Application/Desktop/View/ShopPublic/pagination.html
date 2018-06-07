@@ -1,0 +1,54 @@
+<script id="paginationTpl" type="text/template" charset="utf-8">
+    <ul class="pagination">
+      <li><a href="javascript:${callback}(1);">首页</a></li>
+      <li>
+        <a href="javascript:{@if nowPage-1>=1}${callback}(${nowPage}-1){@/if};" aria-label="Previous">
+          <span aria-hidden="true">上一页</span>
+        </a>
+      </li>
+      {@each listPage as it, i}
+      <li {@if it==nowPage}class="active"{@/if}><a href="javascript:${callback}(${it});">${it}</a></li>
+      {@/each}
+      <li>
+        <a href="javascript:{@if nowPage+1<=totalPages}${callback}(${nowPage}+1){@/if};" aria-label="Next">
+          <span class="clightblue" aria-hidden="true">下一页</span>
+        </a>
+      </li>
+    </ul>
+</script>
+
+<script type="text/javascript" charset="utf-8">
+function showPagination(panelId, nowPage, totalPages, callback) {
+    // 分页栏数字连接
+    var rollPage = 5;
+    var collPage = Math.floor(rollPage / 2);
+    var listPage = [];
+
+    for (var i = 1; i <= rollPage; i++) {
+        var page;
+        if (nowPage - collPage <= 0) {
+            page = i;
+        } else if (nowPage + collPage - 1 >= totalPages) {
+            page = countPage - rollPage + i;
+        } else {
+            page = nowPage - rollPage + i;
+        }
+        if (page >= 1 && page <= totalPages) {
+            listPage.push(page);
+        }
+    }
+
+    // 数据
+    var data = {
+        "nowPage":      nowPage,
+        "totalPages":   totalPages,
+        "callback":     callback,
+        "listPage":     listPage
+    };
+
+    // 模板输出
+    var tpl = document.getElementById("paginationTpl").innerHTML;
+    var html = juicer(tpl, data);
+    $("#"+panelId).html(html);
+}
+</script>

@@ -1,0 +1,54 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <div class="main-title">
+        <h2>{:isset($info['id'])?'编辑':'新增'}课程</h2>
+    </div>
+    <form action="{:U()}" method="post" class="form-horizontal" enctype ="multipart/form-data">
+        <div class="form-item">
+            <label class="item-label">课程名称</label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="co_name" value="{$info.co_name|default=''}">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">课程描述</label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="co_description" value="{$info.co_description|default=''}">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">课程内容</label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="co_content" value="{$info.co_content|default=''}">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">课程学分</label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="co_score" value="{$info.co_score|default=''}">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">课程LOGO</label>
+            <div class="controls">
+                <!-- <input type="file" class="text input-large" name="co_logo" value="{$info.co_score|default=''}"> -->
+                {:hook('UploadImages')}
+            </div>
+        </div>
+        <div class="form-item">
+            <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+        </div>
+    </form>
+</block>
+
+<block name="script">
+    <script type="text/javascript">
+        Think.setValue("pid", {$info.pid|default = 0});
+        Think.setValue("hide", {$info.hide|default = 0});
+        Think.setValue("is_dev", {$info.is_dev|default = 0});
+        //导航高亮
+        highlight_subnav('{:U('Course/index')}');
+    </script>
+</block>

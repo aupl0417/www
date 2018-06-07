@@ -1,0 +1,174 @@
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+    <meta content="yes"name="apple-mobile-web-app-capable"/>
+    <meta content="black"name="apple-mobile-web-app-status-bar-style"/>
+    <title>主页</title>
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" href="css/2.css"/>
+    <link rel="stylesheet" href="css/4.css"/>
+    <style>
+        #header{
+            width: 100%;
+            position: relative;
+            height: 100%;;
+            background: url("images/Gradual change.png");
+            background-repeat: repeat-x;
+        }
+    </style>
+</head>
+<body>
+<header id="top_header">
+    <div id="header" align="center">
+        <!--<input type="file" class="visualization" id="file"/>-->
+        <h3 class="identify_title">发布课程信息</h3>
+        <a href="" class="identify_back"><img src="images/Return2.png" alt=""/>返回</a>
+    </div>
+</header>
+<div id="wrapper">
+    <div id="scroller">
+        <div class="course_request_slide">
+            <div id="swipeSlide" class="wrap course-wrap">
+                <ul class="inline-float">
+                    <li class="inline-float_li">
+                        <ul class="course_slide">
+                            <li class="course_active"><img src="images/Design_3a.png" alt=""/><p>驾驶培训</p></li>
+                            <li><img src="images/Design_1.png" alt=""/><p>设计培训</p></li>
+                            <li><img src="images/Design_6.png" alt=""/><p>职业培训</p></li>
+                            <li><img src="images/Design_7.png" alt=""/><p>音乐培训</p></li>
+                        </ul>
+                    </li>
+                    <li class="inline-float_li">
+                        <ul class="course_slide">
+                            <li><img src="images/Design_2.png" alt=""/><p>英语培训</p></li>
+                            <li><img src="images/Design_5.png" alt=""/><p>小语种培训</p></li>
+                            <li><img src="images/Design_4.png" alt=""/><p>体育考证</p></li>
+                            <li><img src="images/Design_8.png" alt=""/><p>音乐培训</p></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <p class="slide-bullet" id="course_slide">
+                    <i class="icon-bullet active"></i>
+                    <i class="icon-bullet"></i>
+                </p>
+            </div>
+        </div>
+        <div class="course_request_info e_course_request_info">
+            <div class="input-wrap s_input_wrap">
+                <label>联系电话</label>
+                <div class="input-wrap-out enterprise_input_wrap">
+                    <input type="text" class="input-wrap-input" placeholder="请输入你的手机号码或者座机号码"/>
+                </div>
+            </div>
+            <div class="input-wrap s_input_wrap">
+                <label>机构地址</label>
+                <div class="input-wrap-out enterprise_input_wrap">
+                    <input type="text" class="input-wrap-input" placeholder="请输入机构详细地址"/>
+                </div>
+            </div>
+            <p class="course_select_first_p"><b id="course_select_price_p">课程价格</b>  <span>请选择 <img src="images/Design (7).png" alt=""/></span>
+                <select name="business" class="course_select" id="course_select_price">
+                    <option value="课程价格请选择">课程价格</option>
+                    <option value="1200">1200</option>
+                    <option value="1500">1500</option>
+                    <option value="12077">12077</option>
+                    <option value="200">200</option>
+                    <option value="100">100</option>
+                </select></p>
+            <p><b id="course_select_model_p">约课模式</b>  <span>请选择 <img src="images/Design (7).png" alt=""/></span>
+                <select name="business" class="course_select" id="course_select_model">
+                    <option value="约客模式请选择">约课模式</option>
+                    <option value="1200">1200</option>
+                    <option value="1500">1500</option>
+                    <option value="12077">12077</option>
+                    <option value="200">200</option>
+                    <option value="100">100</option>
+                </select>
+            </p>
+            <p><b id="course_select_feature_p">课程特色</b>  <span>请选择 <img src="images/Design (7).png" alt=""/></span>
+            </p>
+        </div>
+        <div class="course_request_content">
+            <div class="course_request_content_title">
+                <p>组团标题</p>
+                <div class="input_wrap course_request_content_input">
+                    <input type="text" class="register_input" placeholder="输入公司全称">
+                </div>
+            </div>
+            <div class="course_request_content_info">
+                <p>课程内容</p>
+                <div class="input_wrap course_request_content_text">
+                    <textarea id="course_textarea" placeholder="请输入您对教育机构想说的话"></textarea>
+                </div>
+            </div>
+        </div>
+        <!--<div class="course_upload_wrap">-->
+            <!--<div class="course_upload_left">-->
+                <!--<img src="images/Photo Frame.png" alt="" id="image"/>-->
+            <!--</div>-->
+            <!--<div class="course_upload_right">-->
+                <!--<p class="course_upload_right_1p">添加培训机构相关图片</p>-->
+                <!--<p class="course_upload_right_2p">图片大小不超过1M</p>-->
+            <!--</div>-->
+        <!--</div>-->
+        <div class="course_btn_wrap">
+            <button class="register_submit course_btn">发布</button>
+            <p class="course_chip">温馨提示:您发布的信息内容应合法，真实，健康,共创良好环境</p>
+        </div>
+    </div>
+
+</div>
+
+
+<script type="text/javascript" src="js/zepto.min.js"></script>
+<script type="text/javascript" src="js/swipe.js"></script>
+<script type="text/javascript" src="iscroll.js"></script>
+
+<script type="text/javascript">
+    (function() {
+        var myScroll;
+        myScroll = new IScroll('#wrapper', { mouseWheel: true ,click:true});
+
+        window.addEventListener('DOMContentLoaded', function(){
+            var $slide = document.getElementById('swipeSlide'),
+                    aBullet = $slide.querySelectorAll('.icon-bullet'),
+                    len = aBullet.length;
+
+            var mySwipe = new Swipe($slide,{
+                continuous: false,
+                stopPropagation: true,
+                callback: function(i){
+                    if(i>=0||i<len) {
+                        $('.icon-bullet').removeClass('active')
+                        aBullet[i].classList.add('active');
+                    }
+                }
+            });
+        });
+    })();
+    $('.course_slide').on('click','li',function (event) {
+        if($(event.target).attr('src')!=null) {
+            var old_url = $('.course_active img').attr('src');
+            var alt_url = old_url.split('a.')[0] + '.png';
+            $('.course_active img').attr('src', alt_url);
+            $('.course_active').removeClass('course_active');
+            if (!$(event.target).hasClass('course_active')) {
+                var url = $(event.target).attr('src');
+                var new_url = url.split('.')[0] + 'a.png';
+                $(event.target).attr('src', new_url);
+                $(event.target).parent().addClass('course_active');
+            }
+        }
+
+
+    });
+//    $('#image').on("click",function (event) {
+//        $('#file').trigger("click");
+//    })
+    document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+</script>
+</body>
+</html>

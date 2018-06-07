@@ -1,0 +1,158 @@
+<include file="Public:header" />
+<div id="content">
+
+	
+	<div class="container">
+		
+		<div class="row">
+			
+
+			<include file="Public:nav" />
+			
+			
+			<div class="span9">
+				<div class="widget-header">
+						<i class="icon-th-list"></i>
+						<h3>广告位管理</h3>
+						<a href="{:U('Advert/adadd')}">添加广告位</a>
+					[最大排序:{$maxsort}]
+					</div> <!-- /widget-header -->
+					
+				<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+							
+								<th width="6%">
+									序号
+								</th>
+								<th width="10%">
+									广告位名称
+								</th>
+								<th width="8%">
+									图片
+								</th>
+								<th width="10%">
+									链接地址
+								</th>
+								<th width="13%"> 
+									上传时间
+								</th>
+								<th width="13%"> 
+									过期时间
+								</th>
+								<th width="8%"> 
+									排序
+								</th>
+								<th width="13%">
+									操作
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+						 
+						
+						<volist name='data' id='vo'>
+							
+							<tr>
+							
+								<td>
+								
+									{$i}
+								</td>
+								<td class="name">{$vo.adname}</td>
+								<td>
+								<img id="advert" src="__HUP__{$vo.advert}" class="img_url" style="width:150px;"/>
+								</td>
+                                <td class="url">{$vo.url}</td>
+								<td>{$vo.ctime}</td>
+								<td><span class="time">{$vo.otime}</span><span style="color: red" class="hidden">已过期</span></td>
+								<td><input type="text" class="sort"  maxLength="5" size="20"value="{$vo.sort}" id="{$vo.id}"  style="width:50px;"/></td>
+								<td>
+
+									 <a href="{:U('advert/adedit',array('id'=>$vo['id']))}">编辑</a> |
+      								<span class="id" id="{$vo.id}" title="{$vo.adname}"><a href="#" title="移除">移除</a></span>
+								</td>
+							</tr>
+							
+						</volist>
+							
+						</tbody>
+					</table>				
+				
+				<!-- 分页 -->	
+							<thead>
+								<div class="pagination" style="margin-left:10px;">
+									<div class="">
+										<a href="javascript:;" style="border-left: 1px solid #ddd"   id="DataTables_Table_0_previous">{$page['counts']}条记录  {$page['curPage']}/{$page['pageAll']}页</a>
+										<if condition="$page['curPage'] neq 1">
+											<a  href="__ACTION__/page/1"     class=""  id="DataTables_Table_0_first">第一页</a>
+											<a  href="__ACTION__/page/{$page['curPage']-1}" class="" id="DataTables_Table_0_previous">上一页</a>
+										</if>
+										
+											<span>
+										<for start="$page['pageFirst']" end="$page['pageMax']+1">
+												<a href="__ACTION__/page/{$i}" <if condition="$i eq $page['curPage']"> style="color: #FC8D00;background-color: #FFFFFF;"</if> >{$i}</a>
+										</for>
+											</span>
+										<if condition="$page['curPage'] neq $page['pageAll']">
+											<a  href="__ACTION__/page/{$page['curPage']+1}" class="" id="DataTables_Table_0_next">下一页</a>
+											<a  href="__ACTION__/page/{$page['pageAll']}"   class="" id="DataTables_Table_0_last">最后一页</a>
+										</if>
+									</div>
+								</div>
+								
+							</thead>
+			</div> <!-- /span9 -->
+			
+			
+		</div> <!-- /row -->
+		
+	</div> <!-- /container -->
+	
+</div> <!-- /content -->
+
+
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script type="text/javascript">
+
+	var deleteURL="{:U('Advert/Delete')}";
+	var listURL="{:U('Advert/adlist')}";
+
+</script >
+<script src="__AJS__/jquery-1.7.2.min.js"></script>
+<script src="__AJS__/excanvas.min.js"></script>
+<!--<script src="__AJS__/jquery.flot.js"></script>
+<script src="__AJS__/jquery.flot.pie.js"></script>
+<script src="__AJS__/jquery.flot.orderBars.js"></script>
+<script src="__AJS__/jquery.flot.resize.js"></script>-->
+<script src="__AJS__/addelete.js"></script>
+<script src="__AJS__/bootstrap-datepicker.js"></script>
+<script src="__AJS__/bootstrap.js"></script>
+<!--<script src="__AJS__/charts/bar.js"></script>-->
+        <script type="text/javascript">
+            var timeList = $(".time");
+            $.each(timeList,function(index,item){
+                var time = new Date($(item).text());
+                var newTime = new Date();
+                if(time.getTime()<newTime.getTime()){
+                    $(item).next().removeClass("hidden");
+                }
+            })
+       
+      $('.sort').bind('change',function(event){
+		var sort=$(event.target).val();
+		var id=$(event.target).attr('id');
+		args={sort:sort,id:id};
+  	   $.post("{:U('Advert/setSort')}",args,function(msg){
+  		   if(msg==1){
+  			   alert('更改成功');
+  		   }else{
+  			  	alert('更改失败');
+  		   }
+  	 	},'text');
+       });   
+            
+        </script>
+<include file="Public:footer" />

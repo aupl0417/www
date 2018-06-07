@@ -1,0 +1,258 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+    <meta content="yes"name="apple-mobile-web-app-capable"/>
+    <meta content="black"name="apple-mobile-web-app-status-bar-style"/>
+    <title>编辑资料 - 17约课</title>
+    <link rel="stylesheet" type="text/css" href="__HCSS__/reset.css">
+    <link rel="stylesheet" href="__HCSS__/2.css"/>
+    <link rel="stylesheet" href="__HCSS__/4.css"/>
+    <link rel="stylesheet" href="__HCSS__/test2.css"/>
+    <meta name="keywords" content="17约课,一起约课,约课,教育培训,约课神器,校园约课,大学生培训,约老师,约女神,驾驶培训,设计培训,职业考证,音乐培训,英语培训,小语种培训,体育培训" />
+    <meta name="description" content="17约课 - 约您身边的良师益友！为您提供约老师，约课程，约女神，约学霸等海量信息，充分满足您免费约课，免费发布课程的需求。" />
+</head>
+<body>
+<div id="info">
+    <form id="form" action="{:U('Shopkeeper/handleEdit')}" method="post" enctype="multipart/form-data">
+        <header id="top_header">
+            <div id="header" align="center">
+                <h3 class="identify_title">编辑资料</h3>
+                <a href="javascript:history.back(-1)" class="identify_back"><img src="__HIMG__/Return2.png" alt=""/>返回</a>
+                <a href="{:U('index/index')}" class="identify_to_index">首页</a>
+            </div>
+        </header>
+        <div class="wrapper">
+                    <div class="blank pr">
+                        <p class="user_info_editor_top">资料完善度</p>
+                        <div class="bar_wrap pa"><div class="bar_cont pa" id="bar">%</div></div>
+                    </div>
+                    <div class="enterprise_info_editor_middle blank">
+                        <h3>头像</h3>
+                        <div class="user_info_editor_img_wrap pr">
+
+                            <div class="user_info_editor_select">
+                                <button type="button" id="btn">选择头像</button>
+                                <p>支持jpg、png、gif格式,不要超过2M</p>
+                                <input type="file" class="visualization" id ="file" name="file"/>
+                            </div>
+                            <span style="line-height: 4.5em;color: red;font-size: large;margin-left: 0.1em;">*</span>
+                            <img id="img0" src="{$resArr.avatar}" alt=""/>
+
+                        </div>
+                    </div>
+                    <div class="blank">
+                        <br/>
+                        <div class="input-wrap" style="overflow: visible !important;">
+                            <span class="need_point">*</span>
+                            <label>机构昵称</label>
+                            <div class="input-wrap-out enterprise_input_wrap">
+                                <input id="nickname" type="text" class="input-wrap-input" name="nickname" value="{$resArr.nickname}" placeholder="大家怎么称呼您的"/>
+                                <i class="input_close_icon op_0"></i>
+                            </div>
+                        </div>
+                        <div class="input-wrap" style="overflow: visible !important;">
+                            <span class="need_point">*</span>
+                            <label>机构校龄</label>
+                            <div class="input-wrap-out enterprise_input_wrap">
+                                <input id="age" type="text" class="input-wrap-input" value="{$resArr.age}" placeholder="请输入一个数字"/>
+                                <i class="input_close_icon op_0"></i>
+                            </div>
+                        </div>
+                        <div class="input-wrap">
+                            <label>机构网站</label>
+                            <div class="input-wrap-out enterprise_input_wrap">
+                                <input id="website" type="text" class="input-wrap-input" value="{$resArr.website}" placeholder=""/>
+                                <i class="input_close_icon op_0"></i>
+                            </div>
+                        </div>
+                        <div class="input-wrap">
+                            <label>师资力量</label>
+                            <div class="input-wrap-out enterprise_input_wrap">
+                                <input id="teacher_power" type="text" class="input-wrap-input" value="{$resArr.teacher_power}" placeholder=""/>
+                                <i class="input_close_icon op_0"></i>
+                            </div>
+                        </div>
+
+                        <div class="input-wrap" style="border-top: solid 1px #eee;margin-bottom:1em; padding-top: 0.45em;">
+                            <label>机构全称</label>
+                            <div class="input-wrap-out enterprise_input_wrap" style="border: none">
+                                <p style="padding-left: 0.1em;margin-top: 0.45em;">{$resArr.company_name}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="blank">
+                        <div id="categoryPanel">
+                            <?php if(!$resArr['cateid']): ?><span style="color: red;font-size: large;position: absolute;line-height: 3.5em;margin-left: 2px">*</span><?php endif; ?>
+                            <p class="shopkeeper_type">机构类别 </p>
+                            <span class="select_chip" >
+                            <span id="catenamePanel">{$resArr['catename']|default=请选择}</span>
+                            <?php if(!$resArr['cateid']): ?><img class="select_array" src="__HIMG__/index_more.png" alt=""/></span><?php endif; ?>
+                        </div>
+                        <?php foreach ($allCategory as $vo): ?>
+                            <p class="shopkeeper_type_item hidden">{$vo.0.catename}<span class="select_chip"><img src="__HIMG__/index_more.png" alt="" class="array_horizon"/></span></p>
+                            <ul class="type_choose hidden clear">
+                                <?php for ($i = 1; $i < count($vo); $i++): ?>
+                                    <li class="type_choose_item">
+                                    <input type="radio" id="categoryInput_{$vo.$i.id}" class="checkbox_label" name="category" value="{$vo.$i.id}" {$vo[$i]['id']==$resArr['cateid']?'checked':''}>&nbsp;
+                                    <label for="categoryInput_{$vo.$i.id}" class="checkbox_label">{$vo.$i.catename}</label>
+                                    </li>
+                                <?php endfor; ?>
+                                
+                                    <li class="type_choose_item">
+	                                    <input type="radio" id="categoryInput_{$vo.0.id}" class="checkbox_label" name="category" value="{$vo.0.id}" {$vo[0]['id']==$resArr['cateid']?'checked':''}>&nbsp;
+	                                    <label for="categoryInput_{$vo.0.id}" class="checkbox_label">综合类</label>
+                                    </li>
+                            </ul>
+                        <?php endforeach; ?>
+
+                        <div class="blank enterprise_feature" id="switchFeatureBtn">
+                            <input type="hidden" id="featureInput" name="features" value="{$resArr.features}" />
+                            <p class="user-info_main_btn">专业特色</p>
+                            <span id="featurePanel" class="select_chip" >{$resArr['features']?$resArr['features']:'请选择'} <img src="__HIMG__/Design (7).png" alt=""></span>
+                        </div>
+                        <div class="input-wrap input-out-text-wrap">
+                            <label>机构简介</label>
+                            <div class="input-wrap-out input-wrap-out-text enterprise_input_wrap">
+                                <textarea id="remark" name="remark" class="input-wrap-input" placeholder="为了让小伙伴们更加了解您，请分段描述机构规模、师资力量、教师成绩">{$resArr.remark}</textarea>
+                                <i class="input_close_icon op_0" ></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="blank">
+                        <br/>
+                        <div class="input-wrap">
+                            <label>机构电话</label>
+                            <div class="input-wrap-out enterprise_input_wrap">
+                                <input id="tel" name="tel" type="text" class="input-wrap-input" value="{$resArr.tel}" placeholder="请填写联系到您的电话"/>
+                                <i class="input_close_icon op_0"></i>
+                            </div>
+                        </div>
+                        <div class="input-wrap">
+                            <label>基本地址</label>
+                            <div class="input-wrap-out" style="border: none;overflow: visible; padding-left: 1.5em; padding-right:0.2em;">
+                                <div class="select_wrap_new">
+                                    <p class="select_wrap_new_p" id="first_new_p">请选择</p>
+                                    <select class="first_new_select" id="zone">
+                                        <option value="0">请选择</option>
+                                        <volist name="allZone" id="vo">
+                                            <option value="{$vo.id}" {$vo['id']==$areaPid?'selected':''}>{$vo.areaname}</option>
+                                        </volist>
+                                    </select>
+                                </div>
+                                -
+                                <div class="select_wrap_new">
+                                    <p class="select_wrap_new_p" id="second_new_p">请选择</p>
+                                    <select class="second_new_select" id="areaid" name="areaid">
+                                        <option value="0">请选择</option>
+                                        <present name="allArea">
+                                            <volist name="allArea" id="vo">
+                                                <option value="{$vo.id}" {$vo['id']==$resArr['areaid']?'selected':''}>{$vo.areaname}</option>
+                                            </volist>
+                                        </present>
+                                    </select>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-wrap">
+                            <label>机构地址</label>
+                            <div class="input-wrap-out enterprise_input_wrap">
+                                <!-- 这里之所以id和name是因为需求改动了 -->
+                                <input id="area_raw" name="area_raw" type="text" class="input-wrap-input" value="{$resArr.area_raw}" placeholder="请填写您真实的机构地址"/>
+                                <i class="input_close_icon op_0"></i>
+                            </div>
+                        </div>
+                         <div class="course_upload_wrap">
+                            <div class="course_upload_left">
+                                <img src="<?php if (empty($resArr['environ'])): ?>__HIMG__/Photo Frame.png<?php else: ?>__UPLOAD__{$resArr['environ']}<?php endif; ?>" alt="" id="environImage"/>
+                            </div>
+                            <div class="course_upload_right">
+                                <p class="course_upload_right_1p">添加培训机构相关图片</p>
+                                <p class="course_upload_right_2p">图片大小不超过1M</p>
+                            </div>
+                        </div>
+                        <input type="file" class="visualization" id="environFile" name="environFile" />           
+                        
+                    </div>
+                    <button type="button" id="submitBtn" class="btn w96 ml2" id="submitform">保存</button>
+                    <br/>
+                    <br/>
+        </div>
+    </form>
+</div>
+
+<!-- feature -->
+<div id="feature" class="hidden">
+    <header id="top_header">
+        <div id="header" align="center">
+            <h3 class="identify_title">课程特色</h3>
+            <span id="featureBackBtn" class="identify_back"><img src="__HIMG__/Return2.png" alt=""/>返回</span>
+        </div>
+    </header>
+    <div class="wrapper">
+                <div class="course_feature_wrap">
+                   <div class="course_feature_add">
+                       <div class="input_wrap course_feature_input">
+                           <input type="text" class="register_input" placeholder="自定义特色，不超过四个字">
+                       </div>
+                       <button class="course_feature_btn">添加</button>
+                   </div>
+                    <p class="course_feature_select_p">选择3个你的课题特色表情</p>
+                    <ul class="course_select_ul">
+                        <?php
+                            $strArr = array(
+                                '免费试听',
+                                '就业推荐',
+                                '素质培养',
+                                '泡女必备',
+                                '名牌课程',
+                                '价格超值',
+                                '幽默风趣',
+                                '师资雄厚',
+                            );
+                            foreach ($strArr as $value) {
+                                $class = in_array($value, $resArr['featureArr']) ? ' class="course_select_ul_active"' : '';
+                                echo "<li$class>$value</li>";
+                                if ($class != '') {
+                                    $key = array_search($value, $resArr['featureArr']);
+                                    unset($resArr['featureArr'][$key]);
+                                }
+                            }
+                            foreach ($resArr['featureArr'] as $value) {
+                                echo "<li class=\"course_select_ul_active\">$value</li>";
+                            }
+                        ?>
+                    </ul>
+                    <button id="featureSubmitBtn" class="btn w96 ml2">保存</button>
+                </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+// 全局数组
+var g = {
+    "designBtn":            '<img src="__HIMG__/Design (7).png" alt="">',
+    "credit":               '{$resArr.credit}',
+    "handleEditUrl":        "{:U('Api/ShopkeeperDetail/handleEdit')}",
+    "infoUrl":              "{:U('Shopkeeper/info', ['id'=>session('shopkeeper.id')])}",
+    "zoneUrl":              "{:U('Api/Area/getByParentId')}",
+    "indexUrl":             "{:U('Index/index')}",
+
+    "upImg":                "__HIMG__/up.png",
+    "indexMoreImg":         "__HIMG__/index_more.png",
+
+    "cateid":               "{$resArr.cateid}"
+};
+</script>
+
+<script type="text/javascript" src="__HJS__/zepto.min.js"></script>
+<script type="text/javascript" src="__HJS__/objimgurl.js"></script>
+<include file="Component:alert" />
+<script type="text/javascript" src="__HJS__/shopkeeper/editor.js" charset="utf-8"></script>
+<include file="Public:statistics"/>
+</body>
+</html>

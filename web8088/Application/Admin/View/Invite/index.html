@@ -1,0 +1,344 @@
+<include file="Public:header" />
+<style>
+.loading {
+  display: block;
+  position: fixed;
+  top: 200px;
+  left: 45%;
+  width: 10%;
+  margin: 0 auto;
+  z-index: 2888;
+}
+.radio-inline {
+  position: relative;
+  display: inline-block;
+  padding-left: 20px;
+  margin-bottom: 0;
+  font-weight: 400;
+  vertical-align: middle;
+  cursor: pointer;	
+  width: 230px;	
+}
+</style>
+    <link href="__ACSS__/bootstrap-datetimepicker.min.css" rel="stylesheet" /> 
+<img src="__HIMG__/loading.gif" alt=""  class="loading hidden"/>
+<div id="content">
+
+	
+	<div class="container">
+		
+		<div class="row">
+		
+			<include file="Public:nav" />
+			
+			<div class="span10">
+				
+				<div class="widget widget-table">
+										
+					<div class="widget-header">
+						<i class="icon-th-list"></i>
+						<h3>
+							官方邀请码
+						</h3>
+                        <a href="javascript:history.back(-1)" class="btn btn-small">返回</a>
+						<!-- Button trigger modal -->
+						<a href="#myModal" role="button" class="btn btn-primary" data-toggle="modal">官方邀请码生成</a>
+						<p class="pull-right" style="  margin-right: 1em;">当前官方邀请码数:
+							<span style="color: #0088cc;" id="page_all_count"> {$page.counts} </span>
+						</p>
+					</div> <!-- /widget-header -->
+
+					<div class="widget-content">
+					
+						<table class="table table-striped table-bordered">
+							<thead>
+								<tr>
+									<th>序号</th>
+									<th>Id</th>
+									<th>邀请码</th>
+									<th>是否一次性<br/>
+										<select id="changeonly" class="form-control" style="width: 75px;">
+											<option value="10" selected>全部</option>
+											<option value="0"  >多次性</option>
+											<option value="1"  >一次性</option>
+										</select>
+									</th>
+									<th>邀请码生成时间</th>
+									<th>邀请码过期时间</th>
+									<th>是否已失效<br/>
+										<select id="changestatus" class="form-control" style="width: 75px;">
+											<option value="10" selected>全部</option>
+											<option value="1"  >未失效</option>
+											<option value="0"  >已失效</option>
+										</select>
+									</th>
+									<th>是否已过期<br/>
+										<select id="changeendtime" class="form-control" style="width: 75px;">
+											<option value="10" selected>全部</option>
+											<option value="1"  >未过期</option>
+											<option value="0"  >已过期</option>
+										</select>
+									</th>
+									<th>使用人数</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							
+							<tbody id="invitebody">
+							
+							</tbody>
+						</table>
+					
+					</div> <!-- /widget-content -->
+					
+					
+					<!-- 分页 -->	
+							<thead>
+								<div id="page" class="pagination" style="margin-left:10px;">
+								
+								</div>
+							</thead>
+							
+							
+					
+				</div> <!-- /widget -->
+				
+			</div> <!-- /span10 -->
+			
+		</div> <!-- /row -->
+		
+	</div> <!-- /container -->
+	
+</div> <!-- /content -->
+
+
+
+<!-- Modal 邀请码-->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">邀请码</h3>
+  </div>
+  <div class="modal-body">
+  <ul class="nav nav-tabs" id="myTab">
+    <li id="typeone" class="active"><a data-toggle="tab" href="#onenum">多次使用</a></li>
+    <li id="typetwo" class=""><a data-toggle="tab" href="#morenum">单次使用</a></li>
+  </ul>
+  <div class="tab-content" id="myTabContent" style="position:relative;height:100px;">
+		<div id="datetimepicker" class="input-append date">
+			邀请码过期时间:
+			<input type="text" id="endtime"></input>
+			<span class="add-on">
+				<i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+			</span>
+		</div>
+	  <div id="onenum" class="tab-pane fade active in"  style="position:absolute">
+	  </div>
+	  <div id="morenum" class="tab-pane fade"  style="position:absolute">
+			要生成的邀请码数量:
+			<input type="text" name="num" id="num" />
+	  </div>
+  </div>
+    	<p>
+		    <input type="hidden" value="0" id="type" />
+		</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+    <button class="btn btn-primary" id="sendBtn">生成邀请码</button>
+  </div>
+</div>
+
+
+
+<script id="tpl" type="text/template">
+    {@each info as it,index}
+								<tr {@if it.color!=null || it.color!= false}style="color:${it.color}"{@/if}>
+									<td>
+										{@if !isNaN(index)}
+											${numxh=parseInt(index)+1}
+										{@/if}
+									</td>
+									<td>${it.id}</td>
+									<td>${it.code}</td>
+									<td>
+										{@if it.uniqueness==1}
+											一次
+										{@else}
+											多次
+										{@/if}
+									</td>
+									<td>${it.ctime}</td>
+									<td>${it.endtime}</td>
+									<td>
+										{@if it.status==1}
+											有效
+										{@else}
+											失效
+										{@/if}
+									</td>
+									<td>
+										{@if it.overtime==1}
+											未过期
+										{@else}
+											已过期
+										{@/if}
+									</td>
+									<td>${it.codenum}
+									</td>
+									<td style="text-align:center">	
+						<a href="{:U('Invite/inveteInfo')}?id=${it.id}"  class="btn btn-small btn-warning" >查看</a>
+									</td>
+								</tr>
+    {@/each}
+</script>
+<script id="tplpage" type="text/template">
+		<a href="javascript:;" style="border-left: 1px solid #ddd"   id="DataTables_Table_0_previous"><span id="add_page_counts">${page.counts}</span>条记录  ${page.curPage}/${page.pageAll}页</a>
+			{@if page.curPage!=1}
+				<a  href="javascript:;" class="page"  index="1" class=""  id="DataTables_Table_0_first">第一页</a>
+				<a  href="javascript:;"  class="page" index="${page.curPage-1}" class="" id="DataTables_Table_0_previous">上一页</a>
+			{@/if}				
+		<span>
+	{@each i in range(page.pageFirst, page.pageMax+1)}
+		<a href="javascript:;" index="${i}" class="page" {@if i==page.curPage} style="color: #FC8D00;background-color: #FFFFFF;"{@/if} >${i}</a>
+	{@/each}
+		</span>
+		{@if page.curPage!=page.pageAll}
+			<a  href="javascript:;"  index="${parseInt(page.curPage)+1}" class="page" id="DataTables_Table_0_next">下一页</a>
+			<a  href="javascript:;" index="${page.pageAll}" class="page" id="DataTables_Table_0_last">最后一页</a>
+		{@/if}
+</script>
+
+<script src="__AJS__/jquery-1.7.2.min.js"></script>
+<script src="__AJS__/excanvas.min.js"></script>
+<script src="__AJS__/bootstrap.js"></script>   
+<script type="text/javascript" src="__AJS__/jquery1.8.3.min.js"></script>
+<script type="text/javascript" src="__HJS__/juicer-min.js"></script>
+<script src="__AJS__/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript">
+ $('#datetimepicker').datetimepicker({
+	format: 'yyyy-MM-dd hh:mm:ss',
+	language: 'en',
+	pickDate: true,
+	pickTime: true,
+	hourStep: 1,
+	minuteStep: 15,
+	secondStep: 30,
+	inputMask: true
+});
+</script>
+
+
+
+
+<script type="text/javascript">
+var invite_official = "{:U('Invite/index')}";
+var inviteList = "{:U('Invite/indexMore')}";
+var addInvite = "{:U('Invite/addInvite')}";
+var page = 1;
+
+function showLoading(){
+    $('.loading').removeClass("hidden");
+}
+function hiddenLoading(){
+    $('.loading').addClass("hidden");
+}
+
+$("#typeone").click(function(){
+	$("#type").val(0);
+});
+$("#typetwo").click(function(){
+	$("#type").val(1);
+});tpl
+
+
+
+function invite(page){
+	showLoading();
+	var datainfo={};
+	datainfo.type=$("#changeonly").val();
+	datainfo.status=$("#changestatus").val();
+	datainfo.overtime=$("#changeendtime").val();
+	datainfo.page=page;
+	console.log(datainfo);
+	$.get(inviteList,datainfo,function(data){
+		console.log(data);
+		hiddenLoading();
+		if(data.status!=200){
+			if(data.list.info==false){
+				$('#invitebody').html('');
+				$('#page').html('');
+				$('#page_all_count').html('0');
+			}
+			return;
+		}
+		var tpl = document.getElementById('tpl').innerHTML;
+		var html = juicer(tpl, data.list);
+		$('#invitebody').html('');
+		$('#invitebody').html(html);
+		var tplpage = document.getElementById('tplpage').innerHTML;
+		var htmlpage = juicer(tplpage, data.list);
+		$('#page').html('');
+		$('#page').html(htmlpage);
+     	
+		$('#page_all_count').html(data.list.page.counts);
+    }, "json");
+}
+invite(1);
+$("#page").on("click",".page",function(e){
+	invite($(e.currentTarget).attr("index"));
+});
+$("#changeonly").on("change",function(e){
+	invite(1);
+});
+$("#changestatus").on("change",function(e){
+	invite(1);
+});
+$("#changeendtime").on("change",function(e){
+	invite(1);
+});
+
+
+
+
+
+
+function postinvite(){
+	var sendinvite={};
+	sendinvite.type = $("#type").val();
+	sendinvite.endtime = $("#endtime").val();
+	sendinvite.num = $("#num").val();
+	console.log(sendinvite);
+	showLoading()
+	$.post(addInvite,sendinvite,function(data){
+		console.log(data);
+		if(data.status!=200){
+			alert(data.msg);
+		}else{
+			var tpl = document.getElementById('tpl').innerHTML;
+			var html = juicer(tpl, data.list);
+			$('#invitebody').prepend(html);
+			var now_page_num = parseInt($('#page_all_count').html());
+			var add_page_num = parseInt(data.list.num);
+			var all_page_num = now_page_num+add_page_num;
+			console.log(all_page_num);
+			$('#page_all_count').html(all_page_num);
+			$('#add_page_counts').html(all_page_num);
+			alert('创建官方邀请码成功');
+		}
+		hiddenLoading();
+		return;
+    }, "json");
+}
+
+$("#sendBtn").on("click",function(e){
+    if (!confirm("确认创建官方邀请码吗？")) {
+        window.event.returnValue = false;
+    }else{
+    	postinvite();
+    }
+});
+
+
+</script>
+<include file="Public:footer" />

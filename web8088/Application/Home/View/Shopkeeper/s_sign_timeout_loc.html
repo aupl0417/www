@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Goto Sign In...</title>
+</head>
+<body>
+<include file="Public:statistics"/>
+</body>
+<script type="text/javascript" charset="utf-8">
+	
+	// 获取登录过时储存的那个地址
+	if (window.localStorage) {
+		localStorage.setItem("s_sign_timeout_loc", "__SELF__")
+	}
+	location = "{:U('Shopkeeper/signin')}"
+	
+</script>
+
+</html>

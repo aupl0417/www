@@ -1,0 +1,52 @@
+<div id="main" class="main">
+    <div class="main-title">
+        <h2>编辑教师等级</h2>
+    </div>
+    <form action="{:U()}" method="post" class="form-horizontal" id="rankForm">
+        <div class="form-item">
+            <label class="item-label">等级名<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="tl_name" value="{$info.tl_name}">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">权重<span class="check-tips">（请输入数字，数字越大级别越高）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="tl_weight" value="{$info.tl_weight}" style="width:50px;">
+            </div>
+        </div>
+         <div class="form-item">
+            <label class="item-label">描述</label>
+            <div class="controls">
+                <textarea type="text" class="text" name="tl_description" style="width:300px; height:80px;">{$info.tl_description}</textarea>
+            </div>
+        </div>
+        <div class="form-item">
+            <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+        </div>
+        <input name="id" type="hidden" value="{$info.tl_id}" />
+    </form>
+</div>
+ <script type="text/javascript">
+var loading  = null;
+$("#rankForm").ajaxForm({
+   beforeSubmit: function(formData) {
+	   loading  = layer.load();
+   },
+   success: function(response) {
+	  layer.close(loading); 
+	  if(response.status == 1) { 
+	    layer.msg('提交成功！', {
+            time: 1000
+        }, function(){
+		    location.reload();
+        });   
+	  }else{
+		layer.msg(response.info, {
+            time: 2000
+        });    
+	  }
+   },
+});
+</script>

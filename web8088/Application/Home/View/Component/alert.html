@@ -1,0 +1,55 @@
+<div class="alert_box_bg hidden" id="alert_box_bg">
+    <div class="alert_box_wrap">
+        <p class="alert_cont" id="alert_cont">请选择培训机构</p>
+        <button type="button" class="alert_btn" id="alert_btn">确定</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    function alertWin(){
+
+        function show(){
+            $('#alert_box_bg').removeClass("hidden");
+        }
+        function hidden(fun){
+            $('#alert_box_bg').addClass("hidden");
+        }
+
+        function setText(text){
+            $('#alert_cont').html(text);
+        }
+
+        function work(fun){
+            $("#alert_btn").click(fun);
+        }
+        function getTarget() {
+            return document.getElementById('alert_btn').parentNode;
+        }
+        function getButton() {
+            return document.getElementById('alert_btn');
+        }
+        return {
+            show:show,
+            hidden:hidden,
+            setText:setText,
+            work:work,
+            getTarget:getTarget,
+            getButton:getButton
+        }
+    }
+
+    var easy_alert = new alertWin();
+
+    /**
+     * 简单的弹窗方法
+     */
+    function easyAlert(text) {
+        var win = new alertWin()
+        win.setText(text)
+        win.show()
+        win.work(function(){
+            $('#alert_box_bg').addClass("hidden");
+        })
+    }
+</script>

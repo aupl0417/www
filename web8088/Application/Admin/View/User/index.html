@@ -1,0 +1,225 @@
+<include file="Public:header" />
+<div id="content">
+	<div class="container">
+		<div class="row">
+		
+			<include file="Public:nav" />
+			
+			<div class="span9">
+				<div class="widget widget-table">
+					<div class="widget-header">
+						<i class="icon-th-list"></i>
+						<h3>用户管理&nbsp;
+                        	<a href="{:U('User/dynamic')}" class="btn btn-small">组团信息</a>
+                        </h3>
+                        <select class="form-control" style="width:100px;" style="width: 50%" onchange="changeOrderMode(this)">
+							<option value="desc" {$order=='desc'?'selected':''} >降序</option>
+							<option value="asc"  {$order=='asc'?'selected':''} >升序</option>
+						</select>
+					</div> <!-- /widget-header -->
+					
+					<div class="widget-content">
+					
+						<table class="table table-striped table-bordered">
+							<thead>
+							
+							<style>.bordertop0 th{border-top: 1px solid #dddddd;}</style>
+								<tr class="bordertop0">
+									<th>ID</th>
+									<th>用户名</th>
+									<th>电子邮箱</th>
+									<th>手机号码</th>
+									<th>最后登录时间</th>
+									<th>注册时间</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							
+							<tbody>
+								<foreach name="rel" key="key" item="values">
+								<tr>
+									<td>{$values['id']}</td>
+									<td>{$values['firstname']}{$values['lastname']}</td>
+									<td>{$values['email']}</td>
+									<td>{$values['phone']}</td>
+									<td>{$values['lasttime']}</td>
+									<td>{$values['ctime']}</td>
+									<td style="text-align:center">			
+										<a href="{:U('User/details',array('uid'=>$values['id']))}" class="btn btn-small btn-warning">查看</a>						
+										<a href="{:U('User/dynamic',array('uid'=>$values['id']))}" class="btn btn-small">组团信息</a>		
+									</td>
+								</tr>
+								</foreach>
+								
+							</tbody>
+							
+						</table>
+
+
+
+<!--	<div class="pagination"></div>
+<div id="contentList"></div>
+						 -->
+
+							 	
+					</div> <!-- /widget-content -->
+					
+					<!-- 分页 -->	
+							<thead>
+								<div class="pagination" style="margin-left:10px;">
+									<div class="">
+										<a href="javascript:;" style="border-left: 1px solid #ddd"   id="DataTables_Table_0_previous">{$page['counts']}条记录  {$page['curPage']}/{$page['pageAll']}页</a>
+										<if condition="$page['curPage'] neq 1">
+											<a  href="__ACTION__/page/1"     class=""  id="DataTables_Table_0_first">第一页</a>
+											<a  href="__ACTION__/page/{$page['curPage']-1}" class="" id="DataTables_Table_0_previous">上一页</a>
+										</if>
+										
+											<span>
+										<for start="$page['pageFirst']" end="$page['pageMax']+1">
+												<a href="__ACTION__/page/{$i}" <if condition="$i eq $page['curPage']"> style="color: #FC8D00;background-color: #FFFFFF;"</if> >{$i}</a>
+										</for>
+											</span>
+										<if condition="$page['curPage'] neq $page['pageAll']">
+											<a  href="__ACTION__/page/{$page['curPage']+1}" class="" id="DataTables_Table_0_next">下一页</a>
+											<a  href="__ACTION__/page/{$page['pageAll']}"   class="" id="DataTables_Table_0_last">最后一页</a>
+										</if>
+									</div>
+								</div>
+								
+							</thead>
+					
+					
+				</div> <!-- /widget -->
+			</div> <!-- /span9 -->
+		</div> <!-- /row -->
+	</div> <!-- /container -->
+</div> <!-- /content -->
+
+		
+ <!-- 	
+<script type="text/javascript">
+var curPage=1
+function readContent()
+{ 
+/*	$.getJSON('{:U('User/index')}',{page:curPage},function(json){
+		 if(json.status==1){
+             $mess.slideDown(3000,function(){
+                 $mess.css(‘display‘,‘block‘);   
+             }).html(‘标题为‘+json.data.title+‘信息为‘+json.data.message);   
+         }else{
+             $mess.slideDown(3000,function(){
+                 $mess.css(‘display‘,‘block‘);   
+             }).html(‘信息添加失败，请检查‘);   
+         }       
+*/	
+		
+	$.getJSON({
+		url:"{:U('User/index')}",
+		data:'page='+curPage,
+		type:"GET",
+		dataType:"json",//以json编码接收上面返回的json编码
+		success:function(jsondata)
+		{
+		 var curPage=jsondata.curPage;
+		 var pageAll=jsondata.pageAll;
+		 var pageFirst=jsondata.pageFirst;
+		 var pageMax=jsondata.pageMax;
+		 var rel=jsondata.rel;
+		 var coding="";
+		 
+	
+
+
+		 
+/*-----设置前一页和首页-----*/
+	if(curPage!=1){
+		    /*--跳转到第一页--*/
+		   coding ='<a href="javascript:pageTo(1);">&laquo; 第一页</a>';
+			/*--跳转前一页--*/
+		   coding +='<a href="javascript:pageTo('+eval(parseInt(curPage)-1)+');" >&laquo; 前一页</a>';
+	 } 
+/*--循环页码   开始位置是计算得到的偏移  开始位置的页码+每页最大显示页码量--*/
+	   for(var i=pageFirst;i<=pageFirst+pageMax-1;i++)
+		{
+			coding +='<a href="javascript:pageTo('+i+');" class="number';
+			if(i==curPage){
+				coding +=' current';
+			}
+			coding +='">'+i+'</a>';
+		}
+/*最后一页等于我们的总页面数 下一页等于当前页码减去------------eval(parseInt(curPage)把curPage字符格式化成int类型------*/     
+		if(curPage!=pageAll){
+			coding +=' <a href="javascript:pageTo('+eval(parseInt(curPage)+1)+');" >下一页 &raquo;</a>';
+			 coding +='<a href="javascript:pageTo('+pageAll+');" >最后 &raquo;</a>';
+		}      
+		//alert(jsondata.curPage);
+	  $(".pagination").html(coding);
+
+	    var perhtml="";
+        for(var plist in newsList)
+        {
+        	perhtml +='<tr>'
+							+'<td><input type="checkbox" value="'+ rel[plist].id+'" name="newid[]" /></td>'
+							+'<td>''</td>'
+							+'<td>'+ rel[plist].email+'</td>'
+							+'<td>'+ rel[plist].phone+'</td>'
+							+'<td>'+ rel[plist].status+'</td>'
+							+'<td>'+ rel[plist].ctime+'</td>'
+							+'<td style="text-align:center">'
+								+'<a href="{:U(\'User/change\')}" class="btn btn-small">编辑</a>'			
+								+'<a href="{:U(\'User/details\')}" class="btn btn-small">查看</a>'				
+								+'<a href="{:U(\'User/dynamic\')}" class="btn btn-small">组团信息</a>'				
+								+'<a href="{:U(\'User/message\')}" class="btn btn-small">通知</a>'
+							+'</td>'
+						+'</tr>'
+						
+						
+						;
+        }
+		$("#contentList").html(perhtml);
+		},
+	    error:function(httpx,errormeaage,ss)
+	    {
+	    	alert("请求失败");
+	    }
+   });	
+}
+/**
+ * 当前页数
+ */
+function pageTo(num)
+{
+	curPage=num;
+	readContent();
+}
+readContent();
+
+</script>
+			
+ -->		
+
+<!-- 排序 -->
+<script>
+function changeOrderMode(node) {
+	var url = "{:U('User/index', array('sort' => 'REPLACE', 't' => time()))}";
+	location = url.replace(/REPLACE/, $(node).val());
+}
+</script>
+
+
+
+	
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="__AJS__/jquery-1.7.2.min.js"></script>
+<script src="__AJS__/excanvas.min.js"></script>
+<script src="__AJS__/jquery.flot.js"></script>
+<script src="__AJS__/jquery.flot.pie.js"></script>
+<script src="__AJS__/jquery.flot.orderBars.js"></script>
+<script src="__AJS__/jquery.flot.resize.js"></script>
+
+
+<script src="__AJS__/bootstrap.js"></script>
+<script src="__AJS__/charts/bar.js"></script>
+<include file="Public:footer" />

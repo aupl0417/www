@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+    <meta content="yes"name="apple-mobile-web-app-capable"/>
+    <meta content="black"name="apple-mobile-web-app-status-bar-style"/>
+    <title>微信登陆</title>
+    <link rel="stylesheet" type="text/css" href="__HCSS__/reset.css">
+    <meta name="keywords" content="微信登陆" />
+    <style>
+	body{
+	background-color: #f0efed;	
+	}
+	.btn-log-weixin{
+		display: block;
+		width: 100%;
+		margin: 0 auto;
+		background-color: #04BE01;
+		border:none;
+		border-radius: 8px;
+		padding-top: .5em;
+		padding-bottom: .5em;
+		color: #fff;
+		font-size: 22px;
+		font-family: "黑体";
+	}
+	.info{
+		padding: 1.5em 1em;
+	}
+	.info p{
+		font-family: "黑体";
+		font-size: 20px;
+		font-weight: 100;
+		margin-bottom: .5em;
+	}
+	.info strong{
+		margin-right:5px;
+		margin-left: 5px; 
+
+	}
+	.bind{
+		display: block;
+		background-color: #fff;
+		width: 100%;
+		padding-top: 1em;
+		padding-bottom: 1em;
+		font-size: large;
+		position: relative;
+		color: #000;
+	}
+	.content>p,.content>a{
+		padding-left: 1em;
+	}
+	.array{
+		position: absolute;
+		right: 1em;
+	}
+    </style>
+</head>
+<body>
+	<div class="content">
+		<section class="info">
+			<p>亲爱的微信用户<!-- :<span>踩踩机大人</span> --></p>
+		<p>若您是17约课<strong>新用户</strong>,建议您</p>
+		<a href="{:U('Wx/isWeiXin')}"><button class="btn-log-weixin">微信号直接接入</button></a>
+		</section>
+		<p>已有17约课账号？</p>
+		<a href="{:U('Wx/wxRelUser')}" class="bind">绑定17约课账号 <img src="__HIMG__/array.png" alt="" class="array"></a>
+	</div>
+    <include file="Public:statistics"/>
+</body>
+</html>

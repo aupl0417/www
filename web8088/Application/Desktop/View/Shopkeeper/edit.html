@@ -1,0 +1,626 @@
+<extend name="ShopPublic:base" />
+
+<block name="title">17约课-资料编辑</block>
+
+<block name="main">
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+		
+
+		 <!-- Left side column. contains the logo and sidebar -->
+
+         <include file="ShopPublic:centerNav" />
+
+      <!--课程发布-->
+       
+        <section class="content">
+           <div class="row">
+           	<h3>基本资料</h3>
+           	<div class="form-group">
+					
+					<label for="">&nbsp;&nbsp;资料完善值</label>
+					<div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 30%;">
+      </div><div class="bar_cont pa" id="bar">%</div>
+    </div>
+				</div>
+               <div class="form-group my-form-group">
+                   <label class="require">上传头像</label>
+                   <div id="preview" href="javascript:void(0);" class="upload-btn">
+                       <img id="headimg" src="{$resArr.avatar}" alt="上传图片" style="max-height:95px;max-width:93px;">
+                   </div>
+                   <!-- <input id="file" name="file" type="file" class="hidden" multiple="multiple" onchange="previewImage(this,93,95);"> -->
+                   <input id="file" name="file" type="file" class="hidden" multiple="multiple">
+                   <div class="advise">
+                       <p>上传机构头像</p>
+                       <p>选择后一个月内修改一次</p>
+                   </div>
+
+               </div>
+				<div class="form-group">
+					<label for="" class="require">机构昵称</label>
+					<input type="text" id='nickname' value="{$resArr.nickname}" placeholder="输入机构昵称，长度不超过8个">
+				</div>
+				<div class="form-group">
+					<label for="" class="require">机构校龄</label>
+					<input type="text" id="age" value="{$resArr.age}" placeholder="请输入校龄">&nbsp;年
+				</div>
+				<div class="form-group">
+
+						<label class="require">机构类别</label>
+						<input type="text" class="input-small" value='{$parentCateName}' style="margin-left: 0;" placeholder="选择大类" index="" readonly="true" id="class_big">
+						<!-- <div class="input-group-btn">
+	       				 <button type="button" class="btn-down dropdown-toggle" data-toggle="dropdown" aria-expanded="false"></button>
+	      				<span class="divide">-</span>
+	      				<input type="text" class="input-small" placeholder="选择小类" readonly="true" id="class_small">
+						<div class="input-group-btn">
+	       				 <button type="button" class="btn-down dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+	      				</div>
+					</div> -->
+					<div class="input-group-btn">
+	       				 <button type="button" class="btn-down dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                            <ul class="dropdown-menu small-menu" role="menu">
+	                            <volist name='allCategory' id='vo' key='key'>
+	                            	<volist name='vo' id='v' key='k'>
+		                            	<if condition="$k-1 eq 0">
+		                                <li><a href="javascript:void(0)" index="{$v.id}">{$v.catename}</a></li>
+		                                </if>
+	                                </volist>
+	                            </volist>
+                            </ul>
+                   	</div>
+                   	<span class="divide">-</span>
+     				<input type="text" class="input-small" value='{$resArr["catename"]}' index='{$resArr["cateid"]}' placeholder="选择小类" readonly="true" id="class_small">
+					<div class="input-group-btn">
+      				 	<button type="button" class="btn-down dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                          <ul class="dropdown-menu small-menu" role="menu">
+	                          <volist name='allCategory' id='vo' key='key'>
+	                            	<volist name='vo' id='v' key='k'>
+		                            	<if condition="$k-1 neq 0">
+		                                <li><a href="javascript:void(0)" index="{$v.id}">{$v.catename}</a></li>
+		                                </if>
+	                                </volist>
+	                            </volist>
+                          </ul>
+                   </div>
+           </div>
+           <div class="row">
+           	<h3>机构介绍</h3>
+           	<div class="form-group">
+					
+					<label for="">机构网址</label>
+					<input id="website" value="{$resArr.website}" placeholder="请输入机构网址，可方便链接">
+				</div>
+				<div class="form-group">
+					
+					<label for="">师资力量</label>
+					<textarea class="tinymce" id="teacher_power" cols="60" placeholder="请填写机构强大的师资力量，优秀的师资力量可以吸引更多的学生">{$resArr.teacher_power}</textarea>
+				</div>
+				<div class="form-group">
+					
+					<label for="">机构全称</label>
+					<input value='{$resArr.company_name}'  id="name" placeholder="请输入机构全称">
+				</div>
+				<div class="form-group" style="position:relative">
+						
+						<label for="">课程特色</label>
+						<a href="javascript:void(0)" id="edit">编辑</a>
+						<div class="course-special" id="course_special">
+							<span>老师漂亮</span>
+							<span>责任心强</span>
+							<span>成绩好</span>
+						</div>
+						<div class="special-menu hidden" id="special_menu"> 
+							<p><input type="text" id="featureInput" placeholder="自定义特色，不超过四个"> <button>添加</button></p>
+							<h4>选择3个符合您的课程特色</h4>
+							<ul class="special-list clearfix" id='tags_list_data'>
+								<li>老师漂亮</li>
+								<li>责任心强</li>
+								<li>成绩好</li>
+								<li>会唱歌</li>
+								<li>会打牌</li>
+								<li>经验丰富</li>
+								<li>勤奋</li>
+								<li>老师漂亮</li>
+								<li>责任心强</li>
+							</ul>
+						</div>
+					</div>
+					<div class="form-group">
+					
+					<label for="">机构简介</label>
+					<textarea class="tinymce" id="remark" cols="60" rows="4" name="positionDetail" placeholder="请输入机家信任度，输入0-315个字">{$resArr.remark}</textarea>
+				</div>
+				<div class="form-group">
+					
+					<label for="">机构电话</label>
+					<input type="text" id="tel" value="{$resArr.tel}" placeholder="请填写机构真实电话" />
+				</div>
+				<div class="form-group">
+						<label >机构地址</label>
+						<input type="text" class="input-small" value='{$resArr["areanames"]["parent_arename"]}' style="margin-left: 0;" id="zone" readonly="true" placeholder="请选择">
+						<div class="input-group-btn">
+	       				 <button type="button" class="btn-down dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                            <ul class="dropdown-menu small-menu" role="menu">
+                                <volist name="allZone" id="vo">
+                               		<li><a href="javascript:;" index="{$vo.id}">{$vo.areaname}</a></li>
+                                </volist>
+                            </ul>
+                        </div>
+	      				<span class="divide">-</span>
+	      				<input type="text" class="input-small" value='{$resArr["areanames"]["this_arename"]}' index='{$resArr["areaid"]}' placeholder="请选择" readonly="true" id="areaid">
+						<div class="input-group-btn">
+	       				 <button type="button" class="btn-down dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                            <ul class="dropdown-menu small-menu" role="menu">
+                            	<volist name='allArea' id='vo'>
+                                	<li><a href="javascript:;" index="{$vo.id}">{$vo.areaname}</a></li>
+                                </volist>
+                            </ul>
+                        </div>
+						<span class="divide">-</span>
+						<input type="text" id='area_raw' value="{$resArr.area_raw}" placeholder="请输入授课地点的详细地址">
+						
+					</div>
+					<div class="form-group">
+					
+					<label for="">机构图片</label>
+                        <div id="preview" href="javascript:void(0);" class="upload-btn">
+                             <img id="imghead" style="max-height:95px;max-width:93px;" src="<?php if (empty($resArr['environ'])): ?>__UPLOAD__Photo Frame.png<?php else: ?>__UPLOAD__{$resArr['environ']}<?php endif; ?>" alt="上传图片">
+                            
+                        </div>
+                       <!--  <input id="environFile" name="file" type="file" class="hidden" multiple="multiple" onchange="previewImage(this,93,95,'preview2','orgimg');"> -->
+                        <input id="environFile" name="file" type="file" class="hidden" multiple="multiple" />
+                        
+
+				</div>
+               <div class="form-group">
+					<span class="button-wrap">
+						<button class="submit" id="submitBtn">发布</button>
+					<!-- <button class="preview">预览</button> -->
+					</span>
+
+               </div>
+           </div>
+        </section>
+
+      </div><!-- /.content-wrapper -->
+
+
+     
+    </div><!-- ./wrapper -->
+</block>
+
+<block name="css">
+	<link rel="stylesheet" href="__PCCSS__/publish.css">
+</block>
+
+<block name="js">
+<script src='__HJS__/objimgurl.js'></script>
+	<script type="text/javascript">
+// 全局数组
+var g = {
+    "designBtn":            '<img src="__HIMG__/Design (7).png" alt="">',
+    "credit":               '{$resArr.credit}',
+    "handleEditUrl":        "{:U('Api/ShopkeeperDetail/handleEdit')}",
+    "infoUrl":              "{:U('Shopkeeper/info', ['id'=>session('shopkeeper.id')])}",
+    "zoneUrl":              "{:U('Api/Area/getByParentId')}",
+    "indexUrl":             "{:U('Index/index')}",
+
+    "upImg":                "__HIMG__/up.png",
+    "indexMoreImg":         "__HIMG__/index_more.png",
+
+    "cateid":               "{$resArr.cateid}"
+};
+</script>
+
+    <!-- AdminLTE App -->
+    <script src="_" type="text/javascript"></script>
+    <script src="__PCJS__/certification.js" type="text/javascript"></script>
+    <script src="__PCJS__/publish.js" type="text/javascript"></script>
+   <script>
+   		$('#bar').css('width', g.credit + '%').text(g.credit + '%');
+       /*通用选择*/
+       $('ul.dropdown-menu').on('click',"li" ,function (e) {
+           var cur = $(e.currentTarget);
+           var value = cur.children().eq(0).html();
+           var cate = cur.children().eq(0).attr('index');
+		   var area = cur.children().eq(0).attr('index');
+		   alert(area);
+          // alert(cate);
+            var par = cur.parent().parent().prev();
+           if(par.is('input')){
+               par.val(value);
+               par.attr('index', cate);
+           }else{
+               par=par.prev();
+               par.val(value);
+               par.attr('index', cate);
+           }
+		   $('#areaid').attr('index', cate);
+       });
+   </script>
+   
+   <!-- 以下是从home下的editor.js里拿的代码 -->
+   <script>
+   $(function() {
+	    $('#zone').on("change", function (event) {
+	        $('#first_new_p').text($('#zone option').not(function(){
+	            return !this.selected;
+	        })[0].innerHTML);
+	        $('#second_new_p').text('请选择');
+
+	        // 基本地区变换
+	        var id = $(this).val();
+
+	        $.get(g.zoneUrl, {"parentid": id}, function(data) {
+	            console.log(data);
+
+	            if (data.status != "200") {
+	                easyAlert(data.msg);
+	                return;
+	            }
+	            var html = '<option value="0">请选择</option>';
+	            for (var i in data.data) {
+	                html = html + '<option value="' + data.data[i].id + '">'+data.data[i].areaname+'</option>'
+	            }
+	            $("#areaid").html(html);
+	        }, "json");
+
+	    });
+
+	    $('#areaid').on("change", function (event) {
+	        $('#second_new_p').text($('#areaid option').not(function(){
+	            return !this.selected;
+	        })[0].innerHTML);
+
+	    });
+
+	    $('#environImage').on("click", function (event) {
+	        $('#environFile').trigger("click");
+	    });
+
+	    $('#shopkeeper_select_type').on('change', function() {
+	        var typeHtml = $('#shopkeeper_select_type option').not(function(){
+	            return !this.selected;
+	        })[0].innerHTML;
+
+	        $('#type').html(typeHtml);
+	    });
+
+
+	    $('.course_select_ul').on('click','li',function (event) {
+	        if($(event.target).hasClass("course_select_ul_active")){
+	            $(event.target).removeClass("course_select_ul_active");
+	        }
+	        else{
+	            if ($(".course_select_ul_active").length >= 3) {
+	                easyAlert("只能选择3个");
+	                return
+	            }
+	            $(event.target).addClass("course_select_ul_active");
+	        }
+	    });
+	    $('.course_feature_btn').click(function (event) {
+	        var value = $('.register_input').val();
+	        if(value==""){
+	            easyAlert("内容不能为空")
+	        }
+	        else if(value.length>4){
+	            easyAlert("长度不能大于4")
+	        }
+	        else {
+	            $('.course_select_ul').append('<li>' + value + '</li>');
+	        }
+	    });
+
+
+	    // 改变分类，只有当没选分类时才能用
+	    if (g.cateid == 0) {
+	        $("#categoryPanel").click(function(e){
+	            var item_first=$(e.currentTarget);
+	            console.log(e.currentTarget);
+
+	            var item_first_child = item_first.siblings(".shopkeeper_type_item");
+	            var array=item_first.next().children().eq(0);
+	           changeArray(array);
+	            for(var i=0;i<item_first_child.length;i++){
+	                if($(item_first_child[i]).hasClass("hidden")){
+	                    $(item_first_child[i]).removeClass("hidden");
+	                }else{
+	                    $(item_first_child[i]).addClass("hidden");
+	                }
+	                var temp=$(item_first_child[i]).next();
+	                if(!$(temp).hasClass("hidden")) {
+	                    $(temp).addClass("hidden");
+	                    var temp=$(item_first_child[i]).children().eq(0).children().eq(0);
+	                    changeArray(temp);
+	                }
+	            }
+	        });
+	    }
+
+	    // 改变二级分类
+	    $(".shopkeeper_type_item").click(function(e){
+	        var item_first=$(e.currentTarget);
+	        var array=item_first.children().eq(0).children().eq(0);
+	        changeArray(array);
+	       var slb=item_first.next();
+	        if($(slb).hasClass("hidden")){
+	            $(slb).removeClass("hidden");
+	        }else{
+	            $(slb).addClass("hidden");
+	        }
+	    });
+
+	    // 分类改变事件
+	    $("input[name=category]").change(function() {
+	        var cateid = $(this).val();
+	        var labelFor = "categoryInput_" + cateid;
+	        var catename = $("label[for=" + labelFor +"]").html();
+	        $("#catenamePanel").html(catename);
+	    });
+
+
+	});
+	// 监听头像变化
+	(function () {
+	    var multi_file1 = document.getElementById('file'),                 // 获取上传控件
+	            slice1 = Array.prototype.slice;                                      // 获取数组slice原型方法
+	            multi_file1.addEventListener('change', function (e) {                    // 监听上传控件数据变化
+	        var files = slice1.call(multi_file1.files, 0);                        // 将FileList对象转为数组获取forEach方法
+	        if(files[0].size>2*1024*1024){
+	        	alert("文件太大了");
+	            files[0]=null;
+	        }
+	        else if (files[0].type.toLowerCase().match(/(jpg)|(jpeg)|(png)|(bmp)/)) {
+	            // 将头像改成图片
+ 	            var objUrl = getObjectURL(this.files[0]) ;
+	            console.log("objUrl = "+objUrl) ;
+	            if (objUrl) {
+	                $("#headimg").attr("src", objUrl) ;
+	            } 
+	        }
+	        else{
+	            alert("只能选择图片格式：jpg、png、bmp");
+	            files[0]=null;
+	        }
+	    });
+	})();
+
+	// 监听场景图变化
+	(function () {
+	    var multi_file2 = document.getElementById('environFile'),                 // 获取上传控件
+	            slice2 = Array.prototype.slice;                                      // 获取数组slice原型方法
+	            multi_file2.addEventListener('change', function (e) {                    // 监听上传控件数据变化
+	        var files = slice2.call(multi_file2.files, 0);                        // 将FileList对象转为数组获取forEach方法
+	        if(files[0].size>1*1024*1024){
+	        	alert("文件太大了");
+	            files[0]=null;
+	        }
+	        else if (files[0].type.toLowerCase().match(/(jpg)|(jpeg)|(png)|(bmp)/)) {
+	            // 将头像改成图片
+ 	            var objUrl = getObjectURL(this.files[0]) ;
+	            console.log("objUrl = "+objUrl) ;
+	            if (objUrl) {
+	                $("#imghead").attr("src", objUrl) ;
+	            } 
+	        }
+	        else{
+	        	alert("只能选择图片格式：jpg、png、bmp");
+	            files[0]=null;
+	        }
+	    });
+	})();
+	
+	
+
+	$(function() {
+
+	    /* $("#switchFeatureBtn").click(switchFeature); */
+	    $("#submitBtn").click(finish);
+	    /* $("#featureBackBtn").click(function() {
+	        switchInfo(false);
+	    });
+	    $("#featureSubmitBtn").click(function() {
+	        switchInfo(true);
+	    }); */
+
+	    /**
+	     * 切换到特点选择界面
+	     */
+	    function switchFeature() {
+	        // 滚动到特性页顶部，防止自定义输入框被挡住
+	        window.scroll(0, 0)
+
+	        $("#info").addClass("hidden");
+	        $("#feature").removeClass("hidden");
+	    }
+
+	    /**
+	     * 切换回信息页面
+	     */
+	    /* function switchInfo(isSave) {
+	        if (isSave) {
+	            var features = "";
+	            if ($(".course_select_ul_active").length > 3) {
+	                alert("只能选择3个");
+	                return;
+	            }
+	            $(".course_select_ul_active").each(function() {
+	                features = features + "|" + $(this).html();
+	            });
+	            $("#featureInput").val(features.substring(1));
+
+	            $("#featurePanel").html(features.substring(1) + g.designBtn);
+	        }
+	        $("#feature").addClass("hidden");
+	        $("#info").removeClass("hidden");
+	    } */
+
+	    /**
+	     * 检测输入
+	     */
+	    function finish() {
+	        var nickname = $.trim($("#nickname").val());
+	        var remark = $.trim($("#remark").val());
+	        var tel = $.trim($("#tel").val());
+	        var area_raw = $.trim($('#area_raw').val());
+	        var features = $("#featureInput").val();
+	        var areaid = $('#areaid').attr('index');
+	        var files = document.getElementById("file").files;
+	        var environFiles = document.getElementById("environFile").files;//object filelists
+	        var age = $.trim($("#age").val());
+	        var website = $.trim($("#website").val());
+	        var teacher_power = $.trim($("#teacher_power").val());
+	        var cateid = $('#class_small').attr('index');
+	  alert(areaid);
+	        if (nickname != "") {
+	            if (!/^[-\w\u4e00-\u9fa5]{2,12}$/.test(nickname)) {
+	                alert("昵称必须为2~12位有效字符");
+	                return;
+	            }
+	        }
+
+	        if (remark != "") {
+	            if (!/^[\s\S]{0,512}$/.test(remark)) {
+	                alert("机构简介长度不能超过512个字符");
+	                return;
+	            }
+	        }
+
+	        if (tel != "") {
+	            if (!/^\d{3,4}\-\d{7,8}$/.test(tel)) {
+	                alert("固定电话号码不正确");
+	                return;
+	            }
+	        }
+
+	        if (area_raw!= "") {
+	            if (!/^[\s\S]{0,40}$/.test(area_raw)) {
+	                alert("地址长度不能超过40个字符");
+	                return;
+	            }
+	        }
+	        
+	        // 校验通过了
+	        var postData = new FormData();
+	        postData.append("nickname", nickname);
+	        postData.append("remark", remark);
+	        postData.append("tel", tel);
+	        postData.append("area_raw", area_raw);
+	        postData.append("areaid", areaid);
+	        postData.append("features", features);
+	        postData.append("age", age);
+	        postData.append("website", website);
+	        postData.append("teacher_power", teacher_power);
+	        postData.append("cateid", cateid);
+
+	        postData.append("file", files[0]);
+	        postData.append("environFile", environFiles[0]);
+			console.log(postData);
+	        // 禁用上传操作
+	        $("#submitBtn").unbind("click", finish);
+	       
+	        alert("正在上传中，请耐心等待");
+	        
+	        // 开始上传信息
+	        $.ajax({
+	            url: g.handleEditUrl,
+	            type: 'POST',
+	            data: postData,
+	            cache: false,
+	            dataType: 'json',
+	            processData: false, // Don't process the files
+	            contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+	            success: function (data, textStatus, jqXHR) {
+	                console.log(data);
+
+	                if (data.status != "200") {
+	                    $("#submitBtn").bind("click", finish)
+	                    return alert(data.msg)
+	                }
+
+	                // 判断有没有完成后跳转的url
+	                if (window.sessionStorage) {
+	                    var backUrl = sessionStorage.getItem("shop.finishDetailBackUrl");
+	                    if (backUrl) {
+	                        location = backUrl;
+	                        return;
+	                    }
+	                }
+
+	                // 没有，跳转到首页
+	                location = g.indexUrl;
+	            },
+	            error: function (jqXHR, textStatus, errorThrown) {
+	                console.log(jqXHR);
+	                alert('ERRORS: ' + textStatus);
+	                $("#submitBtn").bind("click", finish)
+	            }
+	        });
+
+	    }
+
+
+	});
+
+	/**
+	 * 分类改变图片吧
+	 */
+	function changeArray(array){
+	    if(array.attr("src") == g.upImg){
+	        array.attr("src", g.indexMoreImg);
+	    }else{
+	        array.attr("src", g.upImg);
+	    }
+	}
+
+   //标签中，课程特色中 ，选中标签后的处理，添加赋值等 
+$("#tags_list_data").on('click','li',function(e){
+	var tags = $(e.currentTarget).html();
+	var tags_html = '<span>'+tags+'</span>';
+	if(group_tags==''){
+		group_tags = tags;
+		$("#course_special").append(tags_html);
+	}else{
+		var tags_array = group_tags.split("|");
+		if(tags_array.length>=3){
+			alert('标签不能超过3个');
+		}else{
+			var tags_check_status = false;
+			for(var i=0 ; i<tags_array.length ; i++ ){
+				if(tags_array[i]==tags){
+					tags_check_status = false;
+				}else{
+					tags_check_status = true;
+				}
+			}
+			if(!tags_check_status){
+				alert("此标签已经添加了");
+			}else{
+				group_tags = group_tags+'|'+tags;
+				$("#course_special").append(tags_html);
+			}
+		}
+	}
+	console.log(group_tags);
+	console.log(tags);
+});
+//标签中，取消对应的标签
+$("#course_special").on('click','span',function(e){
+	var tags_name = $(e.target).html();
+	var tags_array = group_tags.split("|");
+	for(var i=0 ; i<tags_array.length ; i++ ){
+		console.log(tags_array[i]);
+		if(tags_array[i]==tags_name ){
+			tags_array.splice( i , 1 );
+		}
+	}
+	group_tags = tags_array.join("|");
+	console.log(tags_array);
+	$(e.currentTarget).remove();
+	console.log(group_tags);
+});
+
+   </script>
+</block>

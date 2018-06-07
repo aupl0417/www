@@ -1,0 +1,44 @@
+
+         <section class="sidebar" id="sidebar_menu" style="top:16px;!important">
+          <!-- sidebar menu: : style can be found in sidebar.less -->
+          <div class="sidebar-menu">
+                <h3>全部课程分类</h3>
+                <hr>
+                
+                <foreach name="cateNavData" item="vo" key="k" >
+                
+                <div class="menu_box">
+                  <div class="menu_main">
+                    <h4>{$vo['catename']}</h4>
+                    <i class="fa fa-angle-right pull-right"></i>
+                    <a href="javascript:void(0)">魔术</a>
+                    <a href="javascript:void(0)">化妆</a>
+                    <a href="javascript:void(0)">烹饪</a>
+                  </div>
+                  <div class="menu_sub">
+                  
+                  	<foreach name="vo['catemenu']" item="votwo" key="ktwo" >
+                    <dl>
+                      <dt><a href="{:U('shopkeeper/course_select',array('cateid'=>$votwo['id']))}">{$votwo['catename']}</a></dt>
+                      
+                      <notempty name="votwo['catemenu']" >
+                      
+                      <dd>
+                      <foreach name="votwo['catemenu']" item="vothird" key="kthird" >
+                        <a href="{:U('shopkeeper/course_select',array('cateid'=>$votwo['id']))}">{$vothird['catename']}</a>　
+                      </foreach>
+                      </dd>
+                      
+                      </notempty>
+                      
+                    </dl>
+                    </foreach>
+                    
+                  </div>
+                </div>
+                
+                </foreach>
+                
+               
+          </div>
+        </section>

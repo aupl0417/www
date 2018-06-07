@@ -1,0 +1,108 @@
+<extend name="Public/base"/>
+
+<block name="body">
+	<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+    <div class="main-title">
+        <h2>{:isset($info['id'])?'编辑':'新增'}课程</h2>
+    </div>
+    <form action="{:U()}" method="post" class="form-horizontal" enctype ="multipart/form-data">
+        <!-- <div class="form-item">
+            <label class="item-label">班级名称</label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="co_name" value="{$info.co_name|default=''}">
+            </div>
+        </div> -->
+        <div class="form-item">
+            <label class="item-label">
+            	　　年级：<button class="select-btn select-grade" target-form="form-horizontal" type="button">选择年级</button>
+            </label>
+        </div>
+        <div class="form-item">
+        	<label class="item-label">开班时间：<input type="text" name="cl_startTime" class="text time" value="{$info.co_content|default=''}" placeholder="请选择时间" /></label>
+        </div>
+        <div class="form-item">
+        	<label class="item-label">结束时间：<input type="text" name="cl_endTime" class="text time" value="{$info.co_content|default=''}" placeholder="请选择时间" /></label>
+        </div>
+        <div class="form-item">
+            <label class="item-label">授课方式：<input type="radio" name="cl_teachingType" value="0">线下　<input type="radio" name="cl_teachingType" value="1">网络远程</label>
+        </div>
+        <div class="form-item">
+            <label class="item-label">培训场地：<button class="select-btn select-trainingsite" target-form="form-horizontal" type="button" onclick="selectTrainingsite()">选择培训场地</button></label>
+        </div>
+        <div class="form-item">
+            <label class="item-label">
+            	食宿方式：<select name='cl_boardLodgingType'>
+            			<option value=''>--请选择--</option>
+            			<option value='0'>不包吃不包住</option>
+            			<option value='1'>包吃不包住</option>
+            			<option value='2'>包吃包住</option>
+            			<option value='3'>不包吃包住</option>
+            		</select>
+            </label>
+        </div>
+        <div class="form-item">
+            <label class="item-label">开班期数：<input type="text" class="text input-small" name="cl_phase" value="{$info.cl_phase|default=''}"> 期</label>
+        </div>
+        <div class="form-item">
+            <label class="item-label">　报名费：<input type="text" class="text input-small" name="cl_cose" value="{$info.cl_cose|default=''}"> ￥</label>
+        </div>
+        <div class="form-item">
+            <label class="item-label">班级LOGO</label>
+            <div class="controls">
+                {:hook('UploadImages')}
+            </div>
+        </div>
+        <div class="form-item">
+            <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+        </div>
+    </form>
+</block>
+
+<block name="script">
+	<link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+	<php>if(C('COLOR_STYLE')=='blue_color') echo '<link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">';</php>
+	<link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+	<script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+    <script type="text/javascript">
+	    function selectTrainingsite() {	
+		  $.ajax({
+ 				url: "{:U('Trainingsite/getTrainingsiteListByAjax')}",
+ 				data: {
+ 					//banchId: upperId
+ 				},
+				async: false,
+ 				dataType: "json",
+ 				success: function(str) {
+ 					layer.open({
+                       type: 1,
+                       content: str,
+				       area: '600px',
+                    });
+ 				}
+ 			});
+		};
+		
+		
+		
+		
+		
+		
+		
+		
+        Think.setValue("pid", {$info.pid|default = 0});
+        Think.setValue("hide", {$info.hide|default = 0});
+        Think.setValue("is_dev", {$info.is_dev|default = 0});
+        //导航高亮
+        highlight_subnav('{:U('Class/index')}');
+        $(function(){
+        	$('.time').datetimepicker({
+                format: 'yyyy-mm-dd hh:ii',
+                language:"zh-CN",
+                minView:2,
+                autoclose:true
+            });
+        });
+    </script>
+</block>

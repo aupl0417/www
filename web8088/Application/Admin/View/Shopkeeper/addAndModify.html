@@ -1,0 +1,178 @@
+<include file="Public:header" />
+<div id="content">
+
+	
+	<div class="container">
+		
+		<div class="row">
+
+			<include file="Public:nav" />
+
+            <div class="span9" style="margin-left: 5em;">
+
+                <div class="row">
+                    <div>添加商家</div>
+                    <input type="text" id="add_email_phone" placeholder="登陆邮箱或者手机" /> <span id="add_email_phone_err"></span> <br />
+                    <input type="text" id="add_company_name" placeholder="机构全称" /> <span id="add_company_name_err"></span> <br />
+                    <input type="text" id="add_password" placeholder="密码" /> <span id="add_password_err"></span> <br />
+                    <button id="addBtn">添加一个商家</button>   <span id="add_shopkeeper_err"></span>
+                </div>
+
+                <hr />
+
+
+                <div class="row">
+                    <div>寻找商家</div>
+                    <select id="find_type">
+                        <option value="company_name">公司名</option>
+                        <option value="login_phone">手机</option>
+                        <option value="login_email">邮箱</option>
+                    </select>
+                    <input type="text" id="find_word" />
+                    <button id="findBtn">寻找一个商家</button>
+                </div>
+
+                <hr />
+
+            </div>
+
+        </div> <!-- /row -->
+
+    </div> <!-- /container -->
+
+</div> <!-- /content -->
+
+
+<script type="text/javascript">
+
+</script>
+
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="__AJS__/jquery-1.7.2.min.js"></script>
+
+<!-- 为什么放在这里，因为flot.js不知道为什么throw一个异常了 -->
+<script type="text/javascript" charset="utf-8">
+
+var g = {
+    "addShopkeeperUrl":     "{:U('Shopkeeper/apiHandleAdd')}",
+    "findShopkeeperUrl":    "{:U('Shopkeeper/findShopkeeperdata')}"
+};
+
+
+$(function() {
+
+    function showMsg(id, msg, color) {
+        var $panel =$("#" + id);
+        $panel.html(msg);
+        $panel.css("color", color);
+    }
+
+    // 这里是添加一个商家
+    $("#addBtn").bind("click", function() {
+        // 获取用户输入
+        var phoneOrEmail = $.trim($("#add_email_phone").val());
+        var companyName = $.trim($("#add_company_name").val());
+        var password = $("#add_password").val();
+        var type = "";
+
+        // 验证邮箱或手机
+        var emailReg =/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;//邮件地址必须包含@符号和.com等网络域名
+        var phoneReg =/^1\d{10}$/;	// 包括移动电话
+
+        if(emailReg.test(phoneOrEmail)) {
+            type = "email";
+
+        } else if(phoneReg.test(phoneOrEmail)){
+            type = "phone";
+
+        } else{
+            showMsg("add_email_phone_err", "请输入正确的电话号码或邮箱", "red");
+            return false;
+        }
+        showMsg("add_email_phone_err", "", "green");
+
+        // 验证公司全称
+        if(companyName.length==0){
+            showMsg("add_company_name_err", "机构全称未填写", "red");
+            return false;
+        }
+        else if(companyName.length < 6 || companyName.length > 20){
+            showMsg("add_company_name_err", "机构全称应该在6~20个字符之间", "red");
+            return false;
+        }
+        showMsg("add_company_name_err", "", "green");
+
+        // 验证密码
+        var passwordReg =/^\S{6,12}$/;
+        if(!passwordReg.test(password)){
+            showMsg("add_password_err", "密码必须是6~12个字符，不含空白字符", "red");
+            return false;
+        }
+        showMsg("add_password_err", "", "green");
+
+        // 验证通过了，这里是发送到客户端
+        var data = {};
+        switch (type) {
+            case "email":
+                data.login_email = phoneOrEmail;
+                break;
+
+            case "phone":
+                data.login_phone = phoneOrEmail;
+                break;
+
+            default:
+                return false;
+        }
+        data.company_name = companyName;
+        data.password = password;
+
+        if (!confirm("您确定要添加这个商家吗？？？")) {
+            return false;
+        }
+
+        console.log("addShopkeeper", data);
+
+         $(this).html("添加中，请稍后。。。");
+         $(this).attr("disabled", "disabled");
+         $.post(g.addShopkeeperUrl, data, function(result) {
+
+                 $("#addBtn").removeAttr("disabled");
+                 $("#addBtn").html("添加一个商家");
+
+                 if (result.status != 200) {
+                     showMsg("add_shopkeeper_err", "添加失败：" + result.msg, "red");
+                     return false;
+                 }
+
+                 showMsg("add_shopkeeper_err", "添加成功", "green");
+
+         }, "json");
+    });
+
+    // 搜索按钮点击事件
+    $("#findBtn").bind("click", function() {
+            var findType = $("#find_type").val();
+            var findWord = $.trim($("#find_word").val());
+
+            location = g.findShopkeeperUrl + "?find_type=" + findType + "&find_word=" + findWord;
+    });
+
+});
+</script>
+
+
+<script src="__AJS__/excanvas.min.js"></script>
+<script src="__AJS__/jquery.flot.js"></script>
+<script src="__AJS__/jquery.flot.pie.js"></script>
+<script src="__AJS__/jquery.flot.orderBars.js"></script>
+<script src="__AJS__/jquery.flot.resize.js"></script>
+
+
+<script src="__AJS__/bootstrap.js"></script>
+<script src="__AJS__/charts/bar.js"></script>
+<include file="Public:footer" />
+
+

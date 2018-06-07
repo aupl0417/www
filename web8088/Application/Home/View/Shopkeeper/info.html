@@ -1,0 +1,153 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+    <meta content="yes"name="apple-mobile-web-app-capable"/>
+    <meta content="black"name="apple-mobile-web-app-status-bar-style"/>
+    <title>机构主页 - 17约课</title>
+    <link rel="stylesheet" type="text/css" href="__HCSS__/reset.css">
+    <link rel="stylesheet" href="__HCSS__/2.css"/>
+    <link rel="stylesheet" href="__HCSS__/4.css"/>
+    <link rel="stylesheet" href="__HCSS__/test2.css"/>
+    <meta name="keywords" content="17约课,一起约课,约课,教育培训,约课神器,校园约课,大学生培训,约老师,约女神,驾驶培训,设计培训,职业考证,音乐培训,英语培训,小语种培训,体育培训" />
+    <meta name="description" content="17约课 - 约您身边的良师益友！为您提供约老师，约课程，约女神，约学霸等海量信息，充分满足您免费约课，免费发布课程的需求。" />
+</head>
+<body>
+<header id="top_header">
+    <div id="header" align="center">
+        <h3 class="identify_title">机构信息</h3>
+        <a href="javascript:history.back(-1)" class="identify_back"><img src="__HIMG__/Return2.png" alt=""/>返回</a>
+        <a href="{:U('Shopkeeper/Editor', array('t'=>time()))}" class="identify_to_index {$resArr['isMe']?'':'hidden'}">编辑</a>
+    </div>
+</header>
+<div class="wrapper" style="margin-top: 44px;">
+            <div class="enter-myInfo-top enterprise-myInfo-top">
+                <div class="user_my_info_img_wrap">
+                    <img src="{$resArr.avatar}" alt="" class="user_my_info_img_wrap_img"/>
+                    <!-- <img src="__HIMG__/Canada v.png" alt="" class="user_my_info_img_wrap_V"/> -->
+                </div>
+                <p class="enterprise-myInfo-top_p">
+                    {$resArr['nickname']|default='未填写'}
+                    <eq name="resArr.status" value="3">&nbsp;<img src="__HIMG__/Company.png" alt="" class="enterprise-myInfo-top_p_img"/></eq>
+                </p>
+                <p class="enterprise-tag">
+                    <span class="enterprise-tag-type">{$resArr.catename|default='未填写分类'}</span>
+                    <span class="enterprise-tag-year"><?php echo $resArr['age']?$resArr['age'].'年校龄':'未填写校龄'; ?></span>
+                </p>
+                <p class="text-center enterprise-myInfo-bottom_p">{$resArr['company_name']|default='未填写'}</p>
+            </div>
+
+			<present name="resArr.shopInfo">
+            <div class="user-myInfo-middle">
+            
+            	<a href="{:U('Shopkeeper/mycourse', ['id'=>$resArr['id']])}">
+	                <div class="user-myInfo-middle_trend">
+	                    <h2>课程</h2>
+	                    <p>{$resArr['infoCount']}</p>
+	                </div>
+	                <div class="user-myInfo-middle_info_wrap">
+	                    <img src="__UPLOAD__/{$resArr.shopInfo.environ}" alt=""/>
+	                    <div class="user-myInfo-middle_info">
+	                        <h2>{$resArr['shopInfo']['title']}</h2>
+	                        <p>报名{$resArr['shopInfo']['number']}</p>
+	                        	<img src="__HIMG__/right.png" alt=""/>
+	                    </div>
+                    </a>
+                </div>
+
+            </div>
+		   </present>
+            <div class="clear"></div>
+            <div class="user-myInfo-bottom">
+                <div class="user-myInfo-bottom-left">
+                </div>
+                <div class="user-myInfo-bottom-right">
+                    <p>{$resArr['id']|default='未填写'} <span>约课号</span></p>
+                    <div class="user-myInfo-right-div">
+                       <span class="user-myInfo-label-left">简介</span>
+                       <span style="display: block;width: 95%" >
+                       <span class="brief_info">{$resArr.remark|default='未填写'}</span>
+                           <img class="user-myInfo-array" width="14px" height="8px" src="/Public/Home/img/icon2.png" alt="">
+                       </span>
+                    </div>
+                    <div class="enterprise_feature_ul_wrap pr">
+                    <ul class="enterprise_feature_ul">
+                        <empty name="resArr.features">
+                        未填写
+                        <else />
+                        <volist name="resArr.features" id="vo">
+                        <li>{$vo}</li>
+                        </volist>
+                        </empty>
+                    </ul><span class="enterprise_feature_span">特色</span><div class="clear"></div>
+                    </div>
+                    <div class="user-myInfo-right-div">
+                        <span class="user-myInfo-label-left">师资</span>
+                         <span style="display: block;width: 95%" >
+                             <span class="brief_info">{$resArr.teacher_power|default='未填写'}</span>
+                             <img class="user-myInfo-array" width="14px" height="8px" src="/Public/Home/img/icon2.png" alt="">
+                        </span>
+                    </div>
+
+                    <p><a href="#">{$resArr.website|default='未填写'}</a><span>网址</span></p>
+                    <p>{$resArr['tel']|default='未填写'} <span>联系</span></p>
+                    <p>
+                    	<if condition="empty($resArr['area_detail'])">
+                    	未填写
+                    	<else />
+                    	{$resArr['area_detail']}
+                    	</if>
+                       <span>地址</span>
+                    </p>
+                </div>
+                <div class="clear"></div>
+            </div>
+</div>
+
+<div id="user-img-bg" class="hidden">
+    <img src="" />
+</div>
+
+<script type="text/javascript" src="__HJS__/zepto.min.js"></script>
+<script type="text/javascript" src="__HJS__/user/user_img.js"></script>
+<include file="Public:statistics"/>
+</body>
+</html>
+
+<script type="text/javascript">
+    (function(){
+     $('img.user-myInfo-array').click(
+             function(e){
+            
+                 var self=$(e.target);
+                  var item=$(e.target).siblings();
+                  if(item.hasClass('brief_info')){
+                  		item.removeClass('brief_info');
+                  		self.attr("src","/Public/Home/img/bold-up.png");
+                  }else{
+                  	item.addClass('brief_info');
+                  	self.attr("src","/Public/Home/img/icon2.png");
+                  }
+
+                 
+             }
+     );
+        $('.attend-slogan').click(
+                function(e){
+                    e.preventDefault();
+                    var item=$(e.target);
+                    item.removeClass("attend-slogan");
+                    item.addClass("attend-slogan-show");
+                }
+        );
+        $('.attend-slogan-show').click(
+                function(e){
+                    e.preventDefault();
+                    var item=$(e.target);
+                    item.removeClass("attend-slogan-show");
+                    item.addClass("attend-slogan");
+                }
+        );
+    }
+    )();
+</script>

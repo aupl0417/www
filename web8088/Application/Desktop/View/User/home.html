@@ -1,0 +1,205 @@
+<extend name="UserPublic:tpl" />
+
+<block name="title">17约课-用户主页</block>
+
+<block name="css">
+	<link rel="stylesheet" href="__PCCSS__/home.css">
+</block>
+
+
+<!-- 中部内容 -->	
+<block name="main">
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+
+			<section class="head-box">
+				<div class="info-wrap">
+					<div class="avator-wrap">
+						<img src="{$info['avatar']}" alt="avator">
+					</div>
+					<div class="myinfo">
+						<p>  
+							<span class="name">{$info['firstname']}{$info['lastname']}</span> 
+							<span class="tap-blue"><i class="fa fa-mars"></i>&nbsp;{$info['age']}</span>&nbsp;&nbsp;
+							<span class="tap-lightblue">
+                            <switch name="info['profession']">
+                               <case value="1">
+                                    IT
+                               </case>
+                               <case value="2">
+                                    工
+                               </case>
+                               <case value="3">
+                                    金
+                               </case>
+                               <case value="4">
+                                    文
+                               </case>
+                               <case value="5">
+                                    艺
+                               </case>
+                               <case value="6">
+                                    农
+                               </case>
+                               <case value="7">
+                                    法
+                               </case>
+                                <case value="8">
+                                    教
+                                </case>
+                                <case value="9">
+                                    其
+                                </case>
+                           </switch>
+							</span>&nbsp;&nbsp;
+							<if condition="$info['telstatus'] eq 1">
+								<img src="__PCIMG__//phone_validate.png" alt="phone_validate">
+							</if>
+						</p>
+						<p class="signature">个性签名:</p>
+						<p class="signature">
+							<notempty name="info['remark']">
+								{$info['remark']}
+							<else />
+								留下你的个性签名吧！
+							</notempty>
+						</p>
+					</div>
+				</div>
+			</section>
+			<section class="content">
+				<h3 class="h-18">他的心愿单</h3>
+				<div class="row">
+					<div id="group_data">
+
+					</div>
+				</div>
+				
+				<nav style="text-align:right;" id="group_page">
+
+               </nav>
+				
+			</section>
+			<section class="info">
+				<h3 class="h-18">学员资料</h3>
+				<ul class="info-list">
+					<li><span class="info-title">约课号</span><p><if condition="$info['id'] eq ''">暂无数据<else/>{$info['id']}</if></p></li>
+					<li><span class="info-title">学校</span><p><if condition="$info['school'] eq ''">暂无数据<else/>{$info['school']}</if></p></li>
+					<li><span class="info-title">家乡</span><p><if condition="$info['home'] eq ''">暂无数据<else/>{$info['home']}</if></p></li>
+					<li style="border:1px solid #ddd;"><span class="info-title">兴趣</span><p><if condition="$info['interest'] eq ''">暂无数据<else/>{$info['interest']}</if></p></li>
+				</ul>
+			</section>
+
+      
+</div><!-- /.content-wrapper -->		
+</block>
+
+
+<block name="js">
+
+<!-- 心愿单-->
+<script id="tplgroup" type="text/template" charset="utf-8">
+{@each info as it,index}
+        <div class="col-xs-4">
+          <div class="course">
+            <div class="course-logo-wrap">
+              <div class="logo_model">
+                $${it.content}
+              </div>
+              <img src="{@if it.user_environ!=''&&it.user_environ!=null}${it.user_environ}{@else}${it.environ}{@/if}" class="course-logo" alt="${it.title}">
+            </div>
+            
+            <div class="course-content">
+            <img src="__PCIMG__/laba.png" alt=""/>
+            <a href="{:U('user/onedetail')}?gid=${it.id}">
+            	${it.title}
+            </a>
+            </div>
+                  <div class="course_brief clearfix" style="height: 0px; opacity: 0;>
+                    <li><i class="icons-time" ></i>${it.mode}</li>
+                    <li><i class="icons-msg"></i>${it.comment}条评论</li>
+                    <li><i class="icons-user"></i>${it.number}人跟约</li>
+                  </div>
+            <div class="course-bottom">
+              <div class="bottom-left">
+                <img src="${it.avatar}" alt="avator">&nbsp;&nbsp;&nbsp;${it.firstname}${it.lastname}
+              </div>
+              <div class="bottom-right">
+		{@if it.pricearr!=null}
+                ${it.pricearr.ltnumber}-${it.pricearr.gtnumber}人 <span class="price-now">${it.pricearr.ltprice}元</span> <span class="price-past">${it.pricearr.reference}元</span>
+		{@else}
+                <span class="price-now">${it.ltprice}元</span>
+		{@/if}
+              </div>
+            </div>
+          </div>
+        </div>
+{@/each}
+</script>
+
+<!-- 心愿单的分页-->
+<script id="tplgrouppage" type="text/template" charset="utf-8">
+                <ul class="pagination">
+				{@if page.curPage!=1}
+                  <li><a href="javascript:;"  class="page"  index="1">首页</a></li>
+                  <li>
+                    <a href="javascript:;" aria-label="Previous" class="page" index="${page.curPage-1}">
+                      <span aria-hidden="true">上一页</span>
+                    </a>
+                  </li>
+				{@/if}	
+	{@each i in range(page.pageFirst, page.pageMax+1)}
+                  <li index="${i}" class="page {@if i==page.curPage}active{@/if}"><a href="javascript:;">${i}</a></li>
+	{@/each}
+		{@if page.curPage!=page.pageAll}
+                  <li>
+                    <a href="javascript:;" aria-label="Next" index="${parseInt(page.curPage)+1}" class="page">
+                      <span class="clightblue" aria-hidden="true">下一页</span>
+                    </a>
+                  </li>
+		{@/if}
+                </ul>
+</script>
+
+<script src="__PCJS__/app.min.js" type="text/javascript"></script>
+<script>
+var now_user = {$info['id']}; //当前查看信息的用户的id 
+var login_type = {$loginuser}; //0查看的不是当前用户信息，1是查看当前用户信息 
+var group_url = "{:U('User/course_group')}";
+var pageg = 1;
+
+//用户约课url 
+function getgroup(nowpage){
+	var page_group = {};
+	page_group.page = nowpage;
+	page_group.uid	= now_user;
+	console.log(page_group);
+	$.get(group_url,page_group,function(data){
+	    console.log(data);
+	    if(data.status!=200){
+	    	$('#group_data').html('<p>暂无心愿单</p>');
+	    	return;
+	    }
+        var tplg = document.getElementById('tplgroup').innerHTML;
+        var htmlg = juicer(tplg, data);
+        $('#group_data').html(htmlg);
+        
+        var tplpage = document.getElementById('tplgrouppage').innerHTML;
+        var htmlpage = juicer(tplpage, data);
+        $('#group_page').html(htmlpage);
+        
+        imgonerror();//默认图片
+	}, "json");
+}
+getgroup(pageg);
+$("#group_page").on("click",".page",function(e){
+	getgroup($(e.currentTarget).attr("index"));
+});
+
+
+
+</script>
+
+</block>
+
+

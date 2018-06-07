@@ -1,0 +1,95 @@
+<style type="text/css">
+ .course-table-list{
+	height:690px; 
+	overflow:scroll;
+	overflow-x:hidden  
+ }
+ .course-table-footer{
+	height:40px;
+	width:100%; 
+	text-align:right;
+	
+ }
+</style>
+<div class="input-templete" style="display:none;">
+ <form id="course-table-temp-form" action="{:U('Grade/getAddCourseTableTempletByAjax',['id'=>$info['gr_id']])}" method="post">
+  <table>
+       <thead>
+               <tr> <th width="20%">字段名</th><th width="80%">输入值</th></tr>
+       </thead>
+       <tbody>
+              <tr><td>序号</td><td><input type="text" class="text input-mini" name="sort" id="courseSortNum" value="1" style="width:10%" readonly></td></tr>
+              <tr><td>教师</td><td><button class="select-btn select-selectTeacher" target-form="form-horizontal" type="button" onclick="selectTeacher.get(this,appendTeacher)">点击选择</button></td></tr>
+              <tr><td>课程</td><td><select name="ctt_courseId"><option value="">请选择</option><foreach name="info['courseList']" item="vo" ><option value="{$vo.gc_courseId}">{$vo.co_name}</option></foreach></select></td></tr>
+              <tr><td>培训地址</td><td><button class="select-btn select-selectSite" target-form="form-horizontal" type="button" onclick="selectTrainingsite.get(this)">点击选择</button><input name="ctt_trainingsiteId" type="hidden" value="0" id="trainingsiteId"></td></tr>
+              <tr><td>描叙</td><td><textarea class="text input-mini" style="width:90%; height:50px;" name="ctt_description" id="description"></textarea></td></tr>
+              <tr><td colspan="2" align="right"><button class="btn submit-btn ajax-post" id="submitF" type="submit" target-form="form-horizontal" onclick="courseTableTemplent.saveInput(this);return false;">保 存</button></td></tr>
+      </tbody>
+  </table>
+  <input name="ctt_gradeId" type="hidden" value="{$info.gr_id}" />
+  </form>
+</div>
+  <div class="data-table course-table-list">
+  </div>
+<div class="course-table-footer"><button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal" onclick="courseTableTemplent.saveAllInput(this);return false;">全部保存</button>  <button class="btn btn-return" onclick="javascript:courseTableTemplent.addInput(1);return false;">增加表单</button></div> 
+<script type="text/javascript">
+   function appendTeacher(id,name,e) {
+	   $(e).after('<input name="ctt_teacherId" type="hidden" value="'+id+'">');
+   };
+   
+   function courseTableTemplent() {
+	  var manager = new Object; 
+	  manager.addInput = function(c) {
+		 formCount =  $('.course-table-list #course-table-temp-form').length;
+		 for(i=0;i<c;i++) {
+		   var copy = $('.input-templete #course-table-temp-form').clone();
+		   copy.find('#courseSortNum').val(formCount+i+1);	  
+		   $('.course-table-list').append(copy);
+		 } 
+	  };
+	  
+	  manager.saveAllInput = function() {
+		  $els = $('.course-table-list #course-table-temp-form');  
+		  $els.each(function(){
+			  if(!manager.submitInput($(this)))
+			    return false;  
+          });
+		  layer.msg('提交成功！',function() {
+			  layer.closeAll();   
+		  }); 
+	  }; 
+	  manager.saveInput = function(e) {
+		var $form = $(e).parents('#course-table-temp-form');  
+	    if(manager.submitInput($form)) {
+			layer.msg('提交成功！',function() {
+			   formCount =  $('.course-table-list #course-table-temp-form').length;
+			   if(formCount == 1) {
+				 layer.closeAll();  
+			   }else{
+				 $form.remove();  
+			   }
+		    }); 
+		}
+	  };
+	  manager.submitInput = function($form) {
+		 var flag = false; 
+		 url = "{:U('Grade/getAddCourseTableTempletByAjax',['id'=>$info['gr_id']])}"; 
+		 $.ajax({type: "POST",async: false,url: url,data:{sort:$form.find('[name="sort"]').val(),ctt_teacherId:$form.find('[name="ctt_teacherId"]').val(),ctt_gradeId:$form.find('[name="ctt_gradeId"]').val(),ctt_courseId:$form.find('[name="ctt_courseId"]').val(),ctt_trainingsiteId:$form.find('[name="ctt_trainingsiteId"]').val(),ctt_description:$form.find('[name="ctt_description"]').val()},dataType: "json",success: function(data){
+			 if(data.status == 0){
+                layer.msg(data.info,function() {
+				   
+			    }); 
+			 }else{
+			   flag = true;  
+			 }
+         }});
+		 return flag;
+	  };
+	  manager.init = function() {
+		  manager.addInput(2);  
+	 }; 
+	 return manager;   
+   }
+var courseTableTemplent = courseTableTemplent();
+courseTableTemplent.init();
+</script>

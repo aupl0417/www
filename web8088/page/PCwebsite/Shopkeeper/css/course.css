@@ -1,0 +1,20 @@
+a{
+	color:#929292;
+}
+.content {
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-bottom: 10px;
+  min-height: 140px;
+}
+.select-wrap{
+	background-color: #fff;
+}
+.area_list{
+	list-style: none;
+}
+.area_list li{
+float: left;
+width: 10%;
+}
+

@@ -1,0 +1,101 @@
+<include file="Public:header" />
+<div id="content">
+
+	
+	<div class="container">
+		
+		<div class="row">
+
+			<include file="Public:nav" />
+
+            <div class="span10">		
+				<div class="widget widget-table">
+					<div class="widget-header">
+						<i class="icon-th-list"></i>
+						<h3>短信推广</h3>
+					</div> <!-- /widget-header -->
+					
+					<div class="widget-content">
+						<div class="span8" style="margin-bottom:20px;">
+						 	<h3 style="margin-top:1em;">短信推广</h3>
+							<label>需要推广的课程ID为：</label>
+							<textarea id="sns_content" placeholder="要发送的推广内容" style="width:330px;height:140px"></textarea>
+							短信推广链接的格式为：【17yueke.cn/s/*】，其中*号代表课程的id
+							<br/>
+							<input type="text" id="code" placeholder="请输入验证码" /><br/>
+							<img src="{:U('Sign/getVerify', 't='.time())}"  id="verify" onclick="document.getElementById('verify').src='{:U('Sign/getVerify')}?q='+Math.random()" alt="" style="width:30%;"/>
+    						<a href="javascript:;" onclick="document.getElementById('verify').src='{:U('Sign/getVerify')}?q='+Math.random()" style="width:30%;">看不清，换一张</a>
+							<button id="sendBtn">确认发送</button>
+						</div>
+						
+					</div>
+
+
+
+                <hr />
+
+            	</div>
+                
+
+
+
+            </div><!-- /span10 -->
+
+		</div> <!-- /row -->
+		
+	</div> <!-- /container -->
+	<div></div>
+</div> <!-- /content -->
+
+
+<script type="text/javascript">
+
+</script>
+
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="__AJS__/jquery-1.7.2.min.js"></script>
+<script src="__AJS__/excanvas.min.js"></script>
+<!-- 
+<script src="__AJS__/jquery.flot.js"></script>
+<script src="__AJS__/jquery.flot.pie.js"></script>
+<script src="__AJS__/jquery.flot.orderBars.js"></script>
+<script src="__AJS__/jquery.flot.resize.js"></script>
+ -->
+<script src="__AJS__/bootstrap.js"></script>
+<!-- 
+<script src="__AJS__/charts/bar.js"></script>
+ -->
+<script type="text/javascript" src="__HJS__/juicer-min.js"></script>
+<script type="text/javascript">
+
+function postsms(compage){
+	//showLoading();
+	var sendsms={};
+	sendsms.verify=$("#code").val();
+	sendsms.content=$("#sns_content").val();
+	console.log(sendsms);
+	$.post("{:U('User/promotionsms')}",sendsms,function(data){
+		console.log(data);
+		if(data.status!=200){
+			alert('请联系后台人员');
+			return;
+		}else{
+			alert('发送成功');
+			return;
+		}
+    }, "json");
+}
+$("#sendBtn").on("click",function(e){
+    if (!confirm("确认发送短信推广信息？")) {
+        window.event.returnValue = false;
+    }else{
+		postsms();
+    }
+});
+
+
+
+</script>
+<include file="Public:footer" />

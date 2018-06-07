@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Qiniu Web Player in HTML5</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link href="https://player.qiniucc.com/sdk/latest/qiniuplayer.min.css" rel="stylesheet">
+		<script src="https://player.qiniucc.com/sdk/latest/qiniuplayer.min.js"></script>
+	</head>
+  
+  <body>
+    <h1>Qiniu Web Player</h1>
+    <video id="demo-video" class="video-js vjs-big-play-centered"></video>
+  </body>
+<script>
+var options = {
+    controls: true,
+	loop:false,
+    //file: 'http://og9dz2jqu.cvoda.com/Zmlyc3R2b2RiOm9jZWFucy0xLm1wNA==_q00000001.m3u8',
+    file: 'http://oimslmq8z.bkt.clouddn.com/15.mp4?vwatermark/1/image/aHR0cDovL2RldmVsb3Blci5xaW5pdS5jb20vc2FtcGxlcy9xaW5pdS1sb2dvLnBuZw==/gravity/Center',
+    type: 'mp4',
+    preload: 'auto',
+    autoplay: false, // 如为 true，则视频将会自动播放
+	engineOrder : ['html5', 'flash'],
+	poster      : 'https://player.qiniucc.com/qiniu-620x205.png',
+};
+var player = new QiniuPlayer('demo-video', options, function(){
+	player.ready(function() {
+		player.playRate(2);
+		player.on('play', function() {
+			//player.playRate(2);
+			//player.pause(function(){
+				//var bool = player.isPaused();
+				//console.log(bool);
+			//});
+			var bool = player.duration(10, function(){});
+			player.resize(300, 800, function(){
+				//console.log('aaa');
+			});
+			player.hasControls();
+			player.controls(true);
+			// 业务逻辑
+			//console.log('I am playing.');
+		});
+		
+		
+	});
+
+});
+
+</script>
+</html>

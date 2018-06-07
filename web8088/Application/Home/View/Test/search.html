@@ -1,0 +1,216 @@
+<html><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta name="format-detection" content="telphone=no">
+    <title>搜索 - 17约课</title>
+    <link rel="stylesheet" type="text/css" href="/Public/Home/css/reset.css">
+    <link rel="stylesheet" href="/Public/Home/css/2.css">
+    <link rel="stylesheet" href="/Public/Home/css/4.css">
+    <meta name="keywords" content="17约课,一起约课,约课,教育培训,约课神器,校园约课,大学生培训,约老师,约女神,驾驶培训,设计培训,职业考证,音乐培训,英语培训,小语种培训,体育培训">
+    <meta name="description" content="17约课 - 约您身边的良师益友！为您提供约老师，约课程，约女神，约学霸等海量信息，充分满足您免费约课，免费发布课程的需求。">
+    <link type="text/css" rel="stylesheet" href="chrome-extension://kfgmnlgjmofpiicpgohgfpeabgpmhjdp/style.css"><script type="text/javascript" charset="utf-8" src="chrome-extension://kfgmnlgjmofpiicpgohgfpeabgpmhjdp/page_context.js"></script></head>
+<body gtools_scp_screen_capture_injected="true">
+<header id="top_header">
+    <div id="header" align="center">
+        <h3 class="identify_title">搜索</h3>
+        <a href="/home/index/index.html" class="identify_back"><img src="/Public/Home/img/Return2.png" alt="">返回</a>
+    </div>
+</header>
+<div class="wrapper" style="margin-top: 3em;">
+    <img src="/Public/Home/img/loading.gif" alt="" class="loading hidden">
+    <div class="business_relay_input_wrap">
+        <div class="input_wrap course_institution_input_wrap">
+            <input type="text" class="register_input" placeholder="搜索“机构”试试">
+        </div>
+        <button class="course_institution_btn">搜索</button>
+        <img src="/Public/Home/img/Search for.png" alt="" class="business_img_search">
+    </div>
+    <!-- 热门搜索 -->
+    <!--<div class="hot-search">
+        <h2 class="search-title">热门搜索</h2>
+        <div class="search-items">
+            <ul>
+                <li>同辉驾校</li>
+                <li>音乐培训</li>
+                <li>新东方</li>
+                <li>新东方</li>
+                <li>出国留学</li>
+                <li>天虎设计</li>
+            </ul>
+        </div>
+    </div>-->
+
+    <!-- 发布的约课信息 -->
+    <div id="desc">
+    </div>
+
+    <div class="search_nofound hidden">
+        <p class="search_nofound_p">抱歉亲，没有搜索到合适的信息</p>
+    </div>
+    <!--<button class="enterprise_cont_submit resbut hidden"  id="resbut">加载更多<img src="__HIMG__/right.png" alt=""/></button>-->
+</div>
+<!--约课信息模板-->
+<script id="shopAndUser" type="text/template">
+    {@each info as it,index}
+
+    {@if it.comment_count==null}
+    <div class="section_item">
+
+        <div class="section_item_title">
+            <div class="span2 section_item_portrait">
+                <a href="{:U('LookUser/moInfo')}?uid=${it.uid}"><img src="${it.avatar}" alt="" class="section_item_portrait_img"></a>
+                <!--<img src="__HIMG__/Plus V.png" alt="" class="section_item_portrait_V"/>-->
+            </div>
+            <a href="{:U('LookGroup/onedetail')}?gid=${it.id}"> <div class="span6 section_item_sub"><h3>${it.title}</h3>
+                <p>${it.firstname}${it.lastname}
+
+                    {@if it.telstatus==1}
+                    <img src="__HIMG__/Phone verification.png" alt=""/>
+                    {@/if}
+                    {@if it.profession==1}
+                    <img src="__HIMG__/Interest.png" alt=""/>
+                    {@else if it.profession==2}<img src="__HIMG__/Public.png" alt=""/>
+                    {@else if it.profession==3}<img src="__HIMG__/Gold.png" alt=""/>
+                    {@else if it.profession==4}<img src="__HIMG__/Culture.png" alt=""/>
+                    {@else if it.profession==5}<img src="__HIMG__/art.png" alt=""/>
+                    {@else if it.profession==6}<img src="__HIMG__/Farming.png" alt=""/>
+                    {@else if it.profession==7}<img src="__HIMG__/France.png" alt=""/>
+                    {@else if it.profession==8}<img src="__HIMG__/Teach.png" alt=""/>
+                    {@else}<img src="__HIMG__/qi.png" alt=""/>
+                    {@/if}
+                    {@if it.vtype==1}
+                    {@if it.vstatus==1}
+                    <img src="__HIMG__/RV.png" alt=""/>
+                    {@/if}
+                    {@/if}
+                    {@if it.vtype==2}
+                    {@if it.vstatus==1}
+                    <img src="__HIMG__/Plus V.png" alt=""/>
+                    {@/if}
+                    {@/if}
+                    {@if it.overtimes==0}<span style="color:#a3a3a3">已结束</span>{@/if}
+                </p></div>
+                <div class="span2">
+                    <div class="section_item_follow">
+                        <p class="section_item_time">${it.ctime}</p>
+                        <p class="section_item_follow_p">跟约<span>${it.number}</span></p>
+                    </div>
+                </div>
+            </a>
+            <div class="clear"></div>
+
+        </div>
+        <div class="section_item_cont">
+            <div class="section_item_info span6">
+                {@if it.cate_name==null || it.cate_name==0}
+                <p><img src="__HIMG__/Classification.png" alt="">${it.name}</p>
+                {@else}<p><img src="__HIMG__/Classification.png" alt="">${it.cate_name}</p>
+                {@/if}
+
+                {@if it.pricearr!=null}
+
+
+                <p><img src="/Public/Home/img/Price.png" alt="">${it.pricearr.ltnumber}-${it.pricearr.gtnumber}人<span class="spe_price"> ￥${it.pricearr.ltprice}</span> <span style="text-decoration: line-through">￥${it.pricearr.reference}</span></p>
+                {@else}  <p><img src="__HIMG__/Price.png" alt=""/>${it.ltprice}</p>
+                {@/if}
+                <p><img src="__HIMG__/Time.png" alt="">${it.mode}</p>
+                <p><img src="__HIMG__/Business.png" alt="">${it.nickname}</p>
+                <p><img src="__HIMG__/Location.png" alt="">{@each it.areaname as it2,index}{@if index>1}${it2}{@/if}{@/each}</p>
+            </div>
+            <a href="{:U('LookGroup/onedetail')}?gid=${it.id}">
+                <div class="section_item_photo span4">
+                    <img src="${it.environ}" alt="">
+                </div>
+            </a>
+            <div class="clear"></div>
+        </div>
+        <div class="section_item_feature">
+            <p>课程特色：
+                {@each it.tags as it2,index} <span>${it2}</span>&nbsp;&nbsp;{@/each}</p>
+        </div>
+        <div class="section_item_pv">
+            <p class="section_item_pv_pv"><img src="__HIMG__/Browse.png" alt="">${it.view}</p>
+            <p class="section_item_pv_rep"><img src="__HIMG__/Review.png" alt="">${it.comment}</p>
+            <p class="section_item_pv_home"><img src="__HIMG__/Business2.png" alt="">${it.coursemun}</p>
+        </div>
+    </div>
+
+    {@/if}
+    {@if it.comment_count!=null}
+    <div class="section_item">
+
+        <div class="section_item_title">
+            <div class="span2 section_item_portrait">
+
+                <a href="{:U('Shopkeeper/info')}?id=${it.sid}"> <img src="__UPLOAD__${it.avatar}" alt="" class="section_item_portrait_img"/></a>
+                <!--<img src="__HIMG__/Plus V.png" alt="" class="section_item_portrait_V"/>-->
+            </div>
+            <a href="{:U('Shopkeeper/cont')}?id=${it.id}"><div class="span6 section_item_sub"><h3>${it.title}</h3>
+                <p>${it.nickname}
+                    {@if it.status==3}
+                    <img src="__HIMG__/Company.png" alt=""/>
+                    {@/if}
+                </p></div>
+                <div class="span2">
+                    <div class="section_item_follow">
+                        <p class="section_item_time">${it.ctime}</p>
+                        <p class="section_item_follow_p">报名<span>${it.user_count}</span></p>
+                    </div>
+                </div>
+            </a>
+            <div class="clear"></div>
+
+        </div>
+        <div class="section_item_cont">
+            <div class="section_item_info span6">
+                <p><img src="__HIMG__/Classification.png" alt=""/>${it.catename}</p>
+                <p>
+                    <img src="__HIMG__/Price.png" alt=""/>${it.price}
+                    {@if it.preferent}<span class="price_preferent">${it.preferent} </span><img src="__HIMG__/Hui.png" alt="" />{@/if}
+                </p>
+                <p><img src="__HIMG__/Time.png" alt=""/>${it.mode}</p>
+                <p><img src="__HIMG__/Business.png" alt=""/>${it.nickname}</p>
+                <p><img src="__HIMG__/Location.png" alt=""/>{@each it.areaname[0] as it2,index}{@each it2 as it3,index}${it3}{@/each}{@/each}</p>
+            </div>
+            <a href="{:U('Shopkeeper/cont')}?id=${it.id}">
+                <div class="section_item_photo span4">
+                    <img src="__UPLOAD__${it.environ}" alt=""/>
+                </div>
+            </a>
+            <div class="clear"></div>
+        </div>
+        <div class="section_item_feature">
+            <p>课程特色：
+                {@each it.tags as it2,index} <span>${it2}</span>&nbsp;&nbsp;{@/each}</p>
+            </p>
+        </div>
+        <div class="section_item_pv">
+            <p class="section_item_pv_pv"><img src="__HIMG__/Browse.png" alt=""/>${it.view}</p>
+            <p class="section_item_pv_home"><img src="__HIMG__/Review.png" alt=""/>${it.comment_count}</p>
+
+        </div>
+    </div>
+
+    {@/if}
+    {@/each}
+</script>
+
+<script type="text/javascript" src="__HJS__/zepto.min.js"></script>
+<script type="text/javascript" src="__HJS__/juicer-min.js"></script>
+<script type="text/javascript" src="__HJS__/select_3.js"></script>
+<script type="text/javascript">
+    var areaUrl="{:U('Api/Area/getArea')}";
+    var secondUrl="{:U('Api/Area/getSecondArea')}";
+    var areasUrl="{:U('Api/GroupInfo/getGroupInfo')}";
+    var cateUrl="{:U('Api/GroupInfo/getCategory')}";
+    var thirdcateUrl="{:U('Api/GroupInfo/thirdCategory')}";
+    var busUrl="{:U('GroupInfo/business')}";
+    var busajaxUrl="{:U('Api/GroupInfo/getBusiness')}";
+    var searchUrl="{:U('Api/Index/getSearch')}";
+    var userCateUrl="{:U('Api/Index/ajaxGroup')}";
+    var shopCateUrl="{:U('Api/Index/ajaxShop')}";
+</script>
+
+</body></html>

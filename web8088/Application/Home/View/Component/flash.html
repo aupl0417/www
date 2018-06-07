@@ -1,0 +1,31 @@
+<p class="shoucan hidden">跟约成功！</p>
+<script type="text/javascript">
+
+    function flash(){
+        function setText(text){
+            $('.shoucan').html(text);
+        }
+        function hiddenShare(millisecond){
+            var time = millisecond || 1000;
+            setTimeout(function () {
+                $(".shoucan").addClass("hidden");
+            },time);
+        }
+
+        function showhare(){
+            $(".shoucan").removeClass("hidden");
+        }
+        return {
+            setText:setText,
+            hiddenShare:hiddenShare,
+            showhare:showhare
+        }
+    }
+    var Flash = new flash();
+    function easyFlash(text){
+        Flash.setText(text);
+        Flash.showhare();
+        Flash.hiddenShare();
+    }
+
+</script>

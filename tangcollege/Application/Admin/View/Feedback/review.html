@@ -1,0 +1,55 @@
+<div id="main" class="main">
+    <div class="main-title">
+        <h2><if condition="$is_review eq 0">查看<else/>审核</if>留言</h2>
+    </div>
+    <form id='form' action="{:U()}" method="post" class="form-horizontal">
+        <div class="form-item">
+            <label class="item-label">留言标题：<input type="text" class="text input-midle" readonly name="f_name" value="{$info.f_name|default=''}"></label>
+        </div>
+        <div class="form-item">
+            <label class="item-label">联系邮箱：<input type="text" class="text input-midle" readonly name="f_email" value="{$info.f_email|default=''}"></label>
+        </div>
+        <div class="form-item">
+        	<label class="item-label">留言内容：</label>
+            <div class="textarea input-large">
+	            <textarea name="f_content" width="500px;" readonly>{$info.f_content|default=''}</textarea>
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">审核状态：
+            	<if condition='$is_review eq 1'>
+	            	<select name="f_state">
+	            		<option value=''>--请选择--</option>
+	            		<option value='1'>审核通过</option>
+	            		<option value='2'>审核拒绝</option>
+	            	</select>
+	            <else/>
+	            	<select name="f_state" disabled>
+	            		<option value=''>--请选择--</option>
+	            		<option <if condition='$info.f_state eq 1'>selected="selected"</if> value='1'>审核通过</option>
+	            		<option <if condition='$info.f_state eq 2'>selected="selected"</if> value='2'>审核拒绝</option>
+	            	</select>
+            	</if>
+            </label>
+        </div>
+        <div class="form-item">
+        	<input type='hidden' name='f_id' value='{$info.f_id}'>
+	            <if condition='$is_review eq 1'>
+	            	<button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+	            <else/>
+	            	<button class="btn submit-btn review" id="submit" type="button">确 定</button>
+	            </if>
+            <button class="btn btn-return review" type="button">返 回</button>
+        </div>
+    </form>
+</div>
+
+<block name="script">
+    <script type="text/javascript">
+    	ajaxSubmitForm();
+		
+		$('.review').click(function(){
+			layer.closeAll();
+		});
+    </script>
+</block>

@@ -1,0 +1,71 @@
+<div class="data-table lookClassTableTempletByAjax">
+		<table>
+            <!-- 表头 -->
+            <thead>
+                <tr>
+                    <th width="10%">排序</th>
+                    <th width="10%">教师</th>
+                    <th width="10%">课程</th>
+                    <th width="30%">培训地址</th>
+                    <th width="30%">描叙</th>
+                    <th width="10%">操作</th>
+                </tr>
+            </thead>
+
+            <!-- 列表 -->
+            <tbody>
+                <volist name='lists' id='data' empty='$empty'>
+                	<tr>
+                        <td><input type="text" class="text input-mini courseSortNum" name="ctt_sort" id="courseSortNum" value="{$data.ctt_sort}" style="width:50px" data-id="{$data.ctt_id}"></td>
+                		<td>{$data.username}</td>
+                        <td>{$data.co_name}</td>
+                		<td>{$data.tra_name}</td>
+                        <td>{$data.ctt_description}</td>
+                		<td><a class="sch-btn" href="javascript:void(0);" onclick="classTableTemplet.edit({$data.ctt_id})">编辑</a> | <a class="sch-btn"href="javascript:void(0);" onclick="classTableTemplet.del({$data.ctt_id})">删除</a></td>
+                	</tr>
+                </volist>
+            </tbody>
+        </table>
+	</div>
+<script>
+  function classTableTemplet() {
+	  var manager = new Object; 
+	  manager.box = null;
+	  manager.edit = function(id) {
+		   url = "{:U('grade/editClassTableTempletByAjax')}?fresh="+Math.random();
+           $.ajax({type:'GET',url:url,data:{id:id}, success: function(str){
+                   manager.box = layer.open({
+					                type : 1,
+                                    content: str,
+									area   : ['600px','410px'],
+                  });
+           }});
+		  
+	  }
+	  manager.del = function(id) {
+		   url = "{:U('grade/delClassTableTempletByAjax')}";
+           $.ajax({type:'GET',url:url,data:{id:id}, success: function(data){
+                   layer.msg(data.info,{time:1000},function(){
+					   if(data.status == 1) {
+						   url = "/index.php?s=/Admin/Grade/lookClassTableTempletByAjax/id/"+{$id}+".html";
+						   $('.lookClassTableTempletByAjax').offsetParent().empty().load(url); 
+					   }
+				   });
+           }});
+		  
+	  }  
+	 return manager; 
+  }
+var classTableTemplet = classTableTemplet();
+$(".courseSortNum").blur(function(){
+               url = "{:U('grade/sortClassTableTempletByAjax')}";
+               $.ajax({type:'GET',url:url,data:{id:$(this).attr('data-id'),ctt_sort:$(this).val()},success: function(data){
+                   layer.msg(data.info,{time:1000},function(){
+					   if(data.status == 1) {
+						   url = "/index.php?s=/Admin/Grade/lookClassTableTempletByAjax/id/"+{$id}+".html";
+						   $('.lookClassTableTempletByAjax').offsetParent().empty().load(url); 
+					   }
+				   });
+              }});
+});
+</script>    

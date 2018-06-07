@@ -1,0 +1,160 @@
+<include file="Public:header" />
+<div id="content">
+
+	
+	<div class="container">
+		
+		<div class="row">
+			
+
+			<include file="Public:nav" />
+			
+			
+                    
+                    		<div class="span9">
+				<div class="widget-header">
+						<i class="icon-th-list"></i>
+						<h3>
+					商家数据 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</h3>
+					<p class="pull-right">当前注册商家数量:<b>{$count}</b>  </p>
+					</div> <!-- /widget-header -->
+	
+
+                   <!--  <div class="widget-content"> -->
+
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                     
+                            <tr>
+                                <th>商家ID</th>
+                                <th>昵称</th>
+                                <th>报名数</th>
+                                <th>课程数</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                          
+                            </thead>
+
+                            <tbody>
+                               <volist name='data' id='vo'>
+                                   <tr>
+                                       <td>{$vo.id}</td>
+                                       <td class="user__name">{$vo['nickname']?$vo['nickname']:$vo['company_name']}</td>
+                                       <td>{$vo['number']?$vo['number']:0}</td>
+                                       <td>{$vo.kccount}</td>
+                                       <td>{$vo.statusText}</td>
+                                       <td>
+                                           <a href="{:U('Shopkeeper/detail', array('sid' => $vo['id'], 't' => time()))}" class="btn btn-info btn-small">查看详细资料</a>
+                                           <a href="{:U('Shopkeeper/auth', array('sid' => $vo['id'], 't' => time()))}" class="btn btn-warning btn-small">查看认证资料</a>
+                                           <a href="{:U('Shopkeeper/sendMsg', array('sid' => $vo['id'], 't' => time()))}" class="btn btn-primary btn-small">发送系统消息</a>
+                                       </td>
+                                   </tr>
+                              </volist>
+                            </tbody>
+                        </table>
+
+                   <!--  </div> /widget-content -->
+
+                   	<!-- 分页 -->	
+                    {$page}
+
+                </div> <!-- /widget -->
+
+            </div> <!-- /span10 -->
+
+        </div> <!-- /row -->
+
+    </div> <!-- /container -->
+
+</div> <!-- /content -->
+<!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h3 class="modal-title" id="myModalLabel">详细信息</h3>
+            </div>
+            <div class="modal-body">
+                <p>姓名:<span id = "modal_name"></span></p>
+                <p>手机:<span id ="modal_phone"></span></p>
+                <p>固话:<span id ="modal_tel"></span></p>
+                <p>邮箱:<span id ="modal_email"></span></p>
+                <p>地址:<span id ="modal_address"></span></p>
+                <p>价格:<span id ="modal_price"></span></p>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+
+<script src="__AJS__/jquery-1.7.2.min.js"></script>
+<script src="__AJS__/excanvas.min.js"></script>
+<script src="__AJS__/jquery.flot.js"></script>
+<script src="__AJS__/jquery.flot.pie.js"></script>
+<script src="__AJS__/jquery.flot.orderBars.js"></script>
+<script src="__AJS__/jquery.flot.resize.js"></script>
+<script src="__AJS__/delete.js"></script>
+<script type="text/javascript">
+ /*    $(".user__btn").click(function (e) {
+        e.preventDefault();
+        var tr = $(e.target).parents("tr");
+        var email = tr.find(".user__login_email").text();
+        var phone = tr.find(".user__login_phone").text();
+        var name = tr.find(".user__name").text();
+        var tel = tr.find(".user__tel").text();
+        var price = tr.find(".user__price").text();
+        var address = tr.find(".user__area_detail").text();
+        $("#modal_name").html(name);
+        if(phone==""){
+            $("#modal_phone").html("暂无");
+
+        }
+        else{
+            $("#modal_phone").html(phone);
+
+        }
+        if(email==""){
+            $("#modal_email").html("暂无");
+
+        }
+        else{
+            $("#modal_email").html(email);
+        }
+        if(tel==""){
+            $("#modal_tel").html("暂无");
+
+        }
+        else{
+            $("#modal_tel").html(tel);
+
+        }
+        if(price==""){
+            $("#modal_price").html("暂无");
+
+        }
+        else{
+            $("#modal_price").html(price);
+
+        }
+        if(address==""){
+            $("#modal_address").html("暂无");
+
+        }
+        else{
+            $("#modal_address").html(address);
+
+        }
+
+    })
+ */
+
+</script >
+<script src="__AJS__/bootstrap.js"></script>
+<script src="__AJS__/charts/bar.js"></script>
+<include file="Public:footer" />

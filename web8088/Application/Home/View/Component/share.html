@@ -1,0 +1,78 @@
+<div class="alert_box_bg hidden" id="social_share_box_bg">
+    <div class="social_share_wrap">
+
+        <ul class="social_share_ul" style="z-index: 1000;">
+
+            <li><img src="__HIMG__/share_weixin.png" alt="" class="social_share_img"/><p class="social_share_p">微信朋友圈</p></a></li>
+            <li><img src="__HIMG__/share_QQ.png" alt="" class="social_share_img"/><p class="social_share_p">QQ空间</p></a></li>
+            <li><img src="__HIMG__/share_weibo.png" alt="" class="social_share_img"/><p class="social_share_p">新浪微博</p> </a></li>
+        </ul>
+        <style type="text/css">
+            .jiathis_style{
+                width: 100%;
+                height: 140px;
+                background-color: red;;
+            }
+            .jiathis_button_weixin,.jiathis_txt{
+                width: 33.3%;
+                padding-bottom: 140px !important;
+            }
+        </style>
+        <div class="jiathis_style" style="z-index: 9999; position: absolute;top: 0px; opacity: 0">
+            <a class="jiathis_button_weixin"></a>
+            <a class="jiathis_button_qzone"></a>
+            <a class="jiathis_button_tsina"></a>
+        </div>
+    </div>
+</div>
+<p class="shoucan hidden">跟约成功！</p>
+<script type="text/javascript">
+
+    function social_shareWin(){
+
+        function show(){
+            $('#social_share_box_bg').click(function (event) {
+                if($(event.target).hasClass("alert_box_bg")){
+                      $('#social_share_box_bg').addClass("hidden");
+                }
+            })
+            $('#social_share_box_bg').removeClass("hidden");
+        }
+        function hidden(){
+            $('#social_share_box_bg').addClass("hidden");
+        }
+
+        function work(){
+            $('#social_share_show').click(function () {
+                $('#social_share_box_bg').addClass("hidden");
+                location.href=indexUrl;
+            });
+            $('#social_share_resend').click(function () {
+                $('#social_share_box_bg').addClass("hidden");
+            });
+
+        }
+
+        function setText(text){
+            $('.shoucan').html(text);
+        }
+        function hiddenShare(){
+            setTimeout(function () {
+                $(".shoucan").addClass("hidden");
+            },5000);
+        }
+
+        function showhare(){
+                $(".shoucan").removeClass("hidden");
+        }
+
+        return {
+            show:show,
+            hidden:hidden,
+            work:work,
+            hiddenShare:hiddenShare,
+            showhare:showhare,
+            setText:setText
+        }
+    }
+</script>

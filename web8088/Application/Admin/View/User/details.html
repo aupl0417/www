@@ -1,0 +1,249 @@
+<include file="Public:header" />
+<div id="content">
+
+	
+	<div class="container">
+		
+		<div class="row">
+			
+
+			<include file="Public:nav" />
+			
+			
+			<div class="span9">
+				
+				<div class="widget widget-table">
+										
+					<div class="widget-header">
+						<i class="icon-th-list"></i>
+						<h3>用户管理&nbsp;
+<!--                    	<a href="{:U('Data/assinfo',array('id'=>$rel['id']))}" class="btn btn-small">心愿单</a>  --> 
+                        	<a href="javascript:history.back(-1)" class="btn btn-small">返回</a>
+                        </h3>
+					</div> <!-- /widget-header -->
+					
+					<div class="widget-content">
+					
+						<table class="table table-striped table-bordered">
+							<tr>
+								<td>呢称</td>
+								<td>{$rel['firstname']}{$rel['lastname']}<input id="userid" type="hidden" value="{$rel['id']}" /></td>
+							</tr>
+							<tr>
+								<td>性别</td>
+								<td>
+									<if condition="$rel['sex'] eq 1">男
+									<elseif condition="$rel['sex'] eq 2"/>女
+									<else/>保密
+									</if>
+                                </td>
+							</tr>
+							<tr>
+								<td>年龄</td>
+								<td>{$rel['age']}</td>
+							</tr>
+							<tr>
+								<td>个性签名</td>
+								<td>{$rel['remark']}</td>
+							</tr>
+							<tr>
+								<td>手机号码</td>
+								<td>{$rel['phone']}</td>
+							</tr>
+							<tr>
+								<td>电子邮箱</td>
+								<td>{$rel['email']}</td>
+							</tr>
+							<tr>
+								<td>学校</td>
+								<td>{$rel['school']}</td>
+							</tr>
+							<tr>
+								<td>家乡</td>
+								<td>{$rel['home']}</td>
+							</tr>
+							<tr>
+								<td>兴趣</td>
+								<td>{$rel['interest']}</td>
+							</tr>
+							<tr>
+								<td>专业</td>
+								<td>
+									<switch name="rel['profession']">
+				                       <case value="1">
+				                       		<img src="__HIMG__/Interest.png" alt="" class="user-myInfo-top_p_img"/>
+				                       </case>
+				                       <case value="2">
+				                       		<img src="__HIMG__/Public.png" alt="" class="user-myInfo-top_p_img"/>
+				                       </case>
+				                       <case value="3">
+				                       		<img src="__HIMG__/Gold.png" alt="" class="user-myInfo-top_p_img"/>
+				                       </case>
+				                       <case value="4">
+				                       		<img src="__HIMG__/Culture.png" alt="" class="user-myInfo-top_p_img"/>
+				                       </case>
+				                       <case value="5">
+				                       		<img src="__HIMG__/art.png" alt="" class="user-myInfo-top_p_img"/>
+				                       </case>
+				                       <case value="6">
+				                       		<img src="__HIMG__/Farming.png" alt="" class="user-myInfo-top_p_img"/>
+				                       </case>
+				                       <case value="7">
+				                       		<img src="__HIMG__/France.png" alt="" class="user-myInfo-top_p_img"/>
+				                       </case>
+				                       <case value="8">
+				                       		<img src="__HIMG__/Teach.png" alt="" class="user-myInfo-top_p_img"/>
+				                       </case>
+				                       <case value="9">
+				                       		<img src="__HIMG__/qi.png" alt="" class="user-myInfo-top_p_img"/>
+				                       </case>
+				                       <default />
+				                   </switch>
+								</td>
+							</tr>
+							<tr>
+								<td>头像</td>
+								<td>
+									<img style="width:100px; height:100px;" src="{$rel['avatar']}" type="text"/>
+									<button type="button" onclick="javascript:if(window.confirm('确认当前用户头像不合法，删除用户头像吗？'))window.location.href='{:U('User/del',array('uid'=>$rel['id']))}'" class="btn btn-info">删除</button>
+									<button type="button" onclick="javascript:;" class="btn btn-info">发送邮件</button>
+									<p>禁止上传含有色情、淫秽、暴力、政治、敏感等违反法律法规的头像，如若发现管理员可以删除用户头像，一旦删除无法恢复！</p>
+								</td>
+								
+							</tr>
+							<tr>
+								<td>注册时间</td>
+								<td>{$rel['ctime']}</td>
+							</tr>
+							<tr>
+								<td>最后登录时间</td>
+								<td>{$rel['lasttime']}</td>
+							</tr>
+							<tr>
+								<td>手机状态</td>
+								<td>
+                                    <eq name="rel['telstatus']" value="0">
+									    <label>手机未认证</label>
+                                    <else/>
+									    <label>手机已认证</label>
+									    <br/>
+									    <label>认证的手机号码为：{$rel['telauthen']}</label>
+                                    </eq>
+								</td>
+							</tr>
+							<tr>
+								<td>邮箱状态</td>
+								<td>
+                                    <eq name="rel['status']" value="0">
+									    <label>邮箱未激活</label>
+                                    <else/>
+									    <label>邮箱已激活</label>
+                                    </eq>
+								</td>
+							</tr>
+							<tr>
+								<td> 大V认证 </td>
+								<td>
+									<if condition="($rel['userv']['vstatus'] eq 1) and ($rel['userv']['vtype'] eq 1)">
+									    <label>大V认证类型：个人认证</label>
+									    <br/>
+									    <label>大V认证状态：已认证</label>
+									    <br/>
+									    <label>大V认证材料：</label><a href="{$rel['userv']['vpath']}" target="_blank"><img alt="" src="{$rel['userv']['vpath']}" style="max-width:200px;max-height:200px;"></a>
+									<elseif condition="($rel['userv']['vstatus'] eq 1) and ($rel['userv']['vtype'] eq 2)"/>
+									    <label>大V认证类型：社团认证</label>
+									    <br/>
+									    <label>大V认证状态：已认证</label>
+									    <br/>
+									    <label>大V认证材料：</label><a href="{$rel['userv']['vpath']}" target="_blank"><img alt="" src="{$rel['userv']['vpath']}" style="max-width:200px;max-height:200px;"></a>
+									<elseif condition="($rel['userv']['vstatus'] eq 0) and ($rel['userv']['vtype'] eq 1)"/>
+									    <label>大V认证类型：个人认证<input type="hidden" id="uservtype" value="{$rel['userv']['vtype']}" /></label>
+									    <br/>
+									    <label>大V认证状态：<span id="statustext">未认证</span></label>
+									    <br/>
+									    <label>大V认证材料：</label><a href="{$rel['userv']['vpath']}" target="_blank"><img alt="" src="{$rel['userv']['vpath']}" style="max-width:200px;max-height:200px;"></a>
+										<button type="button" id="uservInfo" class="btn btn-info">审核通过</button>
+									<elseif condition="($rel['userv']['vstatus'] eq 0) and ($rel['userv']['vtype'] eq 2)"/>
+									    <label>大V认证类型：社团认证<input type="hidden" id="uservtype" value="{$rel['userv']['vtype']}" /></label>
+									    <br/>
+									    <label>大V认证状态：<span id="statustext">未认证</span></label>
+									    <br/>
+									    <label>大V认证材料：</label><a href="{$rel['userv']['vpath']}" target="_blank"><img alt="" src="{$rel['userv']['vpath']}" style="max-width:200px;max-height:200px;"></a>
+										<button type="button" id="uservInfo" class="btn btn-info">审核通过</button>
+									<else />
+										<label>用户未上传任何认证资料</label>
+									</if>
+									
+								</td>
+							</tr>
+						</table>
+					</div> <!-- /widget-content -->
+					
+				</div> <!-- /widget -->
+				
+				
+				
+				
+				
+				
+			</div> <!-- /span9 -->
+			
+			
+		</div> <!-- /row -->
+		
+	</div> <!-- /container -->
+	
+</div> <!-- /content -->
+
+
+
+
+
+
+
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="__AJS__/jquery-1.7.2.min.js"></script>
+<script src="__AJS__/excanvas.min.js"></script>
+<script src="__AJS__/jquery.flot.js"></script>
+<script src="__AJS__/jquery.flot.pie.js"></script>
+<script src="__AJS__/jquery.flot.orderBars.js"></script>
+<script src="__AJS__/jquery.flot.resize.js"></script>
+
+
+<script src="__AJS__/bootstrap.js"></script>
+<script src="__AJS__/charts/bar.js"></script>
+<script type="text/javascript">
+$("#uservInfo").on("click",function(e) {
+	if(window.confirm('确认当前用户大V个人认证通过吗？')){
+		var user_id = $("#userid").val();
+		var user_vtype = $("#uservtype").val();
+	    console.log(user_id);
+	    console.log(user_vtype);
+		passuserv(user_id,user_vtype)	
+	}
+})
+
+
+function passuserv(u,vtype){
+    var postuserv={};
+    postuserv.status=1;
+    postuserv.vtype=vtype;
+    postuserv.uid=u;
+    console.log(postuserv);
+    $.post("{:U('User/userPassVstatus')}",postuserv,function(data){
+        console.log(data);
+        if(data.status!=200){
+            alert('审核失败');
+        }else{
+			$("#statustext").html("已认证");
+            alert('审核通过');
+        }
+    }, "json");
+}
+</script>
+
+
+
+<include file="Public:footer" />

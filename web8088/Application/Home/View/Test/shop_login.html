@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+    <meta content="yes"name="apple-mobile-web-app-capable"/>
+    <meta content="black"name="apple-mobile-web-app-status-bar-style"/>
+    <title>商家登陆 - 17约课</title>
+    <link rel="stylesheet" type="text/css" href="__HCSS__/reset.css">
+    <link rel="stylesheet" href="__HCSS__/4.css"/>
+    <link rel="stylesheet" href="__HCSS__/2.css"/>
+    <meta name="keywords" content="17约课,一起约课,约课,教育培训,约课神器,校园约课,大学生培训,约老师,约女神,驾驶培训,设计培训,职业考证,音乐培训,英语培训,小语种培训,体育培训" />
+    <meta name="description" content="17约课 - 约您身边的良师益友！为您提供约老师，约课程，约女神，约学霸等海量信息，充分满足您免费约课，免费发布课程的需求。" />
+</head>
+<body>
+<div class="register_wrap e_first_register login_height">
+    <img src="__HIMG__/logo2.png" alt="" class="register_title"/>
+    <div class="user_register_nav">
+        <p class="user_register_nav_left"><a href="javascript:history.back(-1)"><img src="__HIMG__/back.png" alt=""/>返回</a></p>
+        <p class="user_register_nav_right"><a href="{:U('Shopkeeper/signUpStart')}">注册<img src="__HIMG__/go.png" alt=""/></a></p>
+    </div>
+    <div class="input_wrap validate">
+        <img src="__HIMG__/user.png" alt="" class="validate_i"/><input type="text" id="arg"  class="register_input register_input_login"  placeholder="手机号码/邮箱">
+        <i class="input_close_icon op_0"></i>
+        <div class="validate_wrap">
+            <img src="__HIMG__/Shape-1.png" alt="" class="validate_i"/><input type="password" name="password" id="password"   class="register_input register_input_login" placeholder="密码">
+            <i class="input_close_icon op_0" ></i>
+        </div>
+        <input type="text" name="type" id="hiddentype" class="register_input hidden">
+    </div>
+
+
+    <!--出错了就把Hidden去掉就会显示了，有多少个错误就在多少行li-->
+    <div id="err_panel" class="u_register_err hidden">
+        <ul>
+            <li>
+                <img src="__HIMG__/Exclamation.png" alt="" class="register_err_image"/>
+                <span id="err_span"></span>
+            </li>
+        </ul>
+    </div>
+    <!---->
+    <button class="register_submit"  id ="btn" style="margin-top: 2em;">登陆约课</button>
+    <div class="user_login_footer">
+        <p class="user_register_nav_left"><input id="auto_login" type="checkbox" class="remember_me"/>记住我</p>
+        <p class="user_register_nav_right"><a href="{:U('Shopkeeper/forgetPassword')}" style="color:#fff;">忘记密码?</a></p>
+    </div>
+    <!-- <p class="u_social_account">社交账号直接登陆 <a href=""><img src="__HIMG__/qq.png" alt=""/></a><a href=""><img src="__HIMG__/wechat.png" alt=""/></a></p> -->
+</div>
+<script type="text/javascript" src="__HJS__/zepto.min.js"></script>
+<script type="text/javascript">
+    var handleLogin_url = "{:U('Api/Shopkeeper/handleLogin')}";
+    var index_url = "{:U('Index/index')}?t=";
+
+</script>
+<script type="text/javascript" src="__HJS__/shopkeeper/signin.js" charset="utf-8"></script>
+
+</body>
+</html>

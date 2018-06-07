@@ -1,0 +1,1321 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+    <meta content="yes"name="apple-mobile-web-app-capable"/>
+    <meta content="black"name="apple-mobile-web-app-status-bar-style"/>
+    <title>{$info['title']}－选自17约课</title>
+    <meta name="keywords" content="17约课" />
+    <meta name="description" content="{$info['title']}" />
+    <link rel="stylesheet" type="text/css" href="__HCSS__/reset.css">
+    <link rel="stylesheet" href="__HCSS__/2.css"/>
+    <link rel="stylesheet" href="__HCSS__/4.css"/>
+    <meta name="keywords" content="{$info['title']}" />
+    <meta name="description" content="{$info['title']} - 17约课" />
+
+</head>
+<body>
+<!-- author user -->
+<if condition="$info['logintype'] eq 1">
+    <section class="window_bg hidden">
+        <div class="picker_wrap">
+            <div class="pick_wrap_div">
+                <div class="pick_wrap_img">
+                    <img src="__UPLOAD__/{$info['keeperavatar']}" onerror="javascript:this.src='__IMGDEFAULT__';" alt="">
+                </div>
+                <p class="pick_wrap_title">{$info['keepernickname']}</p>
+                <p class="pick_wrap_phone" style="border: none"><img src="__HIMG__/phone.png" alt="">{$info['keeperphone']}</p>
+            </div>
+            <div class="pick_bottom_wrap"  id="shoplistselect">
+                <p class="picker_p">选择你要推送的课程</p>
+                <div class="pick-input-wrap">
+                    <div class="pick-input-wrap-out" style="border: none;overflow: visible">
+                        <div class="pick_select_wrap_new">
+                            <div class="pick_icon_wrap">
+                                <img src="__HIMG__/icon2.png" alt=""/>
+                            </div>
+                            <p class="select_wrap_new_p" id="third_new_p">请选择课程</p>
+                            <select class="pick_new_select" id="third_new_select">
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="pick_sub_wrap">
+                    <button class="pick_submit" onclick="getpush()">确定</button><button class="pick_end" onclick="showWin()">取消</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div id="hiddenshopnull" class="hidden">
+
+        <div id="shopnull">
+            <p class="picker_p">你好，你目前还没发布课程，发布课程即可
+                推送课程。</p>
+
+            <div class="pick_sub_wrap">
+                <button id="shopkeeperfabu" class="pick_submit">发布课程</button><button class="pick_end" onclick="showWin()">取消</button>
+            </div>
+        </div>
+    </div>
+</if>
+<header id="top_header">
+
+    <!-- 第一次引导 -->
+    <div class="tips-bg hidden">
+        <div id="tip32" class="tips hidden">
+            <div id="selected32" class="selected"></div>
+            <img src="__HIMG__/guide_pointer.png" />
+            <p>快快点击跟约吧，人数<b>越多越优惠！</b></p>
+            <button class="">我知道了</button>
+        </div>
+        <div id="tip33" class="tips hidden">
+            <div id="selected33" class="selected"></div>
+            <img src="__HIMG__/guide_pointer.png" />
+            <p>想<b>快速集结</b>志同道合的小伙伴？将自己的心愿单<b>分享</b>出去吧！</p>
+            <button class="">我知道了</button>
+        </div>
+        <div id="tip34" class="tips hidden">
+            <div id="selected34" class="selected"></div>
+            <img src="__HIMG__/guide_pointer.png" />
+            <p>您有满足这组同学需求的课程？<b>推送</b>给他们吧！</p>
+            <button class="">我知道了</button>
+        </div>
+    </div>
+
+    <div id="header" align="center">
+        <h3 class="identify_title">{$info['title']}</h3>
+
+        <!-- <a href="javascript:location.replace(document.referrer);" class="identify_back"><img src="__HIMG__/Return2.png" alt=""/>返回</a>-->
+        <a href="javascript:history.back(-1)" class="identify_back"><img src="__HIMG__/Return2.png" alt=""/>返回</a>
+        <a href="{:U('Index/index')}" class="identify_to_index">首页</a>
+    </div>
+</header>
+<div class="wrapper">
+    <div class="section_item section_item_course">
+
+        <div class="section_item_title">
+            <div class="span2 section_item_portrait">
+                <a href="{:U('LookUser/moInfo',array('uid'=>$info['uid']))}"><img src="{$info['avatar']}" onerror="javascript:this.src='__IMGDEFAULT__';" alt="" class="section_item_portrait_img"></a>
+            </div>
+            <div class="span6 section_item_sub">
+                <a href="{:U('LookGroup/onedetail',array('gid'=>$info['id']))}"><h3 class="detail_h3">{$info['title']}</h3></a>
+                <p>{$info['firstname']}{$info['lastname']}
+                    <if condition="$info['telstatus'] eq 1">
+                        <img src="__HIMG__/Phone verification.png" alt="">
+                    </if>
+
+                    <switch name="info['profession']">
+                        <case value="1">
+                            <img src="__HIMG__/IT.png" alt="" class="user-myInfo-top_p_img"/>
+                        </case>
+                        <case value="2">
+                            <img src="__HIMG__/Public.png" alt="" class="user-myInfo-top_p_img"/>
+                        </case>
+                        <case value="3">
+                            <img src="__HIMG__/Gold.png" alt="" class="user-myInfo-top_p_img"/>
+                        </case>
+                        <case value="4">
+                            <img src="__HIMG__/Culture.png" alt="" class="user-myInfo-top_p_img"/>
+                        </case>
+                        <case value="5">
+                            <img src="__HIMG__/art.png" alt="" class="user-myInfo-top_p_img"/>
+                        </case>
+                        <case value="6">
+                            <img src="__HIMG__/Farming.png" alt="" class="user-myInfo-top_p_img"/>
+                        </case>
+                        <case value="7">
+                            <img src="__HIMG__/France.png" alt="" class="user-myInfo-top_p_img"/>
+                        </case>
+                        <case value="8">
+                            <img src="__HIMG__/Teach.png" alt="" class="user-myInfo-top_p_img"/>
+                        </case>
+                        <case value="9">
+                            <img src="__HIMG__/qi.png" alt="" class="user-myInfo-top_p_img"/>
+                        </case>
+                        <default />
+                    </switch>
+                    <if condition="$info['overtimes'] eq 0"><span class="time_end">已结束</span></if>
+                </p>
+
+            </div>
+
+            <div class="clear"></div>
+
+        </div>
+        <div class="section_item_cont">
+            <div class="section_item_info span6">
+            
+            
+				<if condition="($info['cate_name'] eq null )||($info['cate_name'] eq 0)">
+					<p><img src="__HIMG__/Classification.png" alt="">{$info['name']}</p>
+				<else />
+					<p><img src="__HIMG__/Classification.png" alt="">{$info['cate_name']}</p>
+				</if>
+				
+				<if condition="$info['pricearr'] neq null">
+				    <p><img src="/Public/Home/img/Price.png" alt="">{$info['pricearr']['ltnumber']}-{$info['pricearr']['gtnumber']}人
+				    	<span class="spe_price"> ￥{$info['pricearr']['ltprice']}</span> 
+				    	<span style="text-decoration: line-through">￥{$info['pricearr']['reference']}</span>
+				    </p>
+				<else />
+					<p><img src="__HIMG__/Price.png" alt=""/>{$info['ltprice']}</p>
+				</if>
+				            
+            
+                <p><img src="__HIMG__/Time.png" alt="">{$info['mode']}</p>
+                <p><img src="__HIMG__/Business.png" alt="">{$info['nickname']}</p>
+                <if condition="$info['areaname'] neq null">
+                <p class="address_p"><img src="__HIMG__/Location.png" alt=""><foreach name="info['areaname']" item="area" key="k" >
+                    <if condition="$k gt 1 ">{$area}&nbsp;
+                    </if></foreach></p>
+                </if>
+            </div>
+            <div class="section_item_photo span4">
+                <img src="__UPLOAD__{$info['environ']}" onerror="javascript:this.src='__IMGDEFAULT__';" alt="">
+            </div>
+            <div class="claer"></div>
+        </div>
+        <div class="section_item_feature">
+            <p class="section_course_time_out">截止日期：<span class="section_course_info">{$info['overtime']}</span></p>
+
+            <p>课程特色：
+                <volist name="info['tags']" id="tags" >
+                    <span>{$tags}</span>&nbsp;
+                </volist>
+            </p>
+            <p class="section_course_wrap">
+                <span class="section-title">课程内容：</span>
+                <span class="section-value">{$info['content']}</span>
+                <img class="toggle-img" width="8px" height="4px" src="__HIMG__/icon2.png" alt="">
+            </p>
+            <!--<p class="section_course_wrap">课程内容：<span class="section_course_info">{$info['content']}</span></p>-->
+        </div>
+        <p class="section_item_join_p">已跟约用户<span id="ykcount">{$info['ykasscount']}</span>人</p><!-- 总跟约数 -->
+        <ul class="section_item_touxiang_ul">
+
+            <div id="sectionscroll">
+
+            </div>
+            <if condition="$info['ykcount'] neq 0">
+                <li class="section_item_more"><a href="javascript:;" onclick="postassist()" id="sectionsclear">显示更多....</a></li>
+            </if>
+        </ul>
+        <div class="clear"></div>
+        <div class="section_item_pv"style="position: relative;top: -6px;margin-bottom: 0">
+            <p class="section_item_pv_pv"><img src="__HIMG__/Browse.png" alt="">{$info['view']}</p><!-- 视图 -->
+            <p class="section_item_pv_rep"><img src="__HIMG__/Review.png" alt=""><span id="ykcomment_count">{$info['ykcomcount']}</span></p><!-- 总评论数 -->
+            <p class="section_item_pv_home"><img src="__HIMG__/Business2.png" alt="">{$info['ykpucount']}</p><!-- 总推送数 -->
+        </div>
+    </div>
+
+    <p class="business_reply_title">全部评论</p>
+    <a name="comment"></a>
+    <div class="business_reply_wrap">
+        <div class="business_relay_input_wrap">
+            <div class="input_wrap business_reply_input">
+                <input type="text" id="commenttext" class="register_input" placeholder="请输入你的评论">
+                <i class="input_close_icon op_0" style="top: 0.6em;"></i>
+            </div>
+            <button class="business_reply_btn" ontouchstart="addcom()">评论</button>
+        </div>
+        <div id="commentlist">
+
+
+        </div>
+        <a href="#comment"  id ="to_top"></a>
+
+        <p class="business_relay_more" id="commentclear" ontouchstart="postcomment()">查看更多评论</p>
+    </div>
+
+
+    <p class="business_reply_title " id="shopkeeperfabushop">商家已推送课程</p>
+
+    <div class="blank w96 ml2 business_course_list " id="shopinfolook">
+        <div id="pushlist"></div>
+        <p class="business_course_more" id="pushedmore">查看更多商家</p>
+
+    </div>
+
+    <div class="blank w96 ml2 business_course_list hidden"  style="padding-top: 0">
+        <p class="business_course_more" style="top: 0;border: none">商家没有更多课程</p>
+    </div>
+    <div class="section_spread">
+        <div class="section_spread_title">
+            <p class="section_spread_title_brand">课程推广</p>
+            <h2>热门课程</h2>
+            <h3>组课热门课程八折优惠</h3>
+        </div>
+        <div id="generPanel" class="section_spread_cont">
+
+        </div>
+    </div>
+    <!-- 商家没有发布课程提示-->
+    <div class="noinfo_warn hidden">
+        <div class="noinfo_warn_wrap">
+                <div class="warn_section1">
+                    <div class="span2 section_item_portrait">
+                        <img src="/Public/home/img/ty.png" alt="" class="section_item_portrait_img">
+                    </div>
+                    <div class="span6 section_item_sub2"><h3 class="warn_h3">新东方英语培训</h3>
+                        <p><img src="/Public/home/img/phoneblue.png" style="height: 18px;width: auto;"/>13533412234
+                        </p>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+
+                <div class="warn_section2">
+                    <p>你好，你目前还没有发布课程，请先完善资料再进行课程发布</p>
+                    <br>
+                    <button id="perfect_info">完善资料</button>
+                </div>
+        </div>
+    </div>
+    <!--<button class="enterprise_cont_submit">查看全部约课<img src="__HIMG__/right.png" alt=""/></button>-->
+
+
+    <br/>
+    <br/>
+    <br/>
+
+
+
+
+
+    <div class="enterprise_cont_footer">
+        <if condition="$info['logintype'] eq 0">
+            <a href="javascript:;" class="enterprise_cont_footer_join" id="assist_user">跟约</a>
+            <elseif condition="$info['logintype'] eq 2"/>
+            <a href="javascript:;" class="enterprise_cont_footer_join" id="assist_user"><if condition="$info['checkAssist'] eq 0">跟约<else />取消</if></a>
+            <elseif condition="$info['logintype'] eq 1"/>
+            <a href="javascript:;" class="enterprise_cont_footer_join" id="sign">推送</a>
+        </if>
+        <input id="loginchecktype" type="text" value="{$info['logintype']}" class="hidden">
+        <input id="logincheckid" type="text" value="{$info['loginid']}" class="hidden">
+        <a class="enterprise_cont_footer_share" id="share_btn"><img src="__HIMG__/link.png" alt=""/>分享</a>
+        <if condition="$info['logintype'] neq 1">
+            <a href="#" id="getcellect" class="enterprise_cont_footer_collect">
+                <img src="__HIMG__/star.png" alt=""/><span id="shoucang_span"><if condition="$info['checkCollect'] eq 0">收藏<else />已收藏</if></span></a>
+            <else />
+        </if>
+    </div>
+
+</div>
+<script type="text/javascript" src="__HJS__/zepto.min.js"></script>
+<include file="Component:share" />
+<!-- 游客跟约成功 -->
+<div class="tourist_succ_bg hidden">
+    <div id="tourist_succ">
+        <div class="succ_title">
+            <span class="succ_title_pic"><img src="__HIMG__/succ.png"></span>
+            <span id="succ_title_hint">跟约成功</span>
+        </div>
+        <p>亲，你还没有注册或登录！是无法成功约到课程的。</p>
+        <button id="t_reg_btn">注册</button>
+        <button id="t_login_btn">立即登陆</button>
+        <button id="t_refuse_btn">残忍拒绝</button>
+    </div>
+</div>
+<!-- 游客选择头像 -->
+<div class="t_avatar_bg hidden">
+    <div id="t_avatar_wrap">
+        <img id="btn" src="__HIMG__/user.png" alt="游客头像"/>
+        <input name="useravatar" type="file" class="visualization" id="file">
+        <input type="hidden" id="imgsrc" />
+        <h3>请上传头像</h3>
+        <p>上传真实的头像，可以更好地约课</p>
+    </div>
+    <!-- 游客点击选择头像时弹出的菜单 -->
+    <!--<div class="t_menu_bg" style="z-index: 5000">
+        <div class="t_menu_wrap">
+            <div id="t_take_p">拍照</div>
+            <div id="t_sel_p">选取现有的</div>
+            <div id="t_close">取消</div>
+        </div>
+    </div>-->
+</div>
+
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<script type="text/javascript" src="__HJS__/juicer-min.js"></script>
+<script type="text/javascript" src="__HJS__/objimgurl.js"></script>
+<script type="text/javascript" src="__HJS__/imgerror.js"></script>
+<script type="text/javascript" >
+var firstgroup={$info['userpushgroup']};//0不是用户登录， 1当前登录的用户第一次发布心愿单，2当前登录的用户不是第一次发布心愿单,3是该用户未发布过,4当前约课不是当前用户发布的
+var login_type_status={$info['logintype']};//0是未登录，1是当前登录的是商家，2是当前登录的是用户
+//0是用户未上传头像，1已上传
+<if condition="$info['useravatarstatus'] neq null">
+	var user_avatar_status={$info['useravatarstatus']};
+</if>
+//是否约课已经过期了
+var overtime_status={$info['overtimes']}; 
+var visitor_id={$info['visitor']};//是否是游客
+
+/**
+ * 特技Input框
+ */
+$("input").on("focus", function (event) {
+    $(event.target).next().removeClass("op_0");
+
+});
+$("input").on("blur", function (event) {
+    $(event.target).next().addClass("op_0");
+
+});
+$(".input_close_icon").click(function (event) {
+    $(event.target).prev().val("");
+});
+
+var gid={$info['id']};
+var i=0;
+var j=0;
+var push=0;
+var shopinfolist=0;
+var share = new social_shareWin();
+var getassisthref="{:U('LookGroup/assistGroup')}";
+var handleavatar="{:U('Api/User/uploadavatar')}";
+
+//上传头像
+$(function(){
+	if(login_type_status==2&&user_avatar_status==0){
+		$(".t_avatar_bg").removeClass("hidden");
+	}
+});
+//是游客则弹出提示
+function visitAssistTrue(){
+	if(login_type_status==0){
+		$(".tourist_succ_bg").removeClass("hidden");
+	}else if(login_type_status==2){
+        share.setText("跟约成功!");
+        share.showhare()
+        share.hiddenShare();
+	}
+}
+//游客选择残忍拒绝
+$("#t_refuse_btn").click(function(){
+	$(".tourist_succ_bg").addClass("hidden");
+});
+//游客选择登录
+$("#t_login_btn").click(function(){
+	window.location.href='{:U("Userregsign/login")}';
+});
+//游客选择注册
+$("#t_reg_btn").click(function(){
+	window.location.href='{:U("Userregsign/index")}';
+});
+/*Input上传图片*/
+$("#btn").bind("click", btnavatarfile);
+
+function btnavatarfile(){
+    $('#btn').click(function () {
+        $('#file').trigger('click');
+    });
+};
+//回显
+$("#file").change(function(){
+        var objUrl = getObjectURL(this.files[0]) ;
+        console.log("objUrl = "+objUrl) ;
+        if (objUrl) {
+            $("#btn").attr("src", objUrl) ;
+            $("#imgsrc").val(objUrl) ;
+            submitavatar();
+        }
+    });
+    
+/**
+ * 分享
+ **/
+$("#share_btn").click(function () {
+    share.show();
+})
+/**
+ * 报名
+ * */
+var jinzhi=1;
+$("#sign").click(function(e){
+    shoplist();
+    e.preventDefault();
+    var height = $(window).scrollTop()+$(window).height()/2-100;
+    var second_height = $(window).scrollTop()+$(window).height()/2-120;
+    $('.picker_wrap').css("top",second_height+"px");
+    showWin();
+});
+document.addEventListener("touchmove",function(e){
+    if(jinzhi==0){
+        e.preventDefault();
+        e.stopPropagation();
+    }
+},false);
+function showWin(){
+    if(jinzhi==0){
+        jinzhi=1;
+    }
+    else{
+        jinzhi=0;
+    }
+    $(".window_bg").toggleClass("hidden");
+}
+$('#third_new_select').on("change", function (event) {
+    $('#third_new_p').text($('#third_new_select option').not(function(){
+        return !this.selected;
+    })[0].innerHTML);
+});
+$('#perfect_info').click(
+        function(){
+            window.location.href="{:U('Shopkeeper/Editor', array('t'=>time()))}";
+        }
+);
+$('.noinfo_warn').click(
+        function(e){
+            var s=$(e.currentTarget);
+            if(s.hasClass('noinfo_warn')){
+                $('.noinfo_warn').addClass('hidden');
+            }
+        }
+);
+//更改那个跟约或者取消--游客--自加载
+/*$(function(){
+	if(login_type_status==0 && visitor_id != 0){
+		var now_visitor_id = localStorage.visitor;
+		if(now_visitor_id!=""&&now_visitor_id!=null&&now_visitor_id==visitor_id){
+			$("#assist_user").html("取消");
+		}
+	}
+});*/
+
+//获取该约课的跟约人信息
+$('#sectionsclear').html('');//加载隐藏查看更多跟约
+function postassist(){
+    i=i+1;
+    var getassistdata={};
+    getassistdata.gid=gid;
+    getassistdata.page=i;
+    $.get(getassisthref,getassistdata,function(data){
+    	if(data.status!=200){
+    		$('#sectionsclear').html('');
+    	}else{
+
+            var tpl = document.getElementById('tplassist').innerHTML;
+            var html = juicer(tpl, data.assistdata);
+
+
+            $('#sectionscroll').append(html);
+            imgonerror();//默认图片
+            visitor_assist_status() //游客是否已经跟约
+            if(!data){
+                $('#sectionsclear').html('');
+            }else{
+                if(data.assistdata.pageAll<=i){
+                    $('#sectionsclear').html('');
+                }else{
+                    $('#sectionsclear').html('查看更多');
+                }
+            }
+    	}
+    }, "json");   
+}
+postassist();
+//游客是否跟约--浏览器端判断游客是否跟约
+function visitor_assist_status(){
+	var visitor_status=localStorage.visitor;
+	if(visitor_status!=''&&visitor_status!=null){
+		$("[data-visitid]").each(function() {
+			var visitid_list=$(this).attr("data-visitid");
+			if(visitid_list==visitor_status){
+				 $("#assist_user").html("取消");
+			}
+		});
+	}
+	return;
+}
+//获取该约课评论
+function postcomment(){
+    j=j+1;
+    $.post("{:U('Api/Groupcomment/comGroup')}",{"page":j,"depth":0,"gid":gid},function(data){
+        var tpl = document.getElementById('tplcomment').innerHTML;
+        var html = juicer(tpl, data.comment);
+
+        $('#commentlist').append(html);
+        imgonerror();//默认图片
+        $(".register_input").on("focus",function(e) {
+            $("#top_header").addClass("fixedIOSBug");
+            $(".enterprise_cont_footer").addClass("fixedIOSBug");
+        }).on("blur",function(e) {
+            $("#top_header").removeClass("fixedIOSBug");
+            $(".enterprise_cont_footer").removeClass("fixedIOSBug");
+        });
+        $(".business_reply_info p").removeClass("border_none");
+        $(".business_reply_item").last().find(".business_reply_info p").addClass("border_none");
+        if(data.comment==false){
+            $('#commentclear').addClass('hidden');
+            $('#commentclear').html('没有更多了');
+        }
+        else if(data.comment.pageAll<=j){
+            $('#commentclear').addClass('hidden');
+            $('#commentclear').html('没有更多了');
+        }
+    }, "json");
+}
+postcomment();
+//添加该约课评论
+function addcom(){
+    var com=$('#commenttext').val();
+    if(com==''){
+        share.setText("评论不能为空");
+        share.showhare();
+        share.hiddenShare();
+    }else{
+        var datas={};
+	    var visitorid=localStorage.visitor;
+	    if(visitorid!=null&&visitorid!=''){
+	    	datas.visitorid=visitorid;
+	    }
+        datas.gid = gid;
+        datas.c_info=com;
+        datas.pid =0;
+        datas.nowhref=window.location.href;
+        $.post("{:U('Api/Groupcomment/commentAdd')}",datas,function(data){
+            console.log(data);
+            if(data.status=="200"){
+                var tpl = document.getElementById('tplcomment').innerHTML;
+                var html = juicer(tpl, data);
+                $('#commentlist').prepend(html);
+                $(".business_reply_info p").removeClass("border_none");
+                $(".business_reply_item").last().find(".business_reply_info p").addClass("border_none");
+                $("#commenttext").val("");
+
+                var yueke_comment_count=parseInt($("#ykcomment_count").html());
+                $("#ykcomment_count").html(yueke_comment_count+1);//评论数+1
+	            localStorage.visitor=data.visitor;
+                imgonerror();//默认图片
+            }else if(data.status=="401"){
+                share.setText("请先登录");
+                share.showhare();
+                share.hiddenShare();
+                setTimeout(function(){window.location.href='{:U("Userregsign/login")}'},800);
+            }else if(data.status=="408"){
+                share.setText(data.comment);
+                share.showhare();
+                share.hiddenShare();
+            }else if(data.status=="410"){
+                share.setText(data.comment);
+                share.showhare();
+                share.hiddenShare();
+            }else if(data.status=="400"){
+                share.setText(data.comment);
+                share.showhare();
+                share.hiddenShare();
+            }
+        }, "json");
+    }
+}
+//获取该约课推送过的课程
+function grouppushed(){
+    push=push+1;
+    var pushdata={};
+    pushdata.page=push;
+    pushdata.gid=gid;
+    $.post("{:U('Api/GroupPushed/pushedByGid')}",pushdata,function(data){
+        console.log(data);
+        if(data.status=="200"){
+            console.log(data);
+            var tpl = document.getElementById('tplpushed').innerHTML;
+            var html = juicer(tpl, data.pushed);
+            $('#pushlist').append(html);
+            $(".business_course_list_phone").removeClass("border_none");
+            $(".business_course_list_div").last().find(".business_course_list_phone").addClass("border_none");
+            if(data.pushed.pageAll<=push){
+                $('#pushedmore').addClass('hidden');
+                $('#pushedmore').html('没有更多了');
+            }
+            imgonerror();//默认图片
+        }else if(data.status=="400"){
+            $('#shopkeeperfabushop').addClass('hidden');
+            $('#shopinfolook').addClass('hidden');
+            $('#pushedmore').addClass('hidden');
+            $('#pushedmore').html('没有更多了');
+        }
+    }, "json");
+}
+grouppushed();
+$('#pushedmore').click(function(){
+    grouppushed();
+})
+
+/**
+ * 获取热门课程
+ */
+function showGener() {
+    $.post("{:U('Api/ShopInfo/gener')}", function(data) {
+        console.log(data);
+        var tpl = document.getElementById('generTpl').innerHTML;
+        var html = juicer(tpl, data);
+        $('#generPanel').append(html);
+    }, "json")
+}
+showGener();
+//添加跟约
+function getassist(){
+	if(overtime_status==1){
+	    $("#assist_user").unbind('click', getassist);
+	    var visitorid=localStorage.visitor;
+	    var assistdata={};
+	    if(visitorid!=null&&visitorid!=''){
+	    	assistdata.visitorid=visitorid;
+	    }
+	    assistdata.nowhref=window.location.href;
+	    assistdata.groupid=gid;
+	    console.log(assistdata);
+	    $.post("{:U('Api/GroupAssist/addAssist')}",assistdata, function(data) {
+	        console.log(data);
+	        if(data.status==401){ //401暂时被弃用
+	
+	            share.setText("请先登录");
+	            share.showhare();
+	            share.hiddenShare();
+	            setTimeout(function(){window.location.href='{:U("Userregsign/login")}'},800);
+	            $("#assist_user").bind('click', getassist);
+	            return;
+	        }else if(data.status==404){ //已经跟约成功 并且删除成功
+	            var yuekekcount=parseInt($("#ykcount").html());
+	
+	            $("#ykcount").html(yuekekcount-1);
+	            $("#assist_user").html("跟约");
+	            $('#sectionscroll').html("");
+	            i=0;
+	            postassist();
+	            share.setText("取消成功。");
+	            share.showhare()
+	            share.hiddenShare();
+	            $("#assist_user").bind('click', getassist);
+	            return;
+	        }else if(data.status==200){
+	            var yuekekcount=parseInt($("#ykcount").html());
+	            $("#ykcount").html(yuekekcount+1);
+	            $("#assist_user").html("取消");
+	            $('#sectionscroll').html("");
+	            i=0;
+	            localStorage.visitor=data.visitor;
+	            postassist();//刷新跟约信息
+	            //share.setText("跟约成功!");//此提示已经转移到下面的判断是否游客的下部操作中
+	            //share.showhare()
+	            //share.hiddenShare();
+	            $("#assist_user").bind('click', getassist);
+	            visitAssistTrue(); //判断是否游客-则下步操作
+	           return;
+	        }else {
+	            share.setText(data.assist);
+	            share.showhare();
+	            share.hiddenShare();
+	            $("#assist_user").bind('click', getassist);
+	            return;
+	        }
+	    }, "json")
+	}else{
+		share.setText("该约课已经截止!");
+    	share.showhare()
+    	share.hiddenShare();
+	}
+}
+$("#assist_user").bind('click', getassist);
+//获取该商家的课程
+function shoplist(){
+    shopinfolist=shopinfolist+1;
+    var loginvalue=$('#loginchecktype').val();
+    var loginid=$('#logincheckid').val();
+    if(loginvalue==0){
+        share.setText("请先登录!");
+        share.showhare();
+        share.hiddenShare();
+        setTimeout(function(){window.location.href='{:U("Index/loginregister")}'},800);
+    }else if(loginvalue==2){
+        share.setText("请登录商家账号!");
+        share.showhare();
+        share.hiddenShare();
+    }else if(loginvalue==1){
+        var shopinfo={};
+        shopinfo.sid=loginid;
+//		shopinfo.page=shopinfolist;
+//		shopinfo.perPage=10;
+        console.log(shopinfo);
+        $.get("{:U('Api/ShopInfo/getVerySimpleInfo')}",shopinfo, function(data) {
+            console.log(data);
+            if(data==403){
+                share.setText("请先登录！");
+                share.showhare();
+                share.hiddenShare();
+                setTimeout(function(){window.location.href='{:U("Index/loginregister")}'},800);
+            }else if(data.status!=200){
+                share.setText(data.data);
+                share.showhare();
+                share.hiddenShare();
+            }else if(!data.data){
+                var shopnullhtml=$('#hiddenshopnull').html();
+                $('#shoplistselect').html(shopnullhtml);
+            }else{
+                var tpl = document.getElementById('shopselect').innerHTML;
+                var html = juicer(tpl, data);
+                $('#third_new_select').append(html);
+                imgonerror();//默认图片
+            }
+        }, "json")
+    }
+}
+
+
+<if condition="$info['logintype'] eq 1">
+$("body").on("click","#shopkeeperfabu",function(){
+    window.location.href="{:U('Shopkeeper/course')}";
+})
+</if>
+
+
+//添加推送
+function getpush(){
+    var shopinfoid=$('#third_new_select').val();
+    var addpushdata={};
+    addpushdata.gid=gid;
+    addpushdata.infoid=shopinfoid;
+    console.log(addpushdata);
+    $.post("{:U('Api/GroupPushed/addPush')}",addpushdata, function(data) {
+//		console.log(data);
+        if(data.status==400){
+            share.setText(data.pushed);
+            share.showhare();
+            share.hiddenShare();
+            return;
+        }else if(data.status==401){
+            share.setText("请先登录！");
+            share.showhare()
+            share.hiddenShare();
+            setTimeout(function(){window.location.href='{:U("Userregsign/login")}'},800);
+            return;
+        }else if(data.status==502){
+            share.setText("已经推送过该课程!");
+            share.showhare()
+            share.hiddenShare();
+            return;
+        }else if(data.status==200){
+            console.log(data);
+            var tpl = document.getElementById('tplpushed').innerHTML;
+            var html = juicer(tpl, data);
+            $('#pushlist').prepend(html);
+            showWin();
+            share.setText("推送成功!");
+            share.showhare()
+            share.hiddenShare();
+        }else{
+            share.setText(data.pushed);handleavatar
+            share.showhare()
+            share.hiddenShare();
+            return;
+        }
+    }, "json")
+}
+//添加收藏
+function getcellect(){
+    var collectdata={};
+    collectdata.gid=gid;
+    collectdata.nowhref=window.location.href;
+    $.get("{:U('Api/UserCollect/addCollect')}",collectdata, function(data) {
+        console.log(data);
+        if(data.status==401){
+            share.setText("请先登录!");
+            share.showhare();
+            share.hiddenShare();
+            setTimeout(function(){window.location.href='{:U("Userregsign/login")}'},800);
+        }else if(data.status==402){
+            $("#shoucang_span").html("收藏")
+            share.setText("取消收藏成功!");
+            share.showhare();
+            share.hiddenShare();
+            return;
+        }else if(data.status==200){
+            $("#shoucang_span").html("已收藏")
+            share.setText("收藏成功!");
+            share.showhare();
+            share.hiddenShare();
+        }
+    }, "json")
+}
+
+$("#getcellect").click(function(e){
+    e.preventDefault();
+    var collectdata={};
+    collectdata.gid=gid;
+	collectdata.nowhref=window.location.href;
+    $.get("{:U('Api/UserCollect/addCollect')}",collectdata, function(data) {
+        console.log(data);
+        if(data.status==401){
+            share.setText("请先登录!");
+            share.showhare();
+            share.hiddenShare();
+            setTimeout(function(){window.location.href='{:U("Userregsign/login")}'},800);
+        }else if(data.status==402){
+            share.setText("取消成功!");
+            $("#shoucang_span").html("收藏")
+            share.showhare();
+            share.hiddenShare();
+            return;
+        }else if(data.status==200){
+            $("#shoucang_span").html("已收藏")
+            share.setText("收藏成功!");
+            share.showhare();
+            share.hiddenShare();
+        }
+    }, "json")
+})
+</script>
+
+<script id="tplassist" type="text/template">
+    {@each assist as it,indext}
+    <li {@if it.uid==0}data-visitid="${it.visitor_id}"{@/if}><a href="{:U('LookUser/moInfo')}?{@if it.uid!=0}uid=${it.uid}{@else}uid=0&&vid=${it.visitor_id}{@/if}"><img src="${it.avatar}" alt=""/></a></li>
+    {@/each}
+</script>
+
+<script id="tplcomment" type="text/template">
+    {@each comment as it,indext}
+
+	{@if it.visitor_id!=0}
+    <div id="delcom${it.id}">
+        <div class="business_reply_item">
+            <a href="{:U('LookUser/moInfo')}?uid=0&&vid=${it.visitor_id}"><img src="${it.visitor_avatar}" alt="" class="business_reply_img"></a>
+            <div class="business_reply_info">
+                <h2><b class="name_comment_1">${it.name}</b>
+                    {@if it.depth!=0}
+                    	<b class="name_comment">回复
+						{@if it.answer_u_id!=0}
+							${it.answer_u_name}</b><span class="hidden">${it.answer_u_id}</span>
+                    	{@else if it.answer_s_id!=0}
+							${it.answer_s_name}</b><span class="hidden">${it.answer_s_id}</span>
+						{@else if it.answer_vi_id!=0}
+							${it.answer_vi_name}</b><span class="hidden">${it.answer_vi_id}</span>
+                    	{@/if}:
+                    {@/if}
+                </h2>
+                <span  class="hidden now_com_id">${it.id}</span>
+                <span  class="hidden now_com_depth">${it.depth}</span>
+                <p>${it.c_info}</p>
+            </div>
+            <span>${it.addtime}</span>
+            <a href="#" class="comment_rep_b">回复</a>
+            {@if it.login_user!=0}
+            	{@if it.login_user==it.uid}
+            		<a href="#" class="comment_delete_b">删除</a>
+            	{@/if}
+            {@else if it.login_sk!=0}
+            	{@if it.login_sk==it.sid}
+            		<a href="#" class="comment_delete_b">删除</a>
+            	{@/if}
+            {@else if it.login_visitor!=0}
+            	{@if it.login_visitor==it.visitor_id}
+            		<a href="#" class="comment_delete_b">删除</a>
+            	{@/if}
+            {@/if}
+        </div>
+        <div class="business_relay_input_wrap comment_rep_wrap hidden">
+            <div class="input_wrap business_reply_input">
+                <input type="text" class="register_input" placeholder="请输入你的评论">
+                <i class="input_close_icon op_0" style="top: 0.6em;"></i>
+            </div>
+            <button  class="business_reply_btn">回复</button>
+        </div>
+    </div>
+    {@else if it.sid==0}
+    <div id="delcom${it.id}">
+        <div class="business_reply_item">
+            <a href="{:U('LookUser/moInfo')}?uid=${it.uid}"><img src="${it.avatar}" alt="" class="business_reply_img"></a>
+            <div class="business_reply_info">
+                <h2><b class="name_comment_1">${it.firstname}${it.lastname}</b>
+                    {@if it.depth!=0}
+                    <b class="name_comment">回复{@if it.answer_s_id==0}${it.answer_u_name}</b><span class="hidden">${it.answer_u_id}</span>
+                    {@else if it.answer_u_id==0}${it.answer_s_name}</b><span class="hidden">${it.answer_s_id}</span>
+                    {@/if}:
+                    {@/if}
+                </h2>
+                <span  class="hidden now_com_id">${it.id}</span>
+                <span  class="hidden now_com_depth">${it.depth}</span>
+                <p>${it.c_info}</p>
+            </div>
+            <span>${it.addtime}</span>
+            <a href="#" class="comment_rep_b">回复</a>
+            {@if it.login_user!=0}
+            {@if it.login_user==it.uid}
+            <a href="#" class="comment_delete_b">删除</a>
+            {@/if}
+            {@else if it.login_sk!=0}
+            {@if it.login_sk==it.sid}
+            <a href="#" class="comment_delete_b">删除</a>
+            {@/if}
+            {@/if}
+        </div>
+        <div class="business_relay_input_wrap comment_rep_wrap hidden">
+            <div class="input_wrap business_reply_input">
+                <input type="text" class="register_input" placeholder="请输入你的评论">
+                <i class="input_close_icon op_0" style="top: 0.6em;"></i>
+            </div>
+            <button  class="business_reply_btn">回复</button>
+        </div>
+    </div>
+    {@else if it.uid==0}
+    <div id="delcom${it.id}">
+        <div class="business_reply_item">
+            <a href="{:U('Shopkeeper/info')}?id=${it.sid}"><img src="${it.skavatar}" alt="" class="business_reply_img"></a>
+            <div class="business_reply_info">
+                <h2><b class="name_comment_1">${it.nickname}</b>
+                    {@if it.depth!=0}
+                    <b class="name_comment">回复{@if it.answer_s_id==0}${it.answer_u_name}</b><span class="hidden">${it.answer_u_id}</span>
+                    {@else if it.answer_u_id==0}${it.answer_s_name}</b><span class="hidden">${it.answer_s_id}</span>
+                    {@/if}:
+                    {@/if}
+                </h2>
+                <span  class="hidden now_com_id">${it.id}</span>
+                <span  class="hidden now_com_depth">${it.depth}</span>
+                <p>${it.c_info}</p>
+            </div>
+            <span>${it.addtime}</span>
+            <a  href="#" class="comment_rep_b">回复</a>
+            {@if it.login_user!=0}
+            {@if it.login_user==it.uid}
+            <a href="#" class="comment_delete_b">删除</a>
+            {@/if}
+            {@else if it.login_sk!=0}
+            {@if it.login_sk==it.sid}
+            <a href="#" class="comment_delete_b">删除</a>
+            {@/if}
+            {@/if}
+        </div>
+        <div class="business_relay_input_wrap comment_rep_wrap hidden">
+            <div class="input_wrap business_reply_input">
+                <input type="text" class="register_input" placeholder="请输入你的评论">
+                <i class="input_close_icon op_0" style="top: 0.6em;"></i>
+            </div>
+            <button  class="business_reply_btn">回复</button>
+        </div>
+    </div>
+    {@/if}
+    {@/each}
+</script>
+
+<script id="tplpushed" type="text/template">
+    {@each pusheds as it,indext}
+    <div class="business_course_list_div">
+        <div class="business_course_list_img">
+            <img src="${it.avatar}" alt="" />
+        </div>
+        <a href="{:U('Shopkeeper/cont')}?id=${it.sinfoid}"><p class="business_course_list_title">${it.title}</p></a>
+        <!--<p class="business_course_list_cont">$${it.content}</p>-->
+        <div class="bz_course_wrap">
+            <p class="bz_course_cont">$${it.content}</p>
+            <img width="8px" height="4px" src="__HIMG__/icon2.png" alt="">
+        </div>
+        <p class="business_course_list_phone"><img src="__HIMG__/phone.png" alt=""/>${it.phone_tel}</p>
+        <span class="business_course_list_time">${it.ctime}</span>
+    </div>
+    {@/each}
+</script>
+
+<script id="generTpl" type="text/template">
+    {@each data as it,i}
+    <div class="span5 section_spread_item">
+        <div class="section_spread_img_wrap">
+            <a href="{:U('Shopkeeper/Info')}?id=${it.sid}"><img src="${it.avatar}"  onerror="javascript:this.src='__IMGDEFAULT__';" alt=""></a>
+        </div>
+        <p class="section_spread_first_title">
+            <a href="{:U('Shopkeeper/cont')}?id=${it.id}">${it.title}</a>
+        </p>
+        <p class="section_spread_second_title">
+            ${it.nickname}
+        </p>
+    </div>
+    {@/each}
+</script>
+
+<script id="shopselect" type="text/template">
+    {@each data as itshop,indexshop}
+    <option value="${itshop.id}">${itshop.title}</option>
+    {@/each}
+</script>
+
+<script type="text/javascript" charset="utf-8">
+    /* 分享的内容 */
+    var jiathis_config = {
+        url: "http://17yueke.cn__SELF__",
+        title: "{$info['title']}－选自17约课",
+        summary: "{$info.contents}",
+        pic: "http://17yueke.cn__UPLOAD__{$info.environ}",
+    }
+
+    //回复-点击触发
+    var answer_p=0;
+    var answer_d=0;
+    $("#commentlist").on("click",".comment_rep_b",function(e) {
+        e.preventDefault();
+        var flat = 0;//判断是不是已经展开回复；
+
+        var currentClick = $(e.target);
+        var curInput = currentClick.parent(".business_reply_item").next();
+        if(curInput.hasClass("hidden")){
+            $(".comment_rep_wrap").addClass("hidden");
+            curInput.removeClass("hidden");
+
+            answer_p=currentClick.parent(".business_reply_item").find(".now_com_id").text();
+            answer_d=currentClick.parent(".business_reply_item").find(".now_com_depth").text();
+
+            var placeholder_user=currentClick.parent(".business_reply_item").find(".name_comment_1").text();
+            currentClick.parent(".business_reply_item").next().find(".register_input").attr("placeholder","回复"+placeholder_user+":");
+        }
+        else{
+            curInput.addClass("hidden");
+
+        }
+
+
+
+        console.log(currentClick.parent(".business_reply_item").next().find(".register_input"));
+        /* 	console.log(answer_p);//上一级的评论的id
+         console.log(answer_d);//上一级的评论深度 */
+    });
+    //回复-点击隐藏
+    /*$("#commentlist").on("click",".business_reply_item",function(e){
+
+     })*/
+    //回复-ajax请求
+    $("#commentlist").on("tap",".business_reply_btn",function(e){
+        var answer_info=$(e.target).parents(".comment_rep_wrap").find(".register_input").val();
+        e.preventDefault();
+        if(answer_info==''){
+            share.setText("评论不能为空");
+            share.showhare();
+            share.hiddenShare();
+        }else{
+            var datas={};
+    	    var visitorid=localStorage.visitor;
+    	    if(visitorid!=null&&visitorid!=''){
+    	    	datas.visitorid=visitorid;
+    	    }
+            datas.gid = gid;
+            datas.c_info=answer_info;
+            datas.pid =answer_p;
+            datas.depth =answer_d;
+			datas.nowhref=window.location.href;
+            $.post("{:U('Api/Groupcomment/commentAdd')}",datas,function(data){
+                console.log(data);
+                if(data.status=="200"){
+                    var tpl = document.getElementById('tplcomment').innerHTML;
+                    var html = juicer(tpl, data);
+                    $('#commentlist').prepend(html);
+                    $(e.target).parents(".comment_rep_wrap").find(".register_input").val("");
+                    $(e.target).parents(".comment_rep_wrap").addClass("hidden");
+                    $("#to_top").trigger("click");
+
+
+                    var yueke_comment_count=parseInt($("#ykcomment_count").html());
+                    $("#ykcomment_count").html(yueke_comment_count+1);
+    	            localStorage.visitor=data.visitor; //游客
+                    imgonerror();//默认图片
+
+                }else if(data.status=="401"){
+                    share.setText("请先登录");
+                    share.showhare();
+                    share.hiddenShare();
+                    setTimeout(function(){window.location.href='{:U("Userregsign/login")}'},800);
+                }else if(data.status=="408"){
+                    share.setText(data.comment);
+                    share.showhare();
+                    share.hiddenShare();
+                }else if(data.status=="410"){
+                    share.setText(data.comment);
+                    share.showhare();
+                    share.hiddenShare();
+                }else{
+                    share.setText(data.comment);
+                    share.showhare();
+                    share.hiddenShare();
+                }
+            }, "json");
+        }
+    });
+    //删除
+    $("#commentlist").on("click",".comment_delete_b",function(e) {
+        e.preventDefault();
+        if (!confirm("确认要删除？")) {
+            window.event.returnValue = false;
+        }else{
+            var delClick = $(e.target);
+            delcomid=delClick.parent(".business_reply_item").find(".now_com_id").text();
+            var datas={};
+            datas.comid = delcomid;
+            datas.gid   = gid;
+            datas.nowhref=window.location.href;
+
+            $.post("{:U('Api/Groupcomment/delGcom')}",datas,function(data){
+                console.log(data);
+                if(data.status=="401"){
+                    share.setText("请先登录");
+                    share.showhare();
+                    share.hiddenShare();
+                    setTimeout(function(){window.location.href='{:U("Userregsign/login")}'},800);
+                }else if(data.status==200){
+                	console.log(delcomid);
+                    $("#delcom"+delcomid).remove();
+
+                    var yueke_comment_count=parseInt($("#ykcomment_count").html());
+                    $("#ykcomment_count").html(yueke_comment_count-1);
+                    /*
+                     $('#commentlist').prepend(html);
+                     $(e.target).parents(".comment_rep_wrap").find(".register_input").val("");
+                     $(e.target).parents(".comment_rep_wrap").addClass("hidden");
+                     $("#to_top").trigger("click");*/
+                }else{
+	                share.setText(data.data);
+	                share.showhare();
+	                share.hiddenShare();
+	            }
+            }, "json");
+
+            console.log(delcomid);
+        }
+    });
+    /*
+     */
+
+    $(".register_input").on("focus",function(e) {
+        $("#top_header").addClass("fixedIOSBug");
+        $(".enterprise_cont_footer").addClass("fixedIOSBug");
+    }).on("blur",function(e) {
+        $("#top_header").removeClass("fixedIOSBug");
+        $(".enterprise_cont_footer").removeClass("fixedIOSBug");
+    });
+    
+    
+    function submitavatar(){
+    	var files 	 = document.getElementById("file").files;
+    	var avatarData = new FormData();
+    	avatarData.append("useravatar", files[0]);
+    	
+    	// 禁用上传操作
+	    $("#btn").unbind("click", btnavatarfile);
+	    share.setText("正在上传中，请耐心等待");
+        share.showhare();
+        share.hiddenShare();
+	    // 开始上传信息
+	    $.ajax({
+	        url: handleavatar,
+	        type: 'POST',
+	        data: avatarData,
+	        cache: false,
+	        dataType: 'json',
+	        processData: false, // Don't process the files
+	        contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+	        success: function (data, textStatus, jqXHR) {
+	            console.log(data);
+	
+	            if (data.status != "200") {
+		            $("#btn").bind("click", btnavatarfile);
+				    share.setText(data.msg);
+			        share.showhare();
+			        share.hiddenShare();
+	                return false;
+	            }
+
+			    share.setText("头像上传成功");
+		        share.showhare();
+		        share.hiddenShare();
+		        
+	        },
+	        error: function (jqXHR, textStatus, errorThrown) {
+	            console.log(jqXHR);
+			    share.setText('ERRORS: ' + textStatus);
+		        share.showhare();
+		        share.hiddenShare();
+	            $("#btn").bind("click", btnavatarfile);
+	        }
+	    });
+    }
+    
+</script>
+<!-- 第一次引导开始 -->
+<script type="text/javascript">
+    $(function () {
+        var startIndex;
+        var endIndex;
+
+        // 如果是商家第一次打开跟约心愿单，推送提示
+        if(login_type_status == 1 && typeof(localStorage.ShopkeeperFirstOpenWishList) == "undefined") {
+            localStorage.ShopkeeperFirstOpenWishList = false;
+            startIndex = 34;
+            endIndex = 34;
+        }
+        // 如果是第一次打开心愿单（包括游客，普通登陆用户），跟约提示
+        else if((login_type_status == 0 || login_type_status == 2)
+                && typeof(localStorage.UserFirstOpenWishList) == "undefined") {
+            localStorage.UserFirstOpenWishList = false;
+            startIndex = 32;
+            endIndex = 32;
+            if(login_type_status == 2 && firstgroup == 1
+                && typeof(localStorage.UserFirstOpenHisOwnWishList) == "undefined") {   // 并且是普通用户第一次点开自己的心愿单
+                localStorage.UserFirstOpenHisOwnWishList = false;
+                endIndex = 33;
+            }
+        }// 如果是当前登录的用户第一次打开自己发布的心愿单，分享提示（跟约提示已经显示过）
+        else if(login_type_status == 2 && firstgroup == 1
+                && typeof(localStorage.UserFirstOpenHisOwnWishList) == "undefined") {
+            localStorage.UserFirstOpenHisOwnWishList = false;
+            startIndex = 33;
+            endIndex = 33;
+        }// 否则什么也不干
+        else {
+            return;
+        }
+        //
+        document.addEventListener("touchmove", function(e) {
+            if(startIndex > 0 && startIndex <= endIndex) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        }, false);
+
+        var $tipsBg = $(".tips-bg");
+        $tipsBg.removeClass("hidden");
+        $tipsBg.find("#tip" + startIndex).removeClass("hidden");
+        var $btns = $(".tips>button");
+        $btns.click(function(e) {
+            $(e.target).parent().addClass("hidden");
+            if (++startIndex <= endIndex) {
+                $("#tip" + startIndex).removeClass("hidden");
+            } else {
+                $tipsBg.addClass("hidden");
+                $btns.unbind("click");
+            }
+        });
+    });
+    // 点击条目展开信息
+    $(".section-value").click(function() {
+        var $this = $(this);
+        var $next = $this.next();
+        if(this.style.whiteSpace == "normal") {
+            this.style.whiteSpace = "nowrap";
+            $next.attr("src", "__HIMG__/icon2.png");
+        }else {
+            this.style.whiteSpace = "normal";
+            $next.attr("src", "__HIMG__/icon1.png");
+        }
+    });
+    // 商家推送课程中，点击展开介绍
+    $("#pushlist").on("click", "p", function(){
+        var $this = $(this);
+        if($this.attr("class") == "bz_course_cont") {
+            var $sibling = $this.next();
+            if($this.css("white-space") === 'nowrap') {
+                $this.css("white-space", "normal");
+                $sibling.attr("src","__HIMG__/icon1.png");
+            } else {
+                $this.css("white-space", "nowrap");
+                $sibling.attr("src","__HIMG__/icon2.png");
+            }
+        }
+    });
+</script>
+<include file="Public:statistics"/>
+</body>
+</html>

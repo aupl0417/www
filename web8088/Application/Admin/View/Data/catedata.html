@@ -1,0 +1,110 @@
+<include file="Public:header" />
+<div id="content">
+
+	
+	<div class="container">
+		
+		<div class="row">
+			
+
+			<include file="Public:nav" />
+			
+			
+			  <div class="span10">
+                <div class="widget widget-table">
+
+                    <div class="widget-header">
+                        <i class="icon-th-list"></i>
+                        <h3>
+                            分类数据 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                        </h3>
+                    </div> <!-- /widget-header -->
+
+                    <div class="widget-content">
+
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>分类名</th>
+                                <th>图标</th>
+                                <th>分类下报名数</th>
+                                <th>分类下商家数</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+						
+                            <tbody>
+                            	<volist name='data' id='vo'>
+                            <tr>
+                                <td>{$i}</td>
+                                <td>{$vo.catename}</td>
+                              <td> <img id="thumb" src="__HUP__{$vo.thumb_logo}"/></td>
+                                <td>{$vo.bmcount}</td>
+                                <td>{$vo.sjcount}</td>
+                                <td><a href="/admin/shopkeeper/detail/sid/369/t/1426815398.html" class="btn btn-info btn-small">查看</a></td>
+
+                            </tr>
+                            </volist>
+                            </tbody>
+                        </table>
+
+                    </div> <!-- /widget-content -->
+
+                   
+						<!-- 分页 -->	
+							<thead>
+								<div class="pagination" style="margin-left:10px;">
+									<div class="">
+										<a href="javascript:;" style="border-left: 1px solid #ddd"   id="DataTables_Table_0_previous">{$page['counts']}条记录  {$page['curPage']}/{$page['pageAll']}页</a>
+										<if condition="$page['curPage'] neq 1">
+											<a  href="__ACTION__/page/1"     class=""  id="DataTables_Table_0_first">第一页</a>
+											<a  href="__ACTION__/page/{$page['curPage']-1}" class="" id="DataTables_Table_0_previous">上一页</a>
+										</if>
+										
+											<span>
+										<for start="$page['pageFirst']" end="$page['pageMax']+1">
+												<a href="__ACTION__/page/{$i}" <if condition="$i eq $page['curPage']"> style="color: #FC8D00;background-color: #FFFFFF;"</if> >{$i}</a>
+										</for>
+											</span>
+										<if condition="$page['curPage'] neq $page['pageAll']">
+											<a  href="__ACTION__/page/{$page['curPage']+1}" class="" id="DataTables_Table_0_next">下一页</a>
+											<a  href="__ACTION__/page/{$page['pageAll']}"   class="" id="DataTables_Table_0_last">最后一页</a>
+										</if>
+									</div>
+								</div>
+								
+							</thead>
+
+                </div> <!-- /widget -->
+
+            </div> <!-- /span10 -->
+
+        </div> <!-- /row -->
+
+    </div> <!-- /container -->
+
+</div> <!-- /content -->
+
+
+
+
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script type="text/javascript">
+
+
+</script >
+<script src="__AJS__/jquery-1.7.2.min.js"></script>
+<script src="__AJS__/excanvas.min.js"></script>
+<script src="__AJS__/jquery.flot.js"></script>
+<script src="__AJS__/jquery.flot.pie.js"></script>
+<script src="__AJS__/jquery.flot.orderBars.js"></script>
+<script src="__AJS__/jquery.flot.resize.js"></script>
+<script src="__AJS__/delete.js"></script>
+
+<script src="__AJS__/bootstrap.js"></script>
+<script src="__AJS__/charts/bar.js"></script>
+<include file="Public:footer" />

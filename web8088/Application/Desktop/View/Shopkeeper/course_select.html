@@ -1,0 +1,286 @@
+<extend name="ShopPublic:base" />
+
+<block name="title">17约课-课程搜索</block>
+
+<block name="main">
+
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+
+        <include file="ShopPublic:cateNav" />
+
+      <!--课程-->
+          <section class="content">
+               <div class="select-wrap">
+                   <p >
+                       <a href="{:U('Shopkeeper/index')}">首页</a>
+                       <?php foreach ($cateArr as $value): ?>
+                       &gt; <a href="{:mergeGetU('Shopkeeper/course_select', array('cateid'=>$value['id']))}">{$value['catename']}</a>
+                       <?php endforeach; ?>
+                   </p>
+                 <div>
+                   <span class="select-left">地区：</span>
+                   <div class="select-area">
+                     <ul class="nav nav-tabs nav-justified">
+                         <?php foreach ($areaArr as $key => $row): ?>
+                      <li class="<?=$key==$currentAreaKey?'active':''?>" role="presentation"><a href="{:mergeGetU('Shopkeeper/course_select', array('areaid'=>$row['item']['id']))}">{$row.item.areaname}</a></li>
+                      <?php endforeach; ?>
+                   </ul>
+                       <div id="subAreaPanel">
+                         <?php if (!empty($currentAreaKey)): ?>
+                         <ul class="area_list clearfix">
+                           <?php foreach ($areaArr[$currentAreaKey]['sub'] as $row): ?>
+                           <li><a href="{:mergeGetU('Shopkeeper/course_select', array('areaid'=>$row['id']))}">{$row.areaname}</a></li>
+                           <?php endforeach; ?>
+                         </ul>
+                         <?php endif; ?>
+                       </div>
+                   </div>
+                 </div>
+
+                 
+               </div>
+               <div class="select-bottom">
+                   <div class="btn-group">
+                      <button type="button" class="btn btn-default dropdown-toggle sort-btn" data-toggle="dropdown" aria-expanded="false">
+                          <?=($searchType == 'wish')?'心愿':'课程'?>  <span class="caret" style="transform: rotate(0deg);"></span>
+                      </button>
+                      <ul class="dropdown-menu" role="menu" style="display: none;">
+                          <li><a href="{:mergeGetU('Shopkeeper/course_select', array('searchType'=>'course'))}">课程</a></li>
+                          <li><a href="{:mergeGetU('Shopkeeper/course_select', array('searchType'=>'wish'))}">心愿</a></li>
+                      </ul>
+                  </div>
+                  <div class="btn-group">
+                          <button type="button" class="btn btn-default dropdown-toggle sort-btn" data-toggle="dropdown" aria-expanded="false">
+                              <?=($greet=='greet')?'最受欢迎':'默认排序'?> <span class="caret" style="transform: rotate(0deg);"></span>
+                          </button>
+                          <ul class="dropdown-menu" role="menu" style="display: none;">
+                            <li><a href="{:mergeGetU('Shopkeeper/course_select', array('greet'=>''))}">默认排序</a></li>
+                            <li><a href="{:mergeGetU('Shopkeeper/course_select', array('greet'=>'greet'))}">最受欢迎</a></li>
+                          </ul>
+                  </div>
+                 </div>
+          </section>
+          <section class="content">
+
+               <!-- 模板输出位置 -->
+              <div id="coursePanel" class="row"> </div>
+
+           <!-- 分页栏 -->
+           <nav id="paginationPanel" style="text-align:right;">
+
+          </section>	
+      </div><!-- /.content-wrapper -->
+
+
+     
+      
+    </div><!-- ./wrapper -->
+
+    <!-- 分页栏使用到的js -->
+    <include file="ShopPublic:pagination" />
+    
+</block>
+
+<block name="css">
+    <link rel="stylesheet" href="__PCCSS__/main.css">
+    <style>
+        /* 主要用于 */
+    a{
+      color:#929292;
+    }
+    .content {
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-bottom: 10px;
+      min-height: 140px;
+    }
+    .select-wrap{
+      background-color: #fff;
+      padding: 1em 1em 1em .8em;
+    }
+    .area_list{
+      list-style: none;
+    }
+    .area_list li{
+    float: left;
+    width: 10%;
+    }
+    .select-left{
+      display: inline-block;
+      vertical-align: top;
+    }
+    .select-area{
+      display: inline-block;
+      width: 90%;
+    }
+    .select-area>div{
+      border-bottom: 1px solid #ddd;
+      border-left: 1px solid #ddd;
+      border-right: 1px solid #ddd;
+      background-color: rgba(199, 199, 199, 0.24);
+    }
+    .nav-tabs>li.active>a{
+    background-color: rgba(199, 199, 199, 0.24);
+    border-bottom: none;
+    }
+
+
+    .nav-tabs.nav-justified>.active>a{
+      border-bottom-color: #F1F1F1 !important; 
+    }
+    .select-bottom{
+      border-top: 1px solid #ddd; 
+     background-color: #fff;
+    }
+    .sort-btn{
+        border-radius: 0px;
+      border: none;
+        border-top: 2px solid #ffffff;
+      border-right: 1px solid #ddd;
+      width: 7em;
+      background-color: inherit;
+    }
+    .sort-btn:hover{
+      color: #268ec0;
+      border-top: 2px solid #4791ff;
+      background-color: #fff !important;
+    }
+    </style>
+</block>
+
+<block name="js">
+
+    <!-- 商家课程模板 -->
+    <script id="courseTpl" type="text/template" charset="utf-8">
+        {@each info as it,index}
+        <div class="col-xs-4">
+            <div class="course">
+                <div class="course-logo-wrap">
+                    <div class="logo_model">
+                    ${it.preferent}
+                    </div>
+                    <img src="__UPLOAD__/${it.environ}" class="course-logo" alt="course pic">
+                </div>
+                
+                <div class="course-content">
+                <img src="__PCIMG__/laba.png" alt=""/>
+                <a href="{:U('Shopkeeper/course')}?id=${it.id}">
+                    ${it.title}
+                    </a>
+                </div>
+                <div class="course_brief clearfix">
+            <li><i class="icons-time" ></i>${it.mode}</li>
+            <li><i class="icons-msg"></i>${it.comment_count}条评论</li>
+            <li><i class="icons-user"></i>${it.user_count}人报名</li>
+          </div>
+                <div class="course-bottom">
+                    <div class="bottom-left">
+                        <img src="__UPLOAD__/${it.avatar}" alt="avator">&nbsp;&nbsp;&nbsp;${it.nickname}
+                    </div>
+                    <div class="bottom-right">
+                        <!-- 3-5人 --> &nbsp;<span class="price-now business">${it.price}元</span> <!-- {@if it.preferent}<span class="price-past">${it.preferent}元</span>{@/if} -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        {@/each}
+    </script>
+
+    <!-- 心愿单模板 -->
+    <script id="wishTpl" type="text/template" charset="utf-8">
+    {@each info as it,index}
+        <div class="col-xs-4">
+          <div class="course">
+            <div class="course-logo-wrap">
+              <div class="logo_model">
+                ${it.area_detail}
+              </div>
+              <img src="__UPLOAD__${it.environ}" class="course-logo" alt="course pic">
+            </div>
+
+            <div class="course-content">
+            <img src="__PCIMG__/laba.png" alt=""/>
+            <a href="#">
+              ${it.title}
+              </a>
+            </div>
+                  <div class="course_brief clearfix">
+                    <li><i class="icons-time" ></i>${it.mode}</li>  
+                    <li><i class="icons-msg"></i>${it.comment}条评论</li>
+                    <li><i class="icons-user"></i>${it.number}人报名</li>
+                  </div>
+            <div class="course-bottom">
+              <div class="bottom-left">
+                <img src="${it.avatar}" alt="avator">&nbsp;&nbsp;&nbsp;${it.firstname}${it.lastname}
+              </div>
+              <div class="bottom-right">
+                ${it.pricearr.ltnumber}-${it.pricearr.gtnumber}人 &nbsp;<span class="price-now">${it.pricearr.ltprice}元</span> <span class="price-past">${it.pricearr.reference}元</span>
+              </div>
+            </div>
+          </div>
+        </div>
+    {@/each}
+    </script>
+
+    <!-- AdminLTE App -->
+    <script src="__PCJS__/app.min.js" type="text/javascript"></script>    
+    <script src="__PCJS__/main.js" type="text/javascript"></script>
+    <script type="text/javascript" src="__HJS__/juicer-min.js"></script>
+
+    <!-- 全局常量 -->
+    <script type="text/javascript" charset="utf-8">
+        var userCateUrl = "{:U('Api/Index/ajaxGroup', array('is_desktop'=>1))}";
+        var shopCateUrl = "{:U('Api/Index/ajaxShop', array('is_desktop'=>1))}";
+
+        var gArgs = {
+            'area_id':  {$areaid},
+            'cate_id':  {$cateid},
+            'searchType':   '{$searchType}',
+            'keyword':  '{$keyword}',
+            'greet':    '{$greet}'
+        };
+    </script>
+
+    <script type="text/javascript" charset="utf-8">
+        $(function() {
+            showCourse(1);
+        });
+
+        function showCourse(page) {
+            var url = '';
+            if (gArgs.searchType == 'wish') {
+                url = userCateUrl;
+            } else {
+                url = shopCateUrl;
+            }
+
+            var args = gArgs;
+            args.page = page;
+
+            $.get(url, args, function(data) {
+                console.log(data);
+
+                // $(".css-loading").addClass("hidden");
+
+                if (!data.info.length) {
+                    alert("没有数据");
+                    return false;
+                }
+
+                // 拼接模板了
+                var tplId = 'courseTpl';
+                if (gArgs.searchType == 'wish') {
+                    tplId = 'wishTpl';
+                }
+                var tpl = document.getElementById(tplId).innerHTML;
+                var html = juicer(tpl, data);
+                $("#coursePanel").html(html);
+
+                showPagination("paginationPanel", page, data.totalPages, "showCourse");
+
+            }, "json");
+
+        }
+    </script>
+</block>

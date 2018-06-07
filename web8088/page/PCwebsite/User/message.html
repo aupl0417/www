@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <title>17约课-消息</title>
+    <meta name="description" content="17约课商家中心" />
+    <meta name="keywords"  content="17约课,一起约课,约课,商家中心" />
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <!-- Bootstrap 3.3.4 -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />    
+    <!-- FontAwesome 4.3.0 -->
+    <link href="http://cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <!-- 2.0.0
+    <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />     -->
+    <!-- Theme style -->
+    <link href="css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
+    <!-- AdminLTE Skins. Choose a skin from the css/skins 
+         folder instead of downloading all of them to reduce the load. -->
+    <link href="css/_all-skins.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="css/all.css">
+	<link rel="stylesheet" href="css/publish.css">
+	<link rel="stylesheet" href="webuploader/style.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+    .mb25{margin-bottom: 25px;}
+    .stu-ava,.o-ava-s{width: 45px;border: 1px solid #eee;border-radius: 5px;position: absolute;}
+    .o-ava-s{margin: 3px 0 0 5px; width: 30px;}
+    .pagination>.active>a{background-color: #2DA4DE; border-color: #2DA4DE;}
+    .cmt-item{padding-bottom: 20px;margin-bottom: 20px;border-bottom: 1px solid #d6d6d6;}
+    .cmt-cont{position: relative;}
+    .cmt-c-wrap{margin-left: 55px;}
+    .post-time{float: right;}
+    .cmt-reply{float: right;cursor: pointer;}
+    .cmt-sub{padding: 3px 5px;background-color: #e8e8e8;}
+    .cmt-sub-i{width: 60px;height: 40px;}
+    .cmt-sub-t{margin-left: 15px;}
+
+    .cmt-input-box{position: relative; margin: 0 0 10px 50px;border: 1px solid #d6d6d6;padding: 5px;}
+    .cmt-input-box:before, .cmt-input-box:after{content: "";display: block;position: absolute;line-height: 0;font-size: 0;right: 6px;top: -20px;border-width: 10px;border-style: solid dashed dashed dashed;border-color: transparent transparent #dbdbdb transparent;}
+    .cmt-input-box:after{right: 6px;top: -18px;border-color: transparent transparent white transparent;}
+    .cmt-input{border: none;outline: none;width: 100%;}
+    .cmt-btn{float: right;margin-bottom: 10px;border: none;color: white;width: 90px;height: 30px;border-radius: 5px;}
+    </style>
+  </head>
+  <body class="skin-blue sidebar-mini">
+    <div class="wrapper">
+      
+      <header class="main-header">
+        <!-- Logo -->
+        <a href="index2.html" class="logo">
+          <!-- mini logo for sidebar mini 50x50 pixels -->
+          <span class="logo-mini">
+            <img src="img/logo-min.png" alt="">
+          </span>
+          <!-- logo for regular state and mobile devices -->
+          <span class="logo-lg">
+           <img src="img/logo.png" alt="">
+          </span>
+        </a>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top clearfix" role="navigation">
+          <!-- Sidebar toggle button-->
+        
+          <button class="publish">	<img src="img/fabu.png" alt="发布"/>免费发布课程</button>
+            
+        </nav>
+      </header>
+      <!-- Left side column. contains the logo and sidebar -->
+      
+
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+
+      <!--课程发布-->
+      <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+          <!-- Sidebar user panel -->
+          <div class="user-panel">
+            <div class="pull-left image">
+              <img src="img/avator.png" class="img-square" alt="User Image" />
+            </div>
+            <div class="pull-left info">
+              <p>新东方英语</p>
+
+              <a href="#">北京新东方英语培训</a>
+            </div>
+          </div>
+         
+          <!-- /.search form -->
+          <!-- sidebar menu: : style can be found in sidebar.less -->
+          <ul class="sidebar-menu">
+				<li class="treeview"><a href=""><i class="icons-text"></i><span>资料编辑</span></a></li>
+				<li class="treeview"><a href="intention.html"><i class="icons-honer"></i><span>求学意向</span></a></li>
+				<li class="treeview"><a href=""><i class="icons-book"></i><span>课程动态</span></a></li>
+				<li class="treeview"><a href="certification.html"><i class="icons-card"></i><span>商家认证</span></a></li>
+				<li class="treeview active"><a href=""><i class="icons-info"></i><span>消息</span></a></li>
+				<li class="treeview"><a href=""><i class="icons-setting"></i><span>设置</span></a></li>
+           
+          </ul>
+        </section>
+        <!-- /.sidebar -->
+      </aside>
+       
+        <section class="content">
+        	<div class="row">
+            <div class="ml40 mr20">
+              <h3 class="fs26 mb25">消息</h3>
+              <div id="cmt-wrapper" class="cmt-wrap">
+                <div class="cmt-item">
+                  <div class="cmt-cont">
+                    <img src="img/2.png" alt="头像" class="stu-ava">
+                    <div class="cmt-c-wrap">
+                      <p><span class="stu-name fs18 clightblue">栗山未来</span><span class="post-time cb6b6b6 fs12">12分钟前</span></p>
+                      <p class="fs16 lh1-5">一直想学英语，自己也学习了几个月，但是不懂技巧，也学习了几个月，但是不懂技巧也学习了几个月，但是不懂技巧学得很难，有时间希望找个老师能教学。<span class="cmt-reply clightblue">回复</span></p>
+                    </div>
+                  </div>
+                  <div class="cmt-tool clearfix hidden">
+                    <img src="img/avator.png" alt="机构头像" class="o-ava-s">
+                    <div class="cmt-input-box">
+                      <input type="text" placeholder="回复@栗山未来:" class="fs16 cmt-input">
+                    </div>
+                    <button class="fs16 cmt-btn bglightblue">评论</button>
+                  </div>
+                  <div class="cmt-sub">
+                    <img class="cmt-sub-i" src="img/banner.png" alt="课程"><span class="fs16 cmt-sub-t">新东方英语四级培训</span>
+                  </div>
+                </div>
+                <div class="cmt-item">
+                  <div class="cmt-cont">
+                    <img src="img/2.png" alt="头像" class="stu-ava">
+                    <div class="cmt-c-wrap">
+                      <p><span class="stu-name fs18 clightblue">栗山未来</span><span class="post-time cb6b6b6 fs12">12分钟前</span></p>
+                      <p class="fs16 lh1-5">一直想学英语，自己也学习了几个月，但是不懂技巧，也学习了几个月，但是不懂技巧也学习了几个月，但是不懂技巧学得很难，有时间希望找个老师能教学。<span class="cmt-reply clightblue">回复</span></p>
+                    </div>
+                  </div>
+                  <div class="cmt-tool clearfix hidden">
+                    <img src="img/avator.png" alt="机构头像" class="o-ava-s">
+                    <div class="cmt-input-box">
+                      <input type="text" placeholder="回复@栗山未来:" class="fs16 cmt-input">
+                    </div>
+                    <button class="fs16 cmt-btn bglightblue">评论</button>
+                  </div>
+                  <div class="cmt-sub">
+                    <img class="cmt-sub-i" src="img/banner.png" alt="课程"><span class="fs16 cmt-sub-t">新东方英语四级培训</span>
+                  </div>
+                </div>
+                <div class="cmt-item">
+                  <div class="cmt-cont">
+                    <img src="img/2.png" alt="头像" class="stu-ava">
+                    <div class="cmt-c-wrap">
+                      <p><span class="stu-name fs18 clightblue">栗山未来</span><span class="post-time cb6b6b6 fs12">12分钟前</span></p>
+                      <p class="fs16 lh1-5">一直想学英语，自己也学习了几个月，但是不懂技巧，也学习了几个月，但是不懂技巧也学习了几个月，但是不懂技巧学得很难，有时间希望找个老师能教学。<span class="cmt-reply clightblue">回复</span></p>
+                    </div>
+                  </div>
+                  <div class="cmt-tool clearfix hidden">
+                    <img src="img/avator.png" alt="机构头像" class="o-ava-s">
+                    <div class="cmt-input-box">
+                      <input type="text" placeholder="回复@栗山未来:" class="fs16 cmt-input">
+                    </div>
+                    <button class="fs16 cmt-btn bglightblue">评论</button>
+                  </div>
+                  <div class="cmt-sub">
+                    <img class="cmt-sub-i" src="img/banner.png" alt="课程"><span class="fs16 cmt-sub-t">新东方英语四级培训</span>
+                  </div>
+                </div>
+              </div>
+              <nav style="text-align:right;">
+                <ul class="pagination">
+                  <li><a href="#">首页</a></li>
+                  <li>
+                    <a href="#" aria-label="Previous">
+                      <span aria-hidden="true">上一页</span>
+                    </a>
+                  </li>
+                  <li class="active"><a href="#">1</a></li>
+                  <li><a href="#">2</a></li>
+                  <li><a href="#">3</a></li>
+                  <li><a href="#">4</a></li>
+                  <li><a href="#">5</a></li>
+                  <li>
+                    <a href="#" aria-label="Next">
+                      <span class="clightblue" aria-hidden="true">下一页</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+        	</div>				
+        </section>
+
+      </div><!-- /.content-wrapper -->
+
+
+      <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+          <b>Version</b> 1.0
+        </div>
+        <strong>Copyright &copy; 广州乐莘网络科技有限公司</a>.</strong>
+      </footer>
+    </div><!-- ./wrapper -->
+
+    <!-- jQuery 2.1.4 -->
+    <script src="js/jquery.min.js"></script>
+   
+    
+    <!-- Bootstrap 3.3.2 JS -->
+    <script src="js/bootstrap.min.js" type="text/javascript"></script>    
+   
+    <!-- AdminLTE App -->
+    <script src="js/app.min.js" type="text/javascript"></script>    
+    <script src="js/jquery.tinymce.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    $('#cmt-wrapper').on('click', 'span', function (event) {
+      var $this = $(this);
+      if($this.hasClass('cmt-reply')){
+        if (!this.isCmtBoxShow){
+          $this.parent().parent().parent().parent().find('.cmt-tool').addClass('hidden');
+          this.isCmtBoxShow = true;
+        }else{
+          $this.parent().parent().parent().parent().find('.cmt-tool').removeClass('hidden');
+          this.isCmtBoxShow = false;
+        }
+      }
+    });
+    $('#cmt-wrapper').on('click', 'button', function (event) {
+      var $this = $(this);
+      if ($this.hasClass('cmt-btn')) {
+        alert('您回复的是：' + $this.parent().parent().find('input').val());
+      }
+    });
+    </script>
+  </body>
+</html>

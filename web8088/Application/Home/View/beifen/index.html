@@ -1,0 +1,233 @@
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+    <meta content="yes"name="apple-mobile-web-app-capable"/>
+    <meta content="black"name="apple-mobile-web-app-status-bar-style"/>
+    <title>主页</title>
+    <link rel="stylesheet" type="text/css" href="__HCSS__/reset.css">
+    <link rel="stylesheet" href="__HCSS__/2.css"/>
+    <style>
+        #header{
+            width: 100%;
+            position: relative;
+            height: 100%;;
+            background: url("__HIMG__/Gradual change.png");
+            background-repeat: repeat-x;
+        }
+    </style>
+</head>
+<body>
+<header id="top_header">
+    <div id="header" align="center">
+        <a href="" id="panelSwitch"><img class="header_img" src="__HIMG__/Left navigation.png" alt=""/></a>
+        <img class="header_middle_img" src="__HIMG__/logo.png" alt=""/>
+        <a href="#" ><img class="header_right_img" src="__HIMG__/Editor.png" alt=""/></a>
+    </div>
+</header>
+<div class="wrap-page">
+    <section class="page" id="wrap">
+        <div class="page-inner">
+            <div id="search">
+                <div class="input_outer">
+                    <input type="text" class="search" id="input_win">
+                    <div class="search_middle">
+                        <p class="search_font"><img src="__HIMG__/Search for.png" alt=""/><span></span>搜索</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ad">
+                <div class="test_ad"></div>
+            </div>
+
+            <div class="nav_first">
+                <ul class="nav_ul">
+                	<volist name="data" id="vo">
+                    <li><a href="#" class=""><img src="__HUP__/{$vo.logo}" alt="" class="nav_photo"/></a>
+                        <p class="text-center">{$vo.catename}</p>
+                    </li>
+					 
+                   </volist>
+				   <li><a href="#" class=""><img src="__HIMG__/more.png" alt="" class="nav_photo"/></a>
+                        <p class="text-center">更多培训</p>
+                    </li>
+                </ul>
+            </div>
+
+                <div class="wrap" id="swipeSlide">
+                    <ul class="inline-float">
+                    	
+                    	<li class="inline-float_li">
+                    			
+                            <ul class="nav_second_ul">
+                            	<volist name="shname" id="sh" offset="0" length='4'>
+                                <li><img src="__HIMG__/more.png" alt="" class="nav_photo"/>
+                                    <p class="text-center">{$sh.nickname}</p>
+                                </li>
+            					</volist>
+                            </ul>
+							
+                        </li>
+					
+                    	<li class="inline-float_li">
+                    			
+                            <ul class="nav_second_ul">
+                            	<volist name="shname" id="sh" offset="4" length='4'>
+                                <li><img src="__HIMG__/more.png" alt="" class="nav_photo"/>
+                                    <p class="text-center">{$sh.nickname}</p>
+                                </li>
+            					</volist>
+                            </ul>
+							
+                        </li>
+					
+                    	<li class="inline-float_li">
+                    			
+                            <ul class="nav_second_ul">
+                            	<volist name="shname" id="sh" offset="8" length='4'>
+                                <li><img src="__HIMG__/more.png" alt="" class="nav_photo"/>
+                                    <p class="text-center">{$sh.nickname}</p>
+                                </li>
+            					</volist>
+                            </ul>
+							
+                        </li>
+					
+						
+       
+                    </ul>
+
+                    <p class="slide-bullet">
+                        <i class="icon-bullet active"></i>
+                        <i class="icon-bullet"></i>
+                        <i class="icon-bullet"></i>
+                    </p>
+            </div>
+            <div id="main">
+                <div class="section">
+                    <div class="section_title">
+                        <img src="__HIMG__/DriverLicense2.png" alt="" class="section_title_img_car"/>
+                        <p>驾驶培训</p>
+                        <div class="section_title_more">
+                            <p>更多</p><img src="__HIMG__/More2.png" alt=""/>
+                        </div>
+                    </div>
+                    <div class="section_items">
+                    	<volist name="groupinfo" id="info">
+                        <div class="section_item">
+                        	
+                            <div class="section_item_title">
+                                <div class="span2 section_item_portrait">
+                                    <img src="__HIMG__/touxiang1.jpg" alt=""/>
+                                </div>
+                                <div class="span6 section_item_sub"><h3>{$info.title}</h3>
+                                    <p>{$info.firstname}{$info.lastname}</p></div>
+                                <div class="span2">
+                                    <div class="section_item_follow">
+                                        <p class="section_item_time">{$info.ctime|transDate}</p>
+                                        <p class="section_item_follow_p">跟组<span>{$info.number}</span></p>
+                                    </div>
+                                </div>
+                                <div class="claer"></div>
+
+                            </div>
+                            <div class="section_item_cont">
+                                <div class="section_item_info span6">
+                                    <p><img src="__HIMG__/Classification.png" alt=""/>{$info.catename}</p>
+                                    <p><img src="__HIMG__/Price.png" alt=""/>{$info.price}</p>
+                                    <p><img src="__HIMG__/Time.png" alt=""/><switch name="info.mode" ><case value="0">全日制</case><case value="1">星期六日</case><case value="2">夜校</case><default />其他
+							</switch>
+						 </p>
+                                    <p><img src="__HIMG__/Business.png" alt=""/>{$info.nickname}</p>
+                                    <p><img src="__HIMG__/Location.png" alt=""/>{$info['areaname'][1]}{$info['areaname'][0]}</p>
+                                </div>
+                                <div class="section_item_photo span4">
+                                    <img src="__HIMG__/test.jpg" alt=""/>
+                                </div>
+                                <div class="claer"></div>
+                            </div>
+                            <div class="section_item_feature">
+                                <p>课程特色：
+								<volist name="info['tags']" id="tags" >
+								<span>{$tags}</span>
+								</volist>
+								</p>
+                            </div>
+                            <div class="section_item_pv">
+                                <p class="section_item_pv_pv"><img src="__HIMG__/Browse.png" alt=""/>{$info.view}</p>
+                                <p class="section_item_pv_rep"><img src="__HIMG__/Review.png" alt=""/>{$info.comment}</p>
+                                <p class="section_item_pv_home"><img src="__HIMG__/Business2.png" alt=""/>{$info.coursemun}</p>
+                            </div>
+                        </div>
+					</volist>
+                        
+                    </div>
+                    <div class="section_spread">
+                        <div class="section_spread_title">
+                            <p class="section_spread_title_brand">课程推广</p>
+                            <h2>热门课程</h2>
+                            <h3>组课热门课程八折优惠</h3>
+                        </div>
+                        <div class="section_spread_cont">
+                        	<volist name="gener" id="ge">
+                            <div class="span5 section_spread_item">
+                            	
+                                <div class="section_spread_img_wrap">
+                                <img src="__HIMG__/test2.jpg" alt=""/>
+                                </div>
+                                <p class="section_spread_first_title">
+                                    {$ge.title}
+                                </p>
+                                <p class="section_spread_second_title">
+                                  	{$ge.nickname}
+                                </p>
+								
+                            </div>      
+							</volist>                     
+                        </div>
+                    </div>
+                </div>
+                <footer id="footer">
+                    <a href="">注册</a>
+                    <a href="">登陆</a>
+                    <p class="footer_city_label">城市: </p><a href="" class="footer_city">广州</a>
+                    <div class="footer_auth">
+                        <div class="span2"><div class="footer_line"></div></div>
+                        <div class="span6"><p>17组课网:17zuke.com 粤icp备14082321号</p></div>
+                        <div class="span2"><div class="footer_line"></div></div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </section>
+</div>
+<section class="panel_wrap"></section>
+<section class="panel" id="panelNav">
+    <div class="panel_person_info">
+        <div class="span4"><img class="panel_person_images" src="__HIMG__/touxiang.png" alt=""/></div>
+        <div class="span6 panel_person_name_wrap">
+            <p>王华良</p>
+            <div><img src="__HIMG__/Interest.png" alt=""/>
+                <img src="__HIMG__/Phone verification.png" alt=""/>
+                <img src="__HIMG__/Plus V.png" alt=""/>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <p class="panel_person_chip">好好学习,天天向上 <img src="__HIMG__/Editor2.png" alt=""/></p>
+    <ul class="nav-aside">
+        <li><a href="#"><img class="nav-aside_img" src="__HIMG__/Collect.png" alt=""/>收藏的课程</a><img src="__HIMG__/right.png" class="panel_to_icon"></li>
+        <li><a href="#"><img class="nav-aside_img" src="__HIMG__/Dynamic.png" alt=""/>动态课程</a><img src="__HIMG__/right.png" class="panel_to_icon"></li>
+        <li><a href="#"><img class="nav-aside_img" src="__HIMG__/Authenticate.png" alt=""/>个人认证</a><img src="__HIMG__/right.png" class="panel_to_icon"></li>
+        <li><a href="#"><img class="nav-aside_img" src="__HIMG__/News.png" alt=""/>消息</a><img src="__HIMG__/right.png" class="panel_to_icon"></li>
+        <li><a href="#"><img class="nav-aside_img" src="__HIMG__/Set up.png" alt=""/>设置</a><img src="__HIMG__/right.png" class="panel_to_icon"></li>
+    </ul>
+</section>
+<script type="text/javascript" src="__HJS__/zepto.min.js"></script>
+<script type="text/javascript" src="__HJS__/swipe.js"></script>
+<script type="text/javascript" src="__HJS__/lequ.js"></script>
+<include file="Public:statistics"/>
+</body>
+</html>

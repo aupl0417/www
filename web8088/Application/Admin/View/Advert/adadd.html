@@ -1,0 +1,100 @@
+<include file="Public:header" />
+<div id="content">
+
+	
+	<div class="container">
+		
+		<div class="row">
+			
+
+			<include file="Public:nav" />
+			
+			
+			<div class="span9">
+				<div class="widget-header">
+						<i class="icon-th-list"></i>
+						<h3>添加广告位</h3>
+						
+					
+					</div> <!-- /widget-header -->
+					<div></div>
+				<form  action="{:U('Advert/insertAd')}" method="post" id="edit-profile" class="form-horizontal" enctype="multipart/form-data" method="post">
+						<fieldset>
+							
+							<div class="control-group">
+								<label class="control-label" for="input01">广告位名称：</label>
+								<div>									
+										<input type="text" class="input-xlarge"  name="adname" id='adname'/>									
+										<span id="name"></span>
+								</div>
+							</div>
+							
+							<div class="control-group">
+								<label class="control-label" for="input01">链接地址：</label>
+								<div>									
+										<input type="text" class="input-xlarge"  name="url" id='url'/>									
+										<span id="name"></span>
+								</div>
+							</div>
+							
+							<div class="control-group">
+								<label class="control-label" for="input01">上传时间：</label>
+								<div>									
+										<input type="text" class="input-xlarge"  name="ctime" id='ctime' node="date" />									
+										<span id="name" ></span>
+								</div>
+								
+							</div>
+								<div class="control-group">
+								<label class="control-label" for="input01">过期时间：</label>
+								<div>									
+										<input type="text" class="input-xlarge"  name="otime" id='otime' node="date" />									
+										<span id="name"></span>
+								</div>
+							</div>
+							
+							<div class="control-group">
+								<label class="control-label" for="input01">排序：</label>
+								<div>									
+										<input type="text" class="sort"  maxLength="5" size="20" name="sort" id="sort" />								
+										<span id="name"></span>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="input01">图片：</label>
+								<div>	
+									 <input  type="file" name="	advert" size="35" />																		
+										
+								</div>
+							</div>
+							
+							<div class="form-actions">
+								<button type="sumbit" id="button" class="btn btn-primary">添加</button> <button type="button" class="btn" id="btn">重置</button>&nbsp;&nbsp;&nbsp;&nbsp;<span id="err"></span>
+							</div>
+						</fieldset>
+					</form>			
+				
+			</div> <!-- /span9 -->
+			
+			
+		</div> <!-- /row -->
+		
+	</div> <!-- /container -->
+	
+</div> <!-- /content -->
+
+
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="__AJS__/jquery-1.7.2.min.js"></script>
+<script src="__AJS__/excanvas.min.js"></script>
+<script src="__AJS__/jquery.flot.js"></script>
+<script src="__AJS__/jquery.flot.pie.js"></script>
+<script src="__AJS__/jquery.flot.orderBars.js"></script>
+<script src="__AJS__/jquery.flot.resize.js"></script>
+<script src="__AJS__/adres.js"></script>
+<script src="__AJS__/bootstrap-datepicker.js"></script>
+<script src="__AJS__/bootstrap.js"></script>
+<script src="__AJS__/charts/bar.js"></script>
+<include file="Public:footer" />

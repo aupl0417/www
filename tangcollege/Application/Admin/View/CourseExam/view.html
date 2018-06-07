@@ -1,0 +1,63 @@
+<div id="main" class="main">
+    <div class="main-title">
+        <h2>查看题目</h2>
+    </div>
+    <form id='form' class="form-horizontal">
+    	<div class="form-containers">
+	    	<div class="form-item">
+	            <label class="item-label">题目问题：<input type="text" {$readonly|default=''} class="text" name="cre_name" value="{$info.cre_name|default=''}"><!-- <button type='button' class='addDesc' index='add'>添加描述</button> --></label>
+	        </div>
+	        <div class="form-item description">
+	            <label class="item-label">题目描述：</label>
+	            <div class="controls">
+	            	<label class="textarea input-large">
+						<textarea name="cre_description" {$readonly|default=''}>{$info.cre_description|default=''}</textarea>
+					</label>
+	            </div>
+	        </div>
+	        <div class="form-item">
+	            <label class="item-label">A、<input type="text" {$readonly|default=''} class="text" name="cre_a" value="{$info.cre_a|default=''}">　B、<input type="text" {$readonly|default=''} class="text" name="cre_b" value="{$info.cre_b|default=''}"></label><br>
+	            <label class="item-label">C、<input type="text" {$readonly|default=''} class="text" name="cre_c" value="{$info.cre_c|default=''}">　D、<input type="text" {$readonly|default=''} class="text" name="cre_d" value="{$info.cre_d|default=''}"></label>
+	        </div>
+	        <div class="form-item">
+	            <label class="item-label">
+	            	正确答案：
+	            		<input type='checkbox' {$disabled|default=''} name='cre_answer[]' <notempty name='info.A'>checked</notempty> value='A'>A　
+		            	<input type='checkbox' {$disabled|default=''} name='cre_answer[]' <notempty name='info.B'>checked</notempty> value='B'>B　
+		            	<input type='checkbox' {$disabled|default=''} name='cre_answer[]' <notempty name='info.C'>checked</notempty> value="C">C　
+		            	<input type='checkbox' {$disabled|default=''} name='cre_answer[]' <notempty name='info.D'>checked</notempty> value="D">D
+	            </label>
+	        </div>
+	        <div class="form-item">
+	            <label class="item-label">题目类型：<input type='radio' {$disabled|default=''} name='cre_type' checked value='0'>单选 　　<input type='radio' {$disabled|default=''} name='cre_type' <if condition='$info.cre_type eq 1'>checked</if> value='1'>多选</label>
+	        </div>
+	        <div class="form-item">
+	            <label class="item-label">是否共享：<input type='radio' {$disabled|default=''} name='cre_isPublic' checked value='0'>否 　　<input type='radio' {$disabled|default=''} name='cre_isPublic' <if condition='$info.cre_isPublic eq 1'>checked</if> value='1'>是</label>
+	        </div>
+	        <script>
+             	function appendCourse(id,name) {
+             		$('#courseId').val(id);
+             		$('.select-course').text(name);
+             	} 	
+	        </script>
+	        <div class="form-item">
+	            <label class="item-label">选择课程<span class="check-tips">（点击选择该级别需要学习的课程）</span></label>
+	            <div class="controls">
+	                <input type='hidden' name='cre_courseId' value='{$info.cre_courseId}' id="courseId">
+	                <button class="select-btn select-course" {$disabled|default=''} target-form="form-horizontal" type="button" onclick="selectCourse.get(this,appendCourse)">{$courseName|default='选择课程'}</button>
+	            </div>
+	        </div>
+        </div>
+        
+        <div class="form-item">
+        	<input type='hidden' name='cre_id' value='{$info.cre_id}'>
+            <button class="btn submit-btn" id="submit" type="button">确 定</button>
+            <button class="btn btn-return" type="button">返 回</button>
+        </div>
+    </form>
+</div>
+<script>
+	$('.btn').click(function(){
+		layer.closeAll();
+	});
+</script>

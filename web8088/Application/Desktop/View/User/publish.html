@@ -1,0 +1,864 @@
+<extend name="UserPublic:tpl"/>
+
+<block name="title">17约课-发布心愿</block>
+
+<block name="css">
+	<link rel="stylesheet" href="__PCCSS__/publish.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</block>
+
+
+<block name="main">
+
+	<div class="content-wrapper" style="min-height: 876px;">
+      
+     <!--用户侧边栏-->
+<include file="UserPublic:centerNav"/>
+  
+       
+        <section class="content">
+        	<div class="row">
+        		<div class="form-group">
+					
+					<label for="course_type" class="require">课程类别</label>
+					<input type="text" id="course_type" placeholder="选择类型" data-type="select"><span class="err-info">我是错误信息</span>
+					
+					<div class="input-group-btn">
+       				 <button type="button" class="btn-down dropdown-toggle" id="ctype" value="4"><span class="caret"></span></button>
+		       			 <ul class="dropdown-menu-big hidden" id="cate_data">
+					          
+		       			 </ul>
+      				</div>
+				</div>
+
+				<div class="form-group">
+					
+					<label for="course_price" class="require">组团价格</label>
+					<input type="text" id="course_price" placeholder="请选择"><span class="err-info">我是错误信息</span>
+					
+                    <div class="input-group-btn">
+                        <button type="button" class="btn-down dropdown-toggle " data-toggle="dropdown" aria-expanded="true"><span class="caret"></span></button>
+                        <ul class="dropdown-menu time-select-menu ordinary-menu" role="menu" id="price_data">
+
+                        </ul>
+                    </div>
+
+      				
+				</div>
+
+                <div class="form-group">
+
+                    <label for="course_model" class="require">约课模式</label>
+                    <input type="text" id="course_model" placeholder="请选择"><span class="err-info">我是错误信息</span>
+
+                    <div class="input-group-btn">
+                        <button type="button" class="btn-down dropdown-toggle " data-toggle="dropdown" aria-expanded="true"><span class="caret"></span></button>
+                        <ul class="dropdown-menu time-select-menu ordinary-menu" role="menu" id="mode">
+                            <li><a href="javascript:;" index="1" >全日制</a></li>
+                            <li><a href="javascript:;" index="2" >工作日</a></li>
+                            <li><a href="javascript:;" index="3" >周末班</a></li>
+                            <li><a href="javascript:;" index="4" >寒暑假</a></li>
+                            <li><a href="javascript:;" index="5" >网络班</a></li>
+                            <li><a href="javascript:;" index="6" >其它</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+				
+				<div class="form-group" style="position:relative">
+						
+						<label  class="require">课程特色</label>
+						<a href="javascript:;" id="edit">编辑</a> 
+						<div class="course-special" id="course_special">
+						</div>
+						<div class="special-menu hidden" id="special_menu"> 
+							<p><input type="text" id="add_tags_text" placeholder="自定义特色，不超过四个"> <button id="add_tags_btn">添加</button></p><span class="err-info">我是错误信息</span>
+							<h4>选择3个符合您的课程特色</h4>
+							<ul class="special-list clearfix" id="tags_list_data">
+								<li>老师漂亮</li>
+								<li>责任心强</li>
+								<li>成绩好</li>
+								<li>会唱歌</li>
+								<li>会打牌</li>
+								<li>经验丰富</li>
+								<li>勤奋</li>
+								<li>老师漂亮</li>
+								<li>责任心强</li>
+							</ul>
+						</div>
+				</div>
+        	</div>
+
+        	<div class="row">
+        		<div class="form-group">
+						
+						<label  class="require">截止日期</label>
+						<input type="text" class="input-small" style="margin-left: 0;" placeholder="请选择" id="day"><span class="err-info" id="overtime_err_info"></span>
+						<div class="input-group-btn">
+	       				 <button id="month_btn" type="button" class="btn-down" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+	       				 <ul class="dropdown-menu small-menu" role="menu" id="month_data">
+			       			 </ul>
+	      				</div>
+	      				<span class="divide">-</span>
+	      				<input type="text" class="input-small" placeholder="请选择" id="days">
+						<div class="input-group-btn">
+	       				 <button id="day_btn" type="button" class="btn-down dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+	       				 <ul class="dropdown-menu small-menu" role="menu" id="day_data">
+			       			 </ul>
+	      				</div>
+						<span class="divide">-</span>
+						<input type="text" class="input-small" placeholder="请选择" id="weekday">
+						<div class="input-group-btn">
+	       				 <button id="weekday_btn" type="button" class="btn-down dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+	       				 <ul class="dropdown-menu small-menu" role="menu" id="weekday_data">
+			       			 </ul>
+	      				</div>
+					</div>
+
+					<div class="form-group">
+						<label for="org_select" class="require">机构选择</label>
+						<a href="javascript:;" id="org_select">请选择</a>   
+						<div class="course-special" id="checked_shopkeeper_id">
+						</div>
+                        <div class="org_menu hidden" id="org_menu">
+                            <div class="org-wrap">
+                                <input type="text" id="seach_keywords" placeholder="请搜索培训机构名称，分类" style="border-top: none"/>
+                                <div class="classify-wrap clearfix">
+                                    <div class="btn-group classify-btn">
+                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                            选择分类 <span class="caret" style="transform: rotate(0deg);"></span>
+                                        </button>
+                                        <ul class="dropdown-menu classify-menu" role="menu" id="cate_one_data" >
+                                        </ul>
+                                    </div>
+                                    <div class="btn-group classify-btn">
+                                        <button type="button" class="btn btn-default dropdown-toggle" id="area_btn" data-toggle="dropdown" aria-expanded="false">
+                                            默认地区 <span class="caret" style="transform: rotate(0deg);"></span>
+                                        </button>
+                                        <ul class="dropdown-menu classify-menu" role="menu" id="area_one_data">
+                                            <li><a href="#">全部地区</a></li>
+                                        </ul>
+                                        <ul class="area-select-second " id="area_two_data">
+
+                                        </ul>
+                                    </div>
+                                    <div class="btn-group classify-btn">
+                                        <button type="button" class="btn btn-default dropdown-toggle " data-toggle="dropdown" aria-expanded="false">
+                                            默认排序 <span class="caret" style="transform: rotate(0deg);"></span>
+                                        </button>
+                                        <ul class="dropdown-menu classify-menu" role="menu">
+                                            <li><a href="javascript:;" id="greet">离我最近</a></li>
+                                            <li><a href="javascript:;" id="nearby">最受欢迎</a></li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                                <ul class="org-list" id="shop_data">
+                                
+                                    
+                                </ul>
+                                <nav style="text-align:right;margin-right: 1em">
+                                    <ul class="pagination tiny" id="page_data">
+                                    </ul>
+                                </nav>
+                            </div>
+                            <button class="btn-org-search" id="seach_shop_btn">搜索</button>
+                        </div>
+					</div>
+        	</div>
+
+			<div class="row">
+				<div class="form-group">
+						<label for="teac_year" class="require">课程标题</label>
+						<input type="text" id="teac_year" placeholder="标题不超过30个字">
+				</div>
+				<div class="form-group">
+					
+					<label for="content" class="require">约课内容</label>
+					<textarea id="content" cols="60" rows="4" name="positionDetail" placeholder="建议分段描述课程内容及课程背景"></textarea>
+				</div>
+                <div class="form-group">
+					<span class="button-wrap">
+						<button class="submit" id="submit_btn">发布</button>
+					<!-- <button class="preview">预览</button> -->
+                        <br><br>
+                        <p class="upload-tip">您发布的内容应该真实、合法、健康。共创良好环境</p>
+					</span>
+                </div>
+			</div>
+        </section>
+
+      </div>
+
+
+</block>
+
+<block name="js">
+<script src="__PCJS__/app.min.js" type="text/javascript"></script>
+<script src="__PCJS__/publish.js" type="text/javascript"></script>
+<!-- 所有课程分类 -->
+<script id="tplcate" type="text/template" charset="utf-8" >
+{@each catenav as it,index}
+					          <li>
+					          	<span class="menu-subtitle">${it.catename}</span>
+					          	<ul class="subtree clearfix">
+				{@each it.catemenu as ittwo,indextwo}
+					          		<li class="">
+					          		<button class="btn-submenu-down dropdown-toggle" data-toggle="dropdown" aria-expanded="false">${ittwo.catename}<span class="caret"></span>
+					          		</button>
+					{@if ittwo.catemenu != '' && ittwo.catemenu != null }
+					          		 <ul class="dropdown-menu dropdown-menu-small clearfix" role="menu">
+						{@each ittwo.catemenu as itthree,indexthree}
+									    <li><a href="javascript:;" class="three_cate_menu_id" index="${itthree.id}">${itthree.catename}</a></li>
+						{@/each}		
+									</ul>
+					{@/if}
+					          		</li>
+				{@/each}
+					          	</ul>
+					          </li>
+{@/each}
+</script>
+<!-- 课程分类的第一分类 -->
+<script id="tplcateone"  type="text/template" charset="utf-8">
+{@each catenav as it,index}
+	<li><a href="javascript:;" index="${it.id}" class="cate">${it.catename}</a></li>
+{@/each}
+</script>
+
+<script id="tplarea"  type="text/template" charset="utf-8">
+{@each list as it,index}
+	<li><a href="javascript:;" index="${it.id}" class="area">${it.areaname}</a></li>
+{@/each}
+</script>
+
+<script id="tplshop"  type="text/template" charset="utf-8">
+{@each info as it,index}
+		
+                                    <li>
+                                        <img src="__UPLOAD__/${it.avatar}" alt="course"/>
+                                        <div class="org_info">
+                                            <h4 class="h-16 set_shopkeeper_name">${it.nickname}</h4>
+                                            <p ><img src="__PCIMG__/phone.png" alt="course"/>{@if it.login_phone!=''&&it.login_phone!=null}${it.login_phone}{@else}暂无{@/if}</p>
+                                            <p ><img src="__PCIMG__/Location.png" alt="course"/>{@if it.area_detail != '' && it.area_detail != null}${it.area_detail}{@else}暂无{@/if}</p>
+                                            <button shoparea="${it.areaid}" shopcate="${it.cateid}" index="${it.sid}" class="set_shopkeeper">设为心愿机构</button>
+                                        </div>
+                                    </li>
+                                    
+{@/each}
+</script>
+
+<script id="tplpage"  type="text/template" charset="utf-8">
+				{@if page.curPage!=1}
+                                        <li>
+                                            <a href="javascript:;" class="page" aria-label="Previous" index="${page.curPage-1}">
+                                                <span aria-hidden="true">上一页</span>
+                                            </a>
+                                        </li>
+				{@/if}	
+
+	{@each i in range(page.pageFirst, page.pageMax+1)}
+                                        <li index="${i}" class="page {@if i==page.curPage}active{@/if}"><a href="javascript:;">${i}</a></li>
+	{@/each}
+		{@if page.curPage!=page.pageAll}
+                                        <li>
+                                            <a href="javascript:;" class="page" aria-label="Next" index="${parseInt(page.curPage)+1}">
+                                                <span class="clightblue" aria-hidden="true">下一页</span>
+                                            </a>
+                                        </li>
+		{@/if}
+</script>
+
+<script id="textprice" type="text/template">
+  {@if reference!=null}
+                       <li><a href="javascript:;" index="1"  disabled="disabled"> 行业参考价：${reference}元</a></li>
+  		{@each info as it,index}
+  		{@if it.ltnumber<10}
+                       <li><a href="javascript:;" index="${it.id}" >约课价${it.ltnumber}-${it.gtnumber}人　　${it.ltprice}元</a></li>
+  		{@else}  
+						<li><a href="javascript:;" index="${it.id}" >约课价${it.ltnumber}人以上　　${it.ltprice}元</a></li>
+  		{@/if}
+              
+ 		{@/each}
+ {@else}
+	<li><a href="javascript:;" disabled="disabled" >请选择</a></li>
+	<li><a href="javascript:;" index="0">免费</a></li>
+	<li><a href="javascript:;" index="0">机构报价</a></li>
+  {@/if}
+</script>
+<script>
+var group_url = "{:U('Api/GroupInfo/insertGroupInfo')}";
+
+var cate_url = "{:U('User/catetory')}";
+
+var price_url = "{:U('Api/GroupInfo/getPrice')}";
+
+var area_url = "{:U('Api/Area/getArea')}";
+var area_second_Url="{:U('Api/Area/getSecondArea')}";
+
+var get_shop = "{:U('Api/GroupInfo/getShopThree')}";
+var search_url = "{:U('Api/GroupInfo/getSeachShopAll')}";
+var timelists="{:U('Api/GroupInfo/addOverTime')}";
+
+//分类搜索，1为分类搜索，2为关键字搜索   
+var seach_type = 1;
+//当前搜索的页码 
+var page_now = 1;
+//分类搜索中-离我最近的 
+var nearby	= '';
+var greet	= '';
+//选中的地区id
+var area_id = 0;
+//搜索中--第一个搜索的分类id
+var cate_id = 1;
+//第一个搜索中的-第一个地区的id 
+var area_one_now = 0;
+
+
+//搜索的关键字 
+var keywords = '';
+
+
+//选中的商家的ID
+var shopkeeper_id = 0;
+//选中的商家的呢称
+var set_shopkeeper_name = '';
+
+
+var month = '';
+var day = '';
+var week_day = '';
+
+//过期时间选中的--月份  
+var month_checked_num = 0;
+var day_checked_num = 0;
+var cha_day_num = 0;
+//约课选中的分类id
+var shop_cate_id = 0;
+var group_cate_name = '';
+
+//选中的分类id
+var group_cate_id = 0;
+
+//选中的地区的ID
+var group_area_id = 0;
+
+
+//选中的约课模式 
+var group_mode = 0;
+//选中的特色标签 
+var group_tags = '';
+
+var group_price_id = 0;
+var group_tile = '';
+var group_content = '';
+var group_environ ='';
+
+$("#mode").on("click","a",function(e){
+	group_mode = $(e.currentTarget).attr("index");
+	var group_mode_name = $(e.currentTarget).html();
+	$("#course_model").val(group_mode_name);
+});
+
+
+
+//组团价格 
+function addPrice(){
+	var args = { cateid:shop_cate_id };
+    $.post(price_url,args,function(msg){
+        var tpl = document.getElementById('textprice').innerHTML;
+        var html = juicer(tpl, msg);
+        $("#price_data").html(html);
+  },'json');
+}
+//组团价格选择后的-处理 
+$("#price_data").on('click','a',function(e){
+	group_price_id = $(e.currentTarget).attr("index");
+	var group_price_name = $(e.currentTarget).html();
+	$("#course_price").val(group_price_name);
+});
+
+//分类 ---所有分类 
+function getcate(){
+	$.get(cate_url,function(data){
+	    console.log(data);
+	    if(data.status==200){
+	    	//所有分类 --
+	       var tplc = document.getElementById('tplcate').innerHTML;
+	        var htmlc = juicer(tplc, data);
+	        $('#cate_data').html(htmlc);
+	        
+	        //第一分类 ---在搜索机构的界面中
+	       var tplco = document.getElementById('tplcateone').innerHTML;
+	        var htmlco = juicer(tplco, data);
+	        $('#cate_one_data').html(htmlco);
+	    }
+	}, "json");
+}
+getcate();
+
+//选择三级分类，然后获取组团价格 
+$("#cate_data").on("click",".three_cate_menu_id",function(e){
+	shop_cate_id = $(e.currentTarget).attr("index");
+	group_cate_name = $(e.currentTarget).html();
+	$("#course_type").val(group_cate_name);
+	addPrice();
+	getShopInfo();
+});
+
+//搜索层中的，分类选中 后对当前的分类进行搜索 
+$("#cate_one_data").on("click",".cate",function(e){
+	page_now = 1;
+	cate_id = $(e.currentTarget).attr("index");
+	seach_type = 1;
+	getShopInfo();
+});
+
+
+
+//搜索层中的，获取所有广州的地区js模板渲染 
+function getArea(){
+	var args = {};
+    $.get(area_url,args,function(data){
+    	console.log(data);
+        //获取地址 
+       var tpl = document.getElementById('tplarea').innerHTML;
+        var html = juicer(tpl, data);
+        $("#area_one_data").append(html);
+    },'json');
+}
+getArea();
+
+//搜索层中的，选中地区后，然后获取当前的区域下的地区详细分类----加载三级地区--
+$("#area_one_data").on("click",".area",function(e){
+	/*$("#area_one_data").css("display","block");*/
+    e.preventDefault();
+    e.stopPropagation();
+     $("#area_two_data").css("display","block");
+	area_one_now = $(e.currentTarget).attr("index");
+	console.log(area_one_now);
+	getTwoArea();
+});
+
+//加载三级地区--,并且js模板渲染到对应的html中 
+function getTwoArea(){
+	var args = {};
+	args.area_id = area_one_now;
+    $.post(area_second_Url,args,function(data){
+    	console.log(data);
+        //获取地址 
+        var tpl = document.getElementById('tplarea').innerHTML;
+        var html = juicer(tpl, data);
+        var html_add_all = '<li><a href="javascript:;" index="0" class="area">全部地区</a></li>';
+        var html_all = html_add_all+html;
+        $("#area_two_data").html(html_all);
+    },'json');
+}
+
+//搜索层中，当选中三级地区后，搜索该地区下的机构  
+$("#area_two_data").on("click",".area",function(e){
+	/*$("#area_one_data").css("display","none");*/
+	$("#area_two_data").css("display","none");
+	page_now = 1;
+	area_id = $(e.currentTarget).attr("index");
+	seach_type = 1;
+	getShopInfo();
+});
+
+
+//搜索层中的，机构筛选 
+function getShopInfo( ){
+	
+	var datainfo = {};
+	if(nearby!=''){
+		dataindo.nearby= nearby;
+	}
+	if(greet!=''){
+		datainfo.greet = greet;
+	}
+	datainfo.area_id = area_id;
+	datainfo.cate_id = cate_id;
+	datainfo.pages = page_now;
+
+	console.log(datainfo);
+	
+	$.post(get_shop,datainfo,function(data){
+		console.log(data);
+		
+        var tpl = document.getElementById('tplshop').innerHTML;
+        var html = juicer(tpl, data);
+        $("#shop_data").html(html);
+
+
+        var tplpage = document.getElementById('tplpage').innerHTML;
+        var htmlpage = juicer(tplpage, data);
+        $("#page_data").html(htmlpage);
+        
+        imgonerror();//默认图片
+	},'json');
+}
+//getShopInfo();
+
+//分页搜索 
+$("#page_data").on("click",".page",function(e){
+	page_now = $(e.currentTarget).attr("index");
+	if(seach_type==1){
+		getShopInfo();
+	}else{
+		seachShop();
+	}
+});
+
+
+
+
+//设为培训机构 
+$("#shop_data").on("click",".set_shopkeeper",function(e){
+	e.preventDefault();
+	group_area_id = $(e.currentTarget).attr("shoparea");
+	group_cate_id = $(e.currentTarget).attr("shopcate");
+	shopkeeper_id = $(e.currentTarget).attr("index");
+	set_shopkeeper_name = $(e.currentTarget).parent().children().eq(0).html();
+	var html ='<span index="'+shopkeeper_id+'" class="cancel_shopkeeper_id">'+set_shopkeeper_name+'</span>';
+	$("#checked_shopkeeper_id").html(html);
+	
+	console.log(group_area_id);
+	console.log(group_cate_id);
+	console.log(shopkeeper_id);
+	console.log(set_shopkeeper_name);
+});
+
+//取消设为培训机构 
+$("#checked_shopkeeper_id").on("click",".cancel_shopkeeper_id",function(e){
+	shopkeeper_id = 0;
+	set_shopkeeper_name = '';
+	$("#checked_shopkeeper_id").html('');
+});
+
+
+
+
+
+//搜搜层中的，关键字搜索
+function seachShop(){
+	$('#seach_shop_btn').unbind('click', seach_click);
+	var args = {};
+	args.keywords = keywords;
+	args.page = page_now;
+	console.log(args);
+	$.post(search_url,args,function(data){
+		console.log(data);
+
+        var tpl = document.getElementById('tplshop').innerHTML;
+        var html = juicer(tpl, data);
+        $("#shop_data").html(html);
+
+        var tplpage = document.getElementById('tplpage').innerHTML;
+        var htmlpage = juicer(tplpage, data);
+        $("#page_data").html(htmlpage);
+
+        imgonerror();//默认图片
+        
+        $('#seach_shop_btn').bind('click', seach_click);
+    },'json');
+}
+//关键字搜索按钮触发事件 
+function seach_click(){
+	page_now = 1;
+	keywords = $("#seach_keywords").val();
+	seach_type = 2;
+	seachShop();
+}
+$('#seach_shop_btn').bind('click', seach_click);
+
+
+
+//标签 --课程特色---自己添加自定义标签
+$("#add_tags_btn").click(function(){
+	var add_mode_text = $("#add_tags_text").val();
+	var mode_html = '<li>'+add_mode_text+'</li>';
+	$("#tags_list_data").append(mode_html);
+});
+//标签中，课程特色中 ，选中标签后的处理，添加赋值等 
+$("#tags_list_data").on('click','li',function(e){
+	var tags = $(e.currentTarget).html();
+	var tags_html = '<span>'+tags+'</span>';
+	if(group_tags==''){
+		group_tags = tags;
+		$("#course_special").append(tags_html);
+	}else{
+		var tags_array = group_tags.split("|");
+		if(tags_array.length>=3){
+			alert('标签不能超过3个');
+		}else{
+			var tags_check_status = false;
+			for(var i=0 ; i<tags_array.length ; i++ ){
+				if(tags_array[i]==tags){
+					tags_check_status = false;
+				}else{
+					tags_check_status = true;
+				}
+			}
+			if(!tags_check_status){
+				alert("此标签已经添加了");
+			}else{
+				group_tags = group_tags+'|'+tags;
+				$("#course_special").append(tags_html);
+			}
+		}
+	}
+	console.log(group_tags);
+});
+//标签中，取消对应的标签
+$("#course_special").on('click','span',function(e){
+	var tags_name = $(e.target).html();
+	var tags_array = group_tags.split("|");
+	for(var i=0 ; i<tags_array.length ; i++ ){
+		console.log(tags_array[i]);
+		if(tags_array[i]==tags_name ){
+			tags_array.splice( i , 1 );
+		}
+	}
+	group_tags = tags_array.join("|");
+	console.log(tags_array);
+	$(e.currentTarget).remove();
+	console.log(group_tags);
+});
+
+
+//时间 
+function monthAdd(){
+	var htmlmonth = '';
+	var now_data = new Date()
+	month 		= now_data.getUTCMonth()+1;
+	day			= now_data.getDate();
+	for(var i=0 ; i<3 ; i++){
+		var month_array_num	= month+i;
+		htmlmonth = htmlmonth+'<li><a href="javascript:;" class="month_checked_num" index="'+month_array_num+'">'+month_array_num+'月</a></li>';
+	}
+	$("#month_data").html(htmlmonth);
+}
+$('#month_btn').bind('click', monthAdd);
+
+//选择过期时间的--月份  
+$("#month_data").on("click",".month_checked_num",function(e){
+	month_checked_num = $(e.currentTarget).attr("index");
+	if(month_checked_num==0){
+		alert('请重新选择');
+	}
+	
+	$("#day").val(month_checked_num+'月');
+	
+	var month_day_num = parseInt(month_checked_num);
+	switch (month_day_num){
+		case 0:
+			dayAdd(0);
+			break;
+		case 1:
+			dayAdd(31);
+			break;
+		case 2:
+			dayAdd(28);
+			break;
+		case 3:
+			dayAdd(31);
+			break;
+		case 4:
+			dayAdd(30);
+			break;
+		case 5:
+			dayAdd(31);
+			break;
+		case 6:
+			dayAdd(30);
+			break;
+		case 7:
+			dayAdd(31);
+			break;
+		case 8:
+			dayAdd(31);
+			break;
+		case 9:
+			dayAdd(30);
+			break;
+		case 10:
+			dayAdd(31);
+			break;
+		case 11:
+			dayAdd(30);
+			break;
+		case 12:
+			dayAdd(31);
+			break;
+		default:
+			console.log('default');
+			break;
+	}
+});
+
+
+
+
+//选择过期时间的--日   
+function dayAdd(numberDay){
+	var htmlday = '';
+	for(var i=0 ; i<numberDay ; i++){
+		var num_day = i+1;
+		htmlday = htmlday+'<li><a href="javascript:;" class="day_checked_num" index="'+num_day+'">'+num_day+'日</a></li>';
+	}
+	$("#day_data").html(htmlday);
+}
+//选择过期时间的--日   
+$('#day_btn').click(function(){
+	$("#day_data").css("display","block");
+});
+
+//选择过期时间的--日   
+$("#day_data").on("click",".day_checked_num",function(e){
+	day_checked_num = $(e.currentTarget).attr("index");
+	$("#days").val(day_checked_num+'日');
+	$("#day_data").css("display","none");
+	
+	var arys1= new Array();   
+	var now_year = new Date()
+	arys1[0] = now_year.getUTCFullYear();
+	arys1[1] = month_checked_num-1;
+	arys1[2] = day_checked_num;
+    var ssdate=new Date(arys1[0],arys1[1],arys1[2]);   
+    var weekday_name = ssdate.getDay() 
+    
+	var weekday_name_num = parseInt(weekday_name);
+    
+
+    cha_day_num = Math.ceil((new Date('2015-'+month_checked_num+'-'+day_checked_num) - new Date())/(1000*60*60*24));
+
+    if(cha_day_num<1){
+    	$("#overtime_err_info").html('请正确选择日期!');
+    }else{
+    	$("#overtime_err_info").html('');
+    }
+    
+    
+	switch (weekday_name_num){
+		case 0:
+			weekdayAdd('星期天');
+			break;
+		case 1:
+			weekdayAdd('星期一');
+			break;
+		case 2:
+			weekdayAdd('星期二');
+			break;
+		case 3:
+			weekdayAdd('星期三');
+			break;
+		case 4:
+			weekdayAdd('星期四');
+			break;
+		case 5:
+			weekdayAdd('星期五');
+			break;
+		case 6:
+			weekdayAdd('星期六');
+			break;
+		default:
+			console.log('default');
+			break;
+	}
+});
+
+
+
+//选择过期时间的--  周末
+function weekdayAdd(weekdayNum){
+	var htmlweekday = '<li><a href="javascript:;" class="weekday_checked_num" index="'+weekdayNum+'">'+weekdayNum+'</a></li>';
+	console.log(htmlweekday);
+	$("#weekday_data").html(htmlweekday);
+}
+
+//选择过期时间的--   周末
+$('#weekday_btn').click(function(){
+	$("#weekday_data").css("display","block");
+});
+
+
+//选择过期时间的--   周末说法 
+$("#weekday_data").on("click",".weekday_checked_num",function(e){
+	weekday_checked_num = $(e.currentTarget).attr("index");
+	$("#weekday").val(weekday_checked_num);
+	$("#weekday_data").css("display","none");
+	
+});
+
+
+
+//发布约课 
+function insertGroup(){
+	var publishLastTime = sessionStorage.publishtime;
+	var lastTitle = sessionStorage.title;
+	if(lastTitle!='' && lastTitle!=null){
+		if(lastTitle==group_tile){
+			alert('你已发布了相似的心愿单');
+			return;
+		}
+	}
+	if(publishLastTime!='' && publishLastTime!=null){
+		var now_time = new Date();
+		if((now_time.getTime() - parseInt(publishLastTime))<(1000*60*2) ){
+			alert('请勿频繁发布心愿单');
+			return;
+		}
+	}
+	group_tile = $("#teac_year").val();
+	group_content = $("#content").val();
+	args = {
+	  sid: shopkeeper_id,
+	  cateid: group_cate_id,
+	  areaid: group_area_id,
+	  catename:group_cate_name,
+	  tags: group_tags ,
+	  title: group_tile,
+	  model: group_mode,
+	  content: group_content,
+	  overtime: cha_day_num ,
+	  priceid: group_price_id,
+	  environ: group_environ
+	};
+	console.log(args);
+	$.post(group_url, args, function(msg) {
+	  if (msg == true) {
+		  alert('发布成功');
+		  var myDate=new Date()
+		  var publishtime = myDate.getTime();
+		  sessionStorage.publishtime = publishtime;
+		  sessionStorage.title = group_tile;
+	  } else {
+		  alert("发布失败或者次数达到上限");
+	  }
+	}, 'json');
+
+}
+
+$("#submit_btn").bind('click',insertGroup);
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+
+</block>

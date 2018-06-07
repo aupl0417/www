@@ -1,0 +1,37 @@
+<div id="main" class="main">
+  <div class="main-title">
+        <h2>查看课时</h2>
+    </div>
+    <div class="data-table">
+		<table>
+            <!-- 表头 -->
+            <thead>
+                <tr>
+                    <th>课时ID</th>
+                    <th>班级</th>
+                    <th>教师</th>
+                    <th>课程</th>
+                    <th>培训地址</th>
+                    <th>开始时间</th>
+                    <th>结束时间</th>
+                </tr>
+            </thead>
+
+            <!-- 列表 -->
+            <tbody class="class-table-lists">
+               <volist name='lists' id='data' empty="$empty">
+                	<tr>
+                		<td>{$data.cta_id}</td>
+                		<td>{$data.cl_name}</td>
+                		<td>{$data.username}</td>
+                		<td>{$data.co_name}</td>
+                		<td>{:msubstr($data['tra_address'],0,30)}</td>
+                		<td>{$data.cta_startTime}</td>
+                		<td>{$data.cta_endTime}</td>
+                	</tr>
+               </volist>      
+            </tbody>
+        </table>
+	</div>
+</div>  
+ 

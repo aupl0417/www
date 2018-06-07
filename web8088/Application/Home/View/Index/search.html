@@ -1,0 +1,145 @@
+<html><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta name="format-detection" content="telphone=no">
+    <title>搜索 - 17约课</title>
+    <link rel="stylesheet" type="text/css" href="/Public/Home/css/reset.css">
+    <link rel="stylesheet" href="/Public/Home/css/2.css">
+    <link rel="stylesheet" href="/Public/Home/css/4.css">
+    <meta name="keywords" content="17约课,一起约课,约课,教育培训,约课神器,校园约课,大学生培训,约老师,约女神,驾驶培训,设计培训,职业考证,音乐培训,英语培训,小语种培训,体育培训">
+    <meta name="description" content="17约课 - 约您身边的良师益友！为您提供约老师，约课程，约女神，约学霸等海量信息，充分满足您免费约课，免费发布课程的需求。">
+    <link type="text/css" rel="stylesheet" href="chrome-extension://kfgmnlgjmofpiicpgohgfpeabgpmhjdp/style.css"><script type="text/javascript" charset="utf-8" src="chrome-extension://kfgmnlgjmofpiicpgohgfpeabgpmhjdp/page_context.js"></script></head>
+<body gtools_scp_screen_capture_injected="true">
+<header id="top_header">
+    <div id="header" align="center">
+        <h3 class="identify_title">搜索</h3>
+        <a href="/home/index/index.html" class="identify_back"><img src="/Public/Home/img/Return2.png" alt="">返回</a>
+    </div>
+</header>
+<div class="wrapper" style="margin-top: 3em;">
+    <!--<img src="/Public/Home/img/loading.gif" alt="" class="loading hidden">-->
+    <div class="css-loading hidden">
+        <div class="ball-holder">
+            <div class="ball"></div>
+        </div>
+    </div>
+    <div class="business_relay_input_wrap">
+        <div class="input_wrap course_institution_input_wrap">
+            <input type="text" class="register_input" placeholder="请搜索课程名称">
+        </div>
+        <button class="course_institution_btn">搜索</button>
+        <img src="/Public/Home/img/Search for.png" alt="" class="business_img_search">
+    </div>
+    <!-- 热门搜索 -->
+    <!--<div class="hot-search">
+        <h2 class="search-title">热门搜索</h2>
+        <div class="search-items">
+            <ul>
+                <li>同辉驾校</li>
+                <li>音乐培训</li>
+                <li>新东方</li>
+                <li>新东方</li>
+                <li>出国留学</li>
+                <li>天虎设计</li>
+            </ul>
+        </div>
+    </div>-->
+
+    <!-- 发布的约课信息 -->
+    <div id="desc">
+    </div>
+
+    <div class="search_nofound hidden">
+        <p class="search_nofound_p">抱歉亲，没有搜索到合适的信息</p>
+    </div>
+    <!--<button class="enterprise_cont_submit resbut hidden"  id="resbut">加载更多<img src="__HIMG__/right.png" alt=""/></button>-->
+</div>
+<!--约课信息模板-->
+<script id="shopAndUser" type="text/template">
+    {@each info as it,index}
+
+    {@if it.comment_count==null}
+
+
+
+
+            <div class="section_item clearfix">
+                <div class="section_item_box">
+                    	<img class="section_item_title_icon" src="__HIMG__/laba.png" alt="">
+					<a href="{:U('LookGroup/onedetail')}?gid=${it.id}" style="color:#636363;  margin-left: 1.1em;">
+                    	<span class="section_item_title_text" >${it.title}</span>
+					</a>
+                </div>
+                <div class="section_item_other clearfix">
+                    <div class="section_item_other_l">
+					<a href="{:U('LookUser/moInfo')}?uid=${it.uid}">
+						<img src="${it.avatar}"  onerror="javascript:this.src='__IMGDEFAULT__';" alt="" class="section_item_cont_avator">
+					</a>
+                        <span style="font-size: small;color: #666565">${it.firstname}${it.lastname}</span>
+                    </div>
+                    <div class="section_item_other_r"  style="color: #5A5A5A;">
+						{@if it.pricearr!=null}
+                        	<span class="section_people">${it.pricearr.ltnumber}-${it.pricearr.gtnumber}人</span>
+							<span class="l_price">${it.pricearr.ltprice}元</span>
+							<span class="h_price">${it.pricearr.reference}元</span>
+						{@else}
+							<span class="l_price">${it.ltprice}元</span>
+						{@/if}
+                    </div>
+                </div>
+            </div>
+
+    {@/if}
+    {@if it.comment_count!=null}
+
+
+
+        <div class="section_item clearfix">
+            <div class="section_item_box">
+                	<img class="section_item_title_icon" src="__HIMG__/laba.png" alt="">
+            	<a href="{:U('Shopkeeper/cont')}?id=${it.id}" style="  margin-left: 1.1em;">
+					<span class="section_item_title_text" style="color:#636363;">${it.title}</span>
+				</a>
+            </div>
+            <div class="section_item_other clearfix">
+                <div class="section_item_other_l">
+					<a href="{:U('Shopkeeper/info')}?id=${it.sid}">
+                    	<img class="section_item_cont_avator" src="__UPLOAD__${it.avatar}" onerror="javascript:this.src='__IMGDEFAULT__';" alt="">
+					</a>
+                    <span style="font-size: small;color: #666565">${it.nickname}</span>
+                </div>
+                <div class="section_item_other_r"  style="color: #5A5A5A;">
+					${it.price}元
+					{@if it.preferent}
+						<span> ${it.preferent} </span>
+						<img src="__HIMG__/Hui2.png" alt="" />
+					{@/if}
+				</div>
+            </div>
+        </div>
+
+
+
+    {@/if}
+    {@/each}
+</script>
+
+<script type="text/javascript" src="__HJS__/zepto.min.js"></script>
+<script type="text/javascript" src="__HJS__/juicer-min.js"></script>
+<script type="text/javascript" src="__HJS__/select_3.js"></script>
+<script type="text/javascript">
+    var areaUrl="{:U('Api/Area/getArea')}";
+    var secondUrl="{:U('Api/Area/getSecondArea')}";
+    var areasUrl="{:U('Api/GroupInfo/getGroupInfo')}";
+    var cateUrl="{:U('Api/GroupInfo/getCategory')}";
+    var thirdcateUrl="{:U('Api/GroupInfo/thirdCategory')}";
+    var busUrl="{:U('GroupInfo/business')}";
+    var busajaxUrl="{:U('Api/GroupInfo/getBusiness')}";
+    var searchUrl="{:U('Api/Index/getSearch')}";
+    var userCateUrl="{:U('Api/Index/ajaxGroup')}";
+    var shopCateUrl="{:U('Api/Index/ajaxShop')}";
+</script>
+<include file="Public:statistics"/>
+</body></html>

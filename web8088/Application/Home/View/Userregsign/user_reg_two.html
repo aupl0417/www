@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+    <meta content="yes"name="apple-mobile-web-app-capable"/>
+    <meta content="black"name="apple-mobile-web-app-status-bar-style"/>
+    <title>用户注册 - 17约课</title>
+    <link rel="stylesheet" type="text/css" href="__HCSS__/reset.css">
+    <link rel="stylesheet" href="__HCSS__/4.css"/>
+    <link rel="stylesheet" href="__HCSS__/2.css"/>
+    <meta name="keywords" content="17约课,一起约课,约课,教育培训,约课神器,校园约课,大学生培训,约老师,约女神,驾驶培训,设计培训,职业考证,音乐培训,英语培训,小语种培训,体育培训" />
+    <meta name="description" content="17约课 - 约您身边的良师益友！为您提供约老师，约课程，约女神，约学霸等海量信息，充分满足您免费约课，免费发布课程的需求。" />
+</head>
+<body>
+
+<div id="reg_user_terms">
+
+<div id="one_reg_user" class="register_wrap e_first_register login_height">
+    <img src="__HIMG__/logo2.png" alt="" class="register_title"/>
+    <!--<img src="__HIMG__/loading.gif" alt="" class="loading hidden"/>-->
+    <div class="user_register_nav">
+        <p class="user_register_nav_left"><a href="javascript:history.back(-1)"><img src="__HIMG__/back.png" alt=""/>返回</a></p>
+        <p class="user_register_nav_right"><a href="{:U('Userregsign/login')}">登陆<img src="__HIMG__/go.png" alt=""/></a></p>
+    </div>
+    <div class="input_wrap validate" style="margin-bottom: 1em;height: 10.8em;">
+        <div class="css-loading hidden" style="position: absolute;left: 50%;top: 2.5em;">
+            <div class="ball-holder">
+                <div class="ball"></div>
+            </div>
+        </div>
+        <input type="text" name="logintype"  class="register_input register_input_login" id="hiddentypevalue" placeholder="手机号码">
+        <i class="input_close_icon op_0"></i>
+        <div class="validate_wrap">
+            <input type="text" name="logintype"  class="register_input" id="reg_code_input" placeholder="输入验证码">
+            <i class="input_close_icon_second op_0"></i>
+        </div>
+        <div class="validate_wrap" style="position: relative;">
+            <input type="text" name="logintype"  class="register_input" id="invite_code_input" placeholder="如有邀请码请输入(区分大小写)" style="width:17em;">
+            <i class="input_close_icon_second op_0"></i>
+            <span style="position: absolute;right: 1em;top: 1em;color: #cccccc;">可选填</span>
+        </div>
+        <input type="text" name="type" id="hiddentype" class="register_input hidden">
+        <button class="validate_btn validate_btn_active">发送验证码</button>
+    </div>
+    <div class="service">
+        <input type="checkbox" name="one_terms_of_use" id="one_agree_check" checked /><span></span>
+        <span>同意<a href="javascript:;" class="terms_of_use">17约课用户使用条款</a> </span>
+    </div>
+    <!--出错了就把Hidden去掉就会显示了，有多少个错误就在多少行li-->
+    <div id="reg_err1" class="u_register_err hidden">
+        <ul>
+            <li><img src="__HIMG__/Exclamation.png" alt="" class="register_err_image"/><span id="reg_err_text1">密码未填写</span></li>
+        </ul>
+    </div>
+    <button id="send_reg" class="register_submit" style="margin-top: 2em;"><span id="reg_next">下一步</span></button>
+    <a href="/home/shopkeeper/signupstart.html" class="register_to_shop">机构加盟<img src="/Public/Home/img/Log in.png" alt="" class="login_register_footer_img"></a>
+</div>
+
+
+
+
+
+<div id="two_reg_user" class="register_wrap e_first_register login_height hidden">
+    <img src="__HIMG__/logo2.png" alt="" class="register_title"/>
+    <div class="user_register_nav">
+        <p class="user_register_nav_left"><a id="reg_user_fanhui" href="javascript:;"><img src="__HIMG__/back.png" alt=""/>返回</a></p>
+        <p class="user_register_nav_right"><a href="{:U('Userregsign/login')}">登陆<img src="__HIMG__/go.png" alt=""/></a></p>
+    </div>
+    <div class="input_wrap validate" style="height: 10.8em;">
+        <div class="css-loading hidden" style="position: absolute;left: 50%;top: 2.5em;">
+            <div class="ball-holder">
+                <div class="ball"></div>
+            </div>
+        </div>
+        <input type="text" name="lastname"  class="register_input" id="lastname" placeholder="输入昵称">
+        <i class="input_close_icon op_0"></i>
+        <div class="validate_wrap">
+            <input type="password" name="password" id="password"  class="register_input" placeholder="设置密码">
+            <i class="input_close_icon_second op_0"></i>
+        </div>
+        <div class="validate_wrap">
+            <input type="password" name="password_r" id="password_r"  class="register_input" placeholder="重新输入密码">
+            <i class="input_close_icon_second op_0"></i>
+        </div>
+        <input type="text" name="type" id="hiddentype" class="register_input hidden">
+    </div>
+    <div class="service">
+        <input type="checkbox" name="two_terms_of_use" id="two_agree_check" checked /><span></span>
+        <span>同意<a href="javascript:;" class="terms_of_use">17约课用户使用条款</a> </span>
+    </div>
+    <!--出错了就把Hidden去掉就会显示了，有多少个错误就在多少行li-->
+    <div id="reg_err2" class="u_register_err hidden">
+        <ul>
+            <li><img src="__HIMG__/Exclamation.png" alt="" class="register_err_image"/><span id="reg_err_text2">密码未填写</span></li>
+        </ul>
+    </div>
+    <button id="register" class="register_submit" style="margin-top: 2em;">
+        <!--<img src="__HIMG__/loading.gif" alt="" class="hidden" id="loading_img"/>-->
+        <div id="loading_img" class="inline-css-loading hidden">
+            <div class="ball-holder">
+                <div class="ball"></div>
+            </div>
+        </div>
+        <span id="login_info">提交注册</span>
+    </button>
+</div>
+
+</div>
+
+<!-- 使用条款 -->
+<div id="terms_hidden" class="hidden">
+	<header id="top_header">
+	    <div id="header" align="center">
+	        <h3 class="identify_title">服务协议</h3>
+	        <a href="javascript:;" class="identify_back terms_back_reg"><img src="/Public/Home/img/Return2.png" alt="">返回</a>
+	    </div>
+	</header>
+	<div class="wrapper" style="margin-top: 3em;">
+	    <div class="service-content">
+	        <p>欢迎使用17约课，17约课及相应的各类应用软件由广州乐莘网络科技有限公司负责运营。</p>
+            <p>请用户在访问和使用17约课提供的服务前仔细阅读本协议。用户接收本协议点击“同意17约课用户使用条款”勾选框完成注册;这表示用户与17约课已达成协议并接受所有的服务条款。</p>
+	        <p>一、17约课服务</p>
+            <p>用户应了解并知悉; 17约课是华南地区首家以组团砍价为商业模式的教育培训约课平台，以高科技为定位、以强大的运营团队为支撑，致力于为学生用户提供优质的教育培训平台，我们的产品核心理念：组团报班更实惠、保质维权全具备、约伴上课成双对。学生与教育机构通过17约课的平台服务，在双方之间达成教学服务协议;并承担相应的权利和义务。如在教学过程中导致用户遭受相关财产及人身损害的，用户可直接向另一方追责， 17约课免于承担因学生和老师之间服务协议履行所致任何纠纷的赔偿责任。也可邀请17约课一起出面协调处理违规事件，17约课建立了完善的客户服务体系，力争帮助或促使老师或学生妥善解决纠纷。
+            <p>二、使用规则
+            <p>1、注册及账户
+            <p>为了使用17约课提供的服务;用户需要注册一个17约课账户。账户名即为用户所提供的常用手机号码，用户需设置密码并确认;通过17约课下发的验证码进行账户验证后，该账户即完成初步注册。在个人中心里;用户需要设置相关个人信息。用户可以在账户中查询到自己已发布的课程/心愿单情况和跟约及报名的课程动态。用户使用17约课服务，应负责维护自己账户的保密性并限制第三方使用/访问其计算机或移动设备，用户对其账户和密码下发生的所有活动承担法律责任。</p>
+            <p>2、信息发布</p>
+            <p>17约课会将机构及老师填写的信息(包括但不限于个人信息、教学经历、讲课视频等)公布于17约课服务平台。17约课认真履行注意义务，对入驻老师/机构的身份证件/营业执照等进行形式审核认证。但是，无法就其所有信息内容的准确性、完整性、真实性等做出实质保证。如果用户在17约课张贴内容或提交材料，用户同意授予17约课非独有的、免费的、永久的、不可撤销的和完全的许可权:在全世界范围内，基于宣传17约课服务等合法目的合理使用、转载、修改、改编、出版、翻译、创作衍生作品、分发和展示这些内容。</p>
+            <p>3、课程报名单</p>
+	    	<p>本条款所述“课程报名单”;是指用户在17约课平台上根据自身需求搜索并选择达成的老师与学生之间的服务协议。学生在平台上搜索到合适的老师后; 课程报名单在下述时刻同时满足时正式成立:1)学生通过17约课点击报名课程;2)学生通过17约课联系到能够提供服务的老师/机构并商定授课时间、地点、方式等服务信息;有关课程报名单的支付、取消等事项，请参见17约课的具体规则介绍。</p>
+	    	<p>4,授课及点评</p>
+	    	<p>老师以线下方式进行授课。授课完毕后，由学生在网站或客户端进行评价，以便17约课进一步改进服务。用户可以在17约课平台发表对老师的评论、意见和其他内容，以及向平台提出建议、意见或其他信息，但是该等内容不得违反中国现行法律法规及其他规范性文件的要求，不得含有非法、淫秽、威胁、侮辱、诽谤、侵犯隐私、侵犯知识产权的内容或以其他形式对第三方权利构成侵犯。17约课在接到有关权利人的投诉与举报后将采取合理的删除或屏蔽等措施。基于用户的过错给17约课造成损失时，用户须对17约课承担赔偿责任。</p>
+	    	<p>三、双方权利义务及法律责任</p>
+	    	<p>1、17约课享有对本协议约定服务的监督、提示、检查、纠正等权利。</p>
+	    	<p>2、17约课有权保留用户注册及使用时预留的所有信息。17约课在线上线下针对17约课服务进行宣传推广活动时，有权合理使用用户预留的信息。</p>
+	    	<p>3、17约课有权删除或屏蔽用户上传的非法及侵权信息。</p>
+	    	<p>4、17约课谨慎使用用户的所有信息，非依法律规定及用户许可，不得向任何第三方透露用户信息。</p>
+	    	<p>5、17约课为任何涉嫌侵权的权利人设置便捷的投诉与举报渠道，并依法采取合理救济措施。</p>
+	    	<p>6、用户须为合法目的使用17约课提供的平台月及务。</p>
+	    	<p>7、用户对其发布的信息的真实性及合法性承担法律责任。用户不得在17约课平台上发布任何虚假、违法信息及言论。用户上传17约课的任何内容如涉嫌侵犯第三方权利的，用户须独立承担因此所产生法律责任。</p>
+	    	<p>8、用户依据17约课平台提供的信息达成约课订单的;应在线下或线上全面、适当履行约定义务并独立承担法律责任。</p>
+	    	<p>9、用户仅对在17约课上享有的服务及内容享有使用权，未经17约课或其他第三方权利人的书面许可，用户不得对包括视频、学习软件、学习资料、音频内容等在内的任何内容进行翻录、复制、发行等违反知识产权相关法律、法规的行为，由此所导致的一切民事、行政或刑事责任，由用户自行承担。</p>
+	    	<p>四、用户注意义务特别提示</p>
+	    	<p>用户上传17约课平台的信息不得含有以下内容:</p>
+	    	<p>(一)反对宪法确定的基本原则的;</p>
+	    	<p>(二)危害国家统一、主权和领土完整的;</p>
+	    	<p>(三)泄露国家秘密、危害国家安全或者损害国家荣誉和利益的;</p>
+	    	<p>(四)煽动民族仇恨、民族歧视;破坏民族团结;或者侵害民族风俗、习惯的;</p>
+	    	<p>(五)宣扬邪教、迷信的;</p>
+	    	<p>(六)扰乱社会秩序，破坏社会稳定的;</p>
+	    	<p>(七)诱导未成年人违法犯罪和渲染暴力、色情、赌博、恐怖活动的;</p>
+	    	<p>(八)侮辱或者诽谤他人;侵害公民个人隐私等他人合法权益的;</p>
+	    	<p>(九)危害社会公德，损害民族优秀文化传统的;</p>
+	    	<p>(十)有关法律、行政法规和国家规定禁止的其他内容。</p>
+	    	<p>五、未成年人特别注意事项</p>
+	    	<p>如果用户不是具备完全民事权利能力和完全民事行为能力的自然人，请用户征得其监护人许可或由其监护人直接使用17约课服务。后续线上线下上课、付款等事宜也需由监护人陪同或征得监护人许可完成。</p>
+	    	<p>六、知识产权</p>
+	    	<p>1、产品使用</p>
+	    	<p>用户登录17约课网站（www.17yueke.cn）即可使用17约课所提供的服务。17约课在此授予客户免费的、不可转让的、非独占的全球性个人许可;允许客户使用由17约课提供的、包含在服务中的产品。但是，客户不得复制、修改、发布、出售或出租17约课的服务产品或所含产品的任何部分，也不得进行反向工程或试图提取该产品的源代码。</p>
+	    	<p>2,版权</p>
+	    	<p>17约课所包含或提供的所有内容诸如文字、图片、视频、声音文件片段、数字下载、软件等都是17约课或其内容提供者的财产，受中国和国际版权法的保护。17约课上所提供使用的所有软件都是17约课或其软件供应商的财产;受中国和国际版权法的保护。未经17约课书面许可;不得以任何形式通过任何方式复制、展示、修改、转让、分发、重新发布、下载、张贴或传输本网站的内容。</p>
+	    	<p>3、企业标识</p>
+	    	<p>本应用服务所包含或者提供的图标、标识、网页页眉、按钮图标、文字等均为17约课独有的合法企业标识。用户未经17约课书面许可不得擅自使用，不得以任何方式或理由对本网站的标识的任何部分进行使用、复制、修改、传播或与其他产品捆绑使用，不得以任何可能引起消费者混淆的方式或任何低毁或诽谤17约课的方式用于任何商品或服务上。未经17约课的书面许可，本应用上的任何内容都不应被解释为以默许或其他方式授予许可或使用本应用上出现的标识的权利。</p>
+	    	<p>七、免责条款</p>
+	    	<p>如发生以下情况，17约课不对用户的直接或间接损失承担法律责任:</p>
+	    	<p>1、17约课系信息服务平台，不保证该等信息的准确性、有效性、及时性或完整性。提供信息的真实性、合法性等由信息提供者承担相关法律责任。</p>
+	    	<p>2、不可抗力事件导致的服务中断或17约课无法控制的原因所导致的用户损失，17约课不承担任何责任。</p>
+	    	<p>3、用户使用本网站(包括链接到第三方网站或自第三方网站链接)而可能产生的计算机病毒、黑客入侵、系统失灵或功能紊乱等导致的用户损失，17约课不承担任何责任。</p>
+	    	<p>4、由于用户将个人注册账号信息告知他人或与他人共享注册帐号，由此导致的任何风险或损失，由用户自行承担。</p>
+	    	<p>5、教师与学员间或与任何第三人间的违约行为、侵权责任等;由有关当事人自行承担法律责任。</p>
+	    	<p>6、如因系统维护或升级而需要暂停网络服务，17约课尽可能事先在网站进行通知。</p>
+	    	<p>八、服务终止</p>
+	    	<p>用户在使用17约课服务的过程中，具有下列情形时，17约课有权终止对该用户的服务</p>
+	    	<p>1、用户以非法目的使用17约课平台;</p>
+	    	<p>2、用户不以约课上课的真实交易为目的使用17约课平台;</p>
+	    	<p>3、用户存在多次被投诉等不良记录的;</p>
+	    	<p>4、其他侵犯17约课合法权益的行为。</p>
+	    	<p>九、隐私声明</p>
+	    	<p>17约课承诺将按照本隐私声明收集、使用和披露用户信息;除本声明另有规定外，不会在未经用户许可的情况下向第三方或公众披露用户信息:</p>
+	    	<p>1、用户信息的范围包括:用户注册的账户信息、用户上传的信息、17约课自动接收的用户信息、17约课通过合法方式收集的用户信息等。</p>
+	    	<p>2、用户信息的收集、使用和披露为了给用户提供更优质的服务，17约课保留收集用户信息等权利，17约课不会向第三方披露任何可能用以识别用户个人身份的信息。只在如下情况下17约课会合法披露用户信息</p>
+	    	<p>(1)经用户事先同意，向第三方披露。</p>
+	    	<p>(2)根据法律的有关规定，或者行政或司法机构的要求，向第三方或者行政、司法机构披露。</p>
+	    	<p>(3)其他根据法律、法规或者政策应进行的披露。</p>
+	    	<p>3、用户信息的保护</p>
+	    	<p>(1)用户的账户均有安全保护功能;请妥善保管账户及密码信息。17约课将通过服务器数据备份，确认技术上以实现安全的对用户密码进行加密等措施确保用户信息不丢失;不被滥用和变造。尽管有前述安全措施;但同时也请用户注意在信息网络上不存在“绝对的安全措施”。</p>
+	    	<p>(2)除非经过用户同意; 17约课不允许任何用户、第三方通过17约课收集、出售或者无偿传播用户信息。</p>
+	    	<p>(3) 17约课含有到其他网站的链接，17约课不对那些网站的隐私保护措施负责。当用户登录那些网站时;请提高警惕，保护个人隐私。</p>
+	    	<p>十、法律适用与争议解决</p>
+	    	<p>1、本协议的履行与解释均适用中华人民共和国法律。</p>
+	    	<p>2、17约课与用户之间的任何争议应友好协商解决，协商不成的，任一方有权将争议提交地方法院诉讼解决。</p>
+	    	<p>十一、本协议条款的修改权与可分性</p>
+	    	<p>1、为更好地提供服务并符合相关监管政策; 17约课有权及时修改本协议条款。请用户定期查阅本协议条款。17约课会在网页上公布这些条款的修改通知。</p>
+	    	<p>2、本协议条款中任何一条被视为无效或因任何理由不可执行，不影响任何其余条款的有效性和可执行性。</p>
+	    	<p>十二、系统消息</p>
+	    	<p>17约课将通过在应用上发布系统消息或其他方式与用户进行联系。用户同意用系统消息方式接收所有协议、通知、披露和其他信息。</p>
+	    	<p>十三、协议生效</p>
+	    	<p>1、本协议自用户注册17约课之日起生效。</p>
+	    	<p>2、17约课在法律允许范围内对本协议拥有解释权。</p>
+	    </div>
+	    <div id="agree_wrap">
+	        <button id="agree_btn" class="terms_back_reg">阅读并同意</button>
+	    </div>
+	</div>
+</div>
+
+
+
+<include file="Component:flash"/>
+
+
+<script type="text/javascript" src="__HJS__/zepto.min.js"></script>
+<script type="text/javascript">
+var index_url  ="{:U('Index/index')}";
+var register_send_url ="{:U('Userregsign/register_send')}";
+var register_check_url ="{:U('Userregsign/register_check')}";
+var register_save_url ="{:U('Userregsign/register_save')}";
+</script>
+<script type="text/javascript">
+    (function () {
+        var oldScroll = $(".login_height").height();
+        $("input").on("focus", function (event) {
+            var height = oldScroll + 150;
+            $(".login_height").css("height",height+"px");
+            $(event.target).next().removeClass("op_0");
+            ontext();
+        }).on("blur", function (event) {
+            $(".login_heterms_hiddenight").css("height",oldScroll+"px");
+            $(event.target).next().addClass("op_0");
+        });
+        $(".input_close_icon").click(function (event) {
+            $(event.target).prev().val("");
+        });reg_user_terms
+        $(".input_close_icon_second").click(function (event) {
+            $(event.target).prev().val("");
+        });
+        var btn = $(".validate_btn");
+		function reg_send_user(){
+            /**
+             * 这里判断手机合法性
+             */
+			 	btn.prop("disabled",true);
+	            btn.removeClass("validate_btn_active");
+	            var time=61;
+	            var timeInter =setInterval(function () {
+	                time = time - 1;
+	                if(time>=0){
+	                    btn.text(time+"s后重发")
+	                }
+	                else{
+	                    btn.prop("disabled",false);
+	                    clearInterval(timeInter);
+	                    btn.text("重新发送");
+	                    btn.addClass("validate_btn_active");
+
+	                    /**
+	                     * 这里判断手机合法性如果合法，添加   btn.addClass("validate_btn_active");
+	                     */
+	                }
+	            },1000);
+		}
+		
+		
+		
+		
+		
+	    function ontext(){
+	        document.getElementById('reg_err1').className='u_register_err hidden';
+	        document.getElementById('reg_err2').className='u_register_err hidden';
+	    }
+
+	    function errtext(classn,etext){
+	        document.getElementById('reg_err1').className=classn;
+	        document.getElementById('reg_err_text1').innerHTML =etext;
+	        document.getElementById('reg_err2').className=classn;
+	        document.getElementById('reg_err_text2').innerHTML =etext;
+	    }
+		
+	    
+	    //条款--返回
+	    $(".terms_back_reg").click(function(){
+	    	$("#terms_hidden").addClass("hidden");
+	    	$("#reg_user_terms").removeClass("hidden");
+	    });
+		
+	    //注册--查看条款
+	    $(".terms_of_use").click(function(){
+	    	$("#terms_hidden").removeClass("hidden");
+	    	$("#reg_user_terms").addClass("hidden");
+	    });
+		
+		//是否同意了
+		function oneAgreeTerms(){
+			var one_agree_terms=$("#one_agree_check").is(":checked");
+			if(one_agree_terms){
+				return true;
+			}else{
+				errtext('u_register_err','请先同意17约课用户使用条款');
+				return false;
+			}
+		}
+		function twoAgreeTerms(){
+			var two_agree_terms=$("#two_agree_check").is(":checked");
+			if(two_agree_terms){
+				return true;
+			}else{
+				errtext('u_register_err','请先同意17约课用户使用条款');
+				return false;
+			}
+		}
+	    
+	    
+	    
+	    
+		
+		$("#reg_user_fanhui").click(function(){
+            $("#one_reg_user").removeClass('hidden');
+            $("#two_reg_user").addClass('hidden');
+		});
+		
+		//发送验证码
+        btn.click(function () {
+        	regsendcode();
+        });
+//=11111111111111==============================================================================================       
+        function checktype(){
+            var type=$("#hiddentypevalue").val();
+            var email=/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;//邮件地址必须包含@符号和.com等网络域名
+           var tel=/^(1)\d{10}$/;	//包括移动电话和固定电话，但是必须大于7位
+/*           if(email.test(type))
+            {
+                document.getElementById('hiddentype').value ='email';
+                return true;
+            }else */
+			if(tel.test(type)){
+                document.getElementById('hiddentype').value ='phone';
+                return true;
+            }else{
+ //               errtext('u_register_err','请输入正确的电话号码或邮箱');
+                errtext('u_register_err','请输入正确的电话号码');
+                return false;
+            }
+        }
+		//将上面n个函数打包成一个AllCheck()函数，在前台界面中调用该AllCheck()；
+  		function CheckRegCode(){
+	        if(checktype()&&oneAgreeTerms()){
+	            return true;
+	        }else{
+	            return false;
+	        }
+	    }
+        
+        function regsendcode(){
+       	 if(CheckRegCode()){
+   			 // 禁用滚动
+   			 $('#register_sendCode').unbind('click', regsendcode)
+                var typename=$("#hiddentype").val();
+                var typevalue=$("#hiddentypevalue").val();
+                var invite_code = $("#invite_code_input").val();
+                var data_send={};
+                data_send.type=typename;
+                data_send.typevalue=typevalue;
+                data_send.terms=true;
+                data_send.invitecode=invite_code;
+                console.log(data_send);
+                $(".css-loading").removeClass("hidden");
+                $.ajax({
+                    type: 'POST',
+                    url: register_send_url,
+                    dataType: 'json',
+                    data:data_send,
+                    success: function(data) {
+                    	console.log(data);
+                        $(".css-loading").addClass("hidden");
+                        if(data.status!=200){
+                            $('#reg_err1').removeClass('hidden');
+                            $("#reg_err_text1").html(data.msg);
+	   						//绑定滚动事件
+	   						$('#register_sendCode').bind('click', regsendcode);
+                        }else{
+                            //$('#reg_err1').removeClass('hidden');
+                            //$("#reg_err_text1").html("验证码发送成功！");
+                            Flash.setText('发送成功');
+                            Flash.showhare();
+                            Flash.hiddenShare(2000);
+                        	reg_send_user();
+                        }
+                    },
+                    error:function(data){
+                        $(".css-loading").addClass("hidden");
+                        $('#reg_err1').removeClass('hidden');
+                        $("#reg_err_text1").html('请重新刷新页面再注册');
+                    }
+                });
+            }else{
+                return false;
+            }
+        }
+//====2222222222222222222============================================================================================================
+        function regcodecheck(){
+        	var code=$("#reg_code_input").val();
+        	var codese=/^\d{6}$/;
+        	if(!codese.test(code)){
+        		errtext('u_register_err','验证码必须是6为数字');
+                return false;
+        	}
+            return true;
+        }
+        
+        
+
+        
+        /*登陆成功的时候*/
+        function check_codo_error() {
+            $(".css-loading").removeClass("hidden");
+            $("#reg_next").text("验证中...");
+        }
+        /*登陆按钮点击的逻辑*/
+        $("#send_reg").click(function () {
+            /*这里判断数据合法性和写ajax*/
+            check_code_user();
+        })
+        
+        
+
+        
+        function check_code_user(){
+            if(regcodecheck()&&oneAgreeTerms()){
+                var regcode=$("#reg_code_input").val();
+                var invite_code = $("#invite_code_input").val();
+                var data_check={};
+                data_check.code=regcode;
+                data_check.terms=true;
+                data_check.invitecode=invite_code;
+                console.log(data_check);
+                check_codo_error();
+                $.ajax({
+                    type: 'POST',
+                    url: register_check_url,
+                    dataType: 'json',
+                    data:data_check,
+                    success: function(data) {
+                        console.log(data);
+                        $(".css-loading").addClass("hidden");
+                        if(data.status!=200){
+                            $('#reg_err1').removeClass('hidden');
+                            $("#reg_err_text1").html(data.msg);
+                        }else{
+                            $('#reg_err1').removeClass('hidden');
+                            $("#reg_err_text1").html("验证码正确！");
+
+                            $("#one_reg_user").addClass('hidden');
+                            $("#two_reg_user").removeClass('hidden');
+                        }
+                    },
+                    error:function(data){
+                        $(".css-loading").addClass("hidden");
+                        $('#reg_err1').removeClass('hidden');
+                        $("#reg_err_text1").html('请重新刷新页面再注册');
+                    }
+                });
+
+            }else{
+                return false;
+            }
+        }
+        
+        
+        
+        
+//====333333333333333333============================================================================================================     
+        
+
+        String.prototype.lengthB = function( ){
+            var b = 0, l = this.length;
+            if( l ){
+                for( var i = 0; i < l; i ++ ){
+                    if(this.charCodeAt( i ) > 255 ){
+                        b += 2;
+                    }else{
+                        b ++ ;
+                    }
+                }
+                return b;
+            }else{
+                return 0;
+            }
+        }
+        
+        
+        /*登陆成功的时候*/
+        function loginSussess() {
+            $("#loading_img").removeClass("hidden");
+            $("#login_info").text("注册中...");
+        }
+
+        /*登陆按钮点击的逻辑*/
+        $("#register").click(function () {
+            /*这里判断数据合法性和写ajax*/
+            
+            save_data();
+        })
+        
+        
+    function TrueNa(){			//验证真实姓名
+       var TrlName=$("#lastname").val();
+   		TrlNamelength=TrlName.lengthB();
+        //var lastName=/^[\u4E00-\u9FA5]{2,5}$/;	//只能是汉字
+        //var lastName=/^[\u4e00-\u9fa5]{2,5}$|^[\dA-Za-z]{4,15}$/;	//只能是2-5汉字||4-15字母--不能超过24个字母或12个汉字
+       //var lastName=/^.{4,15}$/;	//只能是2-5汉字||4-15字母--不能超过24个字母或12个汉字
+       if(TrlName.length==0){
+            errtext('u_register_err','呢称未填写');
+            return false;
+        }
+        else if(TrlNamelength>15||TrlNamelength<4){
+            errtext('u_register_err','呢称只能是4-15个字母或2-7个汉字');
+            return false;
+        }
+        return true;
+    }
+        
+        function pwcheck(){
+            var pw=$("#password").val();
+            var pwR = $('#password_r').val();
+            var passw=/^\S{6,12}$/;
+            if(!passw.test(pw)){
+                errtext('u_register_err','密码必须是6~12个字符');
+                return false;
+            }
+            if(pw != pwR){
+                errtext('u_register_err','两次输入的密码不一致');
+                return false;
+            }
+            return true;
+        }
+        
+	 //将上面n个函数打包成一个AllCheck()函数，在前台界面中调用该AllCheck()；
+     function AllCheck(){
+        if(TrueNa()&&pwcheck()&&twoAgreeTerms()){
+            return true;
+        }else{
+            return false;
+        }
+     }
+        
+        function save_data(){
+            if(AllCheck()){
+                var lastname=$("#lastname").val();
+                var password=$("#password").val();
+                var data_save={};
+                data_save.lastname=lastname;
+                data_save.password=password;
+                data_save.terms=true;
+                loginSussess();
+                $.ajax({
+                    type: 'POST',
+                    url: register_save_url,
+                    dataType: 'json',
+                    data:data_save,
+                    success: function(data) {
+                        if(data.status!=200){
+                            $('#reg_err2').removeClass('hidden');
+                            $("#reg_err_text2").html(data.msg);
+                        }else{
+                            //清除LocalStorage内容，以显示提示
+                            localStorage.removeItem("UserFirstLogin");
+                            localStorage.removeItem("UserFirstOpenHisOwnWishList");
+                            //$('#reg_err2').removeClass('hidden');
+                            //$("#reg_err_text2").html("注册成功！");
+                            Flash.setText('注册成功');
+                            Flash.showhare();
+                            Flash.hiddenShare(2000);
+                            setTimeout(function () {
+                            	if(data.histhref==null||data.histhre==""){
+                                    window.location.href=index_url;
+                            	}else{
+                            		window.location.href=data.histhref;
+                            	}
+                            },1000);
+                        }
+                    },
+                    error:function(data){
+                        $('#reg_err2').removeClass('hidden');
+                        $("#reg_err_text2").html('请重新刷新页面再注册');
+                    }
+                });
+
+            }else{
+                return false;
+            }
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    })()
+</script>
+<include file="Public:statistics"/>
+</body>
+</html>
+
+
+
+
+

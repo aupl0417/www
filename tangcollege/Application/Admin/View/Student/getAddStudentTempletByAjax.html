@@ -1,0 +1,86 @@
+<div id="main" class="main">
+ <div class="main-title">
+        <h2>新增学生</h2>
+    </div>
+    <form action="{:U()}" method="post" class="form-horizontal" id="addStudentForm">
+        <div class="form-item">
+            <label class="item-label">用户名<span class="check-tips">（用户名会作为默认的昵称）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="username" value="">
+            </div>
+        </div>
+         <div class="form-item">
+            <label class="item-label">选择班级<span class="check-tips">（请选择班级）</span></label>
+            <div class="controls">
+               <notempty name="classInfo">
+                  <input name="class[]" type="checkbox" value="{$classInfo.id}" checked="checked" />{$classInfo.name}
+              
+               </notempty> 
+               <button class="select-btn select-selectClass" target-form="form-horizontal" type="button" onclick="selectClass.get(this,appendClass)">选择</button>
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">密码<span class="check-tips">（用户密码不能少于6位）</span></label>
+            <div class="controls">
+                <input type="password" class="text input-large" name="password" value="">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">确认密码</label>
+            <div class="controls">
+                <input type="password" class="text input-large" name="repassword" value="">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">手机</label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="mobile" value="">
+            </div>
+        </div>
+        <div class="form-item">
+            <button class="btn submit-btn " id="submit" type="submit" target-form="form-horizontal">确 定</button>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+function appendClass(id,name) {
+	boxs = $('.select-selectClass').siblings(':checkbox');
+	var flag = true;
+    if(boxs.length > 0) {
+		boxs.each(function(){
+           if($(this).val() == id) {
+			  layer.msg(name+'已经存在了！');
+			  flag = false;
+			  return;
+		   }
+        });
+	}
+	if(flag)
+	  $('.select-selectClass').before('<input name="class[]" type="checkbox" value="'+id+'" checked="checked" />'+name+'&nbsp;');
+	
+}
+var loading  = null;
+$("#addStudentForm").ajaxForm({
+   beforeSubmit: function(formData) {
+	   loading  = layer.load();
+   },
+   success: function(response) {
+	  layer.close(loading); 
+	  if(response.status == 1) { 
+	    layer.msg('提交成功！', {
+            time: 1000
+        }, function(){
+			<empty name="classInfo">
+               location.reload();
+            <else /> 
+               layer.closeAll();
+            </empty> 
+        });   
+	  }else{
+		layer.msg(response.info, {
+            time: 2000
+        });    
+	  }
+   },
+});
+ </script>

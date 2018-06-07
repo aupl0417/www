@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <title><block name="title"></block></title>
+    <meta name="description" content="17约课商家中心" />
+    <meta name="keywords"  content="17约课,一起约课,约课,商家中心" />
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <!-- Bootstrap 3.3.4 -->
+    <link href="__PCCSS__/bootstrap.min.css" rel="stylesheet" type="text/css" />    
+    <!-- FontAwesome 4.3.0 -->
+    <link href="http://cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <!-- 2.0.0
+    <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />     -->
+    <!-- Theme style -->
+    <link href="__PCCSS__/AdminLTE.min.css" rel="stylesheet" type="text/css" />
+    <!-- AdminLTE Skins. Choose a skin from the css/skins 
+         folder instead of downloading all of them to reduce the load. -->
+    <link href="__PCCSS__/_all-skins.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="__PCCSS__/all.css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+      <!--[if lt IE 8]>
+      <script>
+          alert("对不起，您的浏览器不支持我们的网站，请及时卸载");
+      </script>
+      <![endif]-->
+    <block name="css"></block>
+  </head>
+  <body class="skin-blue sidebar-mini">
+    <div class="wrapper">
+
+      <header class="main-header">
+
+         
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top clearfix" role="navigation">
+          <!-- Sidebar toggle button-->
+
+          <div class="navbar-wraper">
+              <a href="{:U('Shopkeeper/index')}" class="logo">
+          <!-- mini logo for sidebar mini 50x50 pixels -->
+          <span class="logo-mini">
+            <img src="__PCIMG__/logo-min.png" alt="">
+          </span>
+          <!-- logo for regular state and mobile devices -->
+          <span class="logo-lg">
+           <img src="__PCIMG__/logo.png" alt="logo" class="logo_img">
+           <img src="__PCIMG__/17yueke.png" alt="yueke" class="logo_txt">
+          </span>
+            </a>
+            <div class="search-wrap">
+                <form action="{:mergeGetU('Shopkeeper/course_select')}" method="get">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                          <span id="searchTypeSpan">课程</span> <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" >
+                          <li><a href="javascript:changeCurrentSearchType('course', '课程');">课程</a></li>
+                          <li><a href="javascript:changeCurrentSearchType('wish', '心愿');">心愿</a></li>
+                        </ul>
+                      </div>
+                      <input type="text" name="searchWord" class="search-input" placeholder="试试输入 “唱歌”">
+                      <input type="hidden" name="searchType" value="course" />
+                      <button type="submit" class="btn-search"> <i class="fa fa-search icon-large"></i> </button>
+                </form>
+           </div>
+
+           <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+              <!-- Notifications: style can be found in dropdown.less -->
+              <li>
+                  <button class="publish" onclick="location='{:U('Shopkeeper/publish')}'">  <img src="__PCIMG__/fabu.png" alt="发布"/>免费发布课程</button>
+              </li>
+              <li class=" ">
+                  <a href="{:U('Shopkeeper/intention')}" >
+                     <img src="__PCIMG__/honer.png"  alt="User Image" style="height:auto;width:14px;" />
+                     <span class="hidden-xs">我收到的求学意向</span>
+                   </a>
+              </li>
+              <!-- User Account: style can be found in dropdown.less -->
+              <li class="user user-menu" id="user_menu" style="height:50px !important;">
+                <a href="/user"  style="height:inherit;">
+                    <img src="__UPLOAD__{:session('shopkeeper.avatar')}" class="user-image" alt="User Image"/>
+                    <span class="caret" style="color:#fff;"></span>
+                </a>
+                <ul class="dropdown-menu" id="setting-menu">
+                  	<li><a href="{:U('Shopkeeper/published')}"><i class="icons-book"></i>已发布课程</a></li>
+                 	 <li><a href="{:U('Shopkeeper/edit')}"><i class="icons-text"></i>资料编辑</a></li>
+                  	<li><a href="{:U('Shopkeeper/message')}"><i class="icons-info"></i>消息</a></li> 
+                  	<li><a href="{:U('Shopkeeper/certification')}"><i class="icons-card"></i>机构认证</a></li>
+                  	<li><a href="{:U('Shopkeeper/system')}"><i class="icons-setting"></i>设置</a></li>
+                  	<li><a href="{:U('Shopkeeper/logout')}"><i class="icons-setting"></i>退出</a></li>
+                </ul>
+              </li>
+              <!-- Control Sidebar Toggle Button -->
+            </ul>
+          </div>
+          </div>
+
+        </nav>
+
+        <!-- Logo -->
+      </header>
+
+      <block name="main"></block>
+
+
+     <footer class="main-footer">
+        <div class="pull-right footer-right">
+          <p><span class="blue_wrap">24小时</span>资讯服务热线</p>
+          <strong>020-28107517</strong>
+        </div>
+        <div class="footer_left">
+          <p>
+          <a href="">机构推广</a>
+          <span>|</span>
+          <a href="">联系我们</a>
+          <span>|</span>
+          <a href="">加入我们</a>
+          <span>|</span>
+          <a href="">常见问题</a>
+          <span>|</span>
+          </p>
+          <p>
+            版权所有@广州乐莘网络有限公司&nbsp;&nbsp;&nbsp;&nbsp;粤ICP备：14082321号
+          </p>
+        </div>
+      </footer>
+
+    <!-- jQuery 2.1.4 -->
+    <script src="__PCJS__/jquery.min.js"></script>
+   
+    
+    <!-- Bootstrap 3.3.2 JS -->
+    <script src="__PCJS__/bootstrap.min.js" type="text/javascript"></script>    
+
+    <script src="__PCJS__/main.js" type="text/javascript"></script>
+    
+    <!-- 我写得JS -->
+    <script type="text/javascript" charset="utf-8">
+        function changeCurrentSearchType(type, text) {
+            $("#searchTypeSpan").html(text);
+            $("input[name=searchType]").val(type);
+        }
+    </script>
+
+    <block name="js"></block>
+
+  </body>
+</html>

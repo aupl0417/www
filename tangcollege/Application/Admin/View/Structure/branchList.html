@@ -1,0 +1,145 @@
+<extend name="Public/base" />
+<block name="body">
+	<!-- 标题栏 -->
+	<div class="main-title">
+		<h2>分院列表</h2>
+	</div>
+	<div class="cf">
+		<div class="fl">
+            <a class="btn" href="javascript:viod(0);" onclick="addBranch()">新 增</a>
+           <!-- <button class="btn ajax-post" url="{:U('User/changeStatus',array('method'=>'resumeUser'))}" target-form="ids">启 用</button>
+            <button class="btn ajax-post" url="{:U('User/changeStatus',array('method'=>'forbidUser'))}" target-form="ids">禁 用</button>
+            <button class="btn ajax-post confirm" url="{:U('User/changeStatus',array('method'=>'deleteUser'))}" target-form="ids">删 除</button>-->
+        </div>
+  </div>
+    <!-- 数据列表 -->
+    <div class="data-table table-striped">
+		<table class="">
+			<thead>
+				<tr>
+				<th  style="width:90%">机构名</th>
+				<th class="">操作</th>
+				</tr>
+			</thead>
+			<tbody class="branch-list">
+			   <volist name="brachLists" id="item">
+					<tr data-id="{$item.br_id}">
+						<td class="item"><span  class="<if condition="$item['subCount'] eq 0 ">no-sub<else/>have-sub</if>">{$item.br_name}</span></td>
+						<td>
+							<a href="javascript:viod(0);" class="ajax-get" onclick="editBranch({$item.br_id})">编辑</a>
+						</td>
+					</tr>
+				</volist>
+			</tbody>
+		</table>
+	</div>
+</block>
+
+<block name="script">
+	<script src="__STATIC__/thinkbox/jquery.thinkbox.js"></script>
+
+	<script type="text/javascript">
+	   var box;
+	   function editBranch(id) {
+		  $.post("{:U('Structure/getBranchEditFormByAjax')}", {id:id}, function(str){
+             box = layer.open({
+                type: 1,
+                content: str,
+				area: '600px',
+             });
+          });
+	   }
+	   
+	   function addBranch() {
+		  $.get("{:U('Structure/branchAddByAjax')}", function(str){
+             box = layer.open({
+                type: 1,
+                content: str,
+				area: '600px',
+             });
+          });
+	   }
+	
+	
+	
+	
+	    $('.branch-list tr').bind("click",displaySubItems);
+	
+ function displaySubItems() {
+ 	    $this = $(this);
+	    upperId = $(this).attr('data-id');
+		spanob = $this.find('.item span');
+ 		if ($('[relateId=' + upperId + ']').length == 0 && spanob.hasClass('have-sub')) {
+			spanob.removeClass().addClass('loading');
+ 			$.ajax({
+ 				url: "{:U('Structure/getBranchSubListByAjax')}",
+ 				data: {
+ 					id: upperId
+ 				},
+				async: false,
+ 				dataType: "json",
+ 				success: function(data) {
+ 					var html = '';
+ 					$.each(data, function(index, val) {
+ 						html += '<tr relateId="' + val.br_parentId + '" data-id="' + val.br_id + '"><td class="item"><span class="' + (val.subCount > 0 ? 'have-sub' : 'no-sub') + '" style="margin-left:' + (val.br_level - 1) * 40 + 'px;">' + val.br_name + '</span></td><td> <a href="javascript:viod(0);" class="ajax-get" onclick="editBranch(' + val.br_id + ')">编辑</a></td>                                       </tr>';
+ 					});
+ 					$this.after(html);
+ 					$('[relateId="'+upperId+'"]').bind("click", displaySubItems);
+ 				}
+ 			});
+			spanob.removeClass().addClass('no-sub');
+ 		} else if($('[relateId=' + upperId + ']').length > 0 && spanob.hasClass('no-sub')){
+ 			hideSubItems(upperId);
+			spanob.removeClass('no-sub').addClass('have-sub');
+ 		} else if($('[relateId=' + upperId + ']').length > 0 && spanob.hasClass('have-sub')) {
+			showSubItems(upperId);
+			spanob.removeClass('have-sub').addClass('no-sub');
+		}
+ }
+ 
+ 
+       function showSubItems(relateId) {
+			$('[relateId="'+relateId+'"]').each(function(){
+				 dataid = $(this).attr('data-id');
+				 subspanob = $(this).find('.item span');
+				 if($('[relateId="'+dataid+'"]').length > 0 && subspanob.hasClass('no-sub')) {
+					subspanob.removeClass('no-sub').addClass('have-sub');
+				 }
+                 $(this).show();
+             });
+		}
+	
+	    function hideSubItems(relateId) {
+			$('[relateId="'+relateId+'"]').each(function(){
+				 dataid = $(this).attr('data-id');
+                 $(this).hide();
+				 if($('[relateId="'+dataid+'"]').length > 0) {
+					hideSubItems(dataid); 
+				 }
+             });
+		}
+	
+	//搜索功能
+	$("#search").click(function(){
+		var url = $(this).attr('url');
+        var query  = $('.search-form').find('input').serialize();
+        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+        query = query.replace(/^&/g,'');
+        if( url.indexOf('?')>0 ){
+            url += '&' + query;
+        }else{
+            url += '?' + query;
+        }
+		window.location.href = url;
+	});
+	//回车搜索
+	$(".search-input").keyup(function(e){
+		if(e.keyCode === 13){
+			$("#search").click();
+			return false;
+		}
+	});
+    //导航高亮
+    highlight_subnav('{:U('User/index')}');
+	</script>
+</block>

@@ -1,0 +1,41 @@
+<extend name="Public/base"/>
+
+<block name='content'>
+	<div id="content" class="content pt45 mb60">
+		<div class="tang-sign-cont">
+			<volist name='list' id='list'>
+				<div class="tang-sign-box">
+					<div class="tang-sign-title">
+						{$list.cta_startTime|strtotime|date="Y-m-d",###} {$list.courseName} <notempty name='list.tra_name'>({$list.tra_name})</notempty>
+					</div>
+					<div class="tang-sign-time bg_white">
+						<ul class="list-unstyled tang-sign-ul over mb0">
+							<li>
+								<div class="time">{$list.att_createTime|strtotime|date="H:i:s",###}</div>
+								<div class="text-center state c-2a8">签到</div>
+							</li>
+							<li>
+								<empty name='list.endAttenTime'>
+									<div class="time">00:00:00</div>
+									<div class="text-center state c-2a8">未退场</div>
+								<else/>
+									<div class="time">{$list.endAttenTime|strtotime|date="H:i:s",###}</div>
+									<div class="text-center state c-2a8">退场</div>
+								</empty>
+							</li>
+							<!-- <li>
+								<div class="time">9:10:08</div>
+								<div class="text-center state c-2a8">签到</div>
+							</li>
+							<li>
+								<div class="time">9:10:08</div>
+								<div class="text-center state c-2a8">退场</div>
+							</li> -->
+						</ul>
+					</div>
+				</div>
+			</volist>
+		</div>
+
+	</div>
+</block>

@@ -1,0 +1,86 @@
+.head-box{
+	border: 1px solid ;
+	height: 220px;
+	background:url(../img/home-bg.png);
+	margin-top: 1.8em;
+	position: relative;
+}
+.info-wrap{
+margin: 0 auto;
+margin-top: 57px;
+margin-left: 440px;
+}
+.avator-wrap{
+	height: 106px;
+	width: 106px;
+	display: inline-block;
+	vertical-align: top;
+}
+.avator-wrap>img{
+ height: inherit;
+ width: inherit;
+ border: 1px solid #ddd;
+ border-radius: 5px;
+ vertical-align: top;
+}
+.myinfo{
+	display: inline-block;
+	color: #fff;
+	margin-left: 16px;
+	text-align: left;
+}
+span.name{
+	font-size: 35.21px;
+}
+.signature{
+	font-size: 16px;
+	line-height: 1em;
+}
+span.tap-lightblue{
+font-size: 12px;
+background: #85c3da;
+padding: 3px 6px;
+border-radius: 3px;
+}
+span.tap-blue{
+font-size: 12px;
+background: #00bdff;
+padding: 3px 6px;
+border-radius: 3px;
+margin-right: 8px;
+}
+section.info{
+	position: absolute;
+	top: 237px;
+	left:0;
+}
+.info-list{
+	list-style: none;
+	padding: 0;
+}
+.info-list li{
+	width: 230px;
+	min-height: 50px;
+	background: #fff;
+	line-height: 48px;
+	border: 1px solid #ddd;
+	border-bottom: none;
+}
+.info-title{
+	margin-left: 22px;
+	margin-right: 22px;
+	font-family: Microsoft YaHei;
+	font-size: 14px;
+	color: #90949a;
+	display: inline-block;
+	vertical-align: top;
+}
+.info-list>li>p{
+	display: inline-block;
+	margin: 0;
+	width: 62%;
+}
+.special{
+	display: inline-block;
+	width: 62%;
+}

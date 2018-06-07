@@ -1,0 +1,130 @@
+<extend name="Public/base"/>
+
+<block name="body">
+	<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+<div id="main" class="main">
+  <div class="main-title">
+        <h2>新增课时</h2>
+    </div>
+    <form action="{:U('ClassTable/add')}" method="post" class="form-horizontal">
+        <div class="form-item">
+            <label class="item-label">选择班级<span class="check-tips">（请选择班级）</span></label>
+            <div class="controls">
+               <button class="select-btn select-selectClass" target-form="form-horizontal" type="button" onclick="selectClass.get(this)">点击选择</button>
+               <input name="classId" type="hidden" value="" id="classId"/>
+            </div>
+        </div>
+         <div class="form-item">
+            <label class="item-label">主要培训地址<span class="check-tips">（输入报名费）</span></label>
+            <div class="controls">
+                <button class="select-btn select-selectClass" target-form="form-horizontal" type="button" onclick="selectselectClass.get(this)">选择培训场地</button>
+                <input name="cl_defaultselectClassId" type="hidden" value="0" />
+            </div>
+        </div> 
+        <div class="form-item">
+            <label class="item-label">班级描述<span class="check-tips">（请添加描述）</span></label>
+            <div class="controls">
+                <textarea type="text" class="text" name="cl_description" style="width:300px; height:80px;"></textarea>
+            </div>
+        </div>
+        <script>
+             $(document).ready(function(){
+				 var data = {$brachLists};
+                $('.menu-level').menulevel({data:data});
+              }); 
+        </script>
+         <div class="form-item">
+            <label class="item-label">属所分院<span class="check-tips">（点击选择院校）</span></label>
+            <div class="controls">
+                 <div class="menu-level">
+                 <div class="container">
+                  <span class="selected round">请选择</span>    
+                  <ul class="items">
+                    <li value="">请选择</li>
+                  </ul>
+                 </div>   
+                <input name="cl_branchId" type="hidden" value="0" id="menu-level-value"/>
+              </div>
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">开班时间<span class="check-tips">（点击选择开班时间）</span></label>
+            <div class="controls">
+                <input type="text" name="cl_startTime" class="text time" value="{$info.co_content|default=''}" placeholder="请选择时间" />
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">结束时间（点击选择结束时间）</label>
+            <div class="controls">
+                <input type="text" name="cl_endTime" class="text time" value="{$info.co_content|default=''}" placeholder="请选择时间" />
+            </div>
+        </div>
+        
+        <div class="form-item">
+            <label class="item-label">授课方式<span class="check-tips">（请选择授课方式）</span></label>
+            <div class="controls">
+                <input type="radio" name="cl_teachingType" value="0" checked="checked">线下　<input type="radio" name="cl_teachingType" value="1">网络远程
+            </div>
+        </div>
+         <div class="form-item">
+            <label class="item-label">食宿方式<span class="check-tips"></span></label>
+            <div class="controls">
+                <select name='cl_boardLodgingType'>
+            			<option value=''>--请选择--</option>
+            			<option value='0'>不包吃不包住</option>
+            			<option value='1'>包吃不包住</option>
+            			<option value='2'>包吃包住</option>
+            			<option value='3'>不包吃包住</option>
+            		</select>
+            </div>
+        </div>
+         <div class="form-item">
+            <label class="item-label">报名费<span class="check-tips">（输入报名费）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-small" name="cl_cost" value="{$info.cl_cose|default=''}"> ￥
+            </div>
+        </div>
+         <div class="form-item">
+            <label class="item-label">班级LOGO<span class="check-tips">（点击上传班级logo）</span></label>
+            <div class="controls">
+                {:hook('UploadImages')}
+            </div>
+        </div>
+        <div class="form-item">
+            <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+        </div>
+    </form>
+</div>
+</block>
+<style>
+
+</style>
+<block name="script">
+	<link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+	<php>if(C('COLOR_STYLE')=='blue_color') echo '<link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">';</php>
+	<link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+	<script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+    <script type="text/javascript">
+		
+		
+		
+		
+		
+		
+        Think.setValue("pid", {$info.pid|default = 0});
+        Think.setValue("hide", {$info.hide|default = 0});
+        Think.setValue("is_dev", {$info.is_dev|default = 0});
+        //导航高亮
+        highlight_subnav('{:U('ClassTable/add')}');
+        $(function(){
+        	$('.time').datetimepicker({
+                format: 'yyyy-mm-dd hh:ii',
+                language:"zh-CN",
+                minView:2,
+                autoclose:true
+            });
+        });
+    </script>
+</block>
